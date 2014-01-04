@@ -4326,22 +4326,22 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     $( "#clothing" ).on( "change", "input", fashioncost );
     
-    var clothingcost=20;
-    var electrochromiccost=0;
-    var feedbackcost=0;
-    var synthleathercost=0;
+    var clothingcost=20;//this is the cost of clothing
+    var electrochromiccost=0;//this is the cost of clothing with electro chromatic
+    var feedbackcost=0;//this is the cost of clothing with feedback
+    var synthleathercost=0;//this is the cost of leather clothing
     
-    var clothingavail=0;
-    var clothingarmor=0;
+    var clothingavail=0;//the avail of the clothing
+    var clothingarmor=0;//the armor value of the clothing, only effected by leather
     
-    function fashioncost() {
+    function fashioncost() {//this is to help calulate how much cloths cost
         cost=$(this).val();
-        if (cost==""||cost<1) {
+        if (cost==""||cost<1) {//if clothes value is less then 1, then its cost = 20
             clothingcost=20;
-        } else {
+        } else {//else the cost is whatever the input says
             clothingcost=cost;
         }
-        fashionprice();
+        fashionprice();//this calulates and renders the cost with the mods that you can add to cloths
     }
     
     function fashionprice() {
@@ -4419,11 +4419,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
     }
     
-    $(".commlinks").appendTo("#links");
-    $(".cyberdecks").appendTo("#decks");
-    $(".rccs").appendTo("#consoles");
+    $(".commlinks").appendTo("#links");//sets the commlink labels
+    $(".cyberdecks").appendTo("#decks");//sets the cyberdeck labels
+    $(".rccs").appendTo("#consoles");//sets the RCC labels
     
-    for (devicename in electronics) {
+    for (devicename in electronics) {//this populates the electronic devices
         device = electronics[devicename];
         if (device["type"]=="commlink") {
             $("#links").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
@@ -4431,6 +4431,8 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             $("#decks").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["array"]+"</td><td>"+device["programs"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
         } else if (device["type"]=="rcc") {
             $("#consoles").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["dataprocess"]+"</td><td>"+device["firewall"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+        } else if (device["type"]=="accessory") {
+            $("#eccessories tbody").append("<tr class='"+devicename+"'><td class='button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>")
         }
         if (device["avail"]>12) {
             $("."+devicename+" .buydevice").addClass("deact").empty().append("-")
@@ -4609,6 +4611,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         $("."+device+" .devicecost").empty().append(inventory[device]["cost"]+"&yen;");
         nuyenUpdater();
     }
+    
     
 </script>
 </body>
