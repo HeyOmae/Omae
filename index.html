@@ -1498,13 +1498,10 @@ p, td {
     
     var p ="Physical";//type of spell
     var m ="Mana";//type of spell
-    var s = "Stun";
-    var i = "Instant";
-    var F = "Force";
     var spellforms = {//list of all the spells
         
         //combat spells
-        acidstream: {name: "Acid Stream", category: "combat", spell: false, preparation: false, direct: false, element: "Acid", type: p, range: "LOS", damage: "Physical", duration: "Instant", drain: "F-3"},
+        acidstream: {name: "Acid Stream", category: "combat", spell: false, preparation: false, direct: false, element: "Acid", type: "Physical", range: "LOS", damage: "Physical", duration: "Instant", drain: "F-3"},
         toxicwave: {name: "Toxic Wave", category: "combat", spell: false, preparation: false, direct: false, element: "Acid", type: p, range: "LOS(A)", damage: "Physical", duration: "Instant", drain: "F-1"},
         punch: {name: "Punch", category: "combat", spell: false, preparation: false, direct: false, element: "None", type: p, range: "T", damage: "Stun", duration: "Instant", drain: "F-6"},
         clout: {name: "Clout", category: "combat", spell: false, preparation: false, direct: false, element: "None", type: p, range: "LOS", damage: "Stun", duration: "Instant", drain: "F-3"},
@@ -1826,10 +1823,10 @@ p, td {
         //accessories
         argloves: {name:"AR Gloves", type:"accessory", device:3, avail:0, cost:150},
         //RFID
-        standardtag: {name:"Standard Tag", type:"rfid", device:1, avail:0, cost:1},
+        standardtag: {name:"Standard Tag", type:"rfid", device:1, avail:0, restrict:"", cost:1},
         //communications
-        bugscanner: {name:"Bug Scanner", rating:1, avail:1, restrict: "Restricted", cost:100},
-        datatap: {name:"Data Tap", avail: 6, restrict:"Restricted", cost:300}
+        bugscanner: {name:"Bug Scanner", type:"communication", rating:1, avail:1, restrict: "Restricted", cost:100},
+        datatap: {name:"Data Tap", type:"communication", avail: 6, restrict:"Restricted", cost:300}
     };
     
     var software = {
@@ -4352,7 +4349,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     $( "#clothing" ).on( "click", ".button", fashionbutton );
     
-    function fashionbutton() {
+    function fashionbutton() {//this will change the value and avail of cloths based off of what buttons are pressed.
         switch ($(this).attr("class")) {
             case ("electrochromic button"):
                 electrochromiccost=500;
@@ -4381,7 +4378,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 clothingarmor=0;
                 break;
             case ("buycloths button"):
-                if (nuyen-parseInt(clothingcost)+electrochromiccost+feedbackcost+synthleathercost<0) {
+                if (nuyen-(parseInt(clothingcost)+electrochromiccost+feedbackcost+synthleathercost)<0) {
                     return;
                 }
                 inventory["clothing"+invNum]={electrochromic: false, feedback: false, leather: false, armor: clothingarmor, avail: clothingavail, cost:parseInt(clothingcost)+electrochromiccost+feedbackcost+synthleathercost}
@@ -4432,16 +4429,45 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         } else if (device["type"]=="rcc") {
             $("#consoles").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["dataprocess"]+"</td><td>"+device["firewall"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
         } else if (device["type"]=="accessory") {
-            $("#eccessories tbody").append("<tr class='"+devicename+"'><td class='button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>")
+            $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+        } else if (device.type=="rfid") {
+            $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+        } else if (device.type=="communication") {
+            $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='numrfid'>0</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
         }
         if (device["avail"]>12) {
             $("."+devicename+" .buydevice").addClass("deact").empty().append("-")
         }
     }
     
-    $("#devices").on("click", ".buydevice", appleStore);
+    $("#e-accessories").on("click", ".buyUp, .sellDown", buyinbulk);
     
-    function appleStore () {
+    function buyinbulk() {
+        var rfid = $(this).parent().attr("class");
+        if ($(this).hasClass("buyUp")) {
+            if (typeof inventory[rfid]==="undefined") {
+                inventory[rfid]=electronics[rfid];
+                inventory[rfid]["tagNo"]=10;
+                nuyen-=inventory[rfid]["cost"];
+            } else if (nuyen-inventory[rfid]["cost"]>0) {
+                inventory[rfid]["tagNo"]+=10;
+                nuyen-=inventory[rfid]["cost"];
+            }
+        } else if ($(this).hasClass("sellDown")&&inventory[rfid]["tagNo"]>0) {
+            inventory[rfid]["tagNo"]-=10;
+            nuyen+=inventory[rfid]["cost"];
+        }
+        tenUp(rfid);
+        nuyenUpdater();
+        
+        function tenUp(x) {
+            $("."+x+" .numrfid").empty().append(inventory[x]["tagNo"]);
+        }
+    }
+    
+    $("#devices, #e-accessories").on("click", ".buydevice", appleStore);
+    
+    function appleStore () {//this function handles buying electroic devices
         var devicename=$(this).parent().attr("class");
         if ($(this).hasClass("deact")||nuyen-electronics[devicename]["cost"]<0) {
             return;
@@ -4469,12 +4495,18 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                     }
                 }
                 break;
+            case "accessory":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moddy' colspan=3></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "communication":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
         }
         nuyen-=inventory[devicename+invNum]["cost"];
         invNum++;
         nuyenUpdater();
         
-        function toInventory(x) {
+        function toInventory(x) {//this adds the device in to the inventory
             inventory[x+invNum]={};
             for (deviceAtt in electronics[x]) {
                 inventory[x+invNum][deviceAtt]=electronics[x][deviceAtt];
@@ -4483,9 +4515,9 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
     }
     
-    $("#devices").on("click", ".selldevice", microsoftStore);
+    $("#devices, #e-accessories").on("click", ".selldevice", microsoftStore);
     
-    function microsoftStore() {
+    function microsoftStore() {//this sells the device
         var devicename=$(this).parent().attr("class");
         $("."+devicename).remove();
         nuyen+=inventory[devicename]["cost"];
