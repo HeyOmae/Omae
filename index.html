@@ -33,6 +33,9 @@
     Celeodor for help with the Technomancer Complex Forms -- http://www.reddit.com/r/Shadowrun/comments/1plgtm/omae_complex_forms_and_you/
     shintsurugifor helping with melee weapons -- http://www.reddit.com/r/Shadowrun/comments/1pq0vr/omae_mele%C3%A9/cd59t5b
     JustKelly for helping with the commlinks, decks, and RCCs. justkelly@me.com or reddit.com/u/justkelly
+    Undin for helping with programs and electronic accessories. --
+        http://www.reddit.com/r/Shadowrun/comments/1tx1wb/omae_need_some_help_with_code_slinging/cecluyn
+        http://www.reddit.com/r/Shadowrun/comments/1w77ne/omae_tagger_but_i_just_met_her/cezdnql
     
     All the people on the Shadowgrid forums for their rule lawyering -- http://forums.shadowruntabletop.com/index.php?board=2.0
         -->
@@ -1822,11 +1825,19 @@ p, td {
         Trioxubermensch: {model: "Triox UberMensch", type: "rcc", device: 6, dataprocess: 8, firewall: 7, avail: 18, restrict: "Restricted", cost: 140000},
         //accessories
         argloves: {name:"AR Gloves", type:"accessory", device:3, avail:0, cost:150},
+        biometricreader: {name:"Biometric Reader", type:"accessory", device:3, avail:4, cost:200},
+        electronicpaper: {name:"Electronic Paper", type:"accessory", device:1, avail:0, cost:5},
+        printer: {name:"Printer", type:"accessory", device:3, avail:0, cost:25},
+        satellitelink: {name:"Satellite Link", type:"accessory", device:4, avail:6, cost:500},
+        simrig: {name:"Simrig", type:"accessory", device:3, avail:12, cost:1000},
+        subvocalmic: {name:"Subvocal Mic", type:"accessory", device:3, avail:4, cost:50},
+        tridprojector: {name:"Trid Projector", type:"accessory", device:3, avail:0, cost:200},
+        trodes: {name:"Trodes", type:"accessory", device:3, avail:0, cost:70},
         //RFID
-        standardtag: {name:"Standard Tag", type:"rfid", device:1, avail:0, restrict:"", cost:1},
+        standardtag: {name:"Standard Tag", type:"rfid", tagNo: 0, device:1, avail:0, restrict:"", cost:1},
         //communications
         bugscanner: {name:"Bug Scanner", type:"communication", rating:1, avail:1, restrict: "Restricted", cost:100},
-        datatap: {name:"Data Tap", type:"communication", avail: 6, restrict:"Restricted", cost:300}
+        datatap: {name:"Data Tap", type:"communication", avail: 6, restrict:"Restricted", cost:300},
     };
     
     var software = {
@@ -3463,7 +3474,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             }
             spellforms["detect"+x+y] = { name:"Detect "+x+" "+y, category: "detection", spell: false, preparation: false, active: "active", direction: spellforms[z]["direction"], type: spellforms[z]["type"], range: "T", duration: "Sustain", drain: spellforms[z]["drain"] };//sets all the values for the new spellform object
             spellhold = spellforms["detect"+x+y]//short hand, because typing all that junk was annoying
-            spell="detect"+x+y;
+            var spell="detect"+x+y;
             $("#"+z).after($("<tr id='"+spell+"' class='"+spellhold["category"]+"'><td class='spellact "+spell+" button'><strong>-</strong></td><td class='prepact "+spell+" button'><strong>-</strong></td><td class='spellname "+spell+"'>"+spellhold["name"]+"</td><td class='illact "+spell+"'>"+spellhold["active"]+"</td><td class='direction "+spell+"'>"+spellhold["direction"]+"</td><td class='spelltype "+spell+"'>"+spellhold["type"]+"</td><td class='spellrange "+spell+"'>"+spellhold["range"]+"</td><td class='spelldur "+spell+"'>"+spellhold["duration"]+"</td><td class='drain "+spell+"'>"+spellhold["drain"].toString()+"</td></tr>"));//Add the spell to the list on the DOM after where it was entered
         }
         
@@ -3474,7 +3485,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             }
             spellforms[z+x] = { name:z+" "+x, category: "health", spell: false, preparation: false, essence: "Essence", type: spellforms[y]["type"], range: "T", duration: "Sustain", drain: spellforms[y]["drain"] };//sets all the values for the new spellform object
             spellhold = spellforms[z+x]//short hand, because typing all that junk was annoying
-            spell=y;
+            var spell=y;
             $("#"+y).after($("<tr id='"+z+x+"' class='"+spellhold["category"]+"'><td class='spellact "+spell+" button'><strong>-</strong></td><td class='prepact "+spell+" button'><strong>-</strong></td><td class='spellname "+spell+"'>"+spellhold["name"]+"</td><td class='heaEss "+spell+"'>"+spellhold["essence"]+"</td><td class='spelltype "+spell+"'>"+spellhold["type"]+"</td><td class='spellrange "+spell+"'>"+spellhold["range"]+"</td><td class='spelldur "+spell+"'>"+spellhold["duration"]+"</td><td class='drain "+spell+"'>"+spellhold["drain"].toString()+"</td></tr>"));//Add the spell to the list on the DOM after where it was entered
 
         }
@@ -4421,7 +4432,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     $(".rccs").appendTo("#consoles");//sets the RCC labels
     
     for (devicename in electronics) {//this populates the electronic devices
-        device = electronics[devicename];
+        var device = electronics[devicename];
         if (device["type"]=="commlink") {
             $("#links").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
         } else if (device["type"]=="deck") {
@@ -4433,26 +4444,27 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         } else if (device.type=="rfid") {
             $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
         } else if (device.type=="communication") {
-            $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='numrfid'>0</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+            $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+            if (typeof device.rating==="undefined") {
+                $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
+                $("."+devicename+" .commrating").empty().append("n/a");
+            }
         }
         if (device["avail"]>12) {
-            $("."+devicename+" .buydevice").addClass("deact").empty().append("-")
+            $("."+devicename+" .buydevice").addClass("deact").empty().append("-");
         }
     }
     
     $("#e-accessories").on("click", ".buyUp, .sellDown", buyinbulk);
     
-    function buyinbulk() {
+    function buyinbulk() {//used to buy rfid tags, or possible other items that can be baught like rfid tags
         var rfid = $(this).parent().attr("class");
-        if ($(this).hasClass("buyUp")) {
-            if (typeof inventory[rfid]==="undefined") {
-                inventory[rfid]=electronics[rfid];
-                inventory[rfid]["tagNo"]=10;
-                nuyen-=inventory[rfid]["cost"];
-            } else if (nuyen-inventory[rfid]["cost"]>0) {
-                inventory[rfid]["tagNo"]+=10;
-                nuyen-=inventory[rfid]["cost"];
-            }
+        if (typeof inventory[rfid]==="undefined") {
+            inventory[rfid]=electronics[rfid];
+        }
+        if ($(this).hasClass("buyUp")&&nuyen-inventory[rfid]["cost"]>0) {
+            inventory[rfid]["tagNo"]+=10;
+            nuyen-=inventory[rfid]["cost"];
         } else if ($(this).hasClass("sellDown")&&inventory[rfid]["tagNo"]>0) {
             inventory[rfid]["tagNo"]-=10;
             nuyen+=inventory[rfid]["cost"];
@@ -4528,8 +4540,8 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     $("#devices").on("click", ".programs .button", buyProgram);
     
     function buyProgram() {
-        device=$(this).parent().parent().parent().attr("class");
-        program = $(this).parent().attr("class");
+        var device=$(this).parent().parent().parent().attr("class");
+        var program = $(this).parent().attr("class");
         if (typeof programs[program]!=="undefined") {
             cost=programcost(program);
         }
@@ -4602,7 +4614,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     $("#devices").on("click", ".linkmods .button", buylinkmod);
     
     function buylinkmod() {
-        device=$(this).parent().parent().attr("class");
+        var device=$(this).parent().parent().attr("class");
         if ($(this).hasClass("simmod")) {
             if ($(this).hasClass("active")) {
                 $(this).removeClass("active");
