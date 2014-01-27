@@ -1,0 +1,52 @@
+//I haven't coded in awhile, but want to help, so here's a bunch of dataentry I did, hopefully it helps!
+
+//credsticks
+standardcredstick: {name:"Standard", type:"credsticks", maxvalue:"5,000", avail:0, cost:5},
+silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", avail:0, cost:20},
+goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", avail:5, cost:100},
+platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avail:10, cost:500},
+ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", avail:20, cost:1000},
+
+//licenses
+fakesin: {name:"Fake SIN", type:"identification", rating:1, avail:3, restrict:"Forbidden", cost:2500},
+fakelicense: {name:"Fake SIN", type:"identification", rating:1, avail:3, restrict:"Forbidden", cost:200},
+
+//Tools
+toolkit: {name:"Kit", type:"tools", avail:0, cost:500},
+toolshop: {name:"Shop", type:"tools", avail:8, cost:5000},
+toolfacility: {name:"Facility", type:"tools", avail:12, cost:5000},
+
+
+//Security devices
+keycombinationlock: {name:"Key/combination lock", type:"securitydevice", rating:1, avail:1, cost:10},
+maglock: {name:"Maglock", type:"securitydevice", rating:1, avail:1, cost:100},
+keypad: {name:"Keypad", type:"securitydevice", avail:0, cost:50},
+cardreader: {name:"Card reader", type:"securitydevice", avail:0, cost:50},
+antitampercircuits: {name:"Anti-tamper circuits", type:"securitydevice", rating:1, avail:1, cost:250},
+//antitampercircuits should add to the rating to whatver they're purchased for.
+biometricreader: {name:"Biometric reader", type:"securitydevice", avail:4, cost:200},
+
+
+//restraints
+metalrestraint: {name:"Metal", type:"restraints", avail:0, cost:20},
+plasteelrestraint: {name:"Plasteel", type:"restraints", avail:6, restrict:"Restricted", cost:50},
+plasticrestraint: {name:"Plastic (per 10)", type:"restraints", avail:0, cost:5},
+containmentmanacles: {name:"Containment manacles", type:"restraints", avail:6, restrict:"Restricted", cost:250},
+
+//b&e gear
+autopicker: {name:"Autopicker", type:"b&egear", rating:1, avail:8, restrict:"Restricted", cost:500},
+cellularglovemolder: {name:"Cellular glove molder", type:"b&egear", rating:1, avail:12, restrict:"Forbidden", cost:500},
+chisel: {name:"Chisel", type:"b&egear", avail:0, cost:20},
+crowbar: {name:"Crowbar", type:"b&egear", avail:0, cost:20},
+keycardcopier: {name:"Keycard Copier", type:"b&egear", rating:1, avail:8, restrict:"Forbidden", cost:600},
+lockpickset: {name:"Lockpick set", type:"b&egear", avail:4, restrict:"Restricted", cost:250},
+maglockpasskey: {name:"Maglock passkey", type:"b&egear", rating:1, avail:3, restrict:"Forbidden", cost:2000},
+miniwelder: {name:"Miniwelder", type:"b&egear", avail:2, cost:250},
+miniwelderfuel: {name:"Miniwelder fuel canister", type:"b&egear", avail:2, cost:80},
+monofilamentchainsaw: {name:"Monofilament chainsaw", type:"b&egear", avail:8, cost:500},
+sequencer: {name:"Sequencer", type:"b&egear", rating:1,  avail:3, restrict:"Forbidden", cost:250},
+
+//industrial chemicals
+gluesolvent: {name:"Glue Solvent", type:"chemicals", avail:2, cost:90},
+gluesprayer: {name:"Glue Sprayer", type:"chemicals", avail:2, cost:150},
+thermiteburningbar: {name:"Thermite burning bar", avail:16, restrict:"Restricted, cost:500},
