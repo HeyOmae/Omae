@@ -1843,14 +1843,14 @@ p, td {
         stealthtags: {name:"Stealth Tags", type:"rfid", device:3, avail:7, restrict:"Restricted", cost:10},
     
         //communications
-        bugscanner: {name:"Bug Scanner", type:"communication", rating:1, avail:1, restrict: "Restricted", cost:100},
+        bugscanner: {name:"Bug Scanner", type:"communication", rating:1, availx:1, avail:1, restrict: "Restricted", costx:100, cost:100},//availx and costx are the multiplier for rating
         datatap: {name:"Data Tap", type:"communication", avail: 6, restrict:"Restricted", cost:300},
-        headjammer: {name:"Headjammer", type:"communication", rating:1, avail:1, restrict: "Restricted", cost:150},
-        jammerarea: {name:"Jammer, area", type:"communication", rating:1, avail:3, restrict: "Forbidden", cost:200},
-        jammerdirectional: {name:"Jammer, directional", type:"communication", rating:1, avail:2, restrict: "Forbidden", cost:200},
-        microtransciever: {name:"Micro-transciever", type:"communication", avail:2, restrict:"", cost:100},
+        headjammer: {name:"Headjammer", type:"communication", rating:1, availx:1, avail:1, restrict: "Restricted", costx:150, cost:150},
+        jammerarea: {name:"Jammer, area", type:"communication", rating:1, availx:3, avail:3, restrict: "Forbidden", costx:200, cost:200},
+        jammerdirectional: {name:"Jammer, directional", type:"communication", rating:1, availx:2, avail:2, restrict: "Forbidden", costx:200, cost:200},
+        microtransciever: {name:"Micro-transciever", type:"communication", avail:2, restrict:"", costx:100, cost:100},
         tageraser: {name:"Tag eraser", type:"communication", avail:6, restrict: "Restricted", cost:450},
-        whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, avail:1, restrict:"", cost:50},
+        whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
     };
     
     var software = {
@@ -4457,7 +4457,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         } else if (device.type=="rfid") {
             $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
         } else if (device.type=="communication") {
-            $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+            $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
             if (typeof device.rating==="undefined") {
                 $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
                 $("."+devicename+" .commrating").empty().append("n/a");
@@ -4670,6 +4670,27 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         nuyenUpdater();
     }
     
+    $("#communications").on("click", ".ratingUp, .ratingDown", commRating);//this is for raising and slowing communcation devices ratings
+    
+    function commRating() {
+        if ($(this).hasClass("deact")) {
+            return;
+        }
+        var device=$(this).parent().attr("class");
+        var ed=electronics[device];//ed=electronic device
+        if ($(this).hasClass("ratingUp")&&ed["avail"]<12&&ed["rating"]<6) {//if this is the rating up button, up the rating of the device
+            ed["rating"]++;
+            ed["avail"]+=ed["availx"];
+            ed.cost+=ed.costx;
+        } else if ($(this).hasClass("ratingDown")&&ed["rating"]>1) {//else if this is the rating down device, lower the rating
+            ed["rating"]--;
+            ed["avail"]-=ed["availx"];
+            ed.cost-=ed.costx;
+        }
+        $("."+device+" .commrating").empty().append(ed["rating"]);
+        $("."+device+" .avail").empty().append(ed["avail"]+" "+ed["restrict"]);
+        $("."+device+" .price").empty().append(ed["cost"]+"&yen;");
+    }
     
 </script>
 </body>
