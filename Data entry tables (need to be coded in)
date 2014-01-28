@@ -136,3 +136,5 @@ chempatch: {name:"Chem patch", type:"slappatches", avail:6, cost:200},
 stimpatch: {name:"Stim patch", type:"slappatches", avail:2, cost:25},
 tranqpatch: {name:"Tranq patch", type:"slappatches", avail:2, cost:20},
 traumapatch: {name:"Trauma patch", type:"slappatches", avail:6, cost:500},
+
+test 2
