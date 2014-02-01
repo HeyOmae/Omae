@@ -1857,11 +1857,11 @@ p, td {
         whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
    
    //credsticks
-         standardcredstick: {name:"Standard", type:"credsticks", maxvalue:"5,000", avail:0, cost:5},
-         silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", avail:0, cost:20},
-         goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", avail:5, cost:100},
-         platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avail:10, cost:500},
-         ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", avail:20, cost:1000},
+         standardcredstick: {name:"Standard", type:"credsticks", maxvalue:"5,000", avail:0,  restrict:"", cost:5},
+         silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", avail:0, restrict:"", cost:20},
+         goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", avail:5, restrict:"", cost:100},
+         platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avail:10, restrict:"", cost:500},
+         ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", avail:20, restrict:"", cost:1000},
     };
     
     var software = {
@@ -4514,10 +4514,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         var credsticks = $(this).parent().attr("class");
         if (typeof inventory[credsticks]==="undefined") {
             inventory[credsticks]=electronics[credsticks];
-            inventory[credsticks]["tagNo"]=0;
+            inventory[credsticks]["No"]=0;
         }
         if ($(this).hasClass("buyUp")&&nuyen-inventory[credsticks]["cost"]>0) {
-            inventory[credsticks]["tagNo"]+=1;
+            inventory[credsticks]["No"]+=1;
             nuyen-=inventory[credsticks]["cost"];
         } else if ($(this).hasClass("sellDown")&&inventory[credsticks]["No"]>0) {
             inventory[credsticks]["No"]-=1;
