@@ -4508,6 +4508,27 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
     }
     
+    $("#e-accessories").on("click", ".buyUp, .sellDown", buyonedevice);
+    
+    function buyonedevice() {//used to buy one device
+        var credsticks = $(this).parent().attr("class");
+        if (typeof inventory[credsticks]==="undefined") {
+            inventory[credsticks]=electronics[credsticks];
+            inventory[credsticks]["tagNo"]=0;
+        }
+        if ($(this).hasClass("buyUp")&&nuyen-inventory[credsticks]["cost"]>0) {
+            inventory[credsticks]["tagNo"]+=1;
+            nuyen-=inventory[credsticks]["cost"];
+        } else if ($(this).hasClass("sellDown")&&inventory[credsticks]["No"]>0) {
+            inventory[credsticks]["No"]-=1;
+            nuyen+=inventory[credsticks]["cost"];
+        }
+        oneUp(credsticks);
+        nuyenUpdater();
+        
+        function oneUp(x) {
+            $("."+x+" .numdevices").empty().append(inventory[x]["No"]);
+        }
     $("#devices, #e-accessories").on("click", ".buydevice", appleStore);
     
     function appleStore () {//this function handles buying electroic devices
