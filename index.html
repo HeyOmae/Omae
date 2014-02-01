@@ -1196,6 +1196,10 @@ p, td {
                 <table id="communications">
                     <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
                 </table>
+                 <h2>Credsticks</h2>
+                 <table id="credsticks">
+                     <tr class="label"><td>Buy</td><td>Max Amount</td><td>Avail</td><td>Cost</td></tr>
+                </table>
             </div>
         </div>
     </div>
@@ -1851,6 +1855,13 @@ p, td {
         microtransciever: {name:"Micro-transciever", type:"communication", avail:2, restrict:"", costx:100, cost:100},
         tageraser: {name:"Tag eraser", type:"communication", avail:6, restrict: "Restricted", cost:450},
         whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
+   
+   //credsticks
+         standardcredstick: {name:"Standard", type:"credsticks", maxvalue:"5,000", avail:0, cost:5},
+         silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", avail:0, cost:20},
+         goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", avail:5, cost:100},
+         platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avail:10, cost:500},
+         ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", avail:20, cost:1000},
     };
     
     var software = {
@@ -4200,6 +4211,26 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         
     }
     
+    function buycredsticks() {
+        if (typeof inventory["credsticks"]==='undefined') {
+            inventory["credsticks"]={}
+            for (key in credsticks) {
+                inventory["credsticks"][key]=credsticks[key];
+            }
+        }
+        if ($(this).hasClass("buyDet")&&nuyen-inventory["credsticks"]["cost"]>0) {
+            inventory["detonator"]["ammount"]++;
+            nuyen-=inventory["detonator"]["cost"];
+        } else if ($(this).hasClass("sellDet")&&inventory["detonator"]["ammount"]>0) {
+            inventory["detonator"]["ammount"]--;
+            nuyen+=inventory["detonator"]["cost"];
+        }
+        $(".caps").empty().append(inventory["detonator"]["ammount"]);
+        nuyenUpdater();
+        
+    }
+    
+ 
     for (type in armor) {
         $("#clotharmor #bodyarmor tbody").append("<tr class='"+type+"'><td class='buyarmor button'><strong>+</strong></td><td>"+armor[type]["name"]+"</td><td>"+armor[type]["armor"]+"</td><td>"+armor[type]["avail"]+" "+armor[type]["restrict"]+"</td><td>"+armor[type]["cost"]+"&#65509;</td></tr>");
         if (armor[type]["avail"]>12) {
@@ -4462,7 +4493,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
                 $("."+devicename+" .commrating").empty().append("n/a");
             }
-        }
+        } else if (device.type=="credsticks") {
+              $('#credsticks').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+          }    
+        
+        
         if (device["avail"]>12) {
             $("."+devicename+" .buydevice").addClass("deact").empty().append("-");
         }
