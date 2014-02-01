@@ -4211,25 +4211,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         
     }
     
-    function buycredsticks() {
-        if (typeof inventory["credsticks"]==='undefined') {
-            inventory["credsticks"]={}
-            for (key in credsticks) {
-                inventory["credsticks"][key]=credsticks[key];
-            }
-        }
-        if ($(this).hasClass("buyDet")&&nuyen-inventory["credsticks"]["cost"]>0) {
-            inventory["detonator"]["ammount"]++;
-            nuyen-=inventory["detonator"]["cost"];
-        } else if ($(this).hasClass("sellDet")&&inventory["detonator"]["ammount"]>0) {
-            inventory["detonator"]["ammount"]--;
-            nuyen+=inventory["detonator"]["cost"];
-        }
-        $(".caps").empty().append(inventory["detonator"]["ammount"]);
-        nuyenUpdater();
-        
-    }
-    
+ 
  
     for (type in armor) {
         $("#clotharmor #bodyarmor tbody").append("<tr class='"+type+"'><td class='buyarmor button'><strong>+</strong></td><td>"+armor[type]["name"]+"</td><td>"+armor[type]["armor"]+"</td><td>"+armor[type]["avail"]+" "+armor[type]["restrict"]+"</td><td>"+armor[type]["cost"]+"&#65509;</td></tr>");
@@ -4494,7 +4476,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename+" .commrating").empty().append("n/a");
             }
         } else if (device.type=="credsticks") {
-              $('#credsticks').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td>0</td><td class='sellDown button'>-</td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+              $('#credsticks').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td>0</td><td class='sellDown button'>-</td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
           }    
         
         
