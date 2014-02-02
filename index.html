@@ -1198,7 +1198,7 @@ p, td {
                 </table>
                  <h2>Credsticks</h2>
                  <table id="credsticks">
-                     <tr class="label"><td>Buy</td><td>Amount</td><td>Sell</td><td>Type</td><td>Max Amount</td><td>Avail</td><td>Cost</td></tr>
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Max Amount</td><td>Avail</td><td>Cost</td></tr>
                 </table>
             </div>
         </div>
@@ -1857,10 +1857,10 @@ p, td {
         whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
    
    //credsticks
-         silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", amount:0, avail:0, restrict:"", cost:20},
-         goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", amount:0, avail:5, restrict:"", cost:100},
-         platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", amount:0, avail:10, restrict:"", cost:500},
-         ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", amount:0, avail:20, restrict:"", cost:1000},
+         silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", avail:0, restrict:"", cost:20},
+         goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", avail:5, restrict:"", cost:100},
+         platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avail:10, restrict:"", cost:500},
+         ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", avail:20, restrict:"", cost:1000},
     };
     
     var software = {
@@ -4541,6 +4541,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moddy' colspan=3></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "communication":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+                
+            case "credsticks":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
         }
