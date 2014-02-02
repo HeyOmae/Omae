@@ -1196,6 +1196,10 @@ p, td {
                 <table id="communications">
                     <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
                 </table>
+                 <h2>Credsticks</h2>
+                 <table id="credsticks">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Max Amount</td><td>Avail</td><td>Cost</td></tr>
+                </table>
             </div>
         </div>
     </div>
@@ -1851,6 +1855,12 @@ p, td {
         microtransciever: {name:"Micro-transciever", type:"communication", avail:2, restrict:"", costx:100, cost:100},
         tageraser: {name:"Tag eraser", type:"communication", avail:6, restrict: "Restricted", cost:450},
         whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
+   
+   //credsticks
+         silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", avail:0, restrict:"", cost:20},
+         goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", avail:5, restrict:"", cost:100},
+         platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avail:10, restrict:"", cost:500},
+         ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", avail:20, restrict:"", cost:1000},
     };
     
     var software = {
@@ -4200,6 +4210,8 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         
     }
     
+ 
+ 
     for (type in armor) {
         $("#clotharmor #bodyarmor tbody").append("<tr class='"+type+"'><td class='buyarmor button'><strong>+</strong></td><td>"+armor[type]["name"]+"</td><td>"+armor[type]["armor"]+"</td><td>"+armor[type]["avail"]+" "+armor[type]["restrict"]+"</td><td>"+armor[type]["cost"]+"&#65509;</td></tr>");
         if (armor[type]["avail"]>12) {
@@ -4462,7 +4474,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
                 $("."+devicename+" .commrating").empty().append("n/a");
             }
-        }
+        } else if (device.type=="credsticks") {
+              $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+          }    
+        
+        
         if (device["avail"]>12) {
             $("."+devicename+" .buydevice").addClass("deact").empty().append("-");
         }
@@ -4525,6 +4541,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moddy' colspan=3></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "communication":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+                
+            case "credsticks":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
         }
