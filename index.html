@@ -4475,7 +4475,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename+" .commrating").empty().append("n/a");
             }
         } else if (device.type=="credsticks") {
-              $('#credsticks').append("<tr class='"+devicename+"'><td class='buycred button'>+</td><td class='numcreds'>0</td><td class='selcred button'>-</td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+              $('#credsticks').append("<tr class='"+devicename+"'><td class='buycred button'>+</td><td class='cred'>0</td><td class='sellcred button'>-</td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
           }    
         
         
@@ -4507,10 +4507,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
     }
     
-    $("#e-accessories").on("click", ".buycred, .sellcred", buyonecred);
+    $("#devices, #e-accessories").on("click", ".buycred, .sellcred", buyonecred);
     
    function buyonecred() {
-        if (typeof inventory["credsticks"]==='undefined') {
+        if (typeof inventory["credsticks"]=='undefined') {
             inventory["credsticks"]={}
             for (key in credsticks) {
                 inventory["credsticks"][key]=credsticks[key];
@@ -4523,7 +4523,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             inventory["credsticks"]["ammount"]--;
             nuyen+=inventory["credsticks"]["cost"];
         }
-        $(".numcreds").empty().append(inventory["credsticks"]["ammount"]);
+        $(".cred").empty().append(inventory["credsticks"]["ammount"]);
         nuyenUpdater();
         
     }
