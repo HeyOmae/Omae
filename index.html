@@ -1198,7 +1198,7 @@ p, td {
                 </table>
                  <h2>Credsticks</h2>
                  <table id="credsticks">
-                     <tr class="label"><td>Buy</td><td>Ammount</td><tdSell</td><td>Max Amount</td><td>Avail</td><td>Cost</td></tr>
+                     <tr class="label"><td>Buy</td><td>Ammount</td><td>Sell</td><td>Max Amount</td><td>Avail</td><td>Cost</td></tr>
                 </table>
             </div>
         </div>
@@ -4475,7 +4475,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename+" .commrating").empty().append("n/a");
             }
         } else if (device.type=="credsticks") {
-              $('#credsticks').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numcred'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+              $('#credsticks').append("<tr class='"+devicename+"'><td class='buycred button'>+</td><td class='numcreds'>0</td><td class='selcred button'>-</td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
           }    
         
         
@@ -4507,28 +4507,27 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
     }
     
-    $("#e-accessories").on("click", ".buyUp, .sellDown", buyonedevice);
+    $("#e-accessories").on("click", ".buycred, .sellcred", buyonecred);
     
-    function buyonedevice() {//used to buy one device
-        var credsticks = $(this).parent().attr("class");
-        if (typeof inventory[credsticks]==="undefined") {
-            inventory[credsticks]=electronics[credsticks];
-            inventory[credsticks]["No"]=0;
+   function buyonecred() {
+        if (typeof inventory["credsticks"]==='undefined') {
+            inventory["credsticks"]={}
+            for (key in credsticks) {
+                inventory["credsticks"][key]=credsticks[key];
+            }
         }
-        if ($(this).hasClass("buyUp")&&nuyen-inventory[credsticks]["cost"]>0) {
-            inventory[credsticks]["No"]+=1;
-            nuyen-=inventory[credsticks]["cost"];
-        } else if ($(this).hasClass("sellDown")&&inventory[credsticks]["No"]>0) {
-            inventory[credsticks]["No"]-=1;
-            nuyen+=inventory[credsticks]["cost"];
+        if ($(this).hasClass("buycred")&&nuyen-inventory["credsticks"]["cost"]>0) {
+            inventory["credsticks"]["ammount"]++;
+            nuyen-=inventory["credsticks"]["cost"];
+        } else if ($(this).hasClass("sellcred")&&inventory["credsticks"]["ammount"]>0) {
+            inventory["credsticks"]["ammount"]--;
+            nuyen+=inventory["credsticks"]["cost"];
         }
-        oneUp(credsticks);
+        $(".numcreds").empty().append(inventory["credsticks"]["ammount"]);
         nuyenUpdater();
         
-        function oneUp(x) {
-            $("."+x+" .numcred").empty().append(inventory[x]["No"]);
-        }
     }
+    
     
     $("#devices, #e-accessories").on("click", ".buydevice", appleStore);
     
