@@ -1198,7 +1198,7 @@ p, td {
                 </table>
                  <h2>Credsticks</h2>
                  <table id="credsticks">
-                     <tr class="label"><td>Buy</td><td>Max Amount</td><td>Avail</td><td>Cost</td></tr>
+                     <tr class="label"><td>Buy</td><td>Ammount</td><tdSell</td><td>Max Amount</td><td>Avail</td><td>Cost</td></tr>
                 </table>
             </div>
         </div>
@@ -4530,6 +4530,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             $("."+x+" .numdevices").empty().append(inventory[x]["No"]);
         }
     }
+    
     $("#devices, #e-accessories").on("click", ".buydevice", appleStore);
     
     function appleStore () {//this function handles buying electroic devices
