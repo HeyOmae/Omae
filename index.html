@@ -1186,15 +1186,19 @@ p, td {
             <div id="e-accessories">
                 <h2>Electonic Accessories</h2>
                 <table id="eccessories">
-                    <tr class="label"><td>Buy</td><td>Accessory</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                    <tr class="label onlybuy"><td>Buy</td><td>Accessory</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
                 </table>
                 <h2>RFID Tags</h2>
                 <table id="rfid">
-                    <tr class="label"><td>Buy</td><td>Ammount</td><td>Sell</td><td>Tags</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                    <tr class="label buysell"><td>Buy</td><td>Ammount</td><td>Sell</td><td>Tags</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
                 </table>
                 <h2>Communications</h2>
                 <table id="communications">
-                    <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
+                    <tr class="label buyrating"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                <h2>Credsticks</h2>
+                <table id="credsticks">
+                    
                 </table>
             </div>
         </div>
@@ -1851,6 +1855,13 @@ p, td {
         microtransciever: {name:"Micro-transciever", type:"communication", avail:2, restrict:"", costx:100, cost:100},
         tageraser: {name:"Tag eraser", type:"communication", avail:6, restrict: "Restricted", cost:450},
         whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
+        
+        //credsticks
+        standardcredstick: {name:"Standard", type:"credsticks", value:0, maxvalue:"5,000", avail:0, cost:5},
+        silvercredstick: {name:"Silver", type:"credsticks", value:0, maxvalue:"20,000", avail:0, cost:20},
+        goldcredstick: {name:"Gold", type:"credsticks", value:0, maxvalue:"100,000", avail:5, cost:100},
+        platinumcredstick: {name:"Platinum", type:"credsticks", value:0, maxvalue:"500,000", avail:10, cost:500},
+        ebonycredstick: {name:"Ebony", type:"credsticks", value:0, maxvalue:"1,000,000", avail:20, cost:1000},
     };
     
     var software = {
@@ -2951,6 +2962,7 @@ p, td {
         theLabeler (".label.crossbow",".projectiles.crossbow");
         theLabeler (".label.throwingweapon",".projectiles.throwingweapons");
         theLabeler (".label.firearm",".firearms");
+        theLabeler (".label.onlybuy","#eccessories,#credsticks");
         
         function theLabeler(x,y) {
             $(x).appendTo(y);
@@ -3046,25 +3058,32 @@ p, td {
         for (item in weapons) {//this pulls the weapons stats from the weapons object to populate the page
             var itemhold = weapons[item];
             //this one populates the melee weapons
-            $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='weapname "+item+"'>"+itemhold["name"]+"</td><td class='accuracy "+item+"'>"+itemhold["accuracy"]+"("+(itemhold["accuracy"]+itemhold["accmod"])+")"+"</td><td class='reach "+item+"'>"+itemhold["reach"]+"("+(itemhold["reach"]+reachmod)+")"+"</td><td class='damage "+item+"'>"+(itemhold["stat"]+itemhold["damage"])+"("+(itemhold["stat"]+itemhold["damage"]+itemhold["dvmod"])+")"+itemhold["damtype"]+" "+itemhold["element"]+"</td><td class='ap "+item+"'>"+itemhold["ap"]+"</td><td class='avail "+item+"'>"+itemhold["avail"]+" "+itemhold["restrict"]+"</td><td class='cost "+item+"'>"+itemhold["cost"]+"&#65509"+"</td></tr>").appendTo($(".meleeweapon."+itemhold["category"]));
-            //this one populates the projectiles
-            $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='incAtt "+item+" weaprating'>+</td><td class='weaprating "+item+" weapratingnum'>"+itemhold["rating"]+"</td><td class='decAtt "+item+" weaprating'>-</td><td class='weap accuracy "+item+"'>"+itemhold["arruracy"]+"</td><td class='weap damage "+item+"'>"+itemhold["damage"]+"</td><td class='weap ap "+item+"'>"+itemhold["ap"]+"</td><td class='weap avail "+item+"'>"+itemhold["avail"]+"</td><td class='weap cost "+item+"'>"+itemhold["cost"]+"</td></tr>").appendTo(".projectiles."+itemhold["category"]);
-            //firearms
-            $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='weapname "+item+"'>"+itemhold["name"]+"</td><td class='accuracy "+item+"'>"+itemhold["accuracy"]+"("+(itemhold["accuracy"]+itemhold["accmod"])+")"+"</td><td class='damage "+item+"'>"+itemhold["damage"]+"("+(itemhold["damage"]+itemhold["dvmod"])+")"+itemhold["damtype"]+" "+itemhold["element"]+"</td><td class='ap "+item+"'>"+itemhold["ap"]+"</td><td class='modes "+item+"'></td><td class='RC "+item+"'>"+itemhold["rc"]+"</td><td class='ammo "+item+" clip'>"+itemhold["ammo"]+" "+itemhold["clip"]+"</td><td class='avail "+item+"'>"+itemhold["avail"]+" "+itemhold["restrict"]+"</td><td class='cost "+item+"'>"+itemhold["cost"]+"&#65509"+"</td></tr>").appendTo(".firearms."+itemhold["category"]);
-            
-            for (firemode in itemhold["mode"]) {
-                $(".modes."+item).append(itemhold["mode"][firemode]+",<br/>");
+            if (itemhold.category=="blades"||"clubs"||"other") {//I have to put this stupid if statement of else Internet Explores explodes. I hate you Microsoft.
+                $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='weapname "+item+"'>"+itemhold["name"]+"</td><td class='accuracy "+item+"'>"+itemhold["accuracy"]+"("+(itemhold["accuracy"]+itemhold["accmod"])+")"+"</td><td class='reach "+item+"'>"+itemhold["reach"]+"("+(itemhold["reach"]+reachmod)+")"+"</td><td class='damage "+item+"'>"+(itemhold["stat"]+itemhold["damage"])+"("+(itemhold["stat"]+itemhold["damage"]+itemhold["dvmod"])+")"+itemhold["damtype"]+" "+itemhold["element"]+"</td><td class='ap "+item+"'>"+itemhold["ap"]+"</td><td class='avail "+item+"'>"+itemhold["avail"]+" "+itemhold["restrict"]+"</td><td class='cost "+item+"'>"+itemhold["cost"]+"&#65509"+"</td></tr>").appendTo($(".meleeweapon."+itemhold["category"]));
             }
-            for (diffAmmo in itemhold["altammo"]) {
-                switch (diffAmmo) {
-                    case "ammo":
-                        $("."+diffAmmo+"."+item).append("/"+itemhold["altammo"][diffAmmo]);
-                        break;
-                    case "clip":
-                        $("."+diffAmmo+"."+item).append(" "+itemhold["altammo"][diffAmmo]);
-                        break;
+            //this one populates the projectiles
+            if (itemhold.catergory=="bow"||"crossbow"||"throwingweapons") {
+                $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='incAtt "+item+" weaprating'>+</td><td class='weaprating "+item+" weapratingnum'>"+itemhold["rating"]+"</td><td class='decAtt "+item+" weaprating'>-</td><td class='weap accuracy "+item+"'>"+itemhold["arruracy"]+"</td><td class='weap damage "+item+"'>"+itemhold["damage"]+"</td><td class='weap ap "+item+"'>"+itemhold["ap"]+"</td><td class='weap avail "+item+"'>"+itemhold["avail"]+"</td><td class='weap cost "+item+"'>"+itemhold["cost"]+"</td></tr>").appendTo(".projectiles."+itemhold["category"]);
+            }
+            //firearms
+            if (itemhold.catergory!=="blades"||"clubs"||"other"||"bow"||"crossbow"||"throwingweapons") {
+                $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='weapname "+item+"'>"+itemhold["name"]+"</td><td class='accuracy "+item+"'>"+itemhold["accuracy"]+"("+(itemhold["accuracy"]+itemhold["accmod"])+")"+"</td><td class='damage "+item+"'>"+itemhold["damage"]+"("+(itemhold["damage"]+itemhold["dvmod"])+")"+itemhold["damtype"]+" "+itemhold["element"]+"</td><td class='ap "+item+"'>"+itemhold["ap"]+"</td><td class='modes "+item+"'></td><td class='RC "+item+"'>"+itemhold["rc"]+"</td><td class='ammo "+item+" clip'>"+itemhold["ammo"]+" "+itemhold["clip"]+"</td><td class='avail "+item+"'>"+itemhold["avail"]+" "+itemhold["restrict"]+"</td><td class='cost "+item+"'>"+itemhold["cost"]+"&#65509"+"</td></tr>").appendTo(".firearms."+itemhold["category"]);
+            
+                for (firemode in itemhold["mode"]) {
+                    $(".modes."+item).append(itemhold["mode"][firemode]+",<br/>");
+                }
+                for (diffAmmo in itemhold["altammo"]) {
+                    switch (diffAmmo) {
+                        case "ammo":
+                            $("."+diffAmmo+"."+item).append("/"+itemhold["altammo"][diffAmmo]);
+                            break;
+                        case "clip":
+                            $("."+diffAmmo+"."+item).append(" "+itemhold["altammo"][diffAmmo]);
+                            break;
+                    }
                 }
             }
+            
             if (itemhold["avail"]>12) {
                 $(".weapact."+item).addClass("deact").empty().append("<span>-</span>");
             }
@@ -4525,7 +4544,8 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moddy' colspan=3></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "communication":
-                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                var dv=inventory[devicename+invNum];//dv=device
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3>"+dv["rating"]+"</td><td>"+dv["name"]+"</td><td>"+dv.avail+" "+dv.restrict+"</td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
         }
         nuyen-=inventory[devicename+invNum]["cost"];
