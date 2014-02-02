@@ -1857,7 +1857,6 @@ p, td {
         whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
    
    //credsticks
-         standardcredstick: {name:"Standard", type:"credsticks", maxvalue:"5,000", avail:0,  restrict:"", cost:5},
          silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", avail:0, restrict:"", cost:20},
          goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", avail:5, restrict:"", cost:100},
          platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avail:10, restrict:"", cost:500},
@@ -4476,7 +4475,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename+" .commrating").empty().append("n/a");
             }
         } else if (device.type=="credsticks") {
-              $('#credsticks').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numdevices'>0</td><td class='sellDown button'>-</td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+              $('#credsticks').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numcred'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
           }    
         
         
@@ -4527,7 +4526,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         nuyenUpdater();
         
         function oneUp(x) {
-            $("."+x+" .numdevices").empty().append(inventory[x]["No"]);
+            $("."+x+" .numcred").empty().append(inventory[x]["No"]);
         }
     }
     
