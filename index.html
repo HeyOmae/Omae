@@ -1922,7 +1922,6 @@ fakelicense: {name:"Fake SIN", type:"identification", rating:1, availx:3, restri
         cardreader: {name:"Card reader", type:"securitydevice", avail:0, restrict:"", cost:50},
         antitampercircuits: {name:"Anti-tamper circuits", type:"securitydevice", rating:1, availx:1, restrict:"", costx:250},
 //antitampercircuits should add to the rating to whatver they're purchased for.
-        biometricreader: {name:"Biometric reader", type:"securitydevice", avail:4, restrict:"", cost:200},
 
 
 //restraints
@@ -1956,7 +1955,7 @@ fakelicense: {name:"Fake SIN", type:"identification", rating:1, availx:3, restri
         flashlight: {name:"Flashlight", type:"survivalgear", avail:0, restrict:"", cost:25},
         gasmask: {name:"Gas mask", type:"survivalgear", avail:0, restrict:"", cost:200},
         geckotapegloves: {name:"Gecko tape gloves", type:"survivalgear",  avail:12, restrict:"", cost:250},
-        hazmatsuit: {name:"Hazmat suit", type:"survivalgear",  avail:8 restrict:"", cost:3000},
+        hazmatsuit: {name:"Hazmat suit", type:"survivalgear",  avail:8, restrict:"", cost:3000},
         lightstick: {name:"Chemsuit", type:"survivalgear", avail:0, restrict:"", cost:25},
         magnesiumtorch: {name:"Magnesium torch", type:"survivalgear", avail:0, restrict:"", cost:5},
         microflarelauncher: {name:"Micro flare launcher", type:"survivalgear", avail:0, restrict:"", cost:175},
@@ -4588,58 +4587,67 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     for (devicename in electronics) {//this populates the electronic devices
         var device = electronics[devicename];
-        if (device["type"]=="commlink") {
-            $("#links").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device["type"]=="deck") {
-            $("#decks").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["array"]+"</td><td>"+device["programs"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device["type"]=="rcc") {
-            $("#consoles").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["dataprocess"]+"</td><td>"+device["firewall"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device["type"]=="accessory") {
-            $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device.type=="rfid") {
-            $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device.type=="communication") {
-            $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
-            if (typeof device.rating==="undefined") {
-                $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
-                $("."+devicename+" .commrating").empty().append("n/a");
-            }
-        } else if (device.type=="credsticks") {
-              $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }    
-    } else if (device.type=="identification") {
-              $('#identification').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-        } else if (device.type=="tools") {
-              $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-          } else if (device.type=="securitydevice") {
-              $('#securitydevice').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-          } else if (device.type=="restraints") {
-              $('#restraints').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-           } else if (device.type=="bnegear") {
-              $('#bnegear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-           } else if (device.type=="chemicals") {
-              $('#chemicals').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-           } else if (device.type=="survivalgear") {
-              $('#survivalgear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-           } else if (device.type=="grapplegungear") {
-              $('#grapplegungear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-           } else if (device.type=="biotech") {
-              $('#biotech').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-           } else if (device.type=="docwagon") {
-              $('#docwagon').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
-           } else if (device.type=="slappatches") {
-              $('#slappatches').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }
+        switch (device.type) {
+            case "commlink":
+                $("#links").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "deck":
+                $("#decks").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["array"]+"</td><td>"+device["programs"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "rcc":
+                $("#consoles").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["dataprocess"]+"</td><td>"+device["firewall"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "accessory":
+                $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "rfid":
+                $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "communication":
+                $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                if (typeof device.rating==="undefined") {
+                    $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
+                    $("."+devicename+" .commrating").empty().append("n/a");
+                }
+                break;
+            case "credsticks":
+                $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "identification":
+                $('#identification').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "tools":
+                $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "securitydevice":
+                $('#securitydevice').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "restraints":
+                $('#restraints').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "bnegear":
+                $('#bnegear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "chemicals":
+                $('#chemicals').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "survivalgear":
+                $('#survivalgear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "grapplegungear":
+                $('#grapplegungear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "biotech":
+                $('#biotech').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "docwagon":
+                $('#docwagon').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "slappatches":
+                $('#slappatches').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+        }
+        
         if (device["avail"]>12) {
             $("."+devicename+" .buydevice").addClass("deact").empty().append("-");
         }
