@@ -2710,14 +2710,14 @@ p, td {
                         augrea--;
                     }
                 }
-            } else if (prop=="improvedphysicalattributebody"||prop=="improvedphysicalattributeagility"||prop=="improvedphysicalattributereaction"||prop=="improvedphysicalattributestrength") {//x!='undefined' doesn't work. Don't do that anymore.
+            } else if (prop=="improvedphysicalattributebody"||prop=="improvedphysicalattributeagility"||prop=="improvedphysicalattributereaction"||prop=="improvedphysicalattributestrength") {//if the power is improve attribute then do this stuff
                 if (powerPoints-power["cost"]>=0 && power["level"]<4 && className=="incAtt "+[prop]) {
                     power["level"]++;
                     powerPoints=powerPoints-power["cost"];
                     
                     addAttMod (power["attmod"]);
                 }
-                if (power["level"]>1 && className=="decAtt "+[prop]) {
+                if (power["level"]>1 && className=="decAtt "+prop) {
                     power["level"]--;
                     powerPoints=powerPoints+power["cost"];
                     
@@ -4714,7 +4714,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
                 
             case "credsticks":
-                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "identification":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
@@ -4756,7 +4756,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             for (deviceAtt in electronics[x]) {
                 inventory[x+invNum][deviceAtt]=electronics[x][deviceAtt];
             }
-            inventory[x+invNum]["programlist"]={};
+            if (electronics[x]["type"]==("rcc"||"deck")) {
+                inventory[x+invNum]["programlist"]={};
+            }
+            
         }
     }
     
