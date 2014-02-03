@@ -8,8 +8,8 @@ platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avai
 ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", avail:20, cost:1000},
 
 //licenses
-fakesin: {name:"Fake SIN", type:"identification", rating:1, avail:3, restrict:"Forbidden", cost:2500},
-fakelicense: {name:"Fake SIN", type:"identification", rating:1, avail:3, restrict:"Forbidden", cost:200},
+fakesin: {name:"Fake SIN", type:"identification", rating:1, availx:3, restrict:"Forbidden", costx:2500},
+fakelicense: {name:"Fake SIN", type:"identification", rating:1, availx:3, restrict:"Forbidden", costx:200},
 
 //Tools
 toolkit: {name:"Kit", type:"tools", avail:0, cost:500},
@@ -17,12 +17,55 @@ toolshop: {name:"Shop", type:"tools", avail:8, cost:5000},
 toolfacility: {name:"Facility", type:"tools", avail:12, cost:5000},
 
 
+//optical & imaging devices
+binoculars: {name:"Binoculars", type:"optical", capacity:1, avail:0, cost:50},
+binocularsoptical: {name:"Binoculars, Optical", type:"optical", avail:0, cost:50},
+camera: {name:"Camera", type:"optical", capacity:1, avail:0, cost:100},
+microcamera: {name:"Micro-Camera", type:"optical", capacity:1, avail:0, cost:100},
+contacts: {name:"Contacts", type:"optical", capacity:1, avail:6, cost:200},
+glasses: {name:"Glasses", type:"optical", capacity:1, avail:0, cost:100},
+goggles: {name:"Goggles", type:"optical", capacity:1, avail:0, cost:50},
+endoscope: {name:"Endoscope", type:"optical", avail:8, cost:250},
+imagingscopes: {name:"Imaging Scopes", type:"optical", capacity:3, avail:2, cost:300},
+periscope: {name:"Periscope", type:"optical", avail:3, cost:50},
+magesightgoggles: {name:"Mage Sight Goggles", type:"optical", avail:12, restrict:"Restricted", cost:3000},
+monocle: {name:"Micro-Camera", type:"optical", capacity:1, avail:12, restrict:"Restricted", cost:3000},
+
+//vision enhancements THESE PROBABLY NEED TO BE HANDLED DIFFERENTLY AVAILIBILITY IS ADDITION TO BASE DEVICE
+lowlightvision: {name:"Low Light Vision", type:"visionenhance", capacity:1, avail:4, cost:500},
+flarecompensation: {name:"Flare compensation", type:"visionenhance", capacity:1, avail:4, cost:250},
+imagelink: {name:"Image link", type:"visionenhance", capacity:1, avail:0, cost:25},
+smartlink: {name:"Smartlink", type:"visionenhance", capacity:1, avail:4, restrict:"Restricted", cost:2000},
+thermographicvisionenhance: {name:"Thermographic vision", type:"visionenhance", capacity:1, avail:6, cost:500},
+visionenhancement: {name:"Vision enhancement", type:"visionenhance", capacity:1, avail:2, cost:500},
+visionmagnification: {name:"Vision magnification", type:"visionenhance", capacity:1, avail:2, cost:250},
+
+//audio devices
+directionalmic: {name:"Directional mic", type:"audiodevices", capacity:1, avail:4, cost:50},
+earbuds: {name:"Ear buds", type:"audiodevices", capacity:1, avail:0, cost:50},
+headphones: {name:"headphones", type:"audiodevices", capacity:1, avail:0, cost:50},
+lasermic: {name:"Laser mic", type:"audiodevices", capacity:1, avail:6, restrict:"Restricted", cost:100},
+omnidirectionalmic: {name:"Omni-directional mic", type:"audiodevices", capacity:1, avail:0, cost:50},
+
+//audio enhancements THESE PROBABLY NEED TO BE HANDLED DIFFERENTLY AVAILIBILITY IS ADDITION TO BASE DEVICE
+audioenhancement: {name:"Audio enhancement", type:"audioenhance", rating:1, capacityx:1, availx:2, costx:500},
+selectsoundfilter: {name:"Select sound filter ", type:"audioenhance", rating:1, capacityx:1, availx:3, costx:250},
+spatialrecognizer: {name:"Spatial recognizer", type:"audioenhance", capacity:2, avail:4, cost:1000},
+
+//not sure how to handle sensors feel free to add
+
+//sensor housings
+
+//sensors
+
+//sensor function
+
 //Security devices
-keycombinationlock: {name:"Key/combination lock", type:"securitydevice", rating:1, avail:1, cost:10},
-maglock: {name:"Maglock", type:"securitydevice", rating:1, avail:1, cost:100},
+keycombinationlock: {name:"Key/combination lock", type:"securitydevice", rating:1, availx:1, costx:10},
+maglock: {name:"Maglock", type:"securitydevice", rating:1, availx:1, costx:100},
 keypad: {name:"Keypad", type:"securitydevice", avail:0, cost:50},
 cardreader: {name:"Card reader", type:"securitydevice", avail:0, cost:50},
-antitampercircuits: {name:"Anti-tamper circuits", type:"securitydevice", rating:1, avail:1, cost:250},
+antitampercircuits: {name:"Anti-tamper circuits", type:"securitydevice", rating:1, availx:1, costx:250},
 //antitampercircuits should add to the rating to whatver they're purchased for.
 biometricreader: {name:"Biometric reader", type:"securitydevice", avail:4, cost:200},
 
@@ -34,19 +77,62 @@ plasticrestraint: {name:"Plastic (per 10)", type:"restraints", avail:0, cost:5},
 containmentmanacles: {name:"Containment manacles", type:"restraints", avail:6, restrict:"Restricted", cost:250},
 
 //b&e gear
-autopicker: {name:"Autopicker", type:"b&egear", rating:1, avail:8, restrict:"Restricted", cost:500},
-cellularglovemolder: {name:"Cellular glove molder", type:"b&egear", rating:1, avail:12, restrict:"Forbidden", cost:500},
+autopicker: {name:"Autopicker", type:"b&egear", rating:1, avail:8, restrict:"Restricted", costx:500},
+cellularglovemolder: {name:"Cellular glove molder", type:"b&egear", rating:1, avail:12, restrict:"Forbidden", costx:500},
 chisel: {name:"Chisel", type:"b&egear", avail:0, cost:20},
 crowbar: {name:"Crowbar", type:"b&egear", avail:0, cost:20},
-keycardcopier: {name:"Keycard Copier", type:"b&egear", rating:1, avail:8, restrict:"Forbidden", cost:600},
+keycardcopier: {name:"Keycard Copier", type:"b&egear", rating:1, avail:8, restrict:"Forbidden", costx:600},
 lockpickset: {name:"Lockpick set", type:"b&egear", avail:4, restrict:"Restricted", cost:250},
-maglockpasskey: {name:"Maglock passkey", type:"b&egear", rating:1, avail:3, restrict:"Forbidden", cost:2000},
+maglockpasskey: {name:"Maglock passkey", type:"b&egear", rating:1, avail:3, restrict:"Forbidden", costx:2000},
 miniwelder: {name:"Miniwelder", type:"b&egear", avail:2, cost:250},
 miniwelderfuel: {name:"Miniwelder fuel canister", type:"b&egear", avail:2, cost:80},
 monofilamentchainsaw: {name:"Monofilament chainsaw", type:"b&egear", avail:8, cost:500},
-sequencer: {name:"Sequencer", type:"b&egear", rating:1,  avail:3, restrict:"Forbidden", cost:250},
+sequencer: {name:"Sequencer", type:"b&egear", rating:1,  availx:3, restrict:"Forbidden", costx:250},
 
 //industrial chemicals
 gluesolvent: {name:"Glue Solvent", type:"chemicals", avail:2, cost:90},
 gluesprayer: {name:"Glue Sprayer", type:"chemicals", avail:2, cost:150},
 thermiteburningbar: {name:"Thermite burning bar", avail:16, restrict:"Restricted, cost:500},
+
+//survival gear
+chemsuit: {name:"Chemsuit", type:"survivalgear", rating:1, availx:2, costx:150},
+climbinggear: {name:"Climbing gear", type:"survivalgear", avail:0, cost:200},
+divinggear: {name:"Diving gear", type:"survivalgear", avail:6, cost:2000},
+flashlight: {name:"Flashlight", type:"survivalgear", avail:0, cost:25},
+gasmask: {name:"Gas mask", type:"survivalgear", avail:0, cost:200},
+geckotapegloves: {name:"Gecko tape gloves", type:"survivalgear",  avail:12, cost:250},
+hazmatsuit: {name:"Hazmat suit", type:"survivalgear",  avail:8 cost:3000},
+lightstick: {name:"Chemsuit", type:"survivalgear", avail:0, cost:25},
+magnesiumtorch: {name:"Magnesium torch", type:"survivalgear", avail:0, cost:5},
+microflarelauncher: {name:"Micro flare launcher", type:"survivalgear", avail:0, cost:175},
+microflares: {name:"Micro flares", type:"survivalgear", avail:0, cost:25},
+rappellinggloves: {name:"Rappelling gloves", type:"survivalgear", avail:0, cost:50},
+respirator: {name:"Respirator", type:"survivalgear", rating:1, avail:0, costx:50},
+survivalkit: {name:"Survival Kit", type:"survivalgear", avail:4, cost:200},
+
+//grapple gun gear
+grapplegun: {name:"Grapple gun", type:"grapplegungear", avail:8, restrict:"Restricted", cost:500},
+catalyststick: {name:"Catalyst stick", type:"grapplegungear", avail:8, restrict:"Forbidden", cost:500},
+microwire: {name:"Microwire", type:"grapplegungear", avail:4, cost:500},
+myomericrope: {name:"Myomeric rope", type:"grapplegungear", avail:10, cost:500},
+standardrope: {name:"Standard rope", type:"grapplegungear", avail:0, cost:500},
+stealthrope: {name:"Stealth rope", type:"grapplegungear", avail:8, restrict:"Forbidden", cost:500},
+
+//biotech
+biomonitor: {name:"Biomonitor", type:"biotech", avail:3, cost:300},
+disposablesyringe: {name:"Disposable syringe", type:"biotech", avail:3, cost:10},
+medkit: {name:"Medkit", type:"biotech", rating:1, availx:1, costx:250},
+medkitsupplies: {name:"Medkit supplies", type:"biotech", avail:0, cost:100},
+
+//docwagon contract
+basiccontract: {name:"Basic", type:"docwagon", avail:0, cost:5000},
+goldontract: {name:"Gold", type:"docwagon", avail:0, cost:25000},
+platinumontract: {name:"Platinum", type:"docwagon", avail:0, cost:50000},
+superplatinumontract: {name:"Super-platinum", type:"docwagon", avail:0, cost:100000},
+
+//slap patches
+antidotepatch: {name:"Antidote patch", type:"slappatches", rating:1, availx:1, costx:50},
+chempatch: {name:"Chem patch", type:"slappatches", avail:6, cost:200},
+stimpatch: {name:"Stim patch", type:"slappatches", availx:2, costx:25},
+tranqpatch: {name:"Tranq patch", type:"slappatches", availx:2, costx:20},
+traumapatch: {name:"Trauma patch", type:"slappatches", avail:6, cost:500},
