@@ -1901,14 +1901,15 @@ p, td {
         whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
    
    //credsticks
+         standard: {name:"Standard", type:"credsticks", maxvalue:"5,000", avail:0, restrict:"", cost:5},
          silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", avail:0, restrict:"", cost:20},
          goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", avail:5, restrict:"", cost:100},
          platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avail:10, restrict:"", cost:500},
          ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", avail:20, restrict:"", cost:1000},
          
            //licenses and SINS
-        fakesin: {name:"Fake SIN", type:"identification", rating:1, avail:3, restrict:"Forbidden", cost:2500},
-    fakelicense: {name:"Fake SIN", type:"identification", rating:1, avail:3, restrict:"Forbidden", cost:200},
+        fakesin: {name:"Fake SIN", id:"", type:"identification", rating:1, avail:3, availx:3, restrict:"Forbidden", costx:2500, cost:2500},
+        fakelicense: {name:"Fake License", id:"", type:"identification", rating:1, avail:3, availx:3, restrict:"Forbidden", costx:200, cost:200},
 
 //Tools
         toolkit: {name:"Kit", type:"tools", avail:0, restrict:"", cost:500},
@@ -3342,7 +3343,7 @@ p, td {
             $("#"+itemNum+" .weaponDP").empty().append("<span>"+(dp)+"</span>");//this renders the dice pool
             $("#"+itemNum+" .custWeapPrice").empty().append("<span>"+inventory[itemNum]["cost"]+"&#65509</span>");//this renders the cost
             $("#"+itemNum+" .acc").empty().append(inventory[itemNum]["accuracy"]+"("+(inventory[itemNum]["accuracy"]+inventory[itemNum]["accmod"])+")");//this renders accuacy of a gun
-            $("#"+itemNum+" .rc").empty().append(inventory[itemNum]["rc"]+"("+(inventory[itemNum]["rc"]+inventory[itemNum]["rcmod"])+")");//this renders the recoil comp
+            $("#"+itemNum+" .rc").empty().append(inventory[itemNum]["rc"]+Math.ceil((str/3)+1)+"("+(inventory[itemNum]["rc"]+inventory[itemNum]["rcmod"]+Math.ceil((str/3)+1))+")");//this renders the recoil comp
             $("#"+itemNum+" .avail").empty().append(inventory[itemNum]["avail"]+" "+inventory[itemNum]["restrict"]);//this renders the avail of a gun
         }
         
@@ -3679,10 +3680,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         var item=$(this).parent().attr("id");
         var itemNum = item+invNum;
         var gotMoney = nuyen-itemhold["cost"]>0;
-        inventory[itemNum]={};
+        inventory[itemNum]={};//this creates a blank object for the weapon's stats to be added too
         for (key in itemhold) {
-            if (key=="mods") {
-                inventory[itemNum][key] = {};
+            if (key=="mods") {//when we get to the key called mods in the weapon, do this
+                inventory[itemNum][key] = {};//make a blank key for the mod
                 for (subkey in itemhold[key]) {//this creates a section for the mods for each instance of a gun, so gun instances don't end up sharing all the same mods
                     inventory[itemNum][key][subkey] = itemhold[key][subkey];
                 } 
@@ -3691,7 +3692,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             }
         }
         inventory[itemNum]["active"]=true;
-        if ($(this).closest(".meleeweapon").hasClass("meleeweapon")&&nuyen-itemhold["cost"]>0) {
+        if ($(this).closest(".meleeweapon").hasClass("meleeweapon")&&gotMoney) {//this you buy a melee weapon do this stuff
             $("#"+item).after("<tr id='"+itemNum+"'><td class='sell button'><em>-</em></td><td>"+itemhold["name"]+"</td><td class='inventory "+item+itemNum+"' colspan=5></td><td class='custWeapPrice'>"+itemhold["cost"]+"&#65509</td></tr>");
             if (magic>0) {
                 inventory[itemNum]["weaponfoci"]=0;
@@ -3700,15 +3701,15 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             
             buyingItem(itemhold);
         }
-        if ($(this).hasClass("bow")&&gotMoney) {
+        if ($(this).hasClass("bow")&&gotMoney) {//buying bows
             addingArrows(7,"#bow",item,itemNum,"Arrows");
             buyingItem(itemhold);
         }
-        if ($(this).closest(".crossbow").hasClass("crossbow")&&gotMoney) {
+        if ($(this).closest(".crossbow").hasClass("crossbow")&&gotMoney) {//buying crossbows
             addingArrows(4,"#"+item,item,itemNum,"Bolts");
             buyingItem(itemhold);
         }
-        if ($(this).hasClass("shuriken")&&gotMoney) {
+        if ($(this).hasClass("shuriken")&&gotMoney) {//buying throwing weapons
             inventory[itemNum]["arrow"]=1;
             $("#shuriken").after("<tr id='"+itemNum+"'><td class='sell button'><em>-</em></td><td class='inventory "+item+itemNum+"' colspan=4></td><td class='custWeapPrice'></td></tr>");
             $(".inventory."+item+itemNum).append("<td class='label'>Shuriken/Throwing Knives</td><td class='"+itemNum+" incAtt arrow'>+</td><td class='arrowNum arrow'>1</td><td class='"+itemNum+" decAtt arrow'>-</td>");
@@ -3756,7 +3757,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 moreclips(itemNum,item,"Speed Loader");
             }
             licenseDP(itemNum,item,itemhold," .options");//add license and dicepool
-            $(".inventory."+item+itemNum+" .options .labelDP").before("<td class='label'>Acc</td><td class='acc "+itemNum+"'>"+itemhold.accuracy+"("+(itemhold.accuracy+itemhold.accmod)+")"+"</td><td class='label'>RC</td><td class='rc "+itemNum+"'>"+itemhold.rc+"("+(itemhold.rc+itemhold.rcmod)+")"+"</td>");
+            $(".inventory."+item+itemNum+" .options .labelDP").before("<td class='label'>Acc</td><td class='acc "+itemNum+"'>"+itemhold.accuracy+"("+(itemhold.accuracy+itemhold.accmod)+")"+"</td><td class='label'>RC</td><td class='rc "+itemNum+"'>"+itemhold.rc+Math.ceil((str/3)+1)+"("+(itemhold.rc+itemhold.rcmod+Math.ceil((str/3)+1))+")"+"</td>");
             $(".inventory."+item+itemNum+" .options").append("<td class='label'>Avail</td><td class='avail "+itemNum+"'>"+itemhold.avail+" "+itemhold.restrict+"</td>");
         }
         
@@ -3956,7 +3957,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     $("#firearms").on("click",".smartgun.button",thinkingsmart)
     
-    function thinkingsmart() {
+    function thinkingsmart() {//the interal smartgun button
         if ($(this).hasClass("deact")) {//if the button is deactivated, do nothing
             return;
         }
@@ -4601,7 +4602,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "rfid":
-                $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td><input type='text' class='fakename' placeholder='For?'></td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "communication":
                 $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
@@ -4614,7 +4615,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "identification":
-                $('#identification').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                $('#identification').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "tools":
                 $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
