@@ -1202,7 +1202,7 @@ p, td {
                 </table>
                 <h2>Identification</h2>
                  <table id="identification">
-                     <tr class="label"><td>Buy</td><td>Type</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
                 </table>
                 <h2>Tools</h2>
                  <table id="tools">
@@ -4602,7 +4602,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "rfid":
-                $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td><input type='text' class='fakename' placeholder='For?'></td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "communication":
                 $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
@@ -4615,7 +4615,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "identification":
-                $('#identification').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                $('#identification').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+" <input type='text' class='fakename' placeholder='For?'"+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "tools":
                 $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
@@ -4718,7 +4718,8 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "identification":
-                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                inventory[devicename+invNum]["id"]=$("."+devicename+" .fakename").val();
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3>"+inventory[devicename+invNum]["rating"]+"</td><td>"+inventory[devicename+invNum]["id"]+"</td><td>"+inventory[devicename+invNum]["avail"]+" "+inventory[devicename+invNum]["restrict"]+"</td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "securitydevice":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
@@ -4893,7 +4894,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         nuyenUpdater();
     }
     
-    $("#communications").on("click", ".ratingUp, .ratingDown", commRating);//this is for raising and slowing communcation devices ratings
+    $("#e-accessories").on("click", ".ratingUp, .ratingDown", commRating);//this is for raising and slowing communcation devices ratings
     
     function commRating() {
         if ($(this).hasClass("deact")) {
