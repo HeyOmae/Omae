@@ -1200,6 +1200,50 @@ p, td {
                  <table id="credsticks">
                      <tr class="label"><td>Buy</td><td>Type</td><td>Max Amount</td><td>Avail</td><td>Cost</td></tr>
                 </table>
+                <h2>Identification</h2>
+                 <table id="identification">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                <h2>Tools</h2>
+                 <table id="tools">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                <h2>Security Devices</h2>
+                 <table id="securitydevice">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                <h2>Restraints</h2>
+                 <table id="restraints">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                <h2>Breaking and Entering Gear</h2>
+                 <table id="bnegear">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                 <h2>Industrial Chemicals</h2>
+                 <table id="chemicals">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                 <h2>Survival Gear</h2>
+                 <table id=survivalgear>
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h2>Grapple Gun Gear</h2>
+                 <table id="grapplegungear">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h2>Biotech</h2>
+                 <table id="biotech">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h2>DocWagon Contract</h2>
+                 <table id="docwagon">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h2>Slap Patches</h2>
+                 <table id="slappatches">
+                     <tr class="label"><td>Buy</td><td>Type</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                </table>
             </div>
         </div>
     </div>
@@ -1857,10 +1901,96 @@ p, td {
         whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
    
    //credsticks
+         standard: {name:"Standard", type:"credsticks", maxvalue:"5,000", avail:0, restrict:"", cost:5},
          silvercredstick: {name:"Silver", type:"credsticks", maxvalue:"20,000", avail:0, restrict:"", cost:20},
          goldcredstick: {name:"Gold", type:"credsticks", maxvalue:"100,000", avail:5, restrict:"", cost:100},
          platinumcredstick: {name:"Platinum", type:"credsticks", maxvalue:"500,000", avail:10, restrict:"", cost:500},
          ebonycredstick: {name:"Ebony", type:"credsticks", maxvalue:"1,000,000", avail:20, restrict:"", cost:1000},
+         
+           //licenses and SINS
+        fakesin: {name:"Fake SIN", id:"", type:"identification", rating:1, avail:3, availx:3, restrict:"Forbidden", costx:2500, cost:2500},
+        fakelicense: {name:"Fake License", id:"", type:"identification", rating:1, avail:3, availx:3, restrict:"Forbidden", costx:200, cost:200},
+
+//Tools
+        toolkit: {name:"Kit", type:"tools", avail:0, restrict:"", cost:500},
+        toolshop: {name:"Shop", type:"tools", avail:8, restrict:"", cost:5000},
+        toolfacility: {name:"Facility", type:"tools", avail:12, restrict:"", cost:5000},
+
+//Security devices
+        keycombinationlock: {name:"Key/combination lock", type:"securitydevice", rating:1, avail:1, restrict:"", cost:10},
+        maglock: {name:"Maglock", type:"securitydevice", rating:1, avail:1, restrict:"", cost:100},
+        keypad: {name:"Keypad", type:"securitydevice", avail:0, restrict:"", cost:50},
+        cardreader: {name:"Card reader", type:"securitydevice", avail:0, restrict:"", cost:50},
+        antitampercircuits: {name:"Anti-tamper circuits", type:"securitydevice", rating:1, avail:1, restrict:"", cost:250},
+//antitampercircuits should add to the rating to whatver they're purchased for.
+
+
+//restraints
+        metalrestraint: {name:"Metal", type:"restraints", avail:0, restrict:"", cost:20},
+        plasteelrestraint: {name:"Plasteel", type:"restraints", avail:6, restrict:"Restricted", cost:50},
+        plasticrestraint: {name:"Plastic (per 10)", type:"restraints", avail:0, restrict:"", cost:5},
+        containmentmanacles: {name:"Containment manacles", type:"restraints", avail:6, restrict:"Restricted", cost:250},
+
+//b&e gear
+        autopicker: {name:"Autopicker", type:"bnegear", rating:1, avail:8, restrict:"Restricted", cost:500},
+        cellularglovemolder: {name:"Cellular glove molder", type:"bnegear", rating:1, avail:12, restrict:"Forbidden", cost:500},
+        chisel: {name:"Chisel", type:"bnegear", avail:0, restrict:"", cost:20},
+        crowbar: {name:"Crowbar", type:"bnegear", avail:0, restrict:"", cost:20},
+        keycardcopier: {name:"Keycard Copier", type:"bnegear", rating:1, avail:8, restrict:"Forbidden", cost:600},
+        lockpickset: {name:"Lockpick set", type:"bnegear", avail:4, restrict:"Restricted", cost:250},
+        maglockpasskey: {name:"Maglock passkey", type:"bnegear", rating:1, avail:3, restrict:"Forbidden", cost:2000},
+        miniwelder: {name:"Miniwelder", type:"bnegear", avail:2, restrict:"", cost:250},
+        miniwelderfuel: {name:"Miniwelder fuel canister", type:"bnegear", avail:2, restrict:"", cost:80},
+        monofilamentchainsaw: {name:"Monofilament chainsaw", type:"bnegear", avail:8, restrict:"", cost:500},
+        sequencer: {name:"Sequencer", type:"bnegear", rating:1,  avail:3, restrict:"Forbidden", cost:250},
+
+//industrial chemicals
+        gluesolvent: {name:"Glue Solvent", type:"chemicals", avail:2, restrict:"", cost:90},
+        gluesprayer: {name:"Glue Sprayer", type:"chemicals", avail:2, restrict:"", cost:150},
+        thermiteburningbar: {name:"Thermite burning bar", avail:16, restrict:"Restricted", cost:500},
+
+//survival gear
+        chemsuit: {name:"Chemsuit", type:"survivalgear", rating:1, avail:2, restrict:"", cost:150},
+        climbinggear: {name:"Climbing gear", type:"survivalgear", avail:0, restrict:"", cost:200},
+        divinggear: {name:"Diving gear", type:"survivalgear", avail:6, restrict:"", cost:2000},
+        flashlight: {name:"Flashlight", type:"survivalgear", avail:0, restrict:"", cost:25},
+        gasmask: {name:"Gas mask", type:"survivalgear", avail:0, restrict:"", cost:200},
+        geckotapegloves: {name:"Gecko tape gloves", type:"survivalgear",  avail:12, restrict:"", cost:250},
+        hazmatsuit: {name:"Hazmat suit", type:"survivalgear",  avail:8, restrict:"", cost:3000},
+        lightstick: {name:"Chemsuit", type:"survivalgear", avail:0, restrict:"", cost:25},
+        magnesiumtorch: {name:"Magnesium torch", type:"survivalgear", avail:0, restrict:"", cost:5},
+        microflarelauncher: {name:"Micro flare launcher", type:"survivalgear", avail:0, restrict:"", cost:175},
+        microflares: {name:"Micro flares", type:"survivalgear", avail:0, restrict:"", cost:25},
+        rappellinggloves: {name:"Rappelling gloves", type:"survivalgear", avail:0, restrict:"", cost:50},
+        respirator: {name:"Respirator", type:"survivalgear", rating:1, avail:0, restrict:"", cost:50},
+        survivalkit: {name:"Survival Kit", type:"survivalgear", avail:4, restrict:"", cost:200},
+
+//grapple gun gear
+        grapplegun: {name:"Grapple gun", type:"grapplegungear", avail:8, restrict:"Restricted", cost:500},
+        catalyststick: {name:"Catalyst stick", type:"grapplegungear", avail:8, restrict:"Forbidden", cost:500},
+        microwire: {name:"Microwire", type:"grapplegungear", avail:4, restrict:"", cost:500},
+        myomericrope: {name:"Myomeric rope", type:"grapplegungear", avail:10, restrict:"", cost:500},
+        standardrope: {name:"Standard rope", type:"grapplegungear", avail:0, restrict:"", cost:500},
+        stealthrope: {name:"Stealth rope", type:"grapplegungear", avail:8, restrict:"Forbidden", cost:500},
+
+//biotech
+        biomonitor: {name:"Biomonitor", type:"biotech", avail:3, restrict:"", cost:300},
+        disposablesyringe: {name:"Disposable syringe", type:"biotech", avail:3, restrict:"", cost:10},
+        medkit: {name:"Medkit", type:"biotech", rating:1, avail:1, restrict:"", cost:250},
+        medkitsupplies: {name:"Medkit supplies", type:"biotech", avail:0, restrict:"", cost:100},
+
+//docwagon contract
+        basiccontract: {name:"Basic", type:"docwagon", avail:0, restrict:"", cost:5000},
+        goldontract: {name:"Gold", type:"docwagon", avail:0, restrict:"", cost:25000},
+        platinumontract: {name:"Platinum", type:"docwagon", avail:0, restrict:"", cost:50000},
+        superplatinumontract: {name:"Super-platinum", type:"docwagon", avail:0, restrict:"", cost:100000},
+
+//slap patches
+        antidotepatch: {name:"Antidote patch", type:"slappatches", rating:1, avail:1, restrict:"", cost:50},
+        chempatch: {name:"Chem patch", type:"slappatches", avail:6, restrict:"", cost:200},
+        stimpatch: {name:"Stim patch", type:"slappatches", avail:2, restrict:"", cost:25},
+        tranqpatch: {name:"Tranq patch", type:"slappatches", avail:2, restrict:"", cost:20},
+        traumapatch: {name:"Trauma patch", type:"slappatches", avail:6, restrict:"", cost:500},
     };
     
     var software = {
@@ -2581,14 +2711,14 @@ p, td {
                         augrea--;
                     }
                 }
-            } else if (prop=="improvedphysicalattributebody"||prop=="improvedphysicalattributeagility"||prop=="improvedphysicalattributereaction"||prop=="improvedphysicalattributestrength") {//x!='undefined' doesn't work. Don't do that anymore.
+            } else if (prop=="improvedphysicalattributebody"||prop=="improvedphysicalattributeagility"||prop=="improvedphysicalattributereaction"||prop=="improvedphysicalattributestrength") {//if the power is improve attribute then do this stuff
                 if (powerPoints-power["cost"]>=0 && power["level"]<4 && className=="incAtt "+[prop]) {
                     power["level"]++;
                     powerPoints=powerPoints-power["cost"];
                     
                     addAttMod (power["attmod"]);
                 }
-                if (power["level"]>1 && className=="decAtt "+[prop]) {
+                if (power["level"]>1 && className=="decAtt "+prop) {
                     power["level"]--;
                     powerPoints=powerPoints+power["cost"];
                     
@@ -3213,7 +3343,7 @@ p, td {
             $("#"+itemNum+" .weaponDP").empty().append("<span>"+(dp)+"</span>");//this renders the dice pool
             $("#"+itemNum+" .custWeapPrice").empty().append("<span>"+inventory[itemNum]["cost"]+"&#65509</span>");//this renders the cost
             $("#"+itemNum+" .acc").empty().append(inventory[itemNum]["accuracy"]+"("+(inventory[itemNum]["accuracy"]+inventory[itemNum]["accmod"])+")");//this renders accuacy of a gun
-            $("#"+itemNum+" .rc").empty().append(inventory[itemNum]["rc"]+"("+(inventory[itemNum]["rc"]+inventory[itemNum]["rcmod"])+")");//this renders the recoil comp
+            $("#"+itemNum+" .rc").empty().append(inventory[itemNum]["rc"]+Math.ceil((str/3)+1)+"("+(inventory[itemNum]["rc"]+inventory[itemNum]["rcmod"]+Math.ceil((str/3)+1))+")");//this renders the recoil comp
             $("#"+itemNum+" .avail").empty().append(inventory[itemNum]["avail"]+" "+inventory[itemNum]["restrict"]);//this renders the avail of a gun
         }
         
@@ -3550,10 +3680,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         var item=$(this).parent().attr("id");
         var itemNum = item+invNum;
         var gotMoney = nuyen-itemhold["cost"]>0;
-        inventory[itemNum]={};
+        inventory[itemNum]={};//this creates a blank object for the weapon's stats to be added too
         for (key in itemhold) {
-            if (key=="mods") {
-                inventory[itemNum][key] = {};
+            if (key=="mods") {//when we get to the key called mods in the weapon, do this
+                inventory[itemNum][key] = {};//make a blank key for the mod
                 for (subkey in itemhold[key]) {//this creates a section for the mods for each instance of a gun, so gun instances don't end up sharing all the same mods
                     inventory[itemNum][key][subkey] = itemhold[key][subkey];
                 } 
@@ -3562,7 +3692,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             }
         }
         inventory[itemNum]["active"]=true;
-        if ($(this).closest(".meleeweapon").hasClass("meleeweapon")&&nuyen-itemhold["cost"]>0) {
+        if ($(this).closest(".meleeweapon").hasClass("meleeweapon")&&gotMoney) {//this you buy a melee weapon do this stuff
             $("#"+item).after("<tr id='"+itemNum+"'><td class='sell button'><em>-</em></td><td>"+itemhold["name"]+"</td><td class='inventory "+item+itemNum+"' colspan=5></td><td class='custWeapPrice'>"+itemhold["cost"]+"&#65509</td></tr>");
             if (magic>0) {
                 inventory[itemNum]["weaponfoci"]=0;
@@ -3571,15 +3701,15 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             
             buyingItem(itemhold);
         }
-        if ($(this).hasClass("bow")&&gotMoney) {
+        if ($(this).hasClass("bow")&&gotMoney) {//buying bows
             addingArrows(7,"#bow",item,itemNum,"Arrows");
             buyingItem(itemhold);
         }
-        if ($(this).closest(".crossbow").hasClass("crossbow")&&gotMoney) {
+        if ($(this).closest(".crossbow").hasClass("crossbow")&&gotMoney) {//buying crossbows
             addingArrows(4,"#"+item,item,itemNum,"Bolts");
             buyingItem(itemhold);
         }
-        if ($(this).hasClass("shuriken")&&gotMoney) {
+        if ($(this).hasClass("shuriken")&&gotMoney) {//buying throwing weapons
             inventory[itemNum]["arrow"]=1;
             $("#shuriken").after("<tr id='"+itemNum+"'><td class='sell button'><em>-</em></td><td class='inventory "+item+itemNum+"' colspan=4></td><td class='custWeapPrice'></td></tr>");
             $(".inventory."+item+itemNum).append("<td class='label'>Shuriken/Throwing Knives</td><td class='"+itemNum+" incAtt arrow'>+</td><td class='arrowNum arrow'>1</td><td class='"+itemNum+" decAtt arrow'>-</td>");
@@ -3627,7 +3757,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 moreclips(itemNum,item,"Speed Loader");
             }
             licenseDP(itemNum,item,itemhold," .options");//add license and dicepool
-            $(".inventory."+item+itemNum+" .options .labelDP").before("<td class='label'>Acc</td><td class='acc "+itemNum+"'>"+itemhold.accuracy+"("+(itemhold.accuracy+itemhold.accmod)+")"+"</td><td class='label'>RC</td><td class='rc "+itemNum+"'>"+itemhold.rc+"("+(itemhold.rc+itemhold.rcmod)+")"+"</td>");
+            $(".inventory."+item+itemNum+" .options .labelDP").before("<td class='label'>Acc</td><td class='acc "+itemNum+"'>"+itemhold.accuracy+"("+(itemhold.accuracy+itemhold.accmod)+")"+"</td><td class='label'>RC</td><td class='rc "+itemNum+"'>"+itemhold.rc+Math.ceil((str/3)+1)+"("+(itemhold.rc+itemhold.rcmod+Math.ceil((str/3)+1))+")"+"</td>");
             $(".inventory."+item+itemNum+" .options").append("<td class='label'>Avail</td><td class='avail "+itemNum+"'>"+itemhold.avail+" "+itemhold.restrict+"</td>");
         }
         
@@ -3827,7 +3957,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     $("#firearms").on("click",".smartgun.button",thinkingsmart)
     
-    function thinkingsmart() {
+    function thinkingsmart() {//the interal smartgun button
         if ($(this).hasClass("deact")) {//if the button is deactivated, do nothing
             return;
         }
@@ -4458,26 +4588,66 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     for (devicename in electronics) {//this populates the electronic devices
         var device = electronics[devicename];
-        if (device["type"]=="commlink") {
-            $("#links").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device["type"]=="deck") {
-            $("#decks").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["array"]+"</td><td>"+device["programs"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device["type"]=="rcc") {
-            $("#consoles").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["dataprocess"]+"</td><td>"+device["firewall"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device["type"]=="accessory") {
-            $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device.type=="rfid") {
-            $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-        } else if (device.type=="communication") {
-            $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
-            if (typeof device.rating==="undefined") {
-                $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
-                $("."+devicename+" .commrating").empty().append("n/a");
-            }
-        } else if (device.type=="credsticks") {
-              $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-          }    
-        
+        switch (device.type) {
+            case "commlink":
+                $("#links").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "deck":
+                $("#decks").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["array"]+"</td><td>"+device["programs"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "rcc":
+                $("#consoles").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["dataprocess"]+"</td><td>"+device["firewall"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "accessory":
+                $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "rfid":
+                $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "communication":
+                $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                if (typeof device.rating==="undefined") {
+                    $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
+                    $("."+devicename+" .commrating").empty().append("n/a");
+                }
+                break;
+            case "credsticks":
+                $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "identification":
+                $('#identification').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+" <input type='text' class='fakename' placeholder='For?'"+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "tools":
+                $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "securitydevice":
+                $('#securitydevice').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "restraints":
+                $('#restraints').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "bnegear":
+                $('#bnegear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "chemicals":
+                $('#chemicals').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "survivalgear":
+                $('#survivalgear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td>><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "grapplegungear":
+                $('#grapplegungear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "biotech":
+                $('#biotech').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "docwagon":
+                $('#docwagon').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+            case "slappatches":
+                $('#slappatches').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
+        }
         
         if (device["avail"]>12) {
             $("."+devicename+" .buydevice").addClass("deact").empty().append("-");
@@ -4545,8 +4715,39 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
                 
             case "credsticks":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "identification":
+                inventory[devicename+invNum]["id"]=$("."+devicename+" .fakename").val();
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3>"+inventory[devicename+invNum]["rating"]+"</td><td>"+inventory[devicename+invNum]["id"]+"</td><td>"+inventory[devicename+invNum]["avail"]+" "+inventory[devicename+invNum]["restrict"]+"</td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "securitydevice":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
+            case "restraints":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "bnegear":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "chemicals":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "survivalgear":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "grapplegungear":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "biotech":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "docwagon":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "slappatches":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break; 
         }
         nuyen-=inventory[devicename+invNum]["cost"];
         invNum++;
@@ -4557,7 +4758,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             for (deviceAtt in electronics[x]) {
                 inventory[x+invNum][deviceAtt]=electronics[x][deviceAtt];
             }
-            inventory[x+invNum]["programlist"]={};
+            if (electronics[x]["type"]==("rcc"||"deck")) {
+                inventory[x+invNum]["programlist"]={};
+            }
+            
         }
     }
     
@@ -4690,7 +4894,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         nuyenUpdater();
     }
     
-    $("#communications").on("click", ".ratingUp, .ratingDown", commRating);//this is for raising and slowing communcation devices ratings
+    $("#e-accessories").on("click", ".ratingUp, .ratingDown", commRating);//this is for raising and slowing communcation devices ratings
     
     function commRating() {
         if ($(this).hasClass("deact")) {
