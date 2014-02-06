@@ -1,0 +1,116 @@
+// Thanks to Evil MJ for taking on the Positive Qualities challenge.
+// Created by Evil MJ on 2/1/14.
+
+//Anywhere where "PC" is listed in comments, it refers to the PC being built; "Character(s)" refers to any character, friend or foe
+//ratingrestriction means the quality may only be bought 'n' times where 'n' is the listed number
+//classrestriction means the listed class (Magician, Technomancer, Mystic Adept, Adept, Aspected Magician, Mundane) may not take the listed quality
+//pqualrestriction means the quality may not be taken with the listed positive quality
+//powerrestriction means the quality may not stack with the listed adept power
+//biowarerestriction means the quality may not stack with the listed bioware
+//metatyperestriction means the listed metatypes may not take the quality
+
+ambidextrouspqual: {name:"Ambidextrous", type:"positivequality", ratingrestriction:1, kcost:4} //p.71; use either hand equally well (no Off-Hand penalties)
+analyticalmindpqual: {name:"Analytical Mind", type:"positivequality", ratingrestriction:1, kcost:5} //p.72; +2 dice to Logic Test v. pattern recognition, evidence analysis, clue hunting, solving puzzles; solve problems in half time
+aptitudepqual: {name:"Aptitude", type:"positivequality", ratingrestriction:1, kcost:14} //p.72; may have 1 skill w/ rating 7 @ creation; may build it up to 13; may only take this quality once
+astralchameleonpqual: {name:"Astral Chameleon", type:"positivequality", ratingrestriction:1, kcost:10} //p.72; must have Magic rating and be able to leave Astral Signature to take quality; Signature lasts half as long; -2 dice to opposing character's Assensing Test
+bilingualpqual: {name:"Bilingual", type:"positivequality", ratingrestriction:1, kcost:5} //p.72; grants fluency in second language; may only be taken at character creation
+blandnesspqual: {name:"Blandness", type:"positivequality", ratingrestriction:1, kcost:8} //p.72; +1 to threshold to characters attempting to recall information about PC; -2 dice to characters attempting to shadow or locate PC in populated area (doesn't apply to Magical or Matrix search); distinctive features like scars, tats, etc. negate quality until they can be hidden
+catlikepqual: {name:"Catlike", type:"positivequality", ratingrestriction:1, kcost:7} //p.72; +2 dice to Sneaking tests
+codeslingerpqual: {name:"Codeslinger", type:"positivequality", ratingrestriction:1, kcost:10} //p.72; applies to 1 Matrix action selected when quality is bought; +2 dice to selected Matrix action
+doublejointedpqual: {name:"Double-Jointed", type:"positivequality", ratingrestriction:1, kcost:6} //p.72; +2 dice to Escape Artist test; PC may squeeze into and navigate cramped spaces others cannot
+exceptionalattributepqual: {name:"Exceptional Attribute", type:"positivequality", ratingrestriction:1, pqualrestriction:"luckypqual", kcost:14} //p.72; may select 1 attribute to exceed Metatype limit by 1 point (includes Magic and Resonance); may not be used with "Lucky" quality
+firstimpressionpqual: {name:"First Impression", type:"positivequality", ratingrestriction:1, kcost:11} //p.74; +2 to Social tests if first encounter with group/individual
+
+focusedconcentrationpqual: {name:"Focused Concentration", type:"positivequality", ratingrestriction:6, classrestriction:"mundane" || "adept", kcost:4} //p.74; Technomancer or Magic users who can cast spells only; able to sustain 1 spell/complex form w/force or level == quality rating w/o suffering penalties
+//may have to change classrestriction to match global code
+
+gearheadpqual: {name:"Gearhead", type:"positivequality", ratingrestriction:1, kcost:11} //p.74; in vehicle/chase combat, PC can increase Speed of vehicle/drone by 20% OR increase Handling modifier by +1 (player's choice); +2 dice for difficult maneuvers/stunts (bonus lasts 1d6 minutes and may be extended 1d6 additional minutes at the cost of 1 point of unresisted stress damage per minute)
+gutspqual: {name:"Guts", type:"positivequality", ratingrestriction:1, kcost:10} //p.74; +2 dice to resist fear and intimidation (includes magically induced fear or intimidation)
+
+highpaintolerancepqual: {name:"High Pain Tolerance", type:"positivequality", ratingrestriction:3, powerrestriction:"painresistance", biowarerestriction:"paineditor" || "damagecompensator", kcost:7} //p.74; ignore 1 box of damage per rating point of quality when calculating wound modifiers; benefits do not stack with "Pain Resistance", "Pain Editor", or "Damage Compensator"
+//may have to change powerrestriction and biowarerestriction to match global code
+
+//Home Ground has several subchoices each with their own effects; I thought it would be best to list each of these as a different entry; Home Ground can be taken multiple times to acquire additional subchoices; ratingrestriction value may need to be changed if it keys off 'name'
+astralacclimationpqual: {name:"Home Ground", subname:"Astral Acclimation", type:"positivequality", ratingrestriction:1, kcost:10} //p.74; ignore up to 2 points of background count in PC's neighborhood
+knowaguypqual: {name:"Home Ground", subname:"You Know a Guy", type:"positivequality", ratingrestriction:1, kcost:10} //p.75; +2 Street Cred for Negotiation with people from PC's neighborhood; NPCs in PC's neighborhood friendly and willing to talk/do favors unless PC does something to change that
+digitalturfpqual: {name:"Home Ground", subname:"Digital Turf", type:"positivequality", ratingrestriction:1, kcost:10} //p.75; +2 dice to Matrix tests in PC's Home Ground host; stacks with other qualities; PC loses this bonus if PC fails to frequent the host for more than 6 months
+transporterpqual: {name:"Home Ground", subname:"The Transporter", type:"positivequality", ratingrestriction:1, kcost:10} //p.75; +2 dice to Evasion tests in PCs neighborhood
+onthelampqual: {name:"Home Ground", subname:"On The Lam", type:"positivequality", ratingrestriction:1, kcost:10} //p.75; +2 dice to PC's Intuition + [approperiate street knowledge] test to find safehouses and other locations to hole up in PC's neighborhood
+streetpoliticspqual: {name:"Home Ground", subname:"Street Politics", type:"positivequality", ratingrestriction:1, kcost:10} //p.75; +2 dice to Knowledge tests relating to gangs, and other local organizations and their operations in the PC's neighborhood
+
+humanlookingpqual: {name:"Human-Looking", type:"positivequality", ratingrestriction:1, metatyperestriction:"troll" || "human", kcost:6} //p.75; no penalty for Social interaction with those who may be biased against PC's metatype; Some metahuman NPCs may show animosity toward PC for trying to look human
+//may have to change metatyperestriction to match global code
+
+indomitablepqual: {name:"Indomitable", type:"positivequality", ratingrestriction:3, kcost:8} //p.75; +1 to Inherent limit of PC's choice (Mental, Physical, Social); quality may be taken 3 times and applied to Inherent limits in any combination the PC chooses
+juryriggerpqual: {name:"Juryrigger", type:"positivequality", ratingrestriction:1, kcost:10} //p.75; +2 to Mechanical tests and -1 to Threshold when juryrigging gear; juryrigged gear works for a limited period of time (see p.75 for examples)
+luckypqual: {name:"Lucky", type:"positivequality", ratingrestriction:1, pqualrestriction:"exceptionalattributepqual", kcost:12} //p.76; increase PC's metatype edge limit by 1;may not be taken with "Exceptional Attribute" quality
+
+magicresistancepqual: {name:"Magic Resistance", type:"positivequality", ratingrestriction:4, classrestriction:"magician" || "mysticadept" || "adept" || "aspectedmagician", kcost:6} //p.76; +additional dice equal to quality rating to Spell Resistance tests; bonus is 'always on', even when receiving beneficial spells; PC may not take part in spells that require a voluntary subject
+//may have to change classrestriction to match global code
+
+mentorspiritpqual: {name:"Mentor Spirit", type:"positivequality", ratingrestriction:1, classrestriction:"technomancer" || "mundane", kcost:5} //p.76; PC selects a mentor spirit (p.320) and recieves that spirit's benefits; PC must have a Magic rating
+//may have to change classrestriction to match global code
+
+naturalathletepqual: {name:"Natural Athlete", type:"positivequality", ratingrestriction:1, kcost:7} //p.76; +2 dice to Running and Gymnastics tests
+naturalhardeningpqual: {name:"Natural Hardening", type:"positivequality", ratingrestriction:1, kcost:10} //p.76; +1 point of natural biofeedback filtering; stacks with Biofeedback Filter program of Technomancer's firewall (p.251)
+
+//natural immunity comes in 4 karma (natural disease or toxin) and 10 karma (sythnetic disease or toxin) flavors; each was entered as a unique entry; may want to add pqualrestriction between flavors?
+naturalimmunity4pqual: {name:"Natural Immunity", subname:"natural", type:"positivequality", ratingrestriction:1, kcost:4} //p.76; PC immune to a single natural disease or toxin; PC may have 1 dose/exposure per 6 hrs with no ill effect; more than 1 dose/exposure per 6 hrs causes normal damage, but PC recovery time is halved; PC may still act as carrier for the disease
+naturalimmunity10pqual: {name:"Natural Immunity", subname:"synthetic", type:"positivequality", ratingrestriction:1, kcost:10} //p.76; PC immune to a single synthetic disease or toxin; PC may have 1 dose/exposure per 6 hrs with no ill effect; more than 1 dose/exposure per 6 hrs causes normal damage, but PC recovery time is halved; PC may still act as carrier for the disease
+
+photographicmemorypqual: {name:"Photographic Memory", type:"positivequality", ratingrestriction:1, kcost:6} //p.76; +2 dice to all Memory tests
+quickhealerpqual: {name:"Quick Healer", type:"positivequality", ratingrestriction:1, kcost:3} //p.77; +2 dice to all Heal tests made on/for/by the PC (includes magical healing)
+
+//resistance to pathogens/toxins comes in 4 karma (resistant to pathogens OR toxins) and 8 karma (resistant to pathogens AND toxins) flavors; each was entered as a unique entry
+resistance4pqual: {name:"Resistance to Pathogens/Toxins", subname:"either", type:"positivequality", ratingrestriction:1, pqualrestriction:"resistance8pqual", kcost:4} //p.77; +1 dice to Resistance test to pathogens OR toxins
+resistance8pqual: {name:"Resistance to Pathogens/Toxins", subname:"both", type:"positivequality", ratingrestriction:1, pqualrestriction:"resistance4pqual", kcost:8} //p.77; +1 dice to Resistance test to pathogens AND toxins
+
+spiritaffinitypqual: {name:"Spirit Affinity", type:"positivequality", ratingrestriction:1, classrestriction:"mundane" || "technomancer", kcost:7} //p.77; PC is attuned to 1 type of spirit, these are drawn/interested in the PC; +1 die to Binding tests for that type of spirit; +1 additional spirit service for each spirit of the selected type; spirits of selected type are reluctant to attack, and if forced, are more likely to use nonlethal attacks
+//may have to change classrestriction to match global code
+
+toughnesspqual: {name:"Toughness", type:"positivequality", ratingrestriction:1, kcost:9} //p.77; +1 die to Body when making Damage Resistance tests
+willtolivepqual: {name:"Will To Live", type:"positivequality", ratingrestriction:3, kcost:3} //p.77; +1 additional Damage Overflow Box per rating
+
+
+//************************************************************************************************************
+
+
+// these are visual and audio electronics that still need to be added
+// cleavered together by jinxdecaire 
+
+//optical & imaging devices
+binoculars: {name:"Binoculars", type:"optical", capacity:1, avail:0, cost:50},
+binocularsoptical: {name:"Binoculars, Optical", type:"optical", avail:0, cost:50},
+camera: {name:"Camera", type:"optical", capacity:1, avail:0, cost:100},
+microcamera: {name:"Micro-Camera", type:"optical", capacity:1, avail:0, cost:100},
+contacts: {name:"Contacts", type:"optical", capacity:1, avail:6, cost:200},
+glasses: {name:"Glasses", type:"optical", capacity:1, avail:0, cost:100},
+goggles: {name:"Goggles", type:"optical", capacity:1, avail:0, cost:50},
+endoscope: {name:"Endoscope", type:"optical", avail:8, cost:250},
+imagingscopes: {name:"Imaging Scopes", type:"optical", capacity:3, avail:2, cost:300},
+periscope: {name:"Periscope", type:"optical", avail:3, cost:50},
+magesightgoggles: {name:"Mage Sight Goggles", type:"optical", avail:12, restrict:"Restricted", cost:3000},
+monocle: {name:"Micro-Camera", type:"optical", capacity:1, avail:12, restrict:"Restricted", cost:3000},
+
+//vision enhancements THESE PROBABLY NEED TO BE HANDLED DIFFERENTLY AVAILIBILITY IS ADDITION TO BASE DEVICE
+lowlightvision: {name:"Low Light Vision", type:"visionenhance", capacity:1, avail:4, cost:500},
+flarecompensation: {name:"Flare compensation", type:"visionenhance", capacity:1, avail:4, cost:250},
+imagelink: {name:"Image link", type:"visionenhance", capacity:1, avail:0, cost:25},
+smartlink: {name:"Smartlink", type:"visionenhance", capacity:1, avail:4, restrict:"Restricted", cost:2000},
+thermographicvisionenhance: {name:"Thermographic vision", type:"visionenhance", capacity:1, avail:6, cost:500},
+visionenhancement: {name:"Vision enhancement", type:"visionenhance", capacity:1, avail:2, cost:500},
+visionmagnification: {name:"Vision magnification", type:"visionenhance", capacity:1, avail:2, cost:250},
+
+//audio devices
+directionalmic: {name:"Directional mic", type:"audiodevices", capacity:1, avail:4, cost:50},
+earbuds: {name:"Ear buds", type:"audiodevices", capacity:1, avail:0, cost:50},
+headphones: {name:"headphones", type:"audiodevices", capacity:1, avail:0, cost:50},
+lasermic: {name:"Laser mic", type:"audiodevices", capacity:1, avail:6, restrict:"Restricted", cost:100},
+omnidirectionalmic: {name:"Omni-directional mic", type:"audiodevices", capacity:1, avail:0, cost:50},
+
+//audio enhancements THESE PROBABLY NEED TO BE HANDLED DIFFERENTLY AVAILIBILITY IS ADDITION TO BASE DEVICE
+audioenhancement: {name:"Audio enhancement", type:"audioenhance", rating:1, capacityx:1, availx:2, costx:500},
+selectsoundfilter: {name:"Select sound filter ", type:"audioenhance", rating:1, capacityx:1, availx:3, costx:250},
+spatialrecognizer: {name:"Spatial recognizer", type:"audioenhance", capacity:2, avail:4, cost:1000},
+
+/
