@@ -4711,7 +4711,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moddy' colspan=3></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "communication":
-                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='devicerating' colspan=3>n/a</td><td colspan=2></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                if (typeof inventory[devicename+invNum]["rating"]!=="undefined") {
+                    $("."+devicename+invNum+" .devicerating").empty().append(inventory[devicename+invNum]["rating"]);
+                }
                 break;
                 
             case "credsticks":
@@ -4720,6 +4723,9 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "identification":
                 inventory[devicename+invNum]["id"]=$("."+devicename+" .fakename").val();
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3>"+inventory[devicename+invNum]["rating"]+"</td><td>"+inventory[devicename+invNum]["id"]+"</td><td>"+inventory[devicename+invNum]["avail"]+" "+inventory[devicename+invNum]["restrict"]+"</td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                break;
+            case "tools":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=2></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "securitydevice":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
