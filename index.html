@@ -1436,7 +1436,7 @@ p, td {
     };
     
     var knowledgeSkills = [
-    ]
+    ];
     
     var adeptPowers = {
         adrenalineboost: {name: "Adrenaline Boost", active: false, level:0, cost:0.25, activation: "free", drain:true },
@@ -2595,26 +2595,26 @@ p, td {
                 resonance = decreaseSpec(resonance,resmin);
                 break;
             case "incAtt bow weaprating": //this increase the bows rating. A strange place to put this...but whatever.
-                if (weapons["bow"]["rating"]<10) {
-                    weapons["bow"]["rating"]++;
+                if (weapons.bow.rating<10) {
+                    weapons.bow.rating++;
                     bowUpdater();
-                };
+                }
                 break;
             case "decAtt bow weaprating": //this increase the bows rating. A strange place to put this...but whatever.
-                if (weapons["bow"]["rating"]>0) {
-                    weapons["bow"]["rating"]--;
+                if (weapons.bow.rating>0) {
+                    weapons.bow.rating--;
                     bowUpdater();
-                };
+                }
                 break;
             
         }
         skillAttUpdater();
         
         function bowUpdater() {
-            weapons["bow"]["damage"]=weapons["bow"]["rating"]+2;
-            weapons["bow"]["ap"]=Math.ceil(weapons["bow"]["rating"]/4)*-1;
-            weapons["bow"]["avail"]=weapons["bow"]["rating"];
-            weapons["bow"]["cost"]=weapons["bow"]["rating"]*100;
+            weapons.bow.damage=weapons.bow.rating+2;
+            weapons.bow.ap=Math.ceil(weapons.bow.rating/4)*-1;
+            weapons.bow.avail=weapons.bow.rating;
+            weapons.bow.cost=weapons.bow.rating*100;
         }
         
         if ($(this).closest("skilltitle")) {//if the incAtt or decAtt is in the div skilltitle, then its a skill, so update the active skills
@@ -2626,10 +2626,10 @@ p, td {
         
         function knowingIsHalftheBattle () {//this sets how many knowledge points a character gets
             knowledgepoints=(int+log)*2;//sets the number of knowledge skill points
-        };
+        }
         
         function skillUpdater (x,y) {//this function gets called by both the active and knowledge skills
-            for (skill in x) {//this will increase the skills
+            for (var skill in x) {//this will increase the skills
                 if (y>0){//if you're out of skill points, don't add skills.
                     if (x[skill]["rating"]<x[skill]["max"]) {//skill ratings can't be over the max skill
                         if (className=="incAtt "+[skill]) {//if increase attrabute (now poorly named) is not with a skill, then do nothing
@@ -2641,7 +2641,7 @@ p, td {
                             x[skill]["rating"]++;//incease the rating of the skill by 1
                         }
                     }
-                };
+                }
                 if (x[skill]["rating"]>0) {
                     if (className=="decAtt "+[skill]) {
                         if (x==activeSkills) {
@@ -2652,7 +2652,7 @@ p, td {
                         x[skill]["rating"]--;
                     }
                 }
-                else if ( (x[skill]["rating"]==0) && (x==knowledgeSkills) ) { // Removes knowledge skill if at zero and reduced again.
+                else if ( (x[skill]["rating"]===0) && (x==knowledgeSkills) ) { // Removes knowledge skill if at zero and reduced again.
                     if (className=="decAtt "+[skill]) {
                         $('.'+[skill]).remove(); // Technically removes table row. Does not delete array entry to avoid index problems.
                     }
@@ -2660,12 +2660,12 @@ p, td {
             }
             return x;
         }
-        for (skill in groupSkills) {//this will increase the skill groups
+        for (var skill in groupSkills) {//this will increase the skill groups
             if (skillgroups>0){
                 if (groupSkills[skill]["rating"]<skillgroupmax) {
                     if (className=="incAtt "+[skill]) {
                         groupSkills[skill]["rating"]++;
-                        for (key in groupSkills[skill]["skillsingroup"]) {
+                        for (var key in groupSkills[skill]["skillsingroup"]) {
                             var x = groupSkills[skill]["skillsingroup"][key];
                             activeSkills[x] ["rating"]=groupSkills[skill]["rating"];
                             $(".incAtt"+"."+x).addClass("deact");
@@ -2674,17 +2674,16 @@ p, td {
                         skillgroups--;
                     }
                 }
-            }
-            if (groupSkills[skill]["rating"]>0) {
+            } else if (groupSkills[skill]["rating"]>0) {
                 if (className=="decAtt "+[skill]) {
                     groupSkills[skill]["rating"]--;
                     skillgroups++;
-                    for (key in groupSkills[skill]["skillsingroup"]) {
-                        var x = groupSkills[skill]["skillsingroup"][key];
-                        activeSkills[x] ["rating"]=groupSkills[skill]["rating"];
-                        if (groupSkills[skill]["rating"]==0){
-                            $(".incAtt"+"."+x).removeClass("deact");
-                            $(".decAtt"+"."+x).removeClass("deact");
+                    for (var key2 in groupSkills[skill]["skillsingroup"]) {
+                        var x2 = groupSkills[skill]["skillsingroup"][key2];
+                        activeSkills[x2] ["rating"]=groupSkills[skill]["rating"];
+                        if (groupSkills[skill]["rating"]===0){
+                            $(".incAtt"+"."+x2).removeClass("deact");
+                            $(".decAtt"+"."+x2).removeClass("deact");
                         }
                     }
                 }
@@ -2692,7 +2691,7 @@ p, td {
         }
         
         for (prop in adeptPowers) {
-            var power = adeptPowers[prop]
+            var power = adeptPowers[prop];
             if (prop=="improvedreflexes" && power["level"]>0) {//this will reduce the cost of improved reflexes if it is activated
                 power["cost"]=1;
                 if (power["level"]>=1 && power["level"]<3 &&powerPoints-power["cost"]>=0) {
@@ -4915,6 +4914,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         $("."+device+" .avail").empty().append(ed["avail"]+" "+ed["restrict"]);
         $("."+device+" .price").empty().append(ed["cost"]+"&yen;");
     }
+    
     
 </script>
 </body>
