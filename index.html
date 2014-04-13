@@ -132,16 +132,21 @@ p, td {
     margin: 15px 5px;
 }
 
-#skillPoints {
-    margin: 15px 0 0 970px;
+#characterPoints {
+    margin: 0;
     padding-right: 11px;
     position: absolute;
     background: #222;
+    width: 1198px;;
 }
 
-#skillPoints.fixed {
+#characterPoints.fixed {
     position: fixed;
     top: 0;
+}
+
+h2#skillgroupHeader {
+    margin-top: 150px;
 }
 
 .points {
@@ -612,32 +617,28 @@ p, td {
             </table>
         </div>
         <div id="skillcontainer">
-            <div id="skillPoints">
-                <h3>Skill Points</h3>
-                <div id="skillpnt" class="points"></div>
-                <h3>Knowledge Points</h3>
-                <div id="knowpnt" class="points"></div>
-                <div class="Mag hide">
-                    <h3>Power Points</h3>
-                    <div id="powerpnt" class="points"></div>
-                    <h3>Spells</h3>
-                    <div id="spellpnt" class="points"></div>
-                </div>
-                <div class="Res hide">
-                    <h3>Forms</h3>
-                    <div id="formpnt" class="points"></div>
-                </div>
-                <div>
-                    <h3>Nuyen</h3>
-                    <div id="nuyen" class="points">0&#65509</div>
-                </div>
-                <div>
-                    <h3>Karma</h3>
-                    <div id="karmapnt" class="points">25</div>
-                </div>
-            </div>
+            <table id="characterPoints"> <!--This displays how many points are left to spend-->
+                <tr>
+                    <th><h3>Skill Points</h3></th>
+                    <th><h3>Knowledge Points</h3></th>
+                    <th class="Mag hide"><h3>Power Points</h3></th>
+                    <th class="Mag hide"><h3>Spells</h3></th>
+                    <th class="Res hide"><h3>Forms</h3></th>
+                    <th><h3>Nuyen</h3></th>
+                    <th><h3>Karma</h3></th>
+                </tr>
+                <tr>
+                    <td id="skillpnt" class="points"></td>
+                    <td id="knowpnt" class="points"></td>
+                    <td id="powerpnt" class="points Mag hide"></td>
+                    <td id="spellpnt" class="points Mag hide"></td>
+                    <td id="formpnt" class="points Res hide"></td>
+                    <td id="nuyen" class="points">0&#65509</td>
+                    <td id="karmapnt" class="points">25</td>
+                </tr>
+            </table>
             <table id="skillgrouplist">
-                <h2>Skill Groups</h2>
+                <h2 id="skillgroupHeader">Skill Groups</h2>
                 <tr class="skillgroupTitles label">
                     <td>
                         raise
@@ -3379,13 +3380,13 @@ p, td {
     };
     
 $(document).ready(function () {//this is makes it so that that skill points becomes fixed to the window
-    var top = $("#skillPoints").offset().top - parseFloat($('#skillPoints').css('margin-top'));//this stupid variable doesn't get set right unless I put it in the document ready funcation
+    var top = $("#characterPoints").offset().top - parseFloat($('#characterPoints').css('margin-top'));//this stupid variable doesn't get set right unless I put it in the document ready funcation
     $(window).scroll(function(){
         var y = $(window).scrollTop();
         if (y>=top){
-            $("#skillPoints").addClass("fixed");
+            $("#characterPoints").addClass("fixed");
         } else {
-            $("#skillPoints").removeClass("fixed");
+            $("#characterPoints").removeClass("fixed");
         }
     });
 })
