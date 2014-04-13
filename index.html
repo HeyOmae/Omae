@@ -4678,7 +4678,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     $("#devices, #e-accessories").on("click", ".buydevice", appleStore);
     
-    function appleStore () {//this function handles buying electroic devices
+    function appleStore () {//this function handles buying electroic devices, and now it seems to also be used to buy everything...
         var devicename=$(this).parent().attr("class");
         if ($(this).hasClass("deact")||nuyen-electronics[devicename]["cost"]<0) {
             return;
@@ -4764,8 +4764,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             for (deviceAtt in electronics[x]) {
                 inventory[x+invNum][deviceAtt]=electronics[x][deviceAtt];
             }
-            if (electronics[x]["type"]==("rcc"||"deck")) {
+            console.log(x);
+            var y=electronics[x]["type"]
+            if (y=="deck"||y=="rcc"||y=="commlink") {
                 inventory[x+invNum]["programlist"]={};
+
             }
             
         }
@@ -4781,7 +4784,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         nuyenUpdater();
     }
     
-    $("#devices").on("click", ".programs .button", buyProgram);
+    $("#devices").on("click", ".programs .button", buyProgram);//this is for buying cyber programs for decks and RCCs
     
     function buyProgram() {
         var device=$(this).parent().parent().parent().attr("class");
@@ -4855,7 +4858,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     }
     
     
-    $("#devices").on("click", ".linkmods .button", buylinkmod);
+    $("#devices").on("click", ".linkmods .button", buylinkmod);//commlink mods
     
     function buylinkmod() {
         var device=$(this).parent().parent().attr("class");
