@@ -2628,7 +2628,7 @@ h2#skillgroupHeader {
         function knowingIsHalftheBattle () {//this sets how many knowledge points a character gets
             knowledgepoints=(int+log)*2;//sets the number of knowledge skill points
         }
-        
+        //skillupdater is very poorly written, refactor later!
         function skillUpdater (x,y) {//this function gets called by both the active and knowledge skills
             for (var skill in x) {//this will increase the skills
                 if (y>0){//if you're out of skill points, don't add skills.
@@ -2643,15 +2643,13 @@ h2#skillgroupHeader {
                         }
                     }
                 }
-                if (x[skill]["rating"]>0) {
-                    if (className=="decAtt "+[skill]) {
-                        if (x==activeSkills) {
-                            skills++;
-                        } else if (x==knowledgeSkills) {
-                            knowledgepoints++;
-                        }
-                        x[skill]["rating"]--;
+                if (x[skill]["rating"]>0 && className=="decAtt "+[skill]) {//if skill rating is over 0 and decrease Attribute is with the skill then do this stuff
+                    if (x==activeSkills) {
+                        skills++;
+                    } else if (x==knowledgeSkills) {
+                        knowledgepoints++;
                     }
+                    x[skill]["rating"]--;
                 }
                 else if ( (x[skill]["rating"]===0) && (x==knowledgeSkills) ) { // Removes knowledge skill if at zero and reduced again.
                     if (className=="decAtt "+[skill]) {
@@ -2662,30 +2660,24 @@ h2#skillgroupHeader {
             return x;
         }
         for (var skill in groupSkills) {//this will increase the skill groups
-            if (skillgroups>0){
-                if (groupSkills[skill]["rating"]<skillgroupmax) {
-                    if (className=="incAtt "+[skill]) {
-                        groupSkills[skill]["rating"]++;
-                        for (var key in groupSkills[skill]["skillsingroup"]) {
-                            var x = groupSkills[skill]["skillsingroup"][key];
-                            activeSkills[x] ["rating"]=groupSkills[skill]["rating"];
-                            $(".incAtt"+"."+x).addClass("deact");
-                            $(".decAtt"+"."+x).addClass("deact");
-                        }
-                        skillgroups--;
-                    }
+            if (skillgroups>0 && groupSkills[skill]["rating"]<skillgroupmax && className=="incAtt "+[skill]){
+                groupSkills[skill]["rating"]++;
+                for (var key in groupSkills[skill]["skillsingroup"]) {
+                    var x = groupSkills[skill]["skillsingroup"][key];
+                    activeSkills[x] ["rating"]=groupSkills[skill]["rating"];
+                    $(".incAtt"+"."+x).addClass("deact");
+                    $(".decAtt"+"."+x).addClass("deact");
                 }
-            } else if (groupSkills[skill]["rating"]>0) {
-                if (className=="decAtt "+[skill]) {
-                    groupSkills[skill]["rating"]--;
-                    skillgroups++;
-                    for (var key2 in groupSkills[skill]["skillsingroup"]) {
-                        var x2 = groupSkills[skill]["skillsingroup"][key2];
-                        activeSkills[x2] ["rating"]=groupSkills[skill]["rating"];
-                        if (groupSkills[skill]["rating"]===0){
-                            $(".incAtt"+"."+x2).removeClass("deact");
-                            $(".decAtt"+"."+x2).removeClass("deact");
-                        }
+                skillgroups--;
+            } else if (groupSkills[skill]["rating"]>0 && className=="decAtt "+[skill]) {
+                groupSkills[skill]["rating"]--;
+                skillgroups++;
+                for (var key2 in groupSkills[skill]["skillsingroup"]) {
+                    var x2 = groupSkills[skill]["skillsingroup"][key2];
+                    activeSkills[x2] ["rating"]=groupSkills[skill]["rating"];
+                    if (groupSkills[skill]["rating"]===0){
+                        $(".incAtt"+"."+x2).removeClass("deact");
+                        $(".decAtt"+"."+x2).removeClass("deact");
                     }
                 }
             }
