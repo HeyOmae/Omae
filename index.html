@@ -1209,6 +1209,12 @@ h2#skillgroupHeader {
                  <table id="tools">
                      <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
                 </table>
+
+                <h2>Optical & Imaging Devices</h2>
+                 <table id="optics">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Device</td><td>Capacity</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+
                 <h2>Security Devices</h2>
                  <table id="securitydevice">
                      <tr class="label"><td>Buy</td><td>Type</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
@@ -1917,6 +1923,20 @@ h2#skillgroupHeader {
         toolshop: {name:"Shop", type:"tools", skill:"", avail:8, restrict:"", cost:5000},
         toolfacility: {name:"Facility", type:"tools", skill:"", avail:12, restrict:"", cost:50000},
 
+//optical & imaging devices
+        binoculars: {name:"Binoculars", type:"optics", rating:1, capacity:3, avail:0, costx:50, cost:50},
+        binocularsoptical: {name:"Binoculars Opitcal", type:"optics", rating:"n/a", capacity:0, avail:0, costx:50, cost:50},
+        camera: {name:"Camera", type:"optics", rating:1, capacity:6, avail:0, costx:100, cost:100},
+        microcamera: {name:"Micro-Camera", type:"optics", rating:1, capacity:1, avail:0, costx:100, cost:100},
+        contacts: {name:"Contacts", type:"optics", rating:1, capacity:3, avail:6, costx:200, cost:200},
+        glasses: {name:"Glasses", type:"optics", rating:1, capacity:4, avail:0, costx:100, cost:100},
+        goggles: {name:"Goggles", type:"optics", rating:1, capacity:6, avail:0, costx:50, cost:50},
+        monocle: {name:"Monocle", type:"optics", rating:1, capacity:4, avail:0, costx:120, cost:120},
+        endoscope: {name:"Endoscope", type:"optics", rating:"n/a", capacity:0, avail:8, costx:250, cost:250},
+        periscope: {name:"Periscope", type:"optics", rating:"n/a", capacity:0, avail:3, costx:50, cost:50},
+        magesightgoggles: {name:"Mage Sight Goggles", type:"optics", rating:"n/a", capacity:0, avail:3, costx:50, cost:50},
+
+
 //Security devices
         keycombinationlock: {name:"Key/combination lock", type:"securitydevice", rating:1, avail:1, restrict:"", cost:10},
         maglock: {name:"Maglock", type:"securitydevice", rating:1, avail:1, restrict:"", cost:100},
@@ -2031,6 +2051,16 @@ h2#skillgroupHeader {
         track:{name:"Track", active: false, category: "hacking", rcc: false, test: "Trace User", mod: 2},
         wrapper:{name:"Wrapper", active: false, category: "hacking", rcc: true}
     };
+
+    var visionenhancements = {
+        lowlightvision: {name:"Low-light vision", cap:1, avail:4, restricted: "", cost:500},
+        flarecompensation: {name:"Flare Compensation", cap:1, avail:1, restricted: "", cost:250},
+        imagelink: {name:"Image Link", cap:1, avail:0, restricted: "", cost:25},
+        smartlink: {name:"Smartlink", cap:1, avail:4, restricted: "Restricted", cost:2000},
+        thermographicvision: {name:"Thermographic Vision", cap:1, avail:6, restricted: "", cost:500},
+        visionenhancement: {name:"Vision Enhancement", rating:1, cap:1, avail:2, availx:2, restricted: "", cost:500, costx:500},
+        visionmagnification: {name:"Vision Magnification", rating:1, cap:1, avail:2, restricted: "", cost:250},
+    }
     
     inventory = {};
     
@@ -4612,6 +4642,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "tools":
                 $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+"<input type='text' class='toolname' placeholder='Skill name'> "+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
+            case "optics": $('#optics').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td>"+device.capacity+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                if (device.rating=="n/a") {
+                    $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
+                }
+                break;
             case "securitydevice":
                 $('#securitydevice').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
@@ -4746,7 +4781,9 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
             case "slappatches":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
-                break; 
+                break;
+            default:
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
         }
         nuyen-=inventory[devicename+invNum]["cost"];
         invNum++;
