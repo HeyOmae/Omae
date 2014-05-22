@@ -1928,10 +1928,10 @@ h2#skillgroupHeader {
         toolfacility: {name:"Facility", type:"tools", skill:"", avail:12, restrict:"", cost:50000},
 
 //optical & imaging devices
-        binoculars: {name:"Binoculars", type:"optics", rating:1, ratingmax:3, avail:0, availx:0, restrict: "", costx:50, cost:50},
-        binocularsoptical: {name:"Binoculars Opitcal", type:"optics", rating:"n/a", ratingmax:0, avail:0, restrict: "", cost:50},
-        camera: {name:"Camera", type:"optics", rating:1, ratingmax:6, avail:0, availx:0, restrict: "", costx:100, cost:100},
-        microcamera: {name:"Micro-Camera", type:"optics", rating:1, ratingmax:1, avail:0, restrict: "", cost:100},
+        binoculars: {name:"Binoculars", type:"optics", rating:1, ratingmax:3, mods:["Vision Magnification"], avail:0, availx:0, restrict: "", costx:50, cost:50},
+        binocularsoptical: {name:"Binoculars Opitcal", type:"optics", rating:"n/a", ratingmax:0, mods:["Vision Magnification"], avail:0, restrict: "", cost:50},
+        camera: {name:"Camera", type:"optics", rating:1, ratingmax:6, mods:["Audio and Video Recording"], avail:0, availx:0, restrict: "", costx:100, cost:100},
+        microcamera: {name:"Micro-Camera", type:"optics", rating:1, ratingmax:1, mods:["Audio and Video Recording"], avail:0, restrict: "", cost:100},
         contacts: {name:"Contacts", type:"optics", rating:1, ratingmax:3, avail:6, availx:0, restrict: "", costx:200, cost:200},
         glasses: {name:"Glasses", type:"optics", rating:1, ratingmax:4, avail:0, availx:0, restrict: "", costx:100, cost:100},
         goggles: {name:"Goggles", type:"optics", rating:1, ratingmax:6, avail:0, availx:0, restrict: "", costx:50, cost:50},
@@ -2057,6 +2057,7 @@ h2#skillgroupHeader {
     };
 
     var visionenhancements = {
+        empty : {name:"Empty", avail:0, cost:0},
         lowlightvision: {name:"Low-light vision", cap:1, avail:4, restricted: "", cost:500},
         flarecompensation: {name:"Flare Compensation", cap:1, avail:1, restricted: "", cost:250},
         imagelink: {name:"Image Link", cap:1, avail:0, restricted: "", cost:25},
@@ -4815,13 +4816,27 @@ $(document).ready(function () {//this is makes it so that that skill points beco
 
     //This function is for giving devices access to its mods
     function enhancements (x,y) { //x=device capacity, y=device name + inventory number
-        
-        for (var i = 1; i <= x; i++) {
-            $("."+y+" .moody").append("<div class='modslot "+i+"'>"+"<select><option>Empty</option></select>"+"</div>");
+
+        if (typeof inventory[y]["mods"] === "undefined") {
+            inventory[y]["mods"] = [];
+        } else {
+            inventory[y]["mods"] = electronics[$(y).prev().attr("class")]["mods"].slice(0);
         }
-        for (mod in visionenhancements) {
+
+        var preinstalled = inventory[y]["mods"].length;
+
+        for (var mod in inventory[y]["mods"]) {
+            $("."+y+" .moody").append("<div class='modslot "+i+"'>"+inventory[y]["mods"][mod]+"</div>");
+        }
+        
+        for (var i = 0+preinstalled; i < x+preinstalled; i++) {
+            $("."+y+" .moody").append("<div class='modslot "+i+"'>"+"<select></select>"+"</div>");
+            inventory[y]["mods"][i]="";
+        }
+        for (var mod in visionenhancements) {
             $("."+y+" .moody .modslot select").append("<option value='"+mod+"'>"+visionenhancements[mod]["name"]+"</option>");
         }
+
     }
     
     $("#devices, #e-accessories").on("click", ".selldevice", microsoftStore);
@@ -4986,7 +5001,28 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     $("#e-accessories").on("change", ".modslot select", modChange);
 
     function modChange() {
-        console.log($(this).val());
+        var device = $(this).parents("tr").attr("class");
+        var slotNum = $(this).parent().attr('class').split(' ')[1];
+        var mod = $(this).val();
+        var oldMod = inventory[device]["mods"][slotNum];
+
+        if (oldMod!="") {
+            inventory[device]["cost"]-=visionenhancements[oldMod]["cost"];
+            nuyen+=visionenhancements[oldMod]["cost"];
+            inventory[device]["avail"]-=visionenhancements[oldMod]["avail"];
+            inventory[device]["cost"]-=visionenhancements[oldMod]["cost"];
+        }
+
+        inventory[device]["avail"]+=visionenhancements[mod]["avail"];
+        inventory[device]["cost"]+=visionenhancements[mod]["cost"];
+        nuyen-=visionenhancements[mod]["cost"];
+        inventory[device]["mods"][slotNum] = mod;
+        $("."+device+" .deviceavail").empty().append(inventory[device]["avail"] + inventory[device]["restrict"]);
+        $("."+device+" .devicecost").empty().append(inventory[device]["cost"]);
+
+        nuyenUpdater();
+        
+            
     }
 
 
