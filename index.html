@@ -2063,8 +2063,10 @@ h2#skillgroupHeader {
         imagelink: {name:"Image Link", cap:1, avail:0, restricted: "", cost:25},
         smartlink: {name:"Smartlink", cap:1, avail:4, restricted: "Restricted", cost:2000},
         thermographicvision: {name:"Thermographic Vision", cap:1, avail:6, restricted: "", cost:500},
-        visionenhancement: {name:"Vision Enhancement", rating:1, cap:1, avail:2, availx:2, restricted: "", cost:500, costx:500},
-        visionmagnification: {name:"Vision Magnification", rating:1, cap:1, avail:2, restricted: "", cost:250},
+        visionenhancement1: {name:"Vision Enhancement 1", rating:1, cap:1, avail:2, restricted: "", cost:500},
+        visionenhancement2: {name:"Vision Enhancement 2", rating:2, cap:2, avail:4, restricted: "", cost:1000},
+        visionenhancement3: {name:"Vision Enhancement 3", rating:3, cap:3, avail:6, restricted: "", cost:1500},
+        visionmagnification: {name:"Vision Magnification", cap:1, avail:2, restricted: "", cost:250},
     }
     
     inventory = {};
@@ -4762,7 +4764,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
             case "optics":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=4></td><td class='deviceavail'>"+inventory[devicename+invNum]["avail"]+"</td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
-                enhancements(inventory[devicename+invNum]["rating"], devicename+invNum);
+                enhancements(inventory[devicename+invNum]["rating"], devicename+invNum, devicename);
                 
                 break;
             case "securitydevice":
@@ -4804,7 +4806,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             for (deviceAtt in electronics[x]) {
                 inventory[x+invNum][deviceAtt]=electronics[x][deviceAtt];
             }
-            console.log(x);
+
             var y=electronics[x]["type"]
             if (y=="deck"||y=="rcc"||y=="commlink") {
                 inventory[x+invNum]["programlist"]={};
@@ -4815,12 +4817,12 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     }
 
     //This function is for giving devices access to its mods
-    function enhancements (x,y) { //x=device capacity, y=device name + inventory number
+    function enhancements (x,y,z) { //x=device capacity, y=device name + inventory number, z=the normal device
 
-        if (typeof inventory[y]["mods"] === "undefined") {
-            inventory[y]["mods"] = [];
-        } else {
-            inventory[y]["mods"] = electronics[$(y).prev().attr("class")]["mods"].slice(0);
+        inventory[y]["mods"]=[];
+        var defaultMods = electronics[z]["mods"];
+        if (typeof defaultMods !== "undefined") {
+            inventory[y]["mods"] = defaultMods.slice(0);
         }
 
         var preinstalled = inventory[y]["mods"].length;
@@ -5002,27 +5004,43 @@ $(document).ready(function () {//this is makes it so that that skill points beco
 
     function modChange() {
         var device = $(this).parents("tr").attr("class");
-        var slotNum = $(this).parent().attr('class').split(' ')[1];
+        var slotNum = Number($(this).parent().attr('class').split(' ')[1]);
         var mod = $(this).val();
         var oldMod = inventory[device]["mods"][slotNum];
+        console.log(slotNum);
 
         if (oldMod!="") {
-            inventory[device]["cost"]-=visionenhancements[oldMod]["cost"];
             nuyen+=visionenhancements[oldMod]["cost"];
             inventory[device]["avail"]-=visionenhancements[oldMod]["avail"];
             inventory[device]["cost"]-=visionenhancements[oldMod]["cost"];
+            multipleCapacity (oldMod, false);
         }
+        multipleCapacity (mod,'disabled');
+
+
 
         inventory[device]["avail"]+=visionenhancements[mod]["avail"];
         inventory[device]["cost"]+=visionenhancements[mod]["cost"];
         nuyen-=visionenhancements[mod]["cost"];
         inventory[device]["mods"][slotNum] = mod;
+
+        //updates the avail and cost
         $("."+device+" .deviceavail").empty().append(inventory[device]["avail"] + inventory[device]["restrict"]);
-        $("."+device+" .devicecost").empty().append(inventory[device]["cost"]);
+        $("."+device+" .devicecost").empty().append(inventory[device]["cost"]+"&yen;");
 
         nuyenUpdater();
         
             
+        function multipleCapacity(x, y) {
+            var cap = visionenhancements[x]["cap"];
+            if (cap>1) {
+                for (var i = 1; i < cap; i++) {
+                    var nextslot = (slotNum+i);
+                    
+                    $("."+device+" .modslot."+nextslot+" select").prop('disabled', y);
+                }
+            }
+        }
     }
 
 
