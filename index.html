@@ -201,6 +201,15 @@ h2#skillgroupHeader {
 #clothing input {
     width: 110px;
 }
+
+.alert {
+    color:black;
+    background-color: red;
+    -webkit-transition: background-color 1s;
+    -moz-transition: background-color 1s;
+    -o-transition: background-color 1s;
+    transition: background-color 1s;
+}
 </style>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -1344,6 +1353,8 @@ h2#skillgroupHeader {
     var focinumber=0;//number of foci that are bonded
     var fociRating=0;//the total rating of the foci
     var fociMaxRating=mag*2;//max rating or total foci
+
+    var maxAvail = 12; //the max availibility at chargen
     
     var activeSkills = {//the list of all the skills in the entire game forever. Catalysis needs to never release any more skills ever after this
         archery:{name:"Archery", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
@@ -3234,7 +3245,7 @@ h2#skillgroupHeader {
                         break;
                 }
             }
-            if (itemhold["avail"]>12) {
+            if (itemhold["avail"]>maxAvail) {
                 $(".weapact."+item).addClass("deact").empty().append("<span>-</span>");
             }
         }
@@ -3762,7 +3773,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             acctarget=".inventory."+item+itemNum+" .accessories";//makes targetting accessories eaiser
             $(acctarget).append("<tr class='nonmounts "+itemNum+"'></tr>");//puting a row in a row breaks the normal table
             var nonmount=".nonmounts."+itemNum;
-            if (itemhold.avail+2<=12||itemhold.mods.internalsmart=="Smartgun") {//adding a internal smartgun increaes avail, this doesn't go over 12
+            if (itemhold.avail+2<=maxAvail||itemhold.mods.internalsmart=="Smartgun") {//adding a internal smartgun increaes avail, this doesn't go over 12
                 $(nonmount).append("<td class='label'>Internal Smartgun</td><td class='smartgun "+itemNum+" button'>+</td>");
             }
             if (itemhold.mods.internalsmart=="Smartgun") {//if the gun already has an internal smartgun system, this prevents people from adding another one
@@ -4164,7 +4175,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
         }
         
-        if (ammotype["avail"]>12) {
+        if (ammotype["avail"]>maxAvail) {
             $("."+ammo+" .button").addClass("deact");
         }
         
@@ -4173,7 +4184,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     $(".gas .grenadesname").empty().append("<select class='toxicgas'></select>");
     
     for (dose in toxin) {
-        if (toxin[dose]["avail"]<12) {
+        if (toxin[dose]["avail"]<maxAvail) {
             $(".toxicgas").append("<option value='"+dose+"'>"+toxin[dose]["name"]+"</option>")
         }
     }
@@ -4316,7 +4327,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     function fatboy() {
         var bomb=$(this).parent().parent().attr("class");
-        if ($(this).hasClass("kgup")&&nuyen-inventory[bomb]["rating"]*100>0) {
+        if ($(this).hasClass("kgup")&&nuyen-inventory[bomb]["rating"]*100>=0) {
             inventory[bomb]["kg"]++;
             bombupdate(bomb);
             if (inventory[bomb]["name"]=="Commercial") {
@@ -4373,7 +4384,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
  
     for (type in armor) {
         $("#clotharmor #bodyarmor tbody").append("<tr class='"+type+"'><td class='buyarmor button'><strong>+</strong></td><td>"+armor[type]["name"]+"</td><td>"+armor[type]["armor"]+"</td><td>"+armor[type]["avail"]+" "+armor[type]["restrict"]+"</td><td>"+armor[type]["cost"]+"&#65509;</td></tr>");
-        if (armor[type]["avail"]>12) {
+        if (armor[type]["avail"]>maxAvail) {
             $("."+type+" .buyarmor").addClass("deact").empty().append("-");
         }
     }
@@ -4683,7 +4694,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
         }
         
-        if (device["avail"]>12) {
+        if (device["avail"]>maxAvail) {
             $("."+devicename+" .buydevice").addClass("deact").empty().append("-");
         }
     }
@@ -4837,6 +4848,12 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
         for (var mod in visionenhancements) {
             $("."+y+" .moody .modslot select").append("<option value='"+mod+"'>"+visionenhancements[mod]["name"]+"</option>");
+            var modcap = visionenhancements[mod]["cap"];
+            if (modcap > 1) {
+                for (var i=modcap; i>1; i--) {
+                    $("."+y+" .moody .modslot."+(inventory[y]["mods"].length-i+1)+" option[value='"+mod+"']").prop("disabled", "disabled");
+                }
+            }
         }
 
     }
@@ -4986,7 +5003,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
         
 
-        if ($(this).hasClass("ratingUp")&&ed["avail"]<12&&ed["rating"]<ratingmax) {//if this is the rating up button, up the rating of the device
+        if ($(this).hasClass("ratingUp")&&ed["avail"]<maxAvail&&ed["rating"]<ratingmax) {//if this is the rating up button, up the rating of the device
             ed["rating"]++;
             ed["avail"]+=ed["availx"];
             ed.cost+=ed.costx;
@@ -5007,7 +5024,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         var slotNum = Number($(this).parent().attr('class').split(' ')[1]);
         var mod = $(this).val();
         var oldMod = inventory[device]["mods"][slotNum];
-        console.log(slotNum);
+        
+        if (nuyen-visionenhancements[mod]["cost"]<0 || inventory[device]["avail"]+visionenhancements[mod]["avail"]>maxAvail) {//if the mod costs too much or changes the avail too high then change to empty and return
+            $(this).val(oldMod);
+            return;
+        }
 
         if (oldMod!="") {
             nuyen+=visionenhancements[oldMod]["cost"];
@@ -5031,13 +5052,20 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         nuyenUpdater();
         
             
-        function multipleCapacity(x, y) {
+        function multipleCapacity(x, y) {//x= mod, y=disable or false
             var cap = visionenhancements[x]["cap"];
             if (cap>1) {
                 for (var i = 1; i < cap; i++) {
-                    var nextslot = (slotNum+i);
+                    var nextslot = ("."+device+" .modslot."+(slotNum+i)+" select");
+                    if ($(nextslot).val() != "empty") {
+                        console.log(visionenhancements[$(nextslot).val()]["cost"]);
+                        nuyen+=visionenhancements[$(nextslot).val()]["cost"];
+                        inventory[device]["cost"]-=visionenhancements[$(nextslot).val()]["cost"];
+                        inventory[device]["mods"][slotNum+i]="empty";
+                        $(nextslot).val("empty");
+                    }
                     
-                    $("."+device+" .modslot."+nextslot+" select").prop('disabled', y);
+                    $(nextslot).prop('disabled', y);
                 }
             }
         }
