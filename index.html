@@ -1218,9 +1218,13 @@ h2#skillgroupHeader {
                  <table id="tools">
                      <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
                 </table>
-
                 <h2>Optical & Imaging Devices</h2>
                  <table id="optics">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Capacity</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+
+                <h2>Audio Devices</h2>
+                 <table id="audio">
                      <tr class="label"><td>Buy</td><td>raise</td><td>Capacity</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
                 </table>
 
@@ -1951,6 +1955,12 @@ h2#skillgroupHeader {
         periscope: {name:"Periscope", type:"optics", rating:"n/a", ratingmax:0, avail:3, restrict: "", cost:50},
         magesightgoggles: {name:"Mage Sight Goggles", type:"optics", rating:"n/a", ratingmax:0, avail:3, restrict: "", cost:50},
 
+//Audio Devices
+        directionalmic: {name:"Directional Mic", type:"audio", rating:1, ratingmax:6, avail:4, availx:0, restrict:"", costx:50, cost:50},
+        earbuds:{name:"Ear Buds", type:"audio", rating:1, ratingmax:3, avail:0, availx:0, restrict:"", costx:50, cost:50},
+        headphones: {name:"Headphones", type:"audio", rating:1, ratingmax:6, avail:0, availx:0, restrict:"", costx:50, cost:50},
+        lasermicrophone: {name:"Laser Microphone", type:"audio", rating:1, ratingmax:6, avail:6, availx:0, restrict:"Restricted", costx:100, cost:100},
+        omnidirectionalmicrophone: {name:"Omni-Directional Microphone", type:"audio", rating:1, ratingmax:6, avail:0, availx:0, restrict:"", costx:50, cost:50},
 
 //Security devices
         keycombinationlock: {name:"Key/combination lock", type:"securitydevice", rating:1, avail:1, restrict:"", cost:10},
@@ -2078,6 +2088,18 @@ h2#skillgroupHeader {
         visionenhancement2: {name:"Vision Enhancement 2", rating:2, cap:2, avail:4, restricted: "", cost:1000},
         visionenhancement3: {name:"Vision Enhancement 3", rating:3, cap:3, avail:6, restricted: "", cost:1500},
         visionmagnification: {name:"Vision Magnification", cap:1, avail:2, restricted: "", cost:250},
+    }
+
+    var audioenhancements = {
+        empty : {name:"Empty", avail:0, cost:0},
+        audioenhancement1: {name:"Audio Enhancement 1", rating:1, cap:1, avail:2, restricted: "", cost:500},
+        audioenhancement2: {name:"Audio Enhancement 2", rating:2, cap:2, avail:4, restricted: "", cost:1000},
+        audioenhancement3: {name:"Audio Enhancement 3", rating:3, cap:3, avail:6, restricted: "", cost:1500},
+        selectsoundfilter1: {name:"Select Sound Filter 1", rating:1, cap:1, avail:3, restricted: "", cost:250},
+        selectsoundfilter2: {name:"Select Sound Filter 2", rating:2, cap:2, avail:6, restricted: "", cost:500},
+        selectsoundfilter3: {name:"Select Sound Filter 3", rating:3, cap:3, avail:9, restricted: "", cost:750},
+        spatialrecognizer: {name:"Spatial Recognizer", rating:1, cap:2, avail:4, restricted: "", cost:1000},
+
     }
     
     inventory = {};
@@ -4665,6 +4687,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                     $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
                 }
                 break;
+            case "audio": $('#audio').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+device.rating+"</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                if (typeof device.availx === "undefined") {
+                    $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
+                }
+                break;
             case "securitydevice":
                 $('#securitydevice').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
@@ -4775,8 +4802,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
             case "optics":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=4></td><td class='deviceavail'>"+inventory[devicename+invNum]["avail"]+"</td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
-                enhancements(inventory[devicename+invNum]["rating"], devicename+invNum, devicename);
-                
+                enhancements(visionenhancements, inventory[devicename+invNum]["rating"], devicename+invNum, devicename);
+                break;
+            case "audio":
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=4></td><td class='deviceavail'>"+inventory[devicename+invNum]["avail"]+"</td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                enhancements(audioenhancements, inventory[devicename+invNum]["rating"], devicename+invNum, devicename);
                 break;
             case "securitydevice":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
@@ -4828,7 +4858,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     }
 
     //This function is for giving devices access to its mods
-    function enhancements (x,y,z) { //x=device capacity, y=device name + inventory number, z=the normal device
+    function enhancements (w,x,y,z) { //w==enchancements, x=device capacity, y=device name + inventory number, z=the normal device
 
         inventory[y]["mods"]=[];
         var defaultMods = electronics[z]["mods"];
@@ -4843,12 +4873,12 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
         
         for (var i = 0+preinstalled; i < x+preinstalled; i++) {
-            $("."+y+" .moody").append("<div class='modslot "+i+"'>"+"<select></select>"+"</div>");
+            $("."+y+" .moody").append("<div class='modslot "+i+"'>"+"<select class='"+inventory[y]["type"]+"'></select>"+"</div>");
             inventory[y]["mods"][i]="";
         }
-        for (var mod in visionenhancements) {
-            $("."+y+" .moody .modslot select").append("<option value='"+mod+"'>"+visionenhancements[mod]["name"]+"</option>");
-            var modcap = visionenhancements[mod]["cap"];
+        for (var mod in w) {
+            $("."+y+" .moody .modslot select").append("<option value='"+mod+"'>"+w[mod]["name"]+"</option>");
+            var modcap = w[mod]["cap"];
             if (modcap > 1) {
                 for (var i=modcap; i>1; i--) {
                     $("."+y+" .moody .modslot."+(inventory[y]["mods"].length-i+1)+" option[value='"+mod+"']").prop("disabled", "disabled");
@@ -5024,25 +5054,33 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         var slotNum = Number($(this).parent().attr('class').split(' ')[1]);
         var mod = $(this).val();
         var oldMod = inventory[device]["mods"][slotNum];
+        switch ($(this).attr("class")) {
+            case "audio":
+                var enhanceMods = audioenhancements;
+                break;
+            case "optics":
+                var enhanceMods = visionenhancements;
+                break;
+        } 
         
-        if (nuyen-visionenhancements[mod]["cost"]<0 || inventory[device]["avail"]+visionenhancements[mod]["avail"]>maxAvail) {//if the mod costs too much or changes the avail too high then change to empty and return
+        if (nuyen-enhanceMods[mod]["cost"]<0 || inventory[device]["avail"]+enhanceMods[mod]["avail"]>maxAvail) {//if the mod costs too much or changes the avail too high then change to empty and return
             $(this).val(oldMod);
             return;
         }
 
         if (oldMod!="") {
-            nuyen+=visionenhancements[oldMod]["cost"];
-            inventory[device]["avail"]-=visionenhancements[oldMod]["avail"];
-            inventory[device]["cost"]-=visionenhancements[oldMod]["cost"];
+            nuyen+=enhanceMods[oldMod]["cost"];
+            inventory[device]["avail"]-=enhanceMods[oldMod]["avail"];
+            inventory[device]["cost"]-=enhanceMods[oldMod]["cost"];
             multipleCapacity (oldMod, false);
         }
         multipleCapacity (mod,'disabled');
 
 
 
-        inventory[device]["avail"]+=visionenhancements[mod]["avail"];
-        inventory[device]["cost"]+=visionenhancements[mod]["cost"];
-        nuyen-=visionenhancements[mod]["cost"];
+        inventory[device]["avail"]+=enhanceMods[mod]["avail"];
+        inventory[device]["cost"]+=enhanceMods[mod]["cost"];
+        nuyen-=enhanceMods[mod]["cost"];
         inventory[device]["mods"][slotNum] = mod;
 
         //updates the avail and cost
@@ -5053,14 +5091,14 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         
             
         function multipleCapacity(x, y) {//x= mod, y=disable or false
-            var cap = visionenhancements[x]["cap"];
+            var cap = enhanceMods[x]["cap"];
             if (cap>1) {
                 for (var i = 1; i < cap; i++) {
                     var nextslot = ("."+device+" .modslot."+(slotNum+i)+" select");
                     if ($(nextslot).val() != "empty") {
-                        console.log(visionenhancements[$(nextslot).val()]["cost"]);
-                        nuyen+=visionenhancements[$(nextslot).val()]["cost"];
-                        inventory[device]["cost"]-=visionenhancements[$(nextslot).val()]["cost"];
+                        console.log(enhanceMods[$(nextslot).val()]["cost"]);
+                        nuyen+=enhanceMods[$(nextslot).val()]["cost"];
+                        inventory[device]["cost"]-=enhanceMods[$(nextslot).val()]["cost"];
                         inventory[device]["mods"][slotNum+i]="empty";
                         $(nextslot).val("empty");
                     }
