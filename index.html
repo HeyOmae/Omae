@@ -1234,7 +1234,7 @@ h2#skillgroupHeader {
                 </table>
                 <h2>Restraints</h2>
                  <table id="restraints">
-                     <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                     <tr class="label"><td>Buy</td><td>Ammount</td><td>Sell</td><td>Type</td><td>Armor</td><td>Structure</td><td>Avail</td><td>Cost</td></tr>
                 </table>
                 <h2>Breaking and Entering Gear</h2>
                  <table id="bnegear">
@@ -1912,11 +1912,11 @@ h2#skillgroupHeader {
         trodes: {name:"Trodes", type:"accessory", device:3, avail:0, cost:70},
         
         //RFID
-        standardtag: {name:"Standard Tag", type:"rfid", device:1, avail:0, restrict:"", cost:1},
-        datachip: {name:"Datachip", type:"rfid", device:1, avail:0, restrict:"", cost:5},
-        securitytags: {name:"Security Tags", type:"rfid", device:3, avail:0, restrict:"", cost:5},
-        sensortags: {name:"Sensor Tags", type:"rfid", device:2, avail:5, restrict:"", cost:40},
-        stealthtags: {name:"Stealth Tags", type:"rfid", device:3, avail:7, restrict:"Restricted", cost:10},
+        standardtag: {name:"Standard Tag", type:"rfid", device:1, avail:0, restrict:"", peritem: 10, cost:1},
+        datachip: {name:"Datachip", type:"rfid", device:1, avail:0, restrict:"", peritem: 10, cost:5},
+        securitytags: {name:"Security Tags", type:"rfid", device:3, avail:0, restrict:"", peritem: 10, cost:5},
+        sensortags: {name:"Sensor Tags", type:"rfid", device:2, avail:5, restrict:"", peritem: 10, cost:40},
+        stealthtags: {name:"Stealth Tags", type:"rfid", device:3, avail:7, restrict:"Restricted", peritem: 10, cost:10},
     
         //communications
         bugscanner: {name:"Bug Scanner", type:"communication", rating:1, availx:1, avail:1, restrict: "Restricted", costx:100, cost:100},//availx and costx are the multiplier for rating
@@ -1974,10 +1974,10 @@ h2#skillgroupHeader {
 
 
 //restraints
-        metalrestraint: {name:"Metal", type:"restraints", avail:0, restrict:"", cost:20},
-        plasteelrestraint: {name:"Plasteel", type:"restraints", avail:6, restrict:"Restricted", cost:50},
-        plasticrestraint: {name:"Plastic (per 10)", type:"restraints", avail:0, restrict:"", cost:5},
-        containmentmanacles: {name:"Containment manacles", type:"restraints", avail:6, restrict:"Restricted", cost:250},
+        metalrestraint: {name:"Metal", type:"restraints", armor:16, structure:2, avail:0, restrict:"", peritem: 1, cost:20},
+        plasteelrestraint: {name:"Plasteel", type:"restraints", armor:20, structure:2, avail:6, restrict:"Restricted", peritem: 1, cost:50},
+        plasticrestraint: {name:"Plastic (per 10)", type:"restraints",  armor:6, structure:1, avail:0, restrict:"", peritem: 10, cost:5},
+        containmentmanacles: {name:"Containment manacles", type:"restraints",  armor:16, structure:2, avail:6, restrict:"Restricted", peritem: 1, cost:250},
 
 //b&e gear
         autopicker: {name:"Autopicker", type:"bnegear", rating:1, avail:8, restrict:"Restricted", cost:500},
@@ -4702,7 +4702,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 }
                 break;
             case "restraints":
-                $('#restraints').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                $('#restraints').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0<td class='sellDown'>-</td></td><td>"+device["name"]+"</td><td>"+device.armor+"</td><td>"+device.structure+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "bnegear":
                 $('#bnegear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
@@ -4741,10 +4741,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             inventory[rfid]["tagNo"]=0;
         }
         if ($(this).hasClass("buyUp")&&nuyen-inventory[rfid]["cost"]>0) {
-            inventory[rfid]["tagNo"]+=10;
+            inventory[rfid]["tagNo"]+=inventory[rfid]["peritem"];
             nuyen-=inventory[rfid]["cost"];
         } else if ($(this).hasClass("sellDown")&&inventory[rfid]["tagNo"]>0) {
-            inventory[rfid]["tagNo"]-=10;
+            inventory[rfid]["tagNo"]-=inventory[rfid]["peritem"];
             nuyen+=inventory[rfid]["cost"];
         }
         tenUp(rfid);
@@ -4819,9 +4819,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 if (typeof inventory[devicename+invNum]["rating"]!=="undefined") {
                     $("."+devicename+invNum+" .devicerating").empty().append(inventory[devicename+invNum]["rating"]);
                 }
-                break;
-            case "restraints":
-                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "bnegear":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
