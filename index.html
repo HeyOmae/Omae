@@ -1460,6 +1460,9 @@ h2#skillgroupHeader {
     var knowledgeSkills = [
     ];
     
+    var p ="Physical";//type of spell
+    var m ="Mana";//type of spell
+    
     var adeptPowers = {
         adrenalineboost: {name: "Adrenaline Boost", active: false, level:0, cost:0.25, activation: "free", drain:true },
         astralperception: {name: "Astral Perception", active:false, level:"n/a", cost:1, activation: "simple", drain:false },
@@ -1569,8 +1572,6 @@ h2#skillgroupHeader {
         wallrunning: {name: "Wall Running", active: true, level:0, cost:0.5, activation: "simple", drain:false }
     };
     
-    var p ="Physical";//type of spell
-    var m ="Mana";//type of spell
     var spellforms = {//list of all the spells
         
         //combat spells
@@ -1842,6 +1843,7 @@ h2#skillgroupHeader {
     var toxin = {
         teargas: {name:"CS/Tear Gas", dose:0, vector:"Contact, Inhalation", speed: "1 Combat Turn", penetration:0, power: 8, effect: "Disorientation, Nausea, Stun Damage", avail: 4, restrict: "Restricted", cost: 20},
         nausea: {name:"Nausea Gas", dose:0, vector:"Inhalation", speed: "3 Combat Turn", penetration:0, power: 9, effect: "Disorientation, Nausea", avail: 6, restrict: "Restricted", cost: 25},
+        neurostunviii: {name: "Neuro-Stun VIII", dose:0, vector:"Contact, Inhalation", speed: "1 Combat Turn", penetration:0, power: 12, effect: "Disorientation, Stun Damage", avail:12, restrict: "Restricted", cost: 60},
         pepperpunch: {name:"Pepper Punch", dose:0, vector:"Contact, Inhalation", speed: "1 Combat Turn", penetration:0, power: 11, effect: "Nausea, Stun Damage", avail: 0, restrict: "", cost: 5}
     };
     
@@ -4206,7 +4208,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     $(".gas .grenadesname").empty().append("<select class='toxicgas'></select>");
     
     for (dose in toxin) {
-        if (toxin[dose]["avail"]<maxAvail) {
+        if (toxin[dose]["avail"]<=maxAvail) {
             $(".toxicgas").append("<option value='"+dose+"'>"+toxin[dose]["name"]+"</option>")
         }
     }
@@ -4298,7 +4300,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     $(".commercial .bombup,.commercial .bombdown, .plastic .buybomb").addClass("deact");
     $(".plastic .buybomb").empty().append("-");
     
-    $("#explosive").on("click", ".bombup, .bombdown", kaboom);
+    $("#explosive").on("click", ".bombup, .bombdown", kaboom);//increases an explosive's rating
     
     function kaboom() {
         if ($(this).hasClass("deact")) {
@@ -4559,7 +4561,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     var clothingavail=0;//the avail of the clothing
     var clothingarmor=0;//the armor value of the clothing, only effected by leather
     
-    function fashioncost() {//this is to help calulate how much cloths cost
+    function fashioncost() {//this is to help calulate how much clothes cost
         cost=$(this).val();
         if (cost==""||cost<1) {//if clothes value is less then 1, then its cost = 20
             clothingcost=20;
