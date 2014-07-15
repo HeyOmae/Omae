@@ -4817,9 +4817,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='devicerating' colspan=3>"+inventory[devicename+invNum]["name"]+" "+inventory[devicename+invNum]["rating"]+"</td><td class='mods'></td><td class='avail'>"+inventory[devicename+invNum]["avail"]+"</td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 if (devicename=="maglock") {
                     for (var mod in maglockMod) {
-                        $("."+devicename+invNum+" .mods").append("<tr class='"+mod+"'><td class='addmod button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+maglockMod[mod]["name"]+"</td></tr>");
+                        $("."+devicename+invNum+" .mods").append("<tr class='"+mod+"'><td class='addmod button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+maglockMod[mod]["rating"]+"</td><td class='ratingDown button'>-</td><td>"+maglockMod[mod]["name"]+"</td></tr>");
                         if (typeof maglockMod[mod]["rating"] == "undefined") {
                             $("."+devicename+invNum+" ."+mod+" .ratingUp, ."+devicename+invNum+" ."+mod+" .ratingDown").addClass("deact");
+                            $("."+devicename+invNum+" ."+mod+" .commrating").empty().append("n/a");
                         }
                     }
                 }
@@ -4875,9 +4876,9 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         
         if ($(this).hasClass("active")) {
             $(this).removeClass("active");
-            inventory[mag]["avail"] -= maglockMod[mod]["avail"];
-            inventory[mag]["cost"] -= maglockMod[mod]["cost"];
-            nuyen+=maglockMod[mod]["cost"];
+            inventory[mag]["avail"] -= inventory[mag]["maglockMods"][mod]["avail"];
+            inventory[mag]["cost"] -= inventory[mag]["maglockMods"][mod]["cost"];
+            nuyen+=inventory[mag]["maglockMods"][mod]["cost"];
             delete inventory[mag]["maglockMods"][mod];
         } else {
             if (inventory[mag]["avail"] + maglockMod[mod]["avail"] > maxAvail) {
