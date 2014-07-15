@@ -1965,13 +1965,9 @@ h2#skillgroupHeader {
         omnidirectionalmicrophone: {name:"Omni-Directional Microphone", type:"audio", rating:1, ratingmax:6, avail:0, availx:0, restrict:"", costx:50, cost:50},
 
 //Security devices
-        keycombinationlock: {name:"Key/combination lock", type:"securitydevice", rating:1, avail:1, availx:1, restrict:"", costx:10, cost:10},
-        maglock: {name:"Maglock", type:"securitydevice", rating:1, avail:1, availx:1, restrict:"", costx:100, cost:100},
-        keypad: {name:"Keypad", type:"securitydevice", avail:0, availx:0,restrict:"", costx:50, cost:50},
-        cardreader: {name:"Card reader", type:"securitydevice", avail:0, availx:0, restrict:"", costx:50, cost:50},
-        antitampercircuits: {name:"Anti-tamper circuits", type:"securitydevice", rating:1, ratingmax:4, avail:1, availx:1, restrict:"", costx:250, cost:250},
-//antitampercircuits should add to the rating to whatver they're purchased for.
-
+        keycombinationlock: {name:"Key/combination lock", type:"securitydevice", rating:1, ratingmax:6, avail:1, availx:1, restrict:"", costx:10, cost:10},
+        maglock: {name:"Maglock", type:"securitydevice", rating:1, ratingmax:6, maglockMods:{}, avail:1, availx:1, restrict:"", costx:100, cost:100},
+        
 
 //restraints
         metalrestraint: {name:"Metal", type:"restraints", armor:16, structure:2, avail:0, restrict:"", peritem: 1, cost:20},
@@ -2047,6 +2043,13 @@ h2#skillgroupHeader {
         shopsoft: {},
         tutorsoft: {}
     };
+
+    var maglockMod = {
+        keypad: {name:"Keypad", avail:0, restrict:"", cost:50},
+        cardreader: {name:"Card reader", avail:0, restrict:"", cost:50},
+        antitampercircuits: {name:"Anti-tamper circuits", rating:1, ratingmax:4, avail:1, availx:1, restrict:"", costx:250, cost:250},
+        biometricreader: {name:"Biometric Reader", avail:4, restrict:"", cost:200}
+    }
     
     var programs = {
         //common
@@ -4696,10 +4699,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
             case "securitydevice":
                 $('#securitydevice').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
-                if (typeof device.rating==="undefined") {
-                    $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
-                    $("."+devicename+" .commrating").empty().append("n/a");
-                }
                 break;
             case "restraints":
                 $('#restraints').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0<td class='sellDown'>-</td></td><td>"+device["name"]+"</td><td>"+device.armor+"</td><td>"+device.structure+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
@@ -4815,9 +4814,14 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 enhancements(audioenhancements, inventory[devicename+invNum]["rating"], devicename+invNum, devicename);
                 break;
             case "securitydevice":
-                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='devicerating' colspan=3>n/a</td><td colspan=2></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
-                if (typeof inventory[devicename+invNum]["rating"]!=="undefined") {
-                    $("."+devicename+invNum+" .devicerating").empty().append(inventory[devicename+invNum]["rating"]);
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='devicerating' colspan=3>"+inventory[devicename+invNum]["name"]+" "+inventory[devicename+invNum]["rating"]+"</td><td class='mods'></td><td class='avail'>"+inventory[devicename+invNum]["avail"]+"</td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                if (devicename=="maglock") {
+                    for (var mod in maglockMod) {
+                        $("."+devicename+invNum+" .mods").append("<tr class='"+mod+"'><td class='addmod button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+maglockMod[mod]["name"]+"</td></tr>");
+                        if (typeof maglockMod[mod]["rating"] == "undefined") {
+                            $("."+devicename+invNum+" ."+mod+" .ratingUp, ."+devicename+invNum+" ."+mod+" .ratingDown").addClass("deact");
+                        }
+                    }
                 }
                 break;
             case "bnegear":
@@ -4861,6 +4865,36 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             }
             
         }
+    }
+
+    $("#securitydevice").on('click', ".addmod", addingMagMod);
+
+    function addingMagMod () {
+        var mod = $(this).parent().attr("class");
+        var mag = $(this).parent().parent().parent().attr("class");
+        
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+            inventory[mag]["avail"] -= maglockMod[mod]["avail"];
+            inventory[mag]["cost"] -= maglockMod[mod]["cost"];
+            nuyen+=maglockMod[mod]["cost"];
+            delete inventory[mag]["maglockMods"][mod];
+        } else {
+            if (inventory[mag]["avail"] + maglockMod[mod]["avail"] > maxAvail) {
+                return;
+            }
+            $(this).addClass("active");
+            inventory[mag]["maglockMods"][mod] = {};
+            for (var key in maglockMod[mod]) {
+                inventory[mag]["maglockMods"][mod][key] = maglockMod[mod][key];
+            }
+            inventory[mag]["avail"] += maglockMod[mod]["avail"];
+            inventory[mag]["cost"] += maglockMod[mod]["cost"];
+            nuyen-=maglockMod[mod]["cost"];
+        }
+        $("."+mag+" .avail").empty().append(inventory[mag]["avail"]);
+        $("."+mag+" .devicecost").empty().append(inventory[mag]["cost"]+"&yen;");
+        nuyenUpdater();
     }
 
     //This function is for giving devices access to its mods
@@ -5030,7 +5064,12 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             return;
         }
         var device=$(this).parent().attr("class");
-        var ed=electronics[device];//ed=electronic device
+        if (typeof electronics[device]!=="undefined") {
+            var ed=electronics[device];//ed=electronic device
+        } else if (typeof maglockMod!=="undefined") {
+            var ed=maglockMod[device];
+        }
+        
 
         if (typeof ed.ratingmax==="undefined") {//if ratingmax isn't defined, then the max is 6, else its the ratingmax
             var ratingmax = 6;
