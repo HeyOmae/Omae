@@ -1252,17 +1252,21 @@ h2#skillgroupHeader {
                  <table id="grapplegungear">
                      <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
                 </table>
+                <h2>Grapple Rope</h2>
+                <table id="grapplerope">
+                    <tr class="label"><td>Buy</td><td>Meters</td><td>Sell</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                </table>
                   <h2>Biotech</h2>
                  <table id="biotech">
-                     <tr class="label"><td>Buy</td><td>Type</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
                 </table>
                   <h2>DocWagon Contract</h2>
                  <table id="docwagon">
-                     <tr class="label"><td>Buy</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                    <tr class="label"><td>Buy</td><td>Years</td><td>Sell</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
                 </table>
                   <h2>Slap Patches</h2>
                  <table id="slappatches">
-                     <tr class="label"><td>Buy</td><td>Type</td><td>Device Rating</td><td>Avail</td><td>Cost</td></tr>
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
                 </table>
             </div>
         </div>
@@ -2011,29 +2015,31 @@ h2#skillgroupHeader {
 
 //grapple gun gear
         grapplegun: {name:"Grapple gun", type:"grapplegungear", avail:8, restrict:"Restricted", cost:500},
-        catalyststick: {name:"Catalyst stick", type:"grapplegungear", avail:8, restrict:"Forbidden", cost:500},
-        microwire: {name:"Microwire", type:"grapplegungear", avail:4, restrict:"", cost:500},
-        myomericrope: {name:"Myomeric rope", type:"grapplegungear", avail:10, restrict:"", cost:500},
-        standardrope: {name:"Standard rope", type:"grapplegungear", avail:0, restrict:"", cost:500},
-        stealthrope: {name:"Stealth rope", type:"grapplegungear", avail:8, restrict:"Forbidden", cost:500},
+        catalyststick: {name:"Catalyst stick", type:"grapplegungear", avail:8, restrict:"Forbidden", cost:120},
+
+//Grappling rope
+        microwire: {name:"Microwire", type:"grapplerope", avail:4, restrict:"", peritem: 100, cost:50},
+        myomericrope: {name:"Myomeric rope", type:"grapplerope", avail:10, restrict:"", peritem: 10, cost:200},
+        standardrope: {name:"Standard rope", type:"grapplerope", avail:0, restrict:"", peritem: 100, cost:50},
+        stealthrope: {name:"Stealth rope", type:"grapplerope", avail:8, restrict:"Forbidden", peritem: 100, cost:85},
 
 //biotech
         biomonitor: {name:"Biomonitor", type:"biotech", avail:3, restrict:"", cost:300},
         disposablesyringe: {name:"Disposable syringe", type:"biotech", avail:3, restrict:"", cost:10},
-        medkit: {name:"Medkit", type:"biotech", rating:1, avail:1, restrict:"", cost:250},
+        medkit: {name:"Medkit", type:"biotech", rating:1, ratingmax:6, avail:1, availx:1, restrict:"", costx:250, cost:250},
         medkitsupplies: {name:"Medkit supplies", type:"biotech", avail:0, restrict:"", cost:100},
 
 //docwagon contract
-        basiccontract: {name:"Basic", type:"docwagon", avail:0, restrict:"", cost:5000},
-        goldontract: {name:"Gold", type:"docwagon", avail:0, restrict:"", cost:25000},
-        platinumontract: {name:"Platinum", type:"docwagon", avail:0, restrict:"", cost:50000},
-        superplatinumontract: {name:"Super-platinum", type:"docwagon", avail:0, restrict:"", cost:100000},
+        basiccontract: {name:"Basic", type:"docwagon", avail:0, restrict:"", peritem: 1, cost:5000},
+        goldontract: {name:"Gold", type:"docwagon", avail:0, restrict:"", peritem: 1, cost:25000},
+        platinumontract: {name:"Platinum", type:"docwagon", avail:0, restrict:"", peritem: 1, cost:50000},
+        superplatinumontract: {name:"Super-platinum", type:"docwagon", avail:0, restrict:"", peritem: 1, cost:100000},
 
 //slap patches
-        antidotepatch: {name:"Antidote patch", type:"slappatches", rating:1, avail:1, restrict:"", cost:50},
+        antidotepatch: {name:"Antidote patch", type:"slappatches", rating:1, ratingmax:6, avail:1, availx:1, restrict:"", costx:50, cost:50},
         chempatch: {name:"Chem patch", type:"slappatches", avail:6, restrict:"", cost:200},
-        stimpatch: {name:"Stim patch", type:"slappatches", avail:2, restrict:"", cost:25},
-        tranqpatch: {name:"Tranq patch", type:"slappatches", avail:2, restrict:"", cost:20},
+        stimpatch: {name:"Stim patch", type:"slappatches", rating:1, ratingmax:6, avail:2, availx:2, restrict:"", costx:25, cost:25},
+        tranqpatch: {name:"Tranq patch", type:"slappatches", rating:1, ratingmax:10, avail:2, availx:2, restrict:"", costx:20, cost:20},
         traumapatch: {name:"Trauma patch", type:"slappatches", avail:6, restrict:"", cost:500},
     };
     
@@ -4705,14 +4711,17 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "grapplegungear":
                 $('#grapplegungear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
+            case "grapplerope":
+                $('#grapplerope').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                break;
             case "biotech":
-                $('#biotech').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                $('#biotech').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+device.rating+"</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "docwagon":
-                $('#docwagon').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                $('#docwagon').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "slappatches":
-                $('#slappatches').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["rating"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                $('#slappatches').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+device.rating+"</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
                 break;
         }
         
@@ -4831,7 +4840,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "grapplegungear":
-                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
+                $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=4></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
             case "biotech":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
