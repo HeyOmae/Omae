@@ -935,8 +935,12 @@ h2#skillgroupHeader {
                     <tr class="meleeweapon clubs">
                         
                     </tr>
-                    <tr><td><h3>Other</h3></td></tr>
-                    <tr class="meleeweapon other">
+                    <tr><td><h3>Unarmed</h3></td></tr>
+                    <tr class="meleeweapon unarmedcombat">
+                        
+                    </tr>
+                    <tr><td><h3>Exotic Melee Weapon</h3></td></tr>
+                    <tr class="meleeweapon exoticmeleeweapon">
                         
                     </tr>
                 </table>
@@ -1709,10 +1713,11 @@ h2#skillgroupHeader {
         staff: {name: "Staff", active: false, category:"clubs", skill:"clubs", accuracy: 6, accmod: 0, reach: 2, damage: 3, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:3, restrict:" ", cost:100},
         stunbaton: {name: "Stun Baton", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 1, damage: 9, stat: 0, dvmod: 0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost:750},
         telescopingstaff: {name: "Telescoping Staff", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 2, damage: 2, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:4, restrict:" ", cost:350},
-        //other
-        knucks: {name:"Knucks", active: false, category:"other", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:1, stat: str, dvmod:0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:"Restricted", cost: 100},
-        monofilamentwhip: {name:"Monofilament Whip", active: false, category:"other", skill:"exoticmeleeweapon", accuracy: 5, accmod: 2, reach:2, damage:12, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-8, avail:12, restrict:"Forbidden", cost: 10000},
-        shockgloves: {name:"Shock Gloves", active: false, category:"other", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:8, stat: 0, dvmod:0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost: 550},
+        //unarmed
+        knucks: {name:"Knucks", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:1, stat: str, dvmod:0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:"Restricted", cost: 100},
+        shockgloves: {name:"Shock Gloves", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:8, stat: 0, dvmod:0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost: 550},
+        //exotic melee weapon
+        monofilamentwhip: {name:"Monofilament Whip", active: false, category:"exoticmeleeweapon", skill:"monofilamentwhip", accuracy: 5, accmod: 2, reach:2, damage:12, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-8, avail:12, restrict:"Forbidden", cost: 10000},
     //bow
         bow:{name:"Bow", active:false, rating: 1, category:"bow", skill:"archery", accuracy:6, accmod:0, damage:str+2, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-1, avail:1, restrict: " ",cost:100},
     //crossbow
