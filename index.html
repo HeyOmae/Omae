@@ -634,6 +634,7 @@ h2#skillgroupHeader {
                     <th class="Mag hide"><h3>Spells</h3></th>
                     <th class="Res hide"><h3>Forms</h3></th>
                     <th><h3>Nuyen</h3></th>
+                    <th><h3>Essence</h3></th>
                     <th><h3>Karma</h3></th>
                 </tr>
                 <tr>
@@ -643,6 +644,7 @@ h2#skillgroupHeader {
                     <td id="spellpnt" class="points Mag hide"></td>
                     <td id="formpnt" class="points Res hide"></td>
                     <td id="nuyen" class="points">0&#65509</td>
+                    <td id="essencepnt" class="points">6</td>
                     <td id="karmapnt" class="points">25</td>
                 </tr>
             </table>
@@ -1717,8 +1719,8 @@ h2#skillgroupHeader {
         knucks: {name:"Knucks", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:1, stat: str, dvmod:0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:"Restricted", cost: 100},
         shockgloves: {name:"Shock Gloves", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:8, stat: 0, dvmod:0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost: 550},
         //exotic melee weapon
-        monofilamentwhip: {name:"Monofilament Whip", active: false, category:"exoticmeleeweapon", skill:"monofilamentwhip", accuracy: 5, accmod: 2, reach:2, damage:12, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-8, avail:12, restrict:"Forbidden", cost: 10000},
-        monofilamentchainsaw: {name:"Monofilament Chainsaw", active: false, category:"exoticmeleeweapon", skill:"chainsaw", accuracy: 3, accmod: 0, reach:1, damage:8, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-6, avail:8, restrict:"", cost: 500},
+        monofilamentwhip: {name:"Monofilament Whip", active: false, category:"exoticmeleeweapon", skill:"monofilamentwhip", skillName:"Monofilament Whip", accuracy: 5, accmod: 2, reach:2, damage:12, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-8, avail:12, restrict:"Forbidden", cost: 10000},
+        monofilamentchainsaw: {name:"Monofilament Chainsaw", active: false, category:"exoticmeleeweapon", skill:"chainsaw", skillName:"Chainsaw", accuracy: 3, accmod: 0, reach:1, damage:8, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-6, avail:8, restrict:"", cost: 500},
     //bow
         bow:{name:"Bow", active:false, rating: 1, category:"bow", skill:"archery", accuracy:6, accmod:0, damage:str+2, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-1, avail:1, restrict: " ",cost:100},
     //crossbow
@@ -3175,12 +3177,20 @@ h2#skillgroupHeader {
         function theLabeler(x,y) {
             $(x).appendTo(y);
         }
+
         $(".knowledgename").appendTo(".namingStuffIsHard");
+
+        for (var x in weapons) {
+            if (weapons[x]["category"] == "exoticmeleeweapon") {
+                activeSkills[weapons[x]["skill"]]={name:weapons[x]["skillName"], catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:false};
+            }
+        }
+
         upNAtEm (activeSkills);
         upNAtEm (knowledgeSkills);
         
         function upNAtEm (x) {//function to set up the active and knowledge skills, "Up and at 'em, Atom Ant!"
-            for(skill in x) {
+            for(var skill in x) {
                 skillsum = funSkillSum (x[skill]["defaultable"], x[skill]["rating"], x[skill]["mod"], x[skill]["stat"]);
                 
                 $("<tr class='"+[skill]+"'><td class='incAtt "+[skill]+"'>+</td><td class='rating'>"+x[skill]["rating"]+"</td><td class='decAtt "+[skill]+"'>-</td><td class='skillName'>"+x[skill]["name"]+"</td><td class='stat'>"+x[skill]["stat"]+"</td><td class= 'mod'>"+x[skill]["mod"]+"</td><td class='skillsum'>"+skillsum+"</td><tr>")
