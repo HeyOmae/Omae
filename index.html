@@ -1046,16 +1046,16 @@ h2#skillgroupHeader {
                     <tr class="firearms shotguns">
                         
                     </tr>
-                    <tr><td><h3>Special Weapons</h3></td></tr>
-                    <tr class="firearms specialweapons">
-                        
-                    </tr>
                     <tr><td><h3>Machine Guns</h3></td></tr>
                     <tr class="firearms machineguns">
                         
                     </tr>
                     <tr><td><h3>Cannons/Launchers</h3></td></tr>
                     <tr class="firearms cannonslaunchers">
+                        
+                    </tr>
+                    <tr><td><h3>Exotic Ranged Weapons</h3></td></tr>
+                    <tr class="firearms exoticrangedweapon">
                         
                     </tr>
                 </table>
@@ -1109,10 +1109,6 @@ h2#skillgroupHeader {
                     <tr id="shotgunammo" class="standard ammunition shotgunammo">
                         
                     </tr>
-                    <tr><td><h3>Special Ammo</h3></td></tr>
-                    <tr id="specialammo" class="ammunition specialammo">
-                        
-                    </tr>
                     <tr><td><h3>Machine Gun Ammo</h3></td></tr>
                     <tr id="lmgammo" class="standard ammunition lmgammo">
                         
@@ -1127,6 +1123,10 @@ h2#skillgroupHeader {
                     </tr>
                     <tr><td><h3>Rockets</h3></td></tr>
                     <tr id="rocketammo" class="ammunition rocketammo">
+                        
+                    </tr>
+                    <tr><td><h3>(Exotic) Special Ammo</h3></td></tr>
+                    <tr id="specialammo" class="ammunition specialammo">
                         
                     </tr>
                 </table>
@@ -1273,6 +1273,33 @@ h2#skillgroupHeader {
                   <h2>Slap Patches</h2>
                  <table id="slappatches">
                      <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+            </div>
+            <div id="magicequipment" class="Mag">
+                  <h2>Magic Equipment</h2>
+                  <h3>Enchanting Foci</h3>
+                 <table id="enchantingfoci">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h3>Metamagic Foci</h3>
+                 <table id="metamagicfoci">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h3>Power Foci</h3>
+                 <table id="powerfoci">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h3>Qi Foci</h3>
+                 <table id="qifoci">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h3>Spell Foci</h3>
+                 <table id="spellfoci">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Spell</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h3>Spirit Foci</h3>
+                 <table id="spiritfoci">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Spirit</td><td>Avail</td><td>Cost</td></tr>
                 </table>
             </div>
         </div>
@@ -1788,13 +1815,13 @@ h2#skillgroupHeader {
     enfieldas7: {name: "Enfield AS-7", active: false, category: "shotguns", skill: "longarms", accuracy: 4, accmod: 1, damage: 13, stat: 0, dvmod: 0, damtype: "Physical", element: " ", mode: {SA:"Semi-Automatic", BF:"Burst Fire"}, rc: 0, rcmod: 0, ammo: 10, altammo: {ammo:24, clip:"Drum"}, clip: "Clip", ap: -1, avail: 12, restrict: "Forbidden", cost: 1100, mods: {top: "empty", barrel: "empty", under: "empty", internalsmart: "empty", integral: "Laser Sight" }},
     pjssmodel55: {name: "PJSS Model 55", active: false, category: "shotguns", skill: "longarms", accuracy: 6, accmod: 0, damage: 11, stat: 0, dvmod: 0, damtype: "Physical", element: " ", mode: {SA:"Semi-Automatic"}, rc: 0, rcmod: 1, ammo: 2, clip: "Break Action", ap: -1, avail: 9, restrict: "Restricted", cost: 1000, mods: {top: "empty", barrel: "empty", under: "empty", internalsmart: "empty", integral: "n/a" }},
  
-    //specialweapons
-    aressiiisupersquirt: {name: "Ares S-III Super Squirt", active: false, category: "specialweapons", skill: "exoticrangedweapon", accuracy: 3, accmod: 0, damage: 0, stat: 0, dvmod: 0, damtype: "Chemical", element: " ", mode: {SA:"Semi-Automatic"}, rc: 0, rcmod: 0, ammo: 20, clip: "Clip", ap: 0, avail: 7, restrict: "Restricted", cost: 950, mods: {top: "empty", barrel: "n/a", under: "empty", internalsmart: "empty", integral: "n/a" }},
-    fichettipaininducer: {name: "Fichetti Pain Inducer", active: false, category: "specialweapons", skill: "exoticrangedweapon", accuracy: 3, accmod: 0, damage: 0, stat: 0, dvmod: 0, damtype: "Special", element: " ", mode: {SS: "Single Shot"}, rc: 0, rcmod: 0, ammo: 10, clip: "Special", ap: 0, avail: 11, restrict: "Restricted", cost: 5000, mods: {top: "empty", barrel: "n/a", under: "empty", internalsmart: "empty", integral: "n/a" }},
-    parashielddartpistol: {name: "Parashield Dart Pistol", active: false, category: "specialweapons", skill: "exoticrangedweapon", accuracy: 5, accmod: 0, damage: 0, stat: 0, dvmod: 0, damtype: "Chemical", element: " ", mode: {SA:"Semi-Automatic"}, rc: 0, rcmod: 0, ammo: 5, clip: "Clip", ap: 0, avail: 4, restrict: "Restricted", cost: 600, mods: {top: "empty", barrel: "n/a", under: "n/a", internalsmart: "empty", integral: "n/a" }},
-    parashielddartrifle: {name: "Parashield Dart Rifle", active: false, category: "specialweapons", skill: "exoticrangedweapon", accuracy: 6, accmod: 0, damage: 0, stat: 0, dvmod: 0, damtype: "Chemical", element: " ", mode: {SA:"Semi-Automatic"}, rc: 0, rcmod: 0, ammo: 6, clip: "Internal Mag", ap: 0, avail: 6, restrict: "Restricted", cost: 1200, mods: {top: "empty", barrel: "n/a", under: "empty", internalsmart: "empty", integral: "Imaging Scope" }},
-    grapplegun: {name: "Grapple Gun", active: false, category: "specialweapons", skill: "exoticrangedweapon", accuracy: 3, accmod: 0, damage: 7, stat: 0, dvmod: 0, damtype: "Stun", element: "", mode: {SS:"Single Shot"}, rc: 0, rcmod: 0, ammo: 1, clip: "Muzzle-Loader", ap: -2, avail: 8, restrict: "Restricted", cost: 500, mods: {top: "empty", barrel: "empty", under: "empty", internalsmart: "empty", integral: "empty" }},
-    microflarelauncher: {name: "Micro Flare Launcher", active: false, category: "specialweapons", skill: "exoticrangedweapon", accuracy: 3, accmod: 0, damage: 5, stat: 0, dvmod: 0, damtype: "Physical", element: "Fire", mode: {SS:"Single Shot"}, rc: 0, rcmod: 0, ammo: 1, clip: "Muzzle-Loader", ap: -5, avail: 0, restrict: "", cost: 175, mods: {top: "empty", barrel: "empty", under: "empty", internalsmart: "empty", integral: "empty" }},
+    //exoticrangedweapon
+    aressiiisupersquirt: {name: "Ares S-III Super Squirt", active: false, category: "exoticrangedweapon", skill: "supersquirt", skillName:"Super Squirt", accuracy: 3, accmod: 0, damage: 0, stat: 0, dvmod: 0, damtype: "Chemical", element: " ", mode: {SA:"Semi-Automatic"}, rc: 0, rcmod: 0, ammo: 20, clip: "Clip", ap: 0, avail: 7, restrict: "Restricted", cost: 950, mods: {top: "empty", barrel: "n/a", under: "empty", internalsmart: "empty", integral: "n/a" }},
+    fichettipaininducer: {name: "Fichetti Pain Inducer", active: false, category: "exoticrangedweapon", skill: "paininducer", skillName:"Pain Inducer", accuracy: 3, accmod: 0, damage: 0, stat: 0, dvmod: 0, damtype: "Special", element: " ", mode: {SS: "Single Shot"}, rc: 0, rcmod: 0, ammo: 10, clip: "Special", ap: 0, avail: 11, restrict: "Restricted", cost: 5000, mods: {top: "empty", barrel: "n/a", under: "empty", internalsmart: "empty", integral: "n/a" }},
+    parashielddartpistol: {name: "Parashield Dart Pistol", active: false, category: "exoticrangedweapon", skill: "dartpistol", skillName:"Dart Pistol", accuracy: 5, accmod: 0, damage: 0, stat: 0, dvmod: 0, damtype: "Chemical", element: " ", mode: {SA:"Semi-Automatic"}, rc: 0, rcmod: 0, ammo: 5, clip: "Clip", ap: 0, avail: 4, restrict: "Restricted", cost: 600, mods: {top: "empty", barrel: "n/a", under: "n/a", internalsmart: "empty", integral: "n/a" }},
+    parashielddartrifle: {name: "Parashield Dart Rifle", active: false, category: "exoticrangedweapon", skill: "dartrifle", skillName:"Dart Rifle", accuracy: 6, accmod: 0, damage: 0, stat: 0, dvmod: 0, damtype: "Chemical", element: " ", mode: {SA:"Semi-Automatic"}, rc: 0, rcmod: 0, ammo: 6, clip: "Internal Mag", ap: 0, avail: 6, restrict: "Restricted", cost: 1200, mods: {top: "empty", barrel: "n/a", under: "empty", internalsmart: "empty", integral: "Imaging Scope" }},
+    grapplegun: {name: "Grapple Gun", active: false, category: "exoticrangedweapon", skill: "grapplegun", skillName:"Grapple Gun", accuracy: 3, accmod: 0, damage: 7, stat: 0, dvmod: 0, damtype: "Stun", element: "", mode: {SS:"Single Shot"}, rc: 0, rcmod: 0, ammo: 1, clip: "Muzzle-Loader", ap: -2, avail: 8, restrict: "Restricted", cost: 500, mods: {top: "empty", barrel: "empty", under: "empty", internalsmart: "empty", integral: "empty" }},
+    microflarelauncher: {name: "Micro Flare Launcher", active: false, category: "exoticrangedweapon", skill: "microflarelauncher", skillName:"Micro Flare Launcher", accuracy: 3, accmod: 0, damage: 5, stat: 0, dvmod: 0, damtype: "Physical", element: "Fire", mode: {SS:"Single Shot"}, rc: 0, rcmod: 0, ammo: 1, clip: "Muzzle-Loader", ap: -5, avail: 0, restrict: "", cost: 175, mods: {top: "empty", barrel: "empty", under: "empty", internalsmart: "empty", integral: "empty" }},
  
     //machineguns
     ingramvaliant: {name: "Ingram Valiant", active: false, category: "machineguns", skill: "heavyweapons", accuracy: 5, accmod: 1, damage: 9, stat: 0, dvmod: 0, damtype: "Physical", element: " ", mode: {BF:"Burst Fire", FA:"Full Auto"}, rc: 2, rcmod: 1, ammo: 50, altammo: {ammo:100, clip:"Belt"}, clip: "Clip", ap: -2, avail: 12, restrict: "Forbidden", cost: 5800, mods: {top: "empty", barrel: "empty", under: "empty", internalsmart: "empty", integral: "Laser Sight, Gas Vent 2" }},
@@ -1933,14 +1960,14 @@ h2#skillgroupHeader {
         stealthtags: {name:"Stealth Tags", type:"rfid", device:3, avail:7, restrict:"Restricted", peritem: 10, cost:10},
     
         //communications
-        bugscanner: {name:"Bug Scanner", type:"communication", rating:1, availx:1, avail:1, restrict: "Restricted", costx:100, cost:100},//availx and costx are the multiplier for rating
-        datatap: {name:"Data Tap", type:"communication", avail: 6, restrict:"Restricted", cost:300},
-        headjammer: {name:"Headjammer", type:"communication", rating:1, availx:1, avail:1, restrict: "Restricted", costx:150, cost:150},
-        jammerarea: {name:"Jammer, area", type:"communication", rating:1, availx:3, avail:3, restrict: "Forbidden", costx:200, cost:200},
-        jammerdirectional: {name:"Jammer, directional", type:"communication", rating:1, availx:2, avail:2, restrict: "Forbidden", costx:200, cost:200},
-        microtransciever: {name:"Micro-transciever", type:"communication", avail:2, restrict:"", costx:100, cost:100},
-        tageraser: {name:"Tag eraser", type:"communication", avail:6, restrict: "Restricted", cost:450},
-        whitenoisegenerator: {name:"White noise generator", type:"communication", rating:1, availx:1, avail:1, restrict:"", costx:50, cost:50},
+        bugscanner: {name:"Bug Scanner", type:"communications", rating:1, ratingmax:6, availx:1, avail:1, restrict: "Restricted", costx:100, cost:100},//availx and costx are the multiplier for rating
+        datatap: {name:"Data Tap", type:"communications", rating:"n/a", avail: 6, restrict:"Restricted", cost:300},
+        headjammer: {name:"Headjammer", type:"communications", rating:1, ratingmax:6, availx:1, avail:1, restrict: "Restricted", costx:150, cost:150},
+        jammerarea: {name:"Jammer, area", type:"communications", rating:1, ratingmax:6, availx:3, avail:3, restrict: "Forbidden", costx:200, cost:200},
+        jammerdirectional: {name:"Jammer, directional", type:"communications", rating:1, ratingmax:6, availx:2, avail:2, restrict: "Forbidden", costx:200, cost:200},
+        microtransciever: {name:"Micro-transciever", type:"communications", rating:"n/a", avail:2, restrict:"", costx:100, cost:100},
+        tageraser: {name:"Tag eraser", type:"communications", rating:"n/a", avail:6, restrict: "Restricted", cost:450},
+        whitenoisegenerator: {name:"White noise generator", type:"communications", rating:1, ratingmax:6, availx:1, avail:1, restrict:"", costx:50, cost:50},
    
    //credsticks
          standard: {name:"Standard", type:"credsticks", maxvalue:"5,000", avail:0, restrict:"", cost:5},
@@ -2051,14 +2078,66 @@ h2#skillgroupHeader {
         stimpatch: {name:"Stim patch", type:"slappatches", rating:1, ratingmax:6, avail:2, availx:2, restrict:"", costx:25, cost:25},
         tranqpatch: {name:"Tranq patch", type:"slappatches", rating:1, ratingmax:10, avail:2, availx:2, restrict:"", costx:20, cost:20},
         traumapatch: {name:"Trauma patch", type:"slappatches", avail:6, restrict:"", cost:500},
+
+//magical items
+    //enchanting foci
+        alchemicalfocus: {name:"Alechemical Focus", type:"enchantingfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:5000, cost:5000, karmaCost:3},
+        disenchantingfocus: {name:"Disenchanting Focus", type:"enchantingfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:5000, cost:5000, karmaCost:3},
+    //metamagic foci
+        centeringfocus: {name:"Centering Focus", type:"metamagicfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:9000, cost:9000, karmaCost:3},
+        flexiblesignaturefocus: {name:"Flexible Signature Focus", type:"metamagicfoci", rating:1, ratingmax:6, restrict:"Restricted", avail:3, availx:3, costx:9000, cost:9000, karmaCost:3},
+        maskingfocus: {name:"Masking Focus", type:"metamagicfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:9000, cost:9000, karmaCost:3},
+        spellshapingfocus: {name:"Spell Shaping Focus", type:"metamagicfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:9000, cost:9000, karmaCost:3},
+    //power foci
+        powerfocifocus: {name:"Power Focus", type:"powerfoci", rating:1, ratingmax:6, avail:4, availx:4, restrict:"Restricted", costx:18000, cost:18000, karmaCost:6},
+    //qi foci
+        qifocus: {name:"Qi Focus", type:"qifoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:3000, cost:3000, karmaCost:2},
+    //spell foci
+        counterspellingfocus: {name:"Counterspelling Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, spellCategory:"combat", karmaCost:2},
+        ritualspellcastingfocus: {name:"Ritual Spellcasting Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, spellCategory:"combat", karmaCost:2},
+        spellcastingfocus: {name:"Spellcasting Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, spellCategory:"combat", karmaCost:2},
+        sustainingfocus: {name:"Sustaining Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, spellCategory:"combat", karmaCost:2},
+    //spirit foci
+        summoningfocus: {name:"Summoning Focus", type:"spiritfoci", spiritType:"fire", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
+        banishingfocus: {name:"Banishing Focus", type:"spiritfoci", spiritType:"fire", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
+        bindingfocus: {name:"Binding Focus", type:"spiritfoci", spiritType:"fire", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
+
     };
+    var spelltypes = [
+        "Combat",
+        "Detection",
+        "Health",
+        "Illusion",
+        "Manipulation"
+    ]
+
+    var spiritType = [
+        "Air",
+        "Beasts",
+        "Blood",
+        "Guardian",
+        "Guidance",
+        "Earth",
+        "Fire",
+        "Insect-Caretaker",
+        "Insect-Nymph",
+        "Insect-Scout",
+        "Insect-Soldier",
+        "Insect-Worker",
+        "Man",
+        "Plant",
+        "Shadow",
+        "Shedim",
+        "Task",
+        "Water"
+    ]
     
     var software = {
         datasoft: {},
         mapsoft: {},
         shopsoft: {},
         tutorsoft: {}
-    };
+    }
 
     var maglockMod = {
         keypad: {name:"Keypad", avail:0, restrict:"", cost:50},
@@ -3180,10 +3259,16 @@ h2#skillgroupHeader {
 
         $(".knowledgename").appendTo(".namingStuffIsHard");
 
-        for (var x in weapons) {
+        for (var x in weapons) {//addes exotic melee weapons to the skill list
             if (weapons[x]["category"] == "exoticmeleeweapon") {
-                activeSkills[weapons[x]["skill"]]={name:weapons[x]["skillName"], catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:false};
+                makeExoticSkill(agi,weapons[x],"Exotic Melee (","agility");
+            } else if (weapons[x]["category"] == "exoticrangedweapon") {
+                makeExoticSkill(agi,weapons[x],"Exotic Range (","agility");
             }
+        }
+
+        function makeExoticSkill (w,x,y,z) {//w=attibute variable,x=weapon[name of exotic weapon], y=type of exotic skill, z=attibute
+            activeSkills[x.skill]={name:y+x.skillName+")", catalog: z, stat:w, rating:0, mod:0, max:6, defaultable:false};
         }
 
         upNAtEm (activeSkills);
@@ -4694,8 +4779,8 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "rfid":
                 $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
-            case "communication":
-                $('#communications').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+            case "communications":
+                ratingGear(device,devicename);
                 break;
             case "credsticks":
                 $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
@@ -4706,39 +4791,67 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "tools":
                 $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+"<input type='text' class='toolname' placeholder='Skill name'> "+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
-            case "optics": $('#optics').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+device.rating+"</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+            case "optics": 
+                ratingGear(device,devicename);
                 break;
-            case "audio": $('#audio').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+device.rating+"</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+            case "audio": 
+                ratingGear(device,devicename);
                 break; 
             case "securitydevice":
-                $('#securitydevice').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                ratingGear(device,devicename);
                 break;
             case "restraints":
                 $('#restraints').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0<td class='sellDown'>-</td></td><td>"+device["name"]+"</td><td>"+device.armor+"</td><td>"+device.structure+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "bnegear":
-                $('#bnegear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+device.rating+"</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                ratingGear(device,devicename);
                 break;
             case "chemicals":
                 $('#chemicals').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "survivalgear":
-                $('#survivalgear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+device.rating+"</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                ratingGear(device,devicename);
                 break;
             case "grapplegungear":
                 $('#grapplegungear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
             case "grapplerope":
-                $('#grapplerope').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                bulkBuyGear(device,devicename);
                 break;
             case "biotech":
-                $('#biotech').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+device.rating+"</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                ratingGear(device,devicename);
                 break;
             case "docwagon":
-                $('#docwagon').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                bulkBuyGear(device,devicename);
                 break;
             case "slappatches":
-                $('#slappatches').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+device.rating+"</td><td class='ratingDown button'>-</td><td>"+device["name"]+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                ratingGear(device,devicename);
+                break;
+            case "enchantingfoci":
+                ratingGear(device,devicename);
+                break;
+            case "metamagicfoci":
+                ratingGear(device,devicename);
+                break;
+            case "powerfoci":
+                ratingGear(device,devicename);
+                break;
+            case "qifoci":
+                ratingGear(device,devicename);
+                break;
+            case "spellfoci":
+                ratingGear(device,devicename);
+                $("#"+device.type+" ."+devicename+" .name").after("<td class='spellCategory'><select></select></td>");
+                for (var spellCat in spelltypes) {
+                    $("#"+device.type+" ."+devicename+" .spellCategory select").append("<option value='"+spelltypes[spellCat]+"'>"+spelltypes[spellCat]+"</option>");
+                };
+                break;
+            case "spiritfoci":
+                ratingGear(device,devicename);
+                $("#"+device.type+" ."+devicename+" .name").after("<td class='spiritType'><select></select></td>");
+                for (var spirit in spiritType) {
+                    $("#"+device.type+" ."+devicename+" .spiritType select").append("<option value='"+spiritType[spirit]+"'>"+spiritType[spirit]+"</option>");
+                };
                 break;
         }
         
@@ -4752,8 +4865,15 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
         }
     }
+
+    function ratingGear(x,y){//x=device, y=devicename
+        $('#'+x.type).append("<tr class='"+y+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+x.rating+"</td><td class='ratingDown button'>-</td><td class='name'>"+x.name+"</td><td class='avail'>"+x.avail+" "+x.restrict+"</td><td class='price'>"+x.cost+"&yen;</td></tr>");
+    };
+    function bulkBuyGear (x,y) {//x=device, y=devicename
+        $('#'+x.type).append("<tr class='"+y+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+x.name+"</td><td>"+x.avail+" "+x.restrict+"</td><td>"+x.cost+"&yen;</td></tr>");
+    }
     
-    $("#e-accessories").on("click", ".buyUp, .sellDown", buyinbulk);
+    $("#gearResource").on("click", ".buyUp, .sellDown", buyinbulk);
     
     function buyinbulk() {//used to buy rfid tags, or possible other items that can be baught like rfid tags
         var rfid = $(this).parent().attr("class");
@@ -4776,7 +4896,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
     }
     
-    $("#devices, #e-accessories").on("click", ".buydevice", appleStore);
+    $("#gearResource").on("click", ".buydevice", appleStore);
     
     function appleStore () {//this function handles buying electroic devices, and now it seems to also be used to buy everything...
         var devicename=$(this).parent().attr("class");
@@ -4951,7 +5071,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
 
     }
     
-    $("#devices, #e-accessories").on("click", ".selldevice", microsoftStore);
+    $("#gearResource").on("click", ".selldevice", microsoftStore);
     
     function microsoftStore() {//this sells the device
         var devicename=$(this).parent().attr("class");
@@ -5080,7 +5200,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         nuyenUpdater();
     }
     
-    $("#e-accessories").on("click", ".ratingUp, .ratingDown", commRating);//this is for raising and slowing communcation devices ratings
+    $("#gearResource").on("click", ".ratingUp, .ratingDown", commRating);//this is for raising and slowing communcation devices ratings
     
     function commRating() {
         if ($(this).hasClass("deact")) {
@@ -5122,6 +5242,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         var slotNum = Number($(this).parent().attr('class').split(' ')[1]);
         var mod = $(this).val();
         var oldMod = inventory[device]["mods"][slotNum];
+            console.log(oldMod);
+        if (oldMod==="") {
+            oldMod="empty";
+        }
         switch ($(this).attr("class")) {
             case "audio":
                 var enhanceMods = audioenhancements;
@@ -5131,7 +5255,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
         } 
         
-        if (nuyen-enhanceMods[mod]["cost"]<0 || inventory[device]["avail"]+enhanceMods[mod]["avail"]>maxAvail) {//if the mod costs too much or changes the avail too high then change to empty and return
+        if (nuyen-enhanceMods[mod]["cost"]+enhanceMods[oldMod]["cost"]<0 || inventory[device]["avail"]+enhanceMods[mod]["avail"]-enhanceMods[oldMod]["avail"]>maxAvail) {//if the mod costs too much or changes the avail too high then change to empty and return
             $(this).val(oldMod);
             return;
         }
