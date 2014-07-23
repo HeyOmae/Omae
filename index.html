@@ -43,8 +43,8 @@
 <head>
     <title>Omae SR5 Character Generator</title>
     <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script src="jquery-2.0.3.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="jquery-2.1.1.min.js"></script>
 <style>
 body {background: #333; /* Old browsers */
     background: -webkit-linear-gradient(top, #222 0%,#2a0022 100%); /* Chrome10+,Safari5.1+ */
@@ -1327,22 +1327,25 @@ h2#skillgroupHeader {
     var reachmod=0;//reachmod for trolls
     var karma=25;
     
-    var bod=1;//current attrabute
-    var agi=1;
-    var rea=1;
-    var str=1;
-    var wil=1;
-    var log=1;
-    var int=1;
-    var cha=1;
+    attributes = {
+        bod:1,//current attrabute
+        agi:1,
+        rea:1,
+        str:1,
+        wil:1,
+        log:1,
+        int:1,
+        cha:1
+    }
+    
     var edg=1;
     var mag=magic=0;
     var res=resonance=0;
-    var iniphy=int+rea;//physical initiative
+    var iniphy=attributes.int+attributes.rea;//physical initiative
     var iniphyDice=1;//physical ini dice
-    var iniast=int*2;//astral initiative
+    var iniast=attributes.int*2;//astral initiative
     var iniastDice = 2;//astral dice
-    var inimat = dataP + int;//matrix initiative
+    var inimat = dataP + attributes.int;//matrix initiative
     var inimatcold = 3;//coldsim dice
     var inimathot = 4;//hotsim dice
     
@@ -1398,69 +1401,69 @@ h2#skillgroupHeader {
     var maxAvail = 12; //the max availibility at chargen
     
     var activeSkills = {//the list of all the skills in the entire game forever. Catalysis needs to never release any more skills ever after this
-        archery:{name:"Archery", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        automatics:{name:"Automatics", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        blades:{name:"Blades", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        clubs:{name:"Clubs", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        exoticrangedweapon:{name:"Exotic Ranged Weapon", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:false},
-        heavyweapons:{name:"Heavy Weapons", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        longarms:{name:"Long Arms", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        pistols:{name:"Pistols", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        throwingweapons:{name:"Throwing Weapons", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        unarmedcombat:{name:"Unarmed Combat", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        gunnery:{name:"Gunnery", catalog:"agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        gymnastics:{name:"Gymnastics", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        escapeartist:{name:"Escape Artist", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        exoticmeleeweapon:{name:"Exotic Melee Weapon", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:false},
-        locksmith:{name:"Locksmith", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        palming:{name:"Palming", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        sneaking:{name:"Sneaking", catalog: "agility", stat:agi, rating:0, mod:0, max:6, defaultable:true},
-        diving:{name:"Diving", catalog: "body", stat:bod, rating:0, mod:0, max:6, defaultable:true},
-        freefall:{name:"Free-Fall", catalog: "body", stat:bod, rating:0, mod:0, max:6, defaultable:true},
-        pilotaerospace:{name:"Pilot Aerospace", catalog: "reaction", stat:rea, rating:0, mod:0, max:6, defaultable:false},
-        pilotaircraft:{name:"Pilot Aircraft", catalog: "reaction", stat:rea, rating:0, mod:0, max:6, defaultable:false},
-        pilotwalker:{name:"Pilot Walker", catalog: "reaction", stat:rea, rating:0, mod:0, max:6, defaultable:false},
-        pilotexoticvehicle:{name:"Pilot Exotic Vehicle", catalog: "reaction", stat:rea, rating:0, mod:0, max:6, defaultable:false},
-        pilotgroundcraft:{name:"Pilot Ground Craft", catalog: "reaction", stat:rea, rating:0, mod:0, max:6, defaultable:true},
-        pilotwatercraft:{name:"Pilot Water Craft", catalog: "reaction", stat:rea, rating:0, mod:0, max:6, defaultable:true},
-        running:{name:"Running", catalog: "strength", stat:str, rating:0, mod:0, max:6, defaultable:true},
-        swimming:{name:"Swimming", catalog: "strength", stat:str, rating:0, mod:0, max:6, defaultable:true},
-        con:{name:"Con", catalog: "charisma", stat:cha, rating:0, mod:0, max:6, defaultable:true},
-        etiquette:{name:"Etiquette", catalog: "charisma", stat:cha, rating:0, mod:0, max:6, defaultable:true},
-        instruction:{name:"Instruction", catalog: "charisma", stat:cha, rating:0, mod:0, max:6, defaultable:true},
-        intimidation:{name:"Intimidation", catalog: "charisma", stat:cha, rating:0, mod:0, max:6, defaultable:true},
-        leadership:{name:"Leadership", catalog: "charisma", stat:cha, rating:0, mod:0, max:6, defaultable:true},
-        negotiation:{name:"Negotiation", catalog: "charisma", stat:cha, rating:0, mod:0, max:6, defaultable:true},
-        performance:{name:"Performance", catalog: "charisma", stat:cha, rating:0, mod:0, max:6, defaultable:true},
-        impersonation:{name:"Impersonation", catalog: "charisma", stat:cha, rating:0, mod:0, max:6, defaultable:true},
-        animalhandling:{name:"Animal Handling", catalog: "charisma", stat:cha, rating:0, mod:0, max:6, defaultable:true},
-        artisan:{name:"Artisan", catalog: "intuition", stat:int, rating:0, mod:0, max:6, defaultable:true},
-        assensing:{name:"Assensing", catalog: "intuition", stat:int, rating:0, mod:0, max:6, defaultable:false},
-        disguise:{name:"Disguise", catalog: "intuition", stat:int, rating:0, mod:0, max:6, defaultable:true},
-        navigation:{name:"Navigation", catalog: "intuition", stat:int, rating:0, mod:0, max:6, defaultable:true},
-        perception:{name:"Perception", catalog: "intuition", stat:int, rating:0, mod:0, max:6, defaultable:true},
-        tracking:{name:"Tracking", catalog: "intuition", stat:int, rating:0, mod:0, max:6, defaultable:true},
-        aeronauticsmechanics:{name:"Aeronautics Mechanics", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        arcane:{name:"Arcane", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        armorer:{name:"Armorer", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:true},
-        automotivemechanic:{name:"Automotive Mechanic", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        biotechnology:{name:"Biotechnology", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        chemistry:{name:"Chemistry", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        computer:{name:"Computer", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:true},
-        cybertechnology:{name:"Cybertechnology", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        cybercombat:{name:"Cybercombat", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:true},
-        demolitions:{name:"Demolitions", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:true},
-        electronicwarfare:{name:"Electronic Warfare", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        firstaid:{name:"First Aid", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:true},
-        industrialmechanics:{name:"Industrial Mechanics", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        hacking:{name:"Hacking", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:true},
-        hardware:{name:"Hardware", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        medicine:{name:"Medicine", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        nauticalmechanics:{name:"Nautical Mechanics", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        software:{name:"Software", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:false},
-        forgery:{name:"Forgery", catalog: "logic", stat:log, rating:0, mod:0, max:6, defaultable:true},
-        astralcombat:{name:"Astral Combat", catalog: "will", stat:wil, rating:0, mod:0, max:6, defaultable:false},
-        survival:{name:"Survival", catalog: "will", stat:wil, rating:0, mod:0, max:6, defaultable:true},
+        archery:{name:"Archery", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        automatics:{name:"Automatics", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        blades:{name:"Blades", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        clubs:{name:"Clubs", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        exoticrangedweapon:{name:"Exotic Ranged Weapon", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:false},
+        heavyweapons:{name:"Heavy Weapons", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        longarms:{name:"Long Arms", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        pistols:{name:"Pistols", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        throwingweapons:{name:"Throwing Weapons", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        unarmedcombat:{name:"Unarmed Combat", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        gunnery:{name:"Gunnery", catalog:"agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        gymnastics:{name:"Gymnastics", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        escapeartist:{name:"Escape Artist", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        exoticmeleeweapon:{name:"Exotic Melee Weapon", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:false},
+        locksmith:{name:"Locksmith", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        palming:{name:"Palming", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        sneaking:{name:"Sneaking", catalog: "agility", stat:attributes.agi, rating:0, mod:0, max:6, defaultable:true},
+        diving:{name:"Diving", catalog: "body", stat:attributes.bod, rating:0, mod:0, max:6, defaultable:true},
+        freefall:{name:"Free-Fall", catalog: "body", stat:attributes.bod, rating:0, mod:0, max:6, defaultable:true},
+        pilotaerospace:{name:"Pilot Aerospace", catalog: "reaction", stat:attributes.rea, rating:0, mod:0, max:6, defaultable:false},
+        pilotaircraft:{name:"Pilot Aircraft", catalog: "reaction", stat:attributes.rea, rating:0, mod:0, max:6, defaultable:false},
+        pilotwalker:{name:"Pilot Walker", catalog: "reaction", stat:attributes.rea, rating:0, mod:0, max:6, defaultable:false},
+        pilotexoticvehicle:{name:"Pilot Exotic Vehicle", catalog: "reaction", stat:attributes.rea, rating:0, mod:0, max:6, defaultable:false},
+        pilotgroundcraft:{name:"Pilot Ground Craft", catalog: "reaction", stat:attributes.rea, rating:0, mod:0, max:6, defaultable:true},
+        pilotwatercraft:{name:"Pilot Water Craft", catalog: "reaction", stat:attributes.rea, rating:0, mod:0, max:6, defaultable:true},
+        running:{name:"Running", catalog: "strength", stat:attributes.str, rating:0, mod:0, max:6, defaultable:true},
+        swimming:{name:"Swimming", catalog: "strength", stat:attributes.str, rating:0, mod:0, max:6, defaultable:true},
+        con:{name:"Con", catalog: "charisma", stat:attributes.cha, rating:0, mod:0, max:6, defaultable:true},
+        etiquette:{name:"Etiquette", catalog: "charisma", stat:attributes.cha, rating:0, mod:0, max:6, defaultable:true},
+        instruction:{name:"Instruction", catalog: "charisma", stat:attributes.cha, rating:0, mod:0, max:6, defaultable:true},
+        intimidation:{name:"Intimidation", catalog: "charisma", stat:attributes.cha, rating:0, mod:0, max:6, defaultable:true},
+        leadership:{name:"Leadership", catalog: "charisma", stat:attributes.cha, rating:0, mod:0, max:6, defaultable:true},
+        negotiation:{name:"Negotiation", catalog: "charisma", stat:attributes.cha, rating:0, mod:0, max:6, defaultable:true},
+        performance:{name:"Performance", catalog: "charisma", stat:attributes.cha, rating:0, mod:0, max:6, defaultable:true},
+        impersonation:{name:"Impersonation", catalog: "charisma", stat:attributes.cha, rating:0, mod:0, max:6, defaultable:true},
+        animalhandling:{name:"Animal Handling", catalog: "charisma", stat:attributes.cha, rating:0, mod:0, max:6, defaultable:true},
+        artisan:{name:"Artisan", catalog: "intuition", stat:attributes.int, rating:0, mod:0, max:6, defaultable:true},
+        assensing:{name:"Assensing", catalog: "intuition", stat:attributes.int, rating:0, mod:0, max:6, defaultable:false},
+        disguise:{name:"Disguise", catalog: "intuition", stat:attributes.int, rating:0, mod:0, max:6, defaultable:true},
+        navigation:{name:"Navigation", catalog: "intuition", stat:attributes.int, rating:0, mod:0, max:6, defaultable:true},
+        perception:{name:"Perception", catalog: "intuition", stat:attributes.int, rating:0, mod:0, max:6, defaultable:true},
+        tracking:{name:"Tracking", catalog: "intuition", stat:attributes.int, rating:0, mod:0, max:6, defaultable:true},
+        aeronauticsmechanics:{name:"Aeronautics Mechanics", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        arcane:{name:"Arcane", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        armorer:{name:"Armorer", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:true},
+        automotivemechanic:{name:"Automotive Mechanic", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        biotechnology:{name:"Biotechnology", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        chemistry:{name:"Chemistry", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        computer:{name:"Computer", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:true},
+        cybertechnology:{name:"Cybertechnology", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        cybercombat:{name:"Cybercombat", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:true},
+        demolitions:{name:"Demolitions", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:true},
+        electronicwarfare:{name:"Electronic Warfare", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        firstaid:{name:"First Aid", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:true},
+        industrialmechanics:{name:"Industrial Mechanics", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        hacking:{name:"Hacking", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:true},
+        hardware:{name:"Hardware", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        medicine:{name:"Medicine", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        nauticalmechanics:{name:"Nautical Mechanics", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        software:{name:"Software", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:false},
+        forgery:{name:"Forgery", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:true},
+        astralcombat:{name:"Astral Combat", catalog: "will", stat:attributes.wil, rating:0, mod:0, max:6, defaultable:false},
+        survival:{name:"Survival", catalog: "will", stat:attributes.wil, rating:0, mod:0, max:6, defaultable:true},
         alchemy:{name:"Alchemy", catalog: "magic", stat:mag, rating:0, mod:0, max:6, defaultable:true},
         artificing:{name:"Artificing", catalog: "magic", stat:mag, rating:0, mod:0, max:6, defaultable:false},
         banishing:{name:"Banishing", catalog: "magic", stat:mag, rating:0, mod:0, max:6, defaultable:false},
@@ -1727,35 +1730,35 @@ h2#skillgroupHeader {
     
     var weapons = {
         //blades
-        combataxe: {name: "Combat axe", active: false, category:"blades", skill:"blades", accuracy: 4, accmod: 0, reach: 2, damage: 5, stat: str, dvmod: 0, damtype: "Physical", element:" ", ap:-4, avail:12, restrict:"Restricted", cost:4000},
-        combatknife: {name: "Combat knife", active: false, category:"blades", skill:"blades", accuracy: 6, accmod: 0, reach: 0, damage: 2, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:-3, avail:4, restrict:" ", cost:300},
-        forearmsnapblades: {name: "Forearm snap-blades", active: false, category:"blades", skill:"blades", accuracy: 4, accmod: 0, reach: 0, damage: 2, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:7, restrict:"Restricted", cost:200},
-        katana: {name: "Katana", active: false, category:"blades", skill:"blades", accuracy: 7, accmod: 0, reach: 1, damage: 3, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:-3, avail:9, restrict:"Restricted", cost:1000},
-        knife: {name: "Knife", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 0, damage: 1, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:-1, avail:0, restrict:" ", cost:10},
-        polearm: {name: "Pole arm", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 3, damage: 3, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:6, restrict:"Restricted", cost:1000},
-        survivalknife: {name: "Survival knife", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 0, damage: 2, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:-1, avail:0, restrict:" ", cost:100},
-        sword: {name: "Sword", active: false, category:"blades", skill:"blades", accuracy: 6, accmod: 0, reach: 1, damage: 3, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:5, restrict:"Restricted", cost:500},
+        combataxe: {name: "Combat axe", active: false, category:"blades", skill:"blades", accuracy: 4, accmod: 0, reach: 2, damage: 5, stat: attributes.str, dvmod: 0, damtype: "Physical", element:" ", ap:-4, avail:12, restrict:"Restricted", cost:4000},
+        combatknife: {name: "Combat knife", active: false, category:"blades", skill:"blades", accuracy: 6, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-3, avail:4, restrict:" ", cost:300},
+        forearmsnapblades: {name: "Forearm snap-blades", active: false, category:"blades", skill:"blades", accuracy: 4, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:7, restrict:"Restricted", cost:200},
+        katana: {name: "Katana", active: false, category:"blades", skill:"blades", accuracy: 7, accmod: 0, reach: 1, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-3, avail:9, restrict:"Restricted", cost:1000},
+        knife: {name: "Knife", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 0, damage: 1, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-1, avail:0, restrict:" ", cost:10},
+        polearm: {name: "Pole arm", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 3, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:6, restrict:"Restricted", cost:1000},
+        survivalknife: {name: "Survival knife", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-1, avail:0, restrict:" ", cost:100},
+        sword: {name: "Sword", active: false, category:"blades", skill:"blades", accuracy: 6, accmod: 0, reach: 1, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:5, restrict:"Restricted", cost:500},
     //clubs
-        club: {name: "Club", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 1, damage: 3, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:0, restrict:" ", cost:30},
-        extendablebaton: {name: "Extendable Baton", active: false, category:"clubs", skill:"clubs", accuracy: 5, accmod: 0, reach: 1, damage: 2, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:4, restrict:" ", cost:100},
-        sap: {name: "Sap", active: false, category:"clubs", skill:"clubs", accuracy: 5, accmod: 0, reach: 0, damage: 2, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:" ", cost:30},
-        staff: {name: "Staff", active: false, category:"clubs", skill:"clubs", accuracy: 6, accmod: 0, reach: 2, damage: 3, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:3, restrict:" ", cost:100},
+        club: {name: "Club", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 1, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:0, restrict:" ", cost:30},
+        extendablebaton: {name: "Extendable Baton", active: false, category:"clubs", skill:"clubs", accuracy: 5, accmod: 0, reach: 1, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:4, restrict:" ", cost:100},
+        sap: {name: "Sap", active: false, category:"clubs", skill:"clubs", accuracy: 5, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:" ", cost:30},
+        staff: {name: "Staff", active: false, category:"clubs", skill:"clubs", accuracy: 6, accmod: 0, reach: 2, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:3, restrict:" ", cost:100},
         stunbaton: {name: "Stun Baton", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 1, damage: 9, stat: 0, dvmod: 0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost:750},
-        telescopingstaff: {name: "Telescoping Staff", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 2, damage: 2, stat: str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:4, restrict:" ", cost:350},
+        telescopingstaff: {name: "Telescoping Staff", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 2, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:4, restrict:" ", cost:350},
         //unarmed
-        knucks: {name:"Knucks", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:1, stat: str, dvmod:0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:"Restricted", cost: 100},
+        knucks: {name:"Knucks", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:1, stat: attributes.str, dvmod:0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:"Restricted", cost: 100},
         shockgloves: {name:"Shock Gloves", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:8, stat: 0, dvmod:0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost: 550},
         //exotic melee weapon
         monofilamentwhip: {name:"Monofilament Whip", active: false, category:"exoticmeleeweapon", skill:"monofilamentwhip", skillName:"Monofilament Whip", accuracy: 5, accmod: 2, reach:2, damage:12, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-8, avail:12, restrict:"Forbidden", cost: 10000},
         monofilamentchainsaw: {name:"Monofilament Chainsaw", active: false, category:"exoticmeleeweapon", skill:"chainsaw", skillName:"Chainsaw", accuracy: 3, accmod: 0, reach:1, damage:8, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-6, avail:8, restrict:"", cost: 500},
     //bow
-        bow:{name:"Bow", active:false, rating: 1, category:"bow", skill:"archery", accuracy:6, accmod:0, damage:str+2, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-1, avail:1, restrict: " ",cost:100},
+        bow:{name:"Bow", active:false, rating: 1, category:"bow", skill:"archery", accuracy:6, accmod:0, damage:attributes.str+2, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-1, avail:1, restrict: " ",cost:100},
     //crossbow
         lightcrossbow: {name:"Light", active: false, category:"crossbow", skill:"archery", accuracy:7, accmod:0, damage:5, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-1, avail:2, restrict: " ",cost:300},
         mediumcrossbow: {name:"Medium", active: false, category:"crossbow", skill:"archery", accuracy:6, accmod:0, damage:7, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-2, avail:4, restrict: "Restricted",cost:500},
         heavycrossbow: {name:"Heavy", active: false, category:"crossbow", skill:"archery", accuracy:5, accmod:0, damage:10, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-3, avail:8, restrict: "Restricted",cost:1000},
     //throwing weapons
-        shuriken: {name:"shuriken", active: false, category:"throwingweapons", skill:"throwingweapons", rating:0, accuracy: phyLimit, accmod:0, damage:1, stat: str, dvmod:0, damtype: "Physical", element: " ", ap:-1, avail:4, restrict:"Restricted", cost: 25},
+        shuriken: {name:"shuriken", active: false, category:"throwingweapons", skill:"throwingweapons", rating:0, accuracy: phyLimit, accmod:0, damage:1, stat: attributes.str, dvmod:0, damtype: "Physical", element: " ", ap:-1, avail:4, restrict:"Restricted", cost: 25},
         
         //firearms
      //tasers
@@ -2471,8 +2474,8 @@ h2#skillgroupHeader {
             if ( $(this).hasClass('elf') ) {
                 resetAtt ();
                 metatype="elf";
-                agi=2;
-                cha=3;
+                attributes.agi=2;
+                attributes.cha=3;
                 agimax=7;
                 agimin=2;
                 chamax=8;
@@ -2497,9 +2500,9 @@ h2#skillgroupHeader {
             if ( $(this).hasClass('dwarf') ) {
                 resetAtt ();
                 metatype="dwarf";
-                bod=3;
-                str=3;
-                wil=2;
+                attributes.bod=3;
+                attributes.str=3;
+                attributes.wil=2;
                 bodmax=8;
                 reamax=5;
                 strmax=8;
@@ -2525,8 +2528,8 @@ h2#skillgroupHeader {
             if ( $(this).hasClass('ork') ) {
                 resetAtt ();
                 metatype="ork";
-                bod=4;
-                str=3;
+                attributes.bod=4;
+                attributes.str=3;
                 bodmax=9;
                 strmax=8;
                 logmax=5;
@@ -2551,8 +2554,8 @@ h2#skillgroupHeader {
             if ( $(this).hasClass('troll') ) {
                 resetAtt ();
                 metatype="troll";
-                bod=5;
-                str=5;
+                attributes.bod=5;
+                attributes.str=5;
                 bodmax=10;
                 strmax=10;
                 agimax=5;
@@ -2579,14 +2582,14 @@ h2#skillgroupHeader {
     }
     
     function resetAtt () {//reset attrabute to default
-        bod=1;
-        agi=1;
-        rea=1;
-        str=1;
-        wil=1;
-        log=1;
-        int=1;
-        cha=1;
+        attributes.bod=1;
+        attributes.agi=1;
+        attributes.rea=1;
+        attributes.str=1;
+        attributes.wil=1;
+        attributes.log=1;
+        attributes.int=1;
+        attributes.cha=1;
         edg=1;
          bodmin=1;
          agimin=1;
@@ -2615,25 +2618,25 @@ h2#skillgroupHeader {
         $("#nuyen").empty().append($("<strong>"+nuyen+"&#65509</strong>"));
     }
     
-    function attDisplay () {//adds the attrabutes to the attrabute table
-        renderAttStat (augbod, "bod", bod, bodmax);
-        renderAttStat (augagi, "agi", agi, agimax);
-        renderAttStat (augrea, "rea", rea, reamax);
-        renderAttStat (augstr, "str", str, strmax);
-        renderAttStat (augwil, "wil", wil, wilmax);
-        renderAttStat (auglog, "log", log, logmax);
-        renderAttStat (augint, "int", int, intmax);
-        renderAttStat (augcha, "cha", cha, chamax);
+    function attDisplay () {//adds the attrabutes to the attribute table
+        renderAttStat (augbod, "bod", attributes.bod, bodmax);
+        renderAttStat (augagi, "agi", attributes.agi, agimax);
+        renderAttStat (augrea, "rea", attributes.rea, reamax);
+        renderAttStat (augstr, "str", attributes.str, strmax);
+        renderAttStat (augwil, "wil", attributes.wil, wilmax);
+        renderAttStat (auglog, "log", attributes.log, logmax);
+        renderAttStat (augint, "int", attributes.int, intmax);
+        renderAttStat (augcha, "cha", attributes.cha, chamax);
         renderSpecStat ("edg", edg, edgmax);
         renderSpecStat ("mag", magic, magmax);
         renderSpecStat ("res", resonance, resmax);
         pointUpdater (".pnt", attribute);
         pointUpdater (".spePnt",specAttribute);
-        phyLimit = renderLimit (phyLimitMod,"phyLimit", str+augstr, bod+augbod, rea+augrea);
-        socLimit = renderLimit (socLimitMod, "socLimit", cha, wil, ess);
-        menLimit = renderLimit (menLimitMod, "menLimit", log, int, wil);
-        iniphy = initiativeRenderMonkey (rea,"meatini", iniphyDice,augrea);
-        iniast = initiativeRenderMonkey (int,"magicini", iniastDice, augint);
+        phyLimit = renderLimit (phyLimitMod,"phyLimit", attributes.str+augstr, attributes.bod+augbod, attributes.rea+augrea);
+        socLimit = renderLimit (socLimitMod, "socLimit", attributes.cha, attributes.wil, ess);
+        menLimit = renderLimit (menLimitMod, "menLimit", attributes.log, attributes.int, attributes.wil);
+        iniphy = initiativeRenderMonkey (attributes.rea,"meatini", iniphyDice,augrea);
+        iniast = initiativeRenderMonkey (attributes.int,"magicini", iniastDice, augint);
         inimat = initiativeRenderMonkey (dataP,"coldmatini", inimatcold, 0);
         inimat = initiativeRenderMonkey (dataP,"hotmatini", inimathot, 0);
         renderSkills ();//this updates everything that uses a for loop
@@ -2661,9 +2664,9 @@ h2#skillgroupHeader {
     
     function initiativeRenderMonkey(x,y,z,w) {
         if (magres=="technomancer") {
-            dataP=log;
+            dataP=attributes.log;
         }
-        var ini = int+augint + x + w;
+        var ini = attributes.int+augint + x + w;
         $("."+y).empty().append($("<strong>"+ini+"+"+z+"D6</strong>"));
         return ini;
     }
@@ -2687,56 +2690,56 @@ h2#skillgroupHeader {
         var className = $(this).attr("class");
         switch(className){//This switch statement is SO LONG!
             case 'incAtt Bod':
-                bod = increasePhy(bod, bodmax);
+                attributes.bod = increasePhy(attributes.bod, bodmax);
                 break;
             case 'incAtt Agi':
-                agi = increasePhy(agi, agimax);
+                attributes.agi = increasePhy(attributes.agi, agimax);
                 break;
             case 'incAtt Rea':
-                rea = increasePhy(rea, reamax);
+                attributes.rea = increasePhy(attributes.rea, reamax);
                 break;
             case 'incAtt Str':
-                str = increasePhy(str, strmax);
+                attributes.str = increasePhy(attributes.str, strmax);
                 break;
             case 'incAtt Wil':
-                wil = increaseMen(wil, wilmax);
+                attributes.wil = increaseMen(attributes.wil, wilmax);
                 break;
             case 'incAtt Log':
-                log = increaseMen(log, logmax);
+                attributes.log = increaseMen(attributes.log, logmax);
                 knowingIsHalftheBattle();//update the number of knowledge skills
                 break;
             case 'incAtt Int':
-                int = increaseMen(int, intmax);
+                attributes.int = increaseMen(attributes.int, intmax);
                 knowingIsHalftheBattle();//update the number of knowledge skills
                 break;
             case 'incAtt Cha':
-                cha = increaseMen(cha, chamax);
+                attributes.cha = increaseMen(attributes.cha, chamax);
                 break;
             case 'decAtt Bod':
-                bod = decreasePhy(bod, bodmin, bodmax);
+                attributes.bod = decreasePhy(attributes.bod, bodmin, bodmax);
                 break;
             case 'decAtt Agi':
-                agi = decreasePhy(agi, agimin, agimax);
+                attributes.agi = decreasePhy(attributes.agi, agimin, agimax);
                 break;
             case 'decAtt Rea':
-                rea = decreasePhy(rea, reamin, reamax);
+                attributes.rea = decreasePhy(attributes.rea, reamin, reamax);
                 break;
             case 'decAtt Str':
-                str = decreasePhy(str, strmin, strmax);
+                attributes.str = decreasePhy(attributes.str, strmin, strmax);
                 break;
             case 'decAtt Wil':
-                wil = decreaseMen(wil, wilmin, wilmax);
+                attributes.wil = decreaseMen(attributes.wil, wilmin, wilmax);
                 break;
             case 'decAtt Log':
-                log = decreaseMen(log, logmin, logmax);
+                attributes.log = decreaseMen(attributes.log, logmin, logmax);
                 knowingIsHalftheBattle();//update the number of knowledge skills
                 break;
             case 'decAtt Int':
-                int = decreaseMen(int, intmin, intmax);
+                attributes.int = decreaseMen(attributes.int, intmin, intmax);
                 knowingIsHalftheBattle ();//update the number of knowledge skills
                 break;
             case 'decAtt Cha':
-                cha = decreaseMen(cha, chamin, chamax);
+                attributes.cha = decreaseMen(attributes.cha, chamin, chamax);
                 break;
             case 'incAtt Edg':
                 edg = increaseSpec(edg, edgmax);
@@ -2795,7 +2798,7 @@ h2#skillgroupHeader {
         }
         
         function knowingIsHalftheBattle () {//this sets how many knowledge points a character gets
-            knowledgepoints=(int+log)*2;//sets the number of knowledge skill points
+            knowledgepoints=(attributes.int+attributes.log)*2;//sets the number of knowledge skill points
         }
         //skillupdater is very poorly written, refactor later!
         function skillUpdater (x,y) {//this function gets called by both the active and knowledge skills
@@ -3261,9 +3264,9 @@ h2#skillgroupHeader {
 
         for (var x in weapons) {//addes exotic melee weapons to the skill list
             if (weapons[x]["category"] == "exoticmeleeweapon") {
-                makeExoticSkill(agi,weapons[x],"Exotic Melee (","agility");
+                makeExoticSkill(attributes.agi,weapons[x],"Exotic Melee (","agility");
             } else if (weapons[x]["category"] == "exoticrangedweapon") {
-                makeExoticSkill(agi,weapons[x],"Exotic Range (","agility");
+                makeExoticSkill(attributes.agi,weapons[x],"Exotic Range (","agility");
             }
         }
 
@@ -3402,28 +3405,28 @@ h2#skillgroupHeader {
         for(prop in activeSkills) {
             switch (activeSkills[prop]["catalog"]) {//this updates the skills attrabute with the current attrabute rating
                 case "agility":
-                    activeSkills[prop]["stat"]=agi+augagi;
+                    activeSkills[prop]["stat"]=attributes.agi+augagi;
                     break;
                 case "body":
-                    activeSkills[prop]["stat"]=bod+augbod;
+                    activeSkills[prop]["stat"]=attributes.bod+augbod;
                     break;
                 case "reaction":
-                    activeSkills[prop]["stat"]=rea+augrea;
+                    activeSkills[prop]["stat"]=attributes.rea+augrea;
                     break;
                 case "strength":
-                    activeSkills[prop]["stat"]=str+augstr;
+                    activeSkills[prop]["stat"]=attributes.str+augstr;
                     break;
                 case "charisma":
-                    activeSkills[prop]["stat"]=cha+augcha;
+                    activeSkills[prop]["stat"]=attributes.cha+augcha;
                     break;
                 case "intuition":
-                    activeSkills[prop]["stat"]=int+augint;
+                    activeSkills[prop]["stat"]=attributes.int+augint;
                     break;
                 case "logic":
-                    activeSkills[prop]["stat"]=log+auglog;
+                    activeSkills[prop]["stat"]=attributes.log+auglog;
                     break;
                 case "will":
-                    activeSkills[prop]["stat"]=wil+augwil;
+                    activeSkills[prop]["stat"]=attributes.wil+augwil;
                     break;
                 case "magic":
                     activeSkills[prop]["stat"]=magic;
@@ -3446,19 +3449,19 @@ h2#skillgroupHeader {
         for(prop in knowledgeSkills) {
             switch (knowledgeSkills[prop]["catalog"]) {//knowledge skill shit is here
                 case "academic":
-                    knowledgeSkills[prop]["stat"]=log;
+                    knowledgeSkills[prop]["stat"]=attributes.log;
                     break;
                 case "interests":
-                    knowledgeSkills[prop]["stat"]=int;
+                    knowledgeSkills[prop]["stat"]=attributes.int;
                     break;
                 case "professional":
-                    knowledgeSkills[prop]["stat"]=log;
+                    knowledgeSkills[prop]["stat"]=attributes.log;
                     break;
                 case "street":
-                    knowledgeSkills[prop]["stat"]=int;
+                    knowledgeSkills[prop]["stat"]=attributes.int;
                     break;
                 case "language":
-                    knowledgeSkills[prop]["stat"]=int;
+                    knowledgeSkills[prop]["stat"]=attributes.int;
                     break;
             }
             
@@ -3490,7 +3493,7 @@ h2#skillgroupHeader {
         
         for (item in weapons) {
             if (weapons[item]["stat"]>0) {
-                weapons[item]["stat"]=str+augstr;
+                weapons[item]["stat"]=attributes.str+augstr;
             }
             if (weapons[item]["skill"]=="unarmedcombat"||weapons[item]["skill"]=="throwingweapons") {
                 weapons[item]["accuracy"]=phyLimit+phyLimitMod;
@@ -3510,15 +3513,15 @@ h2#skillgroupHeader {
                 
             } else if (inventory[itemNum]["weaponfoci"]>0&&activeSkills[inventory[itemNum]["skill"]]["skillsum"]!="n/a") {//this if statements sets the dice pool for the item
                 var dp = activeSkills[inventory[itemNum]["skill"]]["skillsum"]+inventory[itemNum]["weaponfoci"];
-            }else if (inventory[itemNum]["rating"]>str) {//this is for bows
-                var dp = activeSkills[inventory[itemNum]["skill"]]["skillsum"]-((inventory[itemNum]["rating"]-str)*3);
+            }else if (inventory[itemNum]["rating"]>attributes.str) {//this is for bows
+                var dp = activeSkills[inventory[itemNum]["skill"]]["skillsum"]-((inventory[itemNum]["rating"]-attributes.str)*3);
             } else {//this is for everything else
                 var dp = activeSkills[inventory[itemNum]["skill"]]["skillsum"];
             }
             $("#"+itemNum+" .weaponDP").empty().append("<span>"+(dp)+"</span>");//this renders the dice pool
             $("#"+itemNum+" .custWeapPrice").empty().append("<span>"+inventory[itemNum]["cost"]+"&#65509</span>");//this renders the cost
             $("#"+itemNum+" .acc").empty().append(inventory[itemNum]["accuracy"]+"("+(inventory[itemNum]["accuracy"]+inventory[itemNum]["accmod"])+")");//this renders accuacy of a gun
-            $("#"+itemNum+" .rc").empty().append(inventory[itemNum]["rc"]+Math.ceil((str/3)+1)+"("+(inventory[itemNum]["rc"]+inventory[itemNum]["rcmod"]+Math.ceil((str/3)+1))+")");//this renders the recoil comp
+            $("#"+itemNum+" .rc").empty().append(inventory[itemNum]["rc"]+Math.ceil((attributes.str/3)+1)+"("+(inventory[itemNum]["rc"]+inventory[itemNum]["rcmod"]+Math.ceil((attributes.str/3)+1))+")");//this renders the recoil comp
             $("#"+itemNum+" .avail").empty().append(inventory[itemNum]["avail"]+" "+inventory[itemNum]["restrict"]);//this renders the avail of a gun
         }
         
@@ -3580,7 +3583,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     )
     
     function addKnowing () {
-        knowledgeSkills.push({name:$(".knowledgeName").val(), catalog: knowledgeType, stat:int, rating:0, mod:0, max:6, defaultable:false});
+        knowledgeSkills.push({name:$(".knowledgeName").val(), catalog: knowledgeType, stat:attributes.int, rating:0, mod:0, max:6, defaultable:false});
         
         skill = knowledgeSkills.length-1;
                 skillsum = funSkillSum (knowledgeSkills[skill]["defaultable"], knowledgeSkills[skill]["rating"], knowledgeSkills[skill]["mod"], knowledgeSkills[skill]["stat"]);
@@ -3932,7 +3935,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 moreclips(itemNum,item,"Speed Loader");
             }
             licenseDP(itemNum,item,itemhold," .options");//add license and dicepool
-            $(".inventory."+item+itemNum+" .options .labelDP").before("<td class='label'>Acc</td><td class='acc "+itemNum+"'>"+itemhold.accuracy+"("+(itemhold.accuracy+itemhold.accmod)+")"+"</td><td class='label'>RC</td><td class='rc "+itemNum+"'>"+itemhold.rc+Math.ceil((str/3)+1)+"("+(itemhold.rc+itemhold.rcmod+Math.ceil((str/3)+1))+")"+"</td>");
+            $(".inventory."+item+itemNum+" .options .labelDP").before("<td class='label'>Acc</td><td class='acc "+itemNum+"'>"+itemhold.accuracy+"("+(itemhold.accuracy+itemhold.accmod)+")"+"</td><td class='label'>RC</td><td class='rc "+itemNum+"'>"+itemhold.rc+Math.ceil((attributes.str/3)+1)+"("+(itemhold.rc+itemhold.rcmod+Math.ceil((attributes.str/3)+1))+")"+"</td>");
             $(".inventory."+item+itemNum+" .options").append("<td class='label'>Avail</td><td class='avail "+itemNum+"'>"+itemhold.avail+" "+itemhold.restrict+"</td>");
         }
         
