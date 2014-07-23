@@ -5021,9 +5021,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             
         }
 
-        function magicalGoods(x,y,z) {
+        function magicalGoods(x,y,z) {//x=devicename, y=device's name in inventory, z=device in inventory
             if (typeof z.magicType === "undefined") {
                 $("."+x).after("<tr class='"+y+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3>"+z.rating+"</td><td>"+z.name+"</td><td>"+z.avail+" "+z.restrict+"</td><td class='devicecost'>"+z.cost+"&yen;</td></tr>");
+            } else if (x=="qifocus") {
+                $("."+x).after("<tr class='"+y+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3>"+z.rating+"</td><td>"+z.name+"</td><td>"+adeptPowers[z.magicType]["name"]+"</td><td>"+z.avail+" "+z.restrict+"</td><td class='devicecost'>"+z.cost+"&yen;</td></tr>");
             } else {
                 $("."+x).after("<tr class='"+y+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3>"+z.rating+"</td><td>"+z.name+"</td><td>"+z.magicType+"</td><td>"+z.avail+" "+z.restrict+"</td><td class='devicecost'>"+z.cost+"&yen;</td></tr>");
             }
