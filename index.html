@@ -1275,7 +1275,7 @@ h2#skillgroupHeader {
                      <tr class="label"><td>Buy</td><td>raise</td><td>Rating</td><td>lower</td><td>Device</td><td>Avail</td><td>Cost</td></tr>
                 </table>
             </div>
-            <div id="magicequipment" class="Mag">
+            <div id="magicequipment" class="Mag hide">
                   <h2>Magic Equipment</h2>
                   <h3>Enchanting Foci</h3>
                  <table id="enchantingfoci">
@@ -4814,15 +4814,17 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "grapplegungear":
                 $('#grapplegungear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
+            case "grapplerope":
+            case "docwagon":
+                bulkBuyGear(device,devicename);
+                break;
             case "communications":
             case "optics": 
             case "audio": 
             case "securitydevice":
             case "bnegear":
             case "survivalgear":
-            case "grapplerope":
             case "biotech":
-            case "docwagon":
             case "slappatches":
             case "enchantingfoci":
             case "metamagicfoci":
