@@ -23,21 +23,21 @@
     
     <!--Special Thanks to:
     Reddit users:
-    BoDiddySauce for helping explain to me how nested objects work -- http://www.reddit.com/r/learnjavascript/comments/1o964m/how_do_i_make_an_array_in_an_array/ccq181x
-    porkchopsnapplesauce for helping me figure out nested objects too -- http://www.reddit.com/r/learnjavascript/comments/1o964m/how_do_i_make_an_array_in_an_array/ccpws92
-    Kaycat for helping with all the skill data entries -- http://www.reddit.com/r/Shadowrun/comments/1obvph/im_working_on_an_sr5_character_generator_and/ccrcjgk
-    Bagelson for helping with the Adept powers and spells, and firearms entries --
+    BoDiddySauce for helping explain to me how nested objects work - http://www.reddit.com/r/learnjavascript/comments/1o964m/how_do_i_make_an_array_in_an_array/ccq181x
+    porkchopsnapplesauce for helping me figure out nested objects too - http://www.reddit.com/r/learnjavascript/comments/1o964m/how_do_i_make_an_array_in_an_array/ccpws92
+    Kaycat for helping with all the skill data entries - http://www.reddit.com/r/Shadowrun/comments/1obvph/im_working_on_an_sr5_character_generator_and/ccrcjgk
+    Bagelson for helping with the Adept powers and spells, and firearms entries -
         http://www.reddit.com/r/Shadowrun/comments/1omsyr/omae_now_looking_for_help_with_adept_powers/cctoqy3
         http://www.reddit.com/r/Shadowrun/comments/1ovzhj/omae_spells_and_powers/ccwzcav
         http://www.reddit.com/r/Shadowrun/comments/1qckfa/omae_fired_up_about_firearms/cdboann
-    Celeodor for help with the Technomancer Complex Forms -- http://www.reddit.com/r/Shadowrun/comments/1plgtm/omae_complex_forms_and_you/
-    shintsurugifor helping with melee weapons -- http://www.reddit.com/r/Shadowrun/comments/1pq0vr/omae_mele%C3%A9/cd59t5b
+    Celeodor for help with the Technomancer Complex Forms - http://www.reddit.com/r/Shadowrun/comments/1plgtm/omae_complex_forms_and_you/
+    shintsurugifor helping with melee weapons - http://www.reddit.com/r/Shadowrun/comments/1pq0vr/omae_mele%C3%A9/cd59t5b
     JustKelly for helping with the commlinks, decks, and RCCs. justkelly@me.com or reddit.com/u/justkelly
-    Undin for helping with programs and electronic accessories. --
+    Undin for helping with programs and electronic accessories. -
         http://www.reddit.com/r/Shadowrun/comments/1tx1wb/omae_need_some_help_with_code_slinging/cecluyn
         http://www.reddit.com/r/Shadowrun/comments/1w77ne/omae_tagger_but_i_just_met_her/cezdnql
     
-    All the people on the Shadowgrid forums for their rule lawyering -- http://forums.shadowruntabletop.com/index.php?board=2.0
+    All the people on the Shadowgrid forums for their rule lawyering - http://forums.shadowruntabletop.com/index.php?board=2.0
         -->
 <html>
 <head>
@@ -1291,7 +1291,7 @@ h2#skillgroupHeader {
                 </table>
                   <h3>Qi Foci</h3>
                  <table id="qifoci">
-                     <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Avail</td><td>Cost</td></tr>
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Power</td><td>Avail</td><td>Cost</td></tr>
                 </table>
                   <h3>Spell Foci</h3>
                  <table id="spellfoci">
@@ -1335,10 +1335,10 @@ h2#skillgroupHeader {
         wil:1,
         log:1,
         int:1,
-        cha:1
+        cha:1,
+        edg:1
     }
     
-    var edg=1;
     var mag=magic=0;
     var res=resonance=0;
     var iniphy=attributes.int+attributes.rea;//physical initiative
@@ -2094,19 +2094,19 @@ h2#skillgroupHeader {
     //power foci
         powerfocifocus: {name:"Power Focus", type:"powerfoci", rating:1, ratingmax:6, avail:4, availx:4, restrict:"Restricted", costx:18000, cost:18000, karmaCost:6},
     //qi foci
-        qifocus: {name:"Qi Focus", type:"qifoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:3000, cost:3000, karmaCost:2},
+        qifocus: {name:"Qi Focus", type:"qifoci", magicType:"adrenalineboost", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:3000, cost:3000, karmaCost:2},
     //spell foci
-        counterspellingfocus: {name:"Counterspelling Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, spellCategory:"combat", karmaCost:2},
-        ritualspellcastingfocus: {name:"Ritual Spellcasting Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, spellCategory:"combat", karmaCost:2},
-        spellcastingfocus: {name:"Spellcasting Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, spellCategory:"combat", karmaCost:2},
-        sustainingfocus: {name:"Sustaining Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, spellCategory:"combat", karmaCost:2},
+        counterspellingfocus: {name:"Counterspelling Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, magicType:"Combat", karmaCost:2},
+        ritualspellcastingfocus: {name:"Ritual Spellcasting Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, magicType:"Anchored", karmaCost:2},
+        spellcastingfocus: {name:"Spellcasting Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, magicType:"Combat", karmaCost:2},
+        sustainingfocus: {name:"Sustaining Focus", type:"spellfoci", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, magicType:"Combat", karmaCost:2},
     //spirit foci
-        summoningfocus: {name:"Summoning Focus", type:"spiritfoci", spiritType:"fire", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
-        banishingfocus: {name:"Banishing Focus", type:"spiritfoci", spiritType:"fire", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
-        bindingfocus: {name:"Binding Focus", type:"spiritfoci", spiritType:"fire", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
+        summoningfocus: {name:"Summoning Focus", type:"spiritfoci", magicType:"Air", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
+        banishingfocus: {name:"Banishing Focus", type:"spiritfoci", magicType:"Air", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
+        bindingfocus: {name:"Binding Focus", type:"spiritfoci", magicType:"Air", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
 
     };
-    var spelltypes = [
+    var spellType = [
         "Combat",
         "Detection",
         "Health",
@@ -2133,6 +2133,19 @@ h2#skillgroupHeader {
         "Shedim",
         "Task",
         "Water"
+    ]
+
+    var ritualKeywords = [
+        "Anchored",
+        "Adept",
+        "Blood",
+        "Contractual",
+        "Mana",
+        "Material Link",
+        "Minion",
+        "Organic Link",
+        "Spell",
+        "Spotter"
     ]
     
     var software = {
@@ -2448,7 +2461,7 @@ h2#skillgroupHeader {
             if ( $(this).hasClass('human') ) {//this stuff sets the metatype attrabutes and stuff
                 resetAtt ();
                 metatype="human";
-                edg=2;
+                attributes.edg=2;
                 edgmax=7;
                 edgmin=2;
                 attDisplay();
@@ -2590,7 +2603,7 @@ h2#skillgroupHeader {
         attributes.log=1;
         attributes.int=1;
         attributes.cha=1;
-        edg=1;
+        attributes.edg=1;
          bodmin=1;
          agimin=1;
          reamin=1;
@@ -2627,7 +2640,7 @@ h2#skillgroupHeader {
         renderAttStat (auglog, "log", attributes.log, logmax);
         renderAttStat (augint, "int", attributes.int, intmax);
         renderAttStat (augcha, "cha", attributes.cha, chamax);
-        renderSpecStat ("edg", edg, edgmax);
+        renderSpecStat ("edg", attributes.edg, edgmax);
         renderSpecStat ("mag", magic, magmax);
         renderSpecStat ("res", resonance, resmax);
         pointUpdater (".pnt", attribute);
@@ -2742,7 +2755,7 @@ h2#skillgroupHeader {
                 attributes.cha = decreaseMen(attributes.cha, chamin, chamax);
                 break;
             case 'incAtt Edg':
-                edg = increaseSpec(edg, edgmax);
+                attributes.edg = increaseSpec(attributes.edg, edgmax);
                 break;
             case "incAtt Mag":
                 if (magres=="adept"&&magic<magmax) {
@@ -2755,7 +2768,7 @@ h2#skillgroupHeader {
                 resonance= increaseSpec(resonance,resmax);
                 break;
             case "decAtt Edg":
-                edg = decreaseSpec(edg,edgmin);
+                attributes.edg = decreaseSpec(attributes.edg,edgmin);
                 break;
             case "decAtt Mag":
                 if (magres=="adept"&&magic>magmin) {
@@ -3363,6 +3376,7 @@ h2#skillgroupHeader {
         
         for (item in weapons) {//this pulls the weapons stats from the weapons object to populate the page
             var itemhold = weapons[item];
+
             //this one populates the melee weapons
             $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='weapname "+item+"'>"+itemhold["name"]+"</td><td class='accuracy "+item+"'>"+itemhold["accuracy"]+"("+(itemhold["accuracy"]+itemhold["accmod"])+")"+"</td><td class='reach "+item+"'>"+itemhold["reach"]+"("+(itemhold["reach"]+reachmod)+")"+"</td><td class='damage "+item+"'>"+(itemhold["stat"]+itemhold["damage"])+"("+(itemhold["stat"]+itemhold["damage"]+itemhold["dvmod"])+")"+itemhold["damtype"]+" "+itemhold["element"]+"</td><td class='ap "+item+"'>"+itemhold["ap"]+"</td><td class='avail "+item+"'>"+itemhold["avail"]+" "+itemhold["restrict"]+"</td><td class='cost "+item+"'>"+itemhold["cost"]+"&#65509"+"</td></tr>").appendTo($(".meleeweapon."+itemhold["category"]));
             //this one populates the projectiles
@@ -4782,9 +4796,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "rfid":
                 $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
-            case "communications":
-                ratingGear(device,devicename);
-                break;
             case "credsticks":
                 $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
@@ -4794,66 +4805,56 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "tools":
                 $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+"<input type='text' class='toolname' placeholder='Skill name'> "+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
-            case "optics": 
-                ratingGear(device,devicename);
-                break;
-            case "audio": 
-                ratingGear(device,devicename);
-                break; 
-            case "securitydevice":
-                ratingGear(device,devicename);
-                break;
             case "restraints":
                 $('#restraints').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0<td class='sellDown'>-</td></td><td>"+device["name"]+"</td><td>"+device.armor+"</td><td>"+device.structure+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "bnegear":
-                ratingGear(device,devicename);
                 break;
             case "chemicals":
                 $('#chemicals').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
-            case "survivalgear":
-                ratingGear(device,devicename);
-                break;
             case "grapplegungear":
                 $('#grapplegungear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                 break;
+            case "communications":
+            case "optics": 
+            case "audio": 
+            case "securitydevice":
+            case "bnegear":
+            case "survivalgear":
             case "grapplerope":
-                bulkBuyGear(device,devicename);
-                break;
             case "biotech":
-                ratingGear(device,devicename);
-                break;
             case "docwagon":
-                bulkBuyGear(device,devicename);
-                break;
             case "slappatches":
-                ratingGear(device,devicename);
-                break;
             case "enchantingfoci":
-                ratingGear(device,devicename);
-                break;
             case "metamagicfoci":
-                ratingGear(device,devicename);
-                break;
             case "powerfoci":
                 ratingGear(device,devicename);
                 break;
             case "qifoci":
                 ratingGear(device,devicename);
+                $("#"+device.type+" ."+devicename+" .name").after("<td class='adeptPowers'><select></select></td>");
+                for (var power in adeptPowers) {
+                    $("#"+device.type+" ."+devicename+" .adeptPowers select").append("<option value='"+power+"'>"+adeptPowers[power]["name"]+"</option>");
+                };
                 break;
             case "spellfoci":
                 ratingGear(device,devicename);
-                $("#"+device.type+" ."+devicename+" .name").after("<td class='spellCategory'><select></select></td>");
-                for (var spellCat in spelltypes) {
-                    $("#"+device.type+" ."+devicename+" .spellCategory select").append("<option value='"+spelltypes[spellCat]+"'>"+spelltypes[spellCat]+"</option>");
-                };
+                $("#"+device.type+" ."+devicename+" .name").after("<td class='magicType'><select></select></td>");
+                if(devicename!="ritualspellcastingfocus") {
+                    for (var spellCat in spellType) {
+                        $("#"+device.type+" ."+devicename+" .magicType select").append("<option value='"+spellType[spellCat]+"'>"+spellType[spellCat]+"</option>");
+                    };
+                } else {
+                    for (var spellCat in ritualKeywords) {
+                        $("#"+device.type+" ."+devicename+" .magicType select").append("<option value='"+ritualKeywords[spellCat]+"'>"+ritualKeywords[spellCat]+"</option>");
+                    };
+                }
+                
                 break;
             case "spiritfoci":
                 ratingGear(device,devicename);
-                $("#"+device.type+" ."+devicename+" .name").after("<td class='spiritType'><select></select></td>");
+                $("#"+device.type+" ."+devicename+" .name").after("<td class='magicType'><select></select></td>");
                 for (var spirit in spiritType) {
-                    $("#"+device.type+" ."+devicename+" .spiritType select").append("<option value='"+spiritType[spirit]+"'>"+spiritType[spirit]+"</option>");
+                    $("#"+device.type+" ."+devicename+" .magicType select").append("<option value='"+spiritType[spirit]+"'>"+spiritType[spirit]+"</option>");
                 };
                 break;
         }
@@ -4991,6 +4992,14 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "slappatches":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 break;
+            case "enchantingfoci":
+            case "metamagicfoci":
+            case "powerfoci":
+            case "qifoci":
+            case "spellfoci":
+            case "spiritfoci":
+                magicalGoods(devicename,devicename+invNum,inventory[devicename+invNum]);
+                break;
             default:
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
         }
@@ -5010,6 +5019,14 @@ $(document).ready(function () {//this is makes it so that that skill points beco
 
             }
             
+        }
+
+        function magicalGoods(x,y,z) {
+            if (typeof z.magicType === "undefined") {
+                $("."+x).after("<tr class='"+y+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3>"+z.rating+"</td><td>"+z.name+"</td><td>"+z.avail+" "+z.restrict+"</td><td class='devicecost'>"+z.cost+"&yen;</td></tr>");
+            } else {
+                $("."+x).after("<tr class='"+y+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=3>"+z.rating+"</td><td>"+z.name+"</td><td>"+z.magicType+"</td><td>"+z.avail+" "+z.restrict+"</td><td class='devicecost'>"+z.cost+"&yen;</td></tr>");
+            }
         }
     }
 
@@ -5302,6 +5319,32 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 }
             }
         }
+    }
+
+    $("#magicequipment").on("change", ".magicType select", spellChange)
+
+    function spellChange() {
+        electronics[$(this).parents("tr").attr("class")]["magicType"]=$(this).val();
+    }
+
+    $("#qifoci").on("change", ".adeptPowers select", adeptPowerChange)
+
+    function adeptPowerChange() {
+        var power=$(this).val();
+        var qifoci=$(this).parents("tr").attr("class");
+
+        if(adeptPowers[power]["level"]=="n/a") {
+            $("."+qifoci+" .ratingUp,"+"."+qifoci+" .ratingDown").addClass("deact");
+        } else {
+            $("."+qifoci+" .ratingUp,"+"."+qifoci+" .ratingDown").removeClass("deact");
+        }
+        electronics.qifocus.magicType = power;
+        electronics.qifocus.rating = adeptPowers[power]["cost"]*4;//sets the rating of the focus to 4x the cost of the power points
+        electronics.qifocus.avail = electronics.qifocus.rating*3//sets avail to 3x the focus rating
+        electronics.qifocus.cost = electronics.qifocus.rating*3000//set cost to 3000x the rating
+        $("."+qifoci+" .commrating").empty().append(electronics.qifocus.rating);
+        $("."+qifoci+" .avail").empty().append(electronics.qifocus.avail+" "+electronics.qifocus.restrict);
+        $("."+qifoci+" .price").empty().append(electronics.qifocus.cost+"&yen;");
     }
 
 
