@@ -1301,6 +1301,15 @@ h2#skillgroupHeader {
                  <table id="spiritfoci">
                      <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Spirit</td><td>Avail</td><td>Cost</td></tr>
                 </table>
+                  <h2>Magic Supplies</h2>
+                  <h3>Magical Lodge Materials</h3>
+                 <table id="magicallodgematerials">
+                     <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+                  <h2>Reagents</h2>
+                 <table id="reagents">
+                    <tr class="label"><td>Buy</td><td>Dram</td><td>Sell</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                </table>
             </div>
         </div>
     </div>
@@ -1730,35 +1739,35 @@ h2#skillgroupHeader {
     
     var weapons = {
         //blades
-        combataxe: {name: "Combat axe", active: false, category:"blades", skill:"blades", accuracy: 4, accmod: 0, reach: 2, damage: 5, stat: attributes.str, dvmod: 0, damtype: "Physical", element:" ", ap:-4, avail:12, restrict:"Restricted", cost:4000},
-        combatknife: {name: "Combat knife", active: false, category:"blades", skill:"blades", accuracy: 6, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-3, avail:4, restrict:" ", cost:300},
-        forearmsnapblades: {name: "Forearm snap-blades", active: false, category:"blades", skill:"blades", accuracy: 4, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:7, restrict:"Restricted", cost:200},
-        katana: {name: "Katana", active: false, category:"blades", skill:"blades", accuracy: 7, accmod: 0, reach: 1, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-3, avail:9, restrict:"Restricted", cost:1000},
-        knife: {name: "Knife", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 0, damage: 1, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-1, avail:0, restrict:" ", cost:10},
-        polearm: {name: "Pole arm", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 3, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:6, restrict:"Restricted", cost:1000},
-        survivalknife: {name: "Survival knife", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-1, avail:0, restrict:" ", cost:100},
-        sword: {name: "Sword", active: false, category:"blades", skill:"blades", accuracy: 6, accmod: 0, reach: 1, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:5, restrict:"Restricted", cost:500},
+        combataxe: {name: "Combat axe", active: false, category:"blades", skill:"blades", accuracy: 4, accmod: 0, reach: 2, damage: 5, stat: attributes.str, dvmod: 0, damtype: "Physical", element:" ", ap:-4, avail:12, restrict:"Restricted", cost:4000, ref:{book:"SR5",page:"422,423"}},
+        combatknife: {name: "Combat knife", active: false, category:"blades", skill:"blades", accuracy: 6, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-3, avail:4, restrict:" ", cost:300, ref:{book:"SR5",page:"422,423"}},
+        forearmsnapblades: {name: "Forearm snap-blades", active: false, category:"blades", skill:"blades", accuracy: 4, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:7, restrict:"Restricted", cost:200, ref:{book:"SR5",page:"422,423"}},
+        katana: {name: "Katana", active: false, category:"blades", skill:"blades", accuracy: 7, accmod: 0, reach: 1, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-3, avail:9, restrict:"Restricted", cost:1000, ref:{book:"SR5",page:"422,423"}},
+        knife: {name: "Knife", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 0, damage: 1, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-1, avail:0, restrict:" ", cost:10, ref:{book:"SR5",page:"422,423"}},
+        polearm: {name: "Pole arm", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 3, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:6, restrict:"Restricted", cost:1000, ref:{book:"SR5",page:"422,423"}},
+        survivalknife: {name: "Survival knife", active: false, category:"blades", skill:"blades", accuracy: 5, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-1, avail:0, restrict:" ", cost:100, ref:{book:"SR5",page:"422,423"}},
+        sword: {name: "Sword", active: false, category:"blades", skill:"blades", accuracy: 6, accmod: 0, reach: 1, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:-2, avail:5, restrict:"Restricted", cost:500, ref:{book:"SR5",page:"422,423"}},
     //clubs
-        club: {name: "Club", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 1, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:0, restrict:" ", cost:30},
-        extendablebaton: {name: "Extendable Baton", active: false, category:"clubs", skill:"clubs", accuracy: 5, accmod: 0, reach: 1, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:4, restrict:" ", cost:100},
-        sap: {name: "Sap", active: false, category:"clubs", skill:"clubs", accuracy: 5, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:" ", cost:30},
-        staff: {name: "Staff", active: false, category:"clubs", skill:"clubs", accuracy: 6, accmod: 0, reach: 2, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:3, restrict:" ", cost:100},
-        stunbaton: {name: "Stun Baton", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 1, damage: 9, stat: 0, dvmod: 0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost:750},
-        telescopingstaff: {name: "Telescoping Staff", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 2, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:4, restrict:" ", cost:350},
+        club: {name: "Club", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 1, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:0, restrict:" ", cost:30, ref:{book:"SR5",page:"422,423"}},
+        extendablebaton: {name: "Extendable Baton", active: false, category:"clubs", skill:"clubs", accuracy: 5, accmod: 0, reach: 1, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:4, restrict:" ", cost:100, ref:{book:"SR5",page:"422,423"}},
+        sap: {name: "Sap", active: false, category:"clubs", skill:"clubs", accuracy: 5, accmod: 0, reach: 0, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:" ", cost:30, ref:{book:"SR5",page:"422,423"}},
+        staff: {name: "Staff", active: false, category:"clubs", skill:"clubs", accuracy: 6, accmod: 0, reach: 2, damage: 3, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:3, restrict:" ", cost:100, ref:{book:"SR5",page:"422,423"}},
+        stunbaton: {name: "Stun Baton", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 1, damage: 9, stat: 0, dvmod: 0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost:750, ref:{book:"SR5",page:"422,423"}},
+        telescopingstaff: {name: "Telescoping Staff", active: false, category:"clubs", skill:"clubs", accuracy: 4, accmod: 0, reach: 2, damage: 2, stat: attributes.str, dvmod: 0, damtype: "Physical", element: " ", ap:0, avail:4, restrict:" ", cost:350, ref:{book:"SR5",page:"422,423"}},
         //unarmed
-        knucks: {name:"Knucks", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:1, stat: attributes.str, dvmod:0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:"Restricted", cost: 100},
-        shockgloves: {name:"Shock Gloves", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:8, stat: 0, dvmod:0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost: 550},
+        knucks: {name:"Knucks", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:1, stat: attributes.str, dvmod:0, damtype: "Physical", element: " ", ap:0, avail:2, restrict:"Restricted", cost: 100, ref:{book:"SR5",page:"422,423"}},
+        shockgloves: {name:"Shock Gloves", active: false, category:"unarmedcombat", skill:"unarmedcombat", accuracy: phyLimit, accmod:0, reach:0, damage:8, stat: 0, dvmod:0, damtype: "Stun", element: "Electricity", ap:-5, avail:6, restrict:"Restricted", cost: 550, ref:{book:"SR5",page:"423"}},
         //exotic melee weapon
-        monofilamentwhip: {name:"Monofilament Whip", active: false, category:"exoticmeleeweapon", skill:"monofilamentwhip", skillName:"Monofilament Whip", accuracy: 5, accmod: 2, reach:2, damage:12, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-8, avail:12, restrict:"Forbidden", cost: 10000},
-        monofilamentchainsaw: {name:"Monofilament Chainsaw", active: false, category:"exoticmeleeweapon", skill:"chainsaw", skillName:"Chainsaw", accuracy: 3, accmod: 0, reach:1, damage:8, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-6, avail:8, restrict:"", cost: 500},
+        monofilamentwhip: {name:"Monofilament Whip", active: false, category:"exoticmeleeweapon", skill:"monofilamentwhip", skillName:"Monofilament Whip", accuracy: 5, accmod: 2, reach:2, damage:12, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-8, avail:12, restrict:"Forbidden", cost: 10000, ref:{book:"SR5",page:"423"}},
+        monofilamentchainsaw: {name:"Monofilament Chainsaw", active: false, category:"exoticmeleeweapon", skill:"chainsaw", skillName:"Chainsaw", accuracy: 3, accmod: 0, reach:1, damage:8, stat: 0, dvmod:0, damtype: "Physical", element: " ", ap:-6, avail:8, restrict:"", cost: 500, ref:{book:"SR5",page:"448"}},
     //bow
-        bow:{name:"Bow", active:false, rating: 1, category:"bow", skill:"archery", accuracy:6, accmod:0, damage:attributes.str+2, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-1, avail:1, restrict: " ",cost:100},
+        bow:{name:"Bow", active:false, rating: 1, category:"bow", skill:"archery", accuracy:6, accmod:0, damage:attributes.str+2, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-1, avail:1, restrict: " ",cost:100, ref:{book:"SR5",page:"423,424"}},
     //crossbow
-        lightcrossbow: {name:"Light", active: false, category:"crossbow", skill:"archery", accuracy:7, accmod:0, damage:5, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-1, avail:2, restrict: " ",cost:300},
-        mediumcrossbow: {name:"Medium", active: false, category:"crossbow", skill:"archery", accuracy:6, accmod:0, damage:7, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-2, avail:4, restrict: "Restricted",cost:500},
-        heavycrossbow: {name:"Heavy", active: false, category:"crossbow", skill:"archery", accuracy:5, accmod:0, damage:10, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-3, avail:8, restrict: "Restricted",cost:1000},
+        lightcrossbow: {name:"Light", active: false, category:"crossbow", skill:"archery", accuracy:7, accmod:0, damage:5, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-1, avail:2, restrict: " ",cost:300, ref:{book:"SR5",page:"424"}},
+        mediumcrossbow: {name:"Medium", active: false, category:"crossbow", skill:"archery", accuracy:6, accmod:0, damage:7, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-2, avail:4, restrict: "Restricted",cost:500, ref:{book:"SR5",page:"424"}},
+        heavycrossbow: {name:"Heavy", active: false, category:"crossbow", skill:"archery", accuracy:5, accmod:0, damage:10, stat:0, dvmod:0, damtype: "Physical", element:" ", ap:-3, avail:8, restrict: "Restricted",cost:1000, ref:{book:"SR5",page:"424"}},
     //throwing weapons
-        shuriken: {name:"shuriken", active: false, category:"throwingweapons", skill:"throwingweapons", rating:0, accuracy: phyLimit, accmod:0, damage:1, stat: attributes.str, dvmod:0, damtype: "Physical", element: " ", ap:-1, avail:4, restrict:"Restricted", cost: 25},
+        shuriken: {name:"shuriken", active: false, category:"throwingweapons", skill:"throwingweapons", rating:0, accuracy: phyLimit, accmod:0, damage:1, stat: attributes.str, dvmod:0, damtype: "Physical", element: " ", ap:-1, avail:4, restrict:"Restricted", cost: 25, ref:{book:"SR5",page:"424"}},
         
         //firearms
      //tasers
@@ -1912,7 +1921,7 @@ h2#skillgroupHeader {
         thermaldamping: {name: "Thermal Damping", rating:0, capacity: 0, avail:10, restrict:"Restricted", cost:500}
     };
     
-    var electronics = {
+    var electronics = {//This has more then just electronics in it now
         //commlinks
         metalink: {model: "Meta Link", type: "commlink", device: 1, avail: 2, cost: 100},
         sonyemperor: {model: "Sony Emperor", type:"commlink", device:2, avail: 4, cost: 700},
@@ -2104,6 +2113,9 @@ h2#skillgroupHeader {
         summoningfocus: {name:"Summoning Focus", type:"spiritfoci", magicType:"Air", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
         banishingfocus: {name:"Banishing Focus", type:"spiritfoci", magicType:"Air", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
         bindingfocus: {name:"Binding Focus", type:"spiritfoci", magicType:"Air", rating:1, ratingmax:6, avail:3, availx:3, restrict:"Restricted", costx:4000, cost:4000, karmaCost:2},
+    //Magical Supplies
+        magicallodgematerials: {name:"Magical Lodge Materials", type:"magicallodgematerials", rating:1, ratingmax:12, avail:2, availx:2, restrict:"", cost:500, costx:500},
+        reagents: {name:"Reagents", type:"reagents", avail:0, restrict:"", peritem:1, cost:20}
 
     };
     var spellType = [
@@ -2868,7 +2880,7 @@ h2#skillgroupHeader {
             }
         }
         
-        for (prop in adeptPowers) {
+        for (var prop in adeptPowers) {
             var power = adeptPowers[prop];
             if (prop=="improvedreflexes" && power["level"]>0) {//this will reduce the cost of improved reflexes if it is activated
                 power["cost"]=1;
@@ -2899,7 +2911,7 @@ h2#skillgroupHeader {
                     power["level"]--;
                     powerPoints=powerPoints+power["cost"];
                     
-                    for (key in power["attmod"]) {
+                    for (var key in power["attmod"]) {
                         switch (power["attmod"][key]) {
                             case "body":
                                 augbod=minusAugmentAtt(augbod);
@@ -2921,7 +2933,7 @@ h2#skillgroupHeader {
                         power["level"]++;
                         powerPoints=powerPoints-power["cost"];
                         
-                        for (skill in power["skillmod"]) {
+                        for (var skill in power["skillmod"]) {
                             addMod(power["skillmod"][skill], power["level"]);//updates mods that power effect
                         }
                         
@@ -2929,14 +2941,14 @@ h2#skillgroupHeader {
                     if (power["level"]>1 && className=="decAtt "+[prop]) {
                         power["level"]--;
                         powerPoints=powerPoints+power["cost"];
-                        for (skill in power["skillmod"]) {
+                        for (var skill in power["skillmod"]) {
                             minusMod(power["skillmod"][skill], power["level"]);//updates mods that power effect
                         }
                     }
             }
         }
         
-        for (item in inventory) {//this will be used to increase and decrease the weapon foci rating and license rating, and now clips too
+        for (var item in inventory) {//this will be used to increase and decrease the weapon foci rating and license rating, and now clips too
             var itemhold = inventory[item]
             if ($(this).parents("#"+item).attr("id")==item) {
                 if ($(this).attr("class")==item+" incAtt weaponfoci"&&fociRating<fociMaxRating&&focinumber<attributes.mag&&itemhold["weaponfoci"]<3&&nuyen-7000>0&&karma-3>0) {
@@ -3297,7 +3309,7 @@ h2#skillgroupHeader {
         upNAtEm (knowledgeSkills);
         
         function upNAtEm (x) {//function to set up the active and knowledge skills, "Up and at 'em, Atom Ant!"
-            for(var skill in x) {
+            for (var skill in x) {
                 skillsum = funSkillSum (x[skill]["defaultable"], x[skill]["rating"], x[skill]["mod"], x[skill]["stat"]);
                 
                 $("<tr class='"+[skill]+"'><td class='incAtt "+[skill]+"'>+</td><td class='rating'>"+x[skill]["rating"]+"</td><td class='decAtt "+[skill]+"'>-</td><td class='skillName'>"+x[skill]["name"]+"</td><td class='stat'>"+x[skill]["stat"]+"</td><td class= 'mod'>"+x[skill]["mod"]+"</td><td class='skillsum'>"+skillsum+"</td><tr>")
@@ -3305,15 +3317,15 @@ h2#skillgroupHeader {
             }
         }
     
-        for(skill in groupSkills) {//this for loop sets up the skill groups
+        for (var skill in groupSkills) {//this for loop sets up the skill groups
             $("#skillgrouplist").find("tbody").append($("<tr class='"+[skill]+"'><td class='incAtt "+[skill]+"'>+</td><td class='"+[skill]+" rating'>"+groupSkills[skill]["rating"]+"</td><td class='decAtt "+[skill]+"'>-</td><td class='skillgroupname'>"+groupSkills[skill]["name"]+"</td><td class='skillsin "+[skill]+"'></td></tr>"));
-            for(key in groupSkills[skill]["skillsingroup"]) {
+            for (var key in groupSkills[skill]["skillsingroup"]) {
                 $(".skillsin"+"."+[skill]).append(activeSkills[groupSkills[skill]["skillsingroup"][key]]["name"]+", ");
                 
             }
         }
         
-        for(power in adeptPowers) {//this for loop sets up the adept powers
+        for (var power in adeptPowers) {//this for loop sets up the adept powers
             $("#powerlist").append($("<tr class='"+[power]+"'><td id='"+[power]+"'class='add "+[power]+" button'><strong>-</strong></td><td class='incAtt "+[power]+" deact'>+</td><td class='level "+[power]+"'>"+adeptPowers[power]["level"]+"</td><td class='decAtt "+[power]+" deact'>-</td><td class='name "+[power]+"'>"+adeptPowers[power]["name"]+"</td><td class='cost "+[power]+"'>"+adeptPowers[power]["cost"]+"</td><td class='activation "+[power]+"'>"+adeptPowers[power]["activation"]+"</td><td class='drain "+[power]+"'>n/a</td></tr>"));
             
             if (adeptPowers[power]["drain"]==true) {
@@ -3321,7 +3333,7 @@ h2#skillgroupHeader {
             }
         }
         
-        for (spell in spellforms) {//this sets up the spells
+        for (var spell in spellforms) {//this sets up the spells
             var spellhold=spellforms[spell];
             if (spellforms[spell]["category"]=="combat") {
                 $(".spells.combat").append($("<tr id='"+spell+"' class='"+spellhold["category"]+"'><td class='spellact "+spell+" button'><strong>-</strong></td><td class='prepact "+spell+" button'><strong>-</strong></td><td class='spellname "+spell+"'>"+spellhold["name"]+"</td><td class='direct "+spell+"'></td><td class='element "+spell+"'>"+spellhold["element"]+"</td><td class='spelltype "+spell+"'>"+spellhold["type"]+"</td><td class='spellrange "+spell+"'>"+spellhold["range"]+"</td><td class='spelldam "+spell+"'>"+spellhold["damage"]+"</td><td class='spelldur "+spell+"'>"+spellhold["duration"]+"</td><td class='drain "+spell+"'>"+spellhold["drain"].toString()+"</td></tr>"));
@@ -3373,27 +3385,41 @@ h2#skillgroupHeader {
             $(".spellname."+x).empty().append($("<span>"+y+"<select class="+x+"><option value=''>[Attribute]</option><option value='Body'>Body</option><option value='Agility'>Agility</option><option value='Reaction'>Reaction</option><option value='Strength'>Strength</option><option value='Will'>Will</option><option value='Logic'>Logic</option><option value='Intuition'>Intuition</option><option value='Charisma'>Charisma</option></select>"+"</span>"))
         }
         
-        for (form in complexforms) {
+        for (var form in complexforms) {
             var formhold = complexforms[form];
             $(".complexforms.library").append($("<tr id='"+form+"'class='form'><td class='formact "+form+" button'><strong>-</strong></td><td class='formname "+form+"'>"+formhold["name"]+"</td><td class='formtarget "+form+"'>"+formhold["target"]+"</td><td class='formdur "+form+"'>"+formhold["duration"]+"</td><td class='fading "+form+"'>"+formhold["fading"]+"</td></tr>"));
         }
         
         $(".melee.label").appendTo($(".meleeweapon"));//this labels the melee weapons, but I have a function that does this, so i'm stupid for not using that function
         
-        for (item in weapons) {//this pulls the weapons stats from the weapons object to populate the page
+        for (var item in weapons) {//this pulls the weapons stats from the weapons object to populate the page
             var itemhold = weapons[item];
 
-            //this one populates the melee weapons
-            $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='weapname "+item+"'>"+itemhold["name"]+"</td><td class='accuracy "+item+"'>"+itemhold["accuracy"]+"("+(itemhold["accuracy"]+itemhold["accmod"])+")"+"</td><td class='reach "+item+"'>"+itemhold["reach"]+"("+(itemhold["reach"]+reachmod)+")"+"</td><td class='damage "+item+"'>"+(itemhold["stat"]+itemhold["damage"])+"("+(itemhold["stat"]+itemhold["damage"]+itemhold["dvmod"])+")"+itemhold["damtype"]+" "+itemhold["element"]+"</td><td class='ap "+item+"'>"+itemhold["ap"]+"</td><td class='avail "+item+"'>"+itemhold["avail"]+" "+itemhold["restrict"]+"</td><td class='cost "+item+"'>"+itemhold["cost"]+"&#65509"+"</td></tr>").appendTo($(".meleeweapon."+itemhold["category"]));
-            //this one populates the projectiles
-            $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='incAtt "+item+" weaprating'>+</td><td class='weaprating "+item+" weapratingnum'>"+itemhold["rating"]+"</td><td class='decAtt "+item+" weaprating'>-</td><td class='weap accuracy "+item+"'>"+itemhold["arruracy"]+"</td><td class='weap damage "+item+"'>"+itemhold["damage"]+"</td><td class='weap ap "+item+"'>"+itemhold["ap"]+"</td><td class='weap avail "+item+"'>"+itemhold["avail"]+"</td><td class='weap cost "+item+"'>"+itemhold["cost"]+"</td></tr>").appendTo(".projectiles."+itemhold["category"]);
-            //firearms
-            $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='weapname "+item+"'>"+itemhold["name"]+"</td><td class='accuracy "+item+"'>"+itemhold["accuracy"]+"("+(itemhold["accuracy"]+itemhold["accmod"])+")"+"</td><td class='damage "+item+"'>"+itemhold["damage"]+"("+(itemhold["damage"]+itemhold["dvmod"])+")"+itemhold["damtype"]+" "+itemhold["element"]+"</td><td class='ap "+item+"'>"+itemhold["ap"]+"</td><td class='modes "+item+"'></td><td class='RC "+item+"'>"+itemhold["rc"]+"</td><td class='ammo "+item+" clip'>"+itemhold["ammo"]+" "+itemhold["clip"]+"</td><td class='avail "+item+"'>"+itemhold["avail"]+" "+itemhold["restrict"]+"</td><td class='cost "+item+"'>"+itemhold["cost"]+"&#65509"+"</td></tr>").appendTo(".firearms."+itemhold["category"]);
+            switch (itemhold.category) {
+                case "blades":
+                case "clubs":
+                case "unarmedcombat":
+                case "exoticmeleeweapon":
+                    //this one populates the melee weapons
+                    $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='weapname "+item+"'>"+itemhold["name"]+"</td><td class='accuracy "+item+"'>"+itemhold["accuracy"]+"("+(itemhold["accuracy"]+itemhold["accmod"])+")"+"</td><td class='reach "+item+"'>"+itemhold["reach"]+"("+(itemhold["reach"]+reachmod)+")"+"</td><td class='damage "+item+"'>"+(itemhold["stat"]+itemhold["damage"])+"("+(itemhold["stat"]+itemhold["damage"]+itemhold["dvmod"])+")"+itemhold["damtype"]+" "+itemhold["element"]+"</td><td class='ap "+item+"'>"+itemhold["ap"]+"</td><td class='avail "+item+"'>"+itemhold["avail"]+" "+itemhold["restrict"]+"</td><td class='cost "+item+"'>"+itemhold["cost"]+"&#65509"+"</td><td>"+itemhold.ref.book+" p"+itemhold.ref.page+"</td></tr>").appendTo($(".meleeweapon."+itemhold["category"]));
+                    break;
+                case "bow":
+                case "crossbow":
+                case "throwingweapons":
+                    //this one populates the projectiles
+                    $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='incAtt "+item+" weaprating'>+</td><td class='weaprating "+item+" weapratingnum'>"+itemhold["rating"]+"</td><td class='decAtt "+item+" weaprating'>-</td><td class='weap accuracy "+item+"'>"+itemhold["arruracy"]+"</td><td class='weap damage "+item+"'>"+itemhold["damage"]+"</td><td class='weap ap "+item+"'>"+itemhold["ap"]+"</td><td class='weap avail "+item+"'>"+itemhold["avail"]+"</td><td class='weap cost "+item+"'>"+itemhold["cost"]+"</td><td>"+itemhold.ref.book+" p"+itemhold.ref.page+"</td></tr>").appendTo(".projectiles."+itemhold["category"]);
+                    break;
+                default:
+                    //firearms
+                    $("<tr id='"+item+"'><td class='weapact "+item+" button'><strong>+</strong></td><td class='weapname "+item+"'>"+itemhold["name"]+"</td><td class='accuracy "+item+"'>"+itemhold["accuracy"]+"("+(itemhold["accuracy"]+itemhold["accmod"])+")"+"</td><td class='damage "+item+"'>"+itemhold["damage"]+"("+(itemhold["damage"]+itemhold["dvmod"])+")"+itemhold["damtype"]+" "+itemhold["element"]+"</td><td class='ap "+item+"'>"+itemhold["ap"]+"</td><td class='modes "+item+"'></td><td class='RC "+item+"'>"+itemhold["rc"]+"</td><td class='ammo "+item+" clip'>"+itemhold["ammo"]+" "+itemhold["clip"]+"</td><td class='avail "+item+"'>"+itemhold["avail"]+" "+itemhold["restrict"]+"</td><td class='cost "+item+"'>"+itemhold["cost"]+"&#65509"+"</td></tr>").appendTo(".firearms."+itemhold["category"]);
+                    break;
+            }
             
-            for (firemode in itemhold["mode"]) {
+            
+            for (var firemode in itemhold["mode"]) {
                 $(".modes."+item).append(itemhold["mode"][firemode]+",<br/>");
             }
-            for (diffAmmo in itemhold["altammo"]) {
+            for (var diffAmmo in itemhold["altammo"]) {
                 switch (diffAmmo) {
                     case "ammo":
                         $("."+diffAmmo+"."+item).append("/"+itemhold["altammo"][diffAmmo]);
@@ -3422,7 +3448,7 @@ h2#skillgroupHeader {
     }
     
     function skillAttUpdater() {
-        for(prop in activeSkills) {
+        for (var prop in activeSkills) {
             switch (activeSkills[prop]["catalog"]) {//this updates the skills attrabute with the current attrabute rating
                 case "agility":
                     activeSkills[prop]["stat"]=attributes.agi+augagi;
@@ -3459,14 +3485,14 @@ h2#skillgroupHeader {
     }
     
     function renderSkills () {//this has become for rendering/updating anything that can be accessed with a for loop; it seems.
-        for(prop in activeSkills) {
+        for (var prop in activeSkills) {
             statUpdater ("stat", [prop],activeSkills);
             statUpdater ("rating", [prop],activeSkills);
             statUpdater ("mod", [prop],activeSkills);
             activeSkills[prop]["skillsum"] = funSkillSum (activeSkills[prop]["defaultable"], activeSkills[prop]["rating"], activeSkills[prop]["mod"], activeSkills[prop]["stat"]);
             dicePoolUpdater (activeSkills[prop]["skillsum"], [prop]);
         }
-        for(prop in knowledgeSkills) {
+        for (var prop in knowledgeSkills) {
             switch (knowledgeSkills[prop]["catalog"]) {//knowledge skill shit is here
                 case "academic":
                     knowledgeSkills[prop]["stat"]=attributes.log;
@@ -3492,7 +3518,7 @@ h2#skillgroupHeader {
             dicePoolUpdater (skillsum, [prop]);
         }
         
-        for (prop in adeptPowers) {//rendering and updating adept powers!
+        for (var prop in adeptPowers) {//rendering and updating adept powers!
             statUpdater ("level", prop, adeptPowers);
             if (adeptPowers[prop]["drain"]==true) {
                 $("."+prop+" .drain").empty().append("<span>"+adeptPowers[prop]["level"]+"</span>");
@@ -3507,11 +3533,11 @@ h2#skillgroupHeader {
             $("."+y+" .skillsum").empty().append("<span>"+x+"</span>");
         }
         
-        for (skill in groupSkills) {
+        for (var skill in groupSkills) {
             $("."+[skill]+" ."+"rating").empty().append("<span>"+groupSkills[skill]["rating"]+"</span>");
         }
         
-        for (item in weapons) {
+        for (var item in weapons) {
             if (weapons[item]["stat"]>0) {
                 weapons[item]["stat"]=attributes.str+augstr;
             }
@@ -3527,7 +3553,7 @@ h2#skillgroupHeader {
             augmentedDam("damtype","element","stat", "damage", [item], weapons);//render weapon damage this also changes the ap for weapons with altammo
         }
         
-        for (itemNum in inventory) {//this is suppose to update the nuyen price of the time
+        for (var itemNum in inventory) {//this is suppose to update the nuyen price of the time
             
             if (typeof inventory[itemNum]["skill"]==='undefined') {
                 
@@ -3624,10 +3650,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             deactivate($(this));//remove the class that says its on
             power["active"]=false;//turn off power
             //I still need to figure out how to reduce the skill mod when we turn off the skill
-            for (skill in power["skillmod"]) {
+            for (var skill in power["skillmod"]) {
                 resetMod(power["skillmod"][skill],power["level"]);
             }
-            for (key in power["attmod"]) {//this rests the augmented attibute...for the most part.
+            for (var key in power["attmod"]) {//this rests the augmented attibute...for the most part.
                 switch (power["attmod"][key]) {
                     case "body":
                         augbod-=power["level"];
@@ -3680,7 +3706,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                     power["level"]++;
                     $(".incAtt"+"."+$(this).attr("id")).removeClass("deact");
                     $(".decAtt"+"."+$(this).attr("id")).removeClass("deact");
-                    for (skill in power["skillmod"]) {
+                    for (var skill in power["skillmod"]) {
                         addMod(power["skillmod"][skill],power["level"]);
                     }
                     addAttMod (power["attmod"]);
@@ -3699,7 +3725,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     }
     
     function addLimitMod(x) {
-        for (key in x) {
+        for (var key in x) {
             switch (x[key]) {
                 case "physical":
                     phyLimitMod++;
@@ -3715,7 +3741,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
     }
     function minusLimitMod(x) {
-        for (key in x) {
+        for (var key in x) {
             switch (x[key]) {
                 case "physical":
                     phyLimitMod--;
@@ -3732,7 +3758,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     }
     
     function addAttMod(x) {//this will increase the augmented attribute
-        for (key in x) {
+        for (var key in x) {
             switch (x[key]) {
                 case "body":
                     augbod=addAugmentAtt(augbod);
@@ -3879,10 +3905,10 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         var itemNum = item+invNum;
         var gotMoney = nuyen-itemhold["cost"]>0;
         inventory[itemNum]={};//this creates a blank object for the weapon's stats to be added too
-        for (key in itemhold) {
+        for (var key in itemhold) {
             if (key=="mods") {//when we get to the key called mods in the weapon, do this
                 inventory[itemNum][key] = {};//make a blank key for the mod
-                for (subkey in itemhold[key]) {//this creates a section for the mods for each instance of a gun, so gun instances don't end up sharing all the same mods
+                for (var subkey in itemhold[key]) {//this creates a section for the mods for each instance of a gun, so gun instances don't end up sharing all the same mods
                     inventory[itemNum][key][subkey] = itemhold[key][subkey];
                 } 
             } else {
@@ -4032,6 +4058,9 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         fociRating-=inventory[item]["weaponfoci"];
         if (inventory[item]["weaponfoci"]>0) {
             karma+=inventory[item]["weaponfoci"]*3;
+            focinumber--;
+            fociRating-=inventory[item]["weaponfoci"];
+            pointUpdater("#karmapnt",karma);
         };
         $(this).parent().remove();
         delete inventory[item];
@@ -4174,7 +4203,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             } else {
                 itemhold["accmod"]-=2;
             };
-            for (key in weapons) {
+            for (var key in weapons) {
                 if (weapons[key]["name"]==itemhold["name"]) {
                     nuyen+=weapons[key]["cost"];
                     itemhold["cost"]-=weapons[key]["cost"];
@@ -4194,7 +4223,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             } else {
                 itemhold["accmod"]+=2;
             };
-            for (key in weapons) {
+            for (var key in weapons) {
                 if (weapons[key]["name"]==itemhold["name"]) {
                     nuyen-=weapons[key]["cost"];
                     itemhold["cost"]+=weapons[key]["cost"];
@@ -4309,7 +4338,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     $(".ammo.label").appendTo(".ammunition");//adds ammo label
     
-    for (ammo in ammunition) {
+    for (var ammo in ammunition) {
         var ammotype=ammunition[ammo];
         
         switch (ammotype["class"]) {
@@ -4341,7 +4370,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     $(".gas .grenadesname").empty().append("<select class='toxicgas'></select>");
     
-    for (dose in toxin) {
+    for (var dose in toxin) {
         if (toxin[dose]["avail"]<=maxAvail) {
             $(".toxicgas").append("<option value='"+dose+"'>"+toxin[dose]["name"]+"</option>")
         }
@@ -4376,7 +4405,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         if (typeof inventory[gunclass+ammo]==='undefined') {
             inventory[gunclass+ammo]={};
             
-            for (key in ammunition[ammo]) {
+            for (var key in ammunition[ammo]) {
                 inventory[gunclass+ammo][key]=ammunition[ammo][key];
             }
         }
@@ -4427,7 +4456,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     $("#explosive .label").appendTo($(".explosives"));
     
-    for (bomb in explosives) {
+    for (var bomb in explosives) {
         $("."+bomb+".explosives").append("<tr class='"+bomb+"'><td class='buybomb button'><strong>+</strong></td><td class='bombup button'>+</td><td class='explosiverating'>"+explosives[bomb]["rating"]+"</td><td class='bombdown button'>-</td><td>"+explosives[bomb]["avail"]+" "+explosives[bomb]["restrict"]+"</td><td class='bombbond'>"+explosives[bomb]["cost"]+"&#65509;</td></tr>");
     }
     
@@ -4463,7 +4492,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         if ($(this).hasClass("buybomb")&&nuyen-explosives[bomb]["cost"]>0) {
             inventory[bomb+invNum]={};
             bombname=bomb+invNum;
-            for (key in explosives[bomb]) {
+            for (var key in explosives[bomb]) {
                 inventory[bombname][key]=explosives[bomb][key];
             }
             inventory[bombname]["kg"]=1;
@@ -4522,7 +4551,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     function buyDetonator() {
         if (typeof inventory["detonator"]==='undefined') {
             inventory["detonator"]={}
-            for (key in detonator) {
+            for (var key in detonator) {
                 inventory["detonator"][key]=detonator[key];
             }
         }
@@ -4540,7 +4569,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
  
  
-    for (type in armor) {
+    for (var type in armor) {
         $("#clotharmor #bodyarmor tbody").append("<tr class='"+type+"'><td class='buyarmor button'><strong>+</strong></td><td>"+armor[type]["name"]+"</td><td>"+armor[type]["armor"]+"</td><td>"+armor[type]["avail"]+" "+armor[type]["restrict"]+"</td><td>"+armor[type]["cost"]+"&#65509;</td></tr>");
         if (armor[type]["avail"]>maxAvail) {
             $("."+type+" .buyarmor").addClass("deact").empty().append("-");
@@ -4555,14 +4584,14 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             return;
         }
         inventory[armtype+invNum]={}
-        for (key in armor[armtype]) {
+        for (var key in armor[armtype]) {
             inventory[armtype+invNum][key]=armor[armtype][key];
         }
         $("."+armtype).after("<tr class='"+armtype+invNum+"'><td class='sellarmor button'><em>-</em></td><td class='armormods' colspan=3></td><td class='armorcost'>"+inventory[armtype+invNum]["cost"]+"&#65509;</td></tr>");
         inventory[armtype+invNum]["mods"]={};//create emtpy mods section for intentory armor
-        for (mods in armormods) {//this will add the mods
+        for (var mods in armormods) {//this will add the mods
             inventory[armtype+invNum]["mods"][mods]={};//this will add the name of the mods
-            for (modstats in armormods[mods]) {
+            for (var modstats in armormods[mods]) {
                 inventory[armtype+invNum]["mods"][mods][modstats]=armormods[mods][modstats]//this adds all the stats for each mod
             }
             if (typeof armormods[mods]["rating"]!=="undefined") {//this is for mods that don't have ratings
@@ -4784,7 +4813,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     $(".cyberdecks").appendTo("#decks");//sets the cyberdeck labels
     $(".rccs").appendTo("#consoles");//sets the RCC labels
     
-    for (devicename in electronics) {//this populates the electronic devices
+    for (var devicename in electronics) {//this populates the electronic devices
         var device = electronics[devicename];
         switch (device.type) {
             case "commlink":
@@ -4822,6 +4851,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
             case "grapplerope":
             case "docwagon":
+            case "reagents":
                 bulkBuyGear(device,devicename);
                 break;
             case "communications":
@@ -4835,6 +4865,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "enchantingfoci":
             case "metamagicfoci":
             case "powerfoci":
+            case "magicallodgematerials":
                 ratingGear(device,devicename);
                 break;
             case "qifoci":
@@ -4925,14 +4956,14 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='programs' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 var localmod = $("."+devicename+invNum+" .programs");
                 localmod.append("<tr class='agent'><td class='label'>Agent</td><td class='agentup button'>+</td><td class='agentrating'>0</td><td class='agentdown button'>-</td></tr>");
-                for (program in programs) {
+                for (var program in programs) {
                     localmod.append("<tr class='"+program+"'><td class='label'>"+programs[program]["name"]+"</td><td class='buyprogram button' colspan=3><strong>+</strong></td></tr>");
                 }
                 break;
             case "rcc":
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='programs' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
                 var localmod = $("."+devicename+invNum+" .programs");
-                for (program in programs) {
+                for (var program in programs) {
                     if (programs[program]["rcc"]==true) {
                         localmod.append("<tr class='"+program+"'><td class='label'>"+programs[program]["name"]+"</td><td class='buyprogram button' colspan=3><strong>+</strong></td></tr>");
                     }
@@ -5025,7 +5056,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         
         function toInventory(x) {//this adds the device in to the inventory
             inventory[x+invNum]={};
-            for (deviceAtt in electronics[x]) {
+            for (var deviceAtt in electronics[x]) {
                 inventory[x+invNum][deviceAtt]=electronics[x][deviceAtt];
             }
 
