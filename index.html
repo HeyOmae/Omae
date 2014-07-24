@@ -1336,10 +1336,10 @@ h2#skillgroupHeader {
         log:1,
         int:1,
         cha:1,
-        edg:1
+        edg:1,
+        mag:0
     }
     
-    var mag=magic=0;
     var res=resonance=0;
     var iniphy=attributes.int+attributes.rea;//physical initiative
     var iniphyDice=1;//physical ini dice
@@ -1396,7 +1396,7 @@ h2#skillgroupHeader {
     
     var focinumber=0;//number of foci that are bonded
     var fociRating=0;//the total rating of the foci
-    var fociMaxRating=mag*2;//max rating or total foci
+    var fociMaxRating=attributes.mag*2;//max rating or total foci
 
     var maxAvail = 12; //the max availibility at chargen
     
@@ -1464,15 +1464,15 @@ h2#skillgroupHeader {
         forgery:{name:"Forgery", catalog: "logic", stat:attributes.log, rating:0, mod:0, max:6, defaultable:true},
         astralcombat:{name:"Astral Combat", catalog: "will", stat:attributes.wil, rating:0, mod:0, max:6, defaultable:false},
         survival:{name:"Survival", catalog: "will", stat:attributes.wil, rating:0, mod:0, max:6, defaultable:true},
-        alchemy:{name:"Alchemy", catalog: "magic", stat:mag, rating:0, mod:0, max:6, defaultable:true},
-        artificing:{name:"Artificing", catalog: "magic", stat:mag, rating:0, mod:0, max:6, defaultable:false},
-        banishing:{name:"Banishing", catalog: "magic", stat:mag, rating:0, mod:0, max:6, defaultable:false},
-        binding:{name:"Binding", catalog: "magic", stat:mag, rating:0, mod:0, max:6, defaultable:false},
-        counterspelling:{name:"Counterspelling", catalog: "magic", stat:mag, rating:0, mod:0, max:6, defaultable:false},
-        ritualspellcasting:{name:"Ritual Spellcasting", catalog: "magic", stat:mag, rating:0, mod:0, max:6, defaultable:false},
-        spellcasting:{name:"Spellcasting", catalog: "magic", stat:magic, rating:0, mod:0, max:6, defaultable:false},
-        summoning:{name:"Summoning", catalog: "magic", stat:magic, rating:0, mod:0, max:6, defaultable:false},
-        disenchanting:{name:"Disenchanting", catalog: "magic", stat:magic, rating:0, mod:0, max:6, defaultable:false},
+        alchemy:{name:"Alchemy", catalog: "magic", stat:attributes.mag, rating:0, mod:0, max:6, defaultable:true},
+        artificing:{name:"Artificing", catalog: "magic", stat:attributes.mag, rating:0, mod:0, max:6, defaultable:false},
+        banishing:{name:"Banishing", catalog: "magic", stat:attributes.mag, rating:0, mod:0, max:6, defaultable:false},
+        binding:{name:"Binding", catalog: "magic", stat:attributes.mag, rating:0, mod:0, max:6, defaultable:false},
+        counterspelling:{name:"Counterspelling", catalog: "magic", stat:attributes.mag, rating:0, mod:0, max:6, defaultable:false},
+        ritualspellcasting:{name:"Ritual Spellcasting", catalog: "magic", stat:attributes.mag, rating:0, mod:0, max:6, defaultable:false},
+        spellcasting:{name:"Spellcasting", catalog: "magic", stat:attributes.mag, rating:0, mod:0, max:6, defaultable:false},
+        summoning:{name:"Summoning", catalog: "magic", stat:attributes.mag, rating:0, mod:0, max:6, defaultable:false},
+        disenchanting:{name:"Disenchanting", catalog: "magic", stat:attributes.mag, rating:0, mod:0, max:6, defaultable:false},
         compiling:{name:"Compiling", catalog: "resonance", stat:resonance, rating:0, mod:0, max:6, defaultable:false},
         decompiling:{name:"Decompiling", catalog: "resonance", stat:resonance, rating:0, mod:0, max:6, defaultable:false},
         registering:{name:"Registering", catalog: "resonance", stat:resonance, rating:0, mod:0, max:6, defaultable:false}
@@ -2641,7 +2641,7 @@ h2#skillgroupHeader {
         renderAttStat (augint, "int", attributes.int, intmax);
         renderAttStat (augcha, "cha", attributes.cha, chamax);
         renderSpecStat ("edg", attributes.edg, edgmax);
-        renderSpecStat ("mag", magic, magmax);
+        renderSpecStat ("mag", attributes.mag, magmax);
         renderSpecStat ("res", resonance, resmax);
         pointUpdater (".pnt", attribute);
         pointUpdater (".spePnt",specAttribute);
@@ -2671,7 +2671,7 @@ h2#skillgroupHeader {
         $("."+ x + " .stats").empty().append($("<span>"+y+"/"+z+"("+augment+")"+"</span>"));
     }
     
-    function renderSpecStat (x, y, z) {//this is for special stats like edge, mag, and res
+    function renderSpecStat (x, y, z) {//this is for special stats like edge, attributes.mag, and res
         $("."+ x + " .stats").empty().append($("<span>"+y+"/"+z+"</span>"));
     }
     
@@ -2758,11 +2758,11 @@ h2#skillgroupHeader {
                 attributes.edg = increaseSpec(attributes.edg, edgmax);
                 break;
             case "incAtt Mag":
-                if (magres=="adept"&&magic<magmax) {
+                if (magres=="adept"&&attributes.mag<magmax) {
                     powerPoints++;
                 }
-                magic= increaseSpec(magic,magmax);
-                fociMaxRating=magic*2;
+                attributes.mag= increaseSpec(attributes.mag,magmax);
+                fociMaxRating=attributes.mag*2;
                 break;
             case "incAtt Res":
                 resonance= increaseSpec(resonance,resmax);
@@ -2771,11 +2771,11 @@ h2#skillgroupHeader {
                 attributes.edg = decreaseSpec(attributes.edg,edgmin);
                 break;
             case "decAtt Mag":
-                if (magres=="adept"&&magic>magmin) {
+                if (magres=="adept"&&attributes.mag>magmin) {
                     powerPoints--;
                 }
-                magic = decreaseSpec(magic,magmin);
-                fociMaxRating=magic*2;
+                attributes.mag = decreaseSpec(attributes.mag,magmin);
+                fociMaxRating=attributes.mag*2;
                 break;
             case "decAtt Res":
                 resonance = decreaseSpec(resonance,resmin);
@@ -2917,7 +2917,7 @@ h2#skillgroupHeader {
                     }
                 }
             } else {
-                    if (powerPoints-power["cost"]>=0 && power["level"]<magic && className=="incAtt "+[prop]) {
+                    if (powerPoints-power["cost"]>=0 && power["level"]<attributes.mag && className=="incAtt "+[prop]) {
                         power["level"]++;
                         powerPoints=powerPoints-power["cost"];
                         
@@ -2939,7 +2939,10 @@ h2#skillgroupHeader {
         for (item in inventory) {//this will be used to increase and decrease the weapon foci rating and license rating, and now clips too
             var itemhold = inventory[item]
             if ($(this).parents("#"+item).attr("id")==item) {
-                if ($(this).attr("class")==item+" incAtt weaponfoci"&&fociRating<fociMaxRating&&focinumber<magic&&itemhold["weaponfoci"]<3&&nuyen-7000>0&&karma>0) {
+                if ($(this).attr("class")==item+" incAtt weaponfoci"&&fociRating<fociMaxRating&&focinumber<attributes.mag&&itemhold["weaponfoci"]<3&&nuyen-7000>0&&karma-3>0) {
+                    if (itemhold["weaponfoci"]==0) {
+                        focinumber++;
+                    }
                     itemhold["weaponfoci"]++;
                     inventoryStatUpdater (item, ".focirating.weaponfoci", itemhold["weaponfoci"]);
                     fociRating++;
@@ -2948,6 +2951,9 @@ h2#skillgroupHeader {
                     karma-=3;
                 } else if ($(this).attr("class")==item+" decAtt weaponfoci"&&itemhold["weaponfoci"]>0) {
                     itemhold["weaponfoci"]--;
+                    if (itemhold["weaponfoci"]==0) {
+                        focinumber--;
+                    }
                     inventoryStatUpdater (item, ".focirating.weaponfoci", itemhold["weaponfoci"]);
                     fociRating--;
                     nuyen+=7000;
@@ -3095,7 +3101,7 @@ h2#skillgroupHeader {
         }
         return x;
     }
-    $(".mage, .techno, .mystic, .adept, .aspect").click(//this part will call the magic/resonance function
+    $(".mage, .techno, .mystic, .adept, .aspect").click(//this part will call the attributes.mag/resonance function
         selectmagres
     );
     
@@ -3106,7 +3112,7 @@ h2#skillgroupHeader {
         else {
             fnselect ($(this));//highlights what's been clicked on
             
-            if ( $(this).hasClass('mage') ) {//magic man doing magic stuff
+            if ( $(this).hasClass('mage') ) {//attributes.mag man doing attributes.mag stuff
                 magres="mage";
                 awaken ("Mag","Res");
                 magemysticsetting ();
@@ -3121,7 +3127,7 @@ h2#skillgroupHeader {
                 awaken ("Res","Mag");
                 switch ("magres"){
                     case priorityA:
-                        magic=0;
+                        attributes.mag=0;
                         powerPoints=0;
                         resonance=6;
                         resmin=6;
@@ -3130,7 +3136,7 @@ h2#skillgroupHeader {
                         spells=0;
                         break;
                     case priorityB:
-                        magic=0;
+                        attributes.mag=0;
                         powerPoints=0;
                         resonance=4;
                         resmin=4;
@@ -3139,7 +3145,7 @@ h2#skillgroupHeader {
                         spells=0;
                         break;
                     case priorityC:
-                        magic=0;
+                        attributes.mag=0;
                         powerPoints=0;
                         resonance=3;
                         resmin=3;
@@ -3153,7 +3159,7 @@ h2#skillgroupHeader {
                 awaken ("Mag","Res");
                 switch ("magres"){
                     case priorityB:
-                        magic=6;
+                        attributes.mag=6;
                         powerPoints=6.0;
                         magmin=6;
                         resonance=0;
@@ -3162,7 +3168,7 @@ h2#skillgroupHeader {
                         forms=0;
                         break;
                     case priorityC:
-                        magic=4;
+                        attributes.mag=4;
                         powerPoints=4.0;
                         magmin=4;
                         resonance=0;
@@ -3171,7 +3177,7 @@ h2#skillgroupHeader {
                         forms=0;
                         break;
                     case priorityD:
-                        magic=2;
+                        attributes.mag=2;
                         powerPoints=2.0;
                         magmin=2;
                         resonance=0;
@@ -3185,7 +3191,7 @@ h2#skillgroupHeader {
                 awaken ("Mag","Res");
                 switch ("magres"){
                     case priorityB:
-                        magic=5;
+                        attributes.mag=5;
                         powerPoints=0;
                         magmin=5;
                         resonance=0;
@@ -3194,7 +3200,7 @@ h2#skillgroupHeader {
                         forms=0;
                         break;
                     case priorityC:
-                        magic=3;
+                        attributes.mag=3;
                         powerPoints=0;
                         magmin=3;
                         resonance=0;
@@ -3203,7 +3209,7 @@ h2#skillgroupHeader {
                         forms=0;
                         break;
                     case priorityD:
-                        magic=2;
+                        attributes.mag=2;
                         powerPoints=0;
                         magmin=2;
                         resonance=0;
@@ -3213,7 +3219,7 @@ h2#skillgroupHeader {
                 }
             }
             
-            fociMaxRating=magic*2;
+            fociMaxRating=attributes.mag*2;
             
         }
         attDisplay ();
@@ -3221,7 +3227,7 @@ h2#skillgroupHeader {
     function magemysticsetting () {//since mystics and mages have the same stuff, they get a funcation
         switch ("magres"){
             case priorityA:
-                magic=6;
+                attributes.mag=6;
                 powerPoints=0;
                 magmin=6;
                 resonance=0;
@@ -3230,7 +3236,7 @@ h2#skillgroupHeader {
                 forms=0;
                 break;
             case priorityB:
-                magic=4;
+                attributes.mag=4;
                 powerPoints=0;
                 magmin=4;
                 resonance=0;
@@ -3239,7 +3245,7 @@ h2#skillgroupHeader {
                 forms=0;
                 break;
             case priorityC:
-                magic=3;
+                attributes.mag=3;
                 powerPoints=0;
                 magmin=3;
                 resonance=0;
@@ -3248,7 +3254,7 @@ h2#skillgroupHeader {
                 break;
         }
     }
-    function awaken(x,y) {//this is suppose to unhide magic or resonance and then hide the other stat
+    function awaken(x,y) {//this is suppose to unhide attributes.mag or resonance and then hide the other stat
         $("."+x).removeClass("hide");
         $("."+y).addClass("hide");
     }
@@ -3442,8 +3448,8 @@ h2#skillgroupHeader {
                 case "will":
                     activeSkills[prop]["stat"]=attributes.wil+augwil;
                     break;
-                case "magic":
-                    activeSkills[prop]["stat"]=magic;
+                case "attributes.mag":
+                    activeSkills[prop]["stat"]=attributes.mag;
                     break;
                 case "resonance":
                     activeSkills[prop]["stat"]=resonance;
@@ -3746,7 +3752,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     
     
     function addMod(x, y) {//x=skill name y=adept power level
-        if (y<=magic) {
+        if (y<=attributes.mag) {
             activeSkills[x]["mod"]++;
         }
     }
@@ -3886,7 +3892,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         inventory[itemNum]["active"]=true;
         if ($(this).closest(".meleeweapon").hasClass("meleeweapon")&&gotMoney) {//this you buy a melee weapon do this stuff
             $("#"+item).after("<tr id='"+itemNum+"'><td class='sell button'><em>-</em></td><td>"+itemhold["name"]+"</td><td class='inventory "+item+itemNum+"' colspan=5></td><td class='custWeapPrice'>"+itemhold["cost"]+"&#65509</td></tr>");
-            if (magic>0) {
+            if (attributes.mag>0) {
                 inventory[itemNum]["weaponfoci"]=0;
                 $("<td class='label'>Weapon Focus</td><td class='"+itemNum+" incAtt weaponfoci'>+</td><td class='focirating weaponfoci'>0</td><td class='"+itemNum+" decAtt weaponfoci'>-</td>").appendTo($(".inventory."+item+itemNum));
             }
@@ -5000,7 +5006,15 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "qifoci":
             case "spellfoci":
             case "spiritfoci":
+                if (fociRating+inventory[devicename+invNum]["rating"]>fociMaxRating||focinumber+1>attributes.mag||karma-(inventory[devicename+invNum]["rating"]*inventory[devicename+invNum]["karmaCost"])<=0) {
+                    alert("You're at the max foci rating you can bond");
+                     return;
+                }
                 magicalGoods(devicename,devicename+invNum,inventory[devicename+invNum]);
+                focinumber++;
+                fociRating+=inventory[devicename+invNum]["rating"];
+                karma-=inventory[devicename+invNum]["rating"]*inventory[devicename+invNum]["karmaCost"];
+                pointUpdater("#karmapnt",karma);
                 break;
             default:
                 $("."+devicename).after("<tr class='"+devicename+invNum+"'><td class='selldevice button'><em>-</em></td><td class='moody' colspan=5></td><td class='devicecost'>"+inventory[devicename+invNum]["cost"]+"&yen;</td></tr>");
@@ -5038,29 +5052,29 @@ $(document).ready(function () {//this is makes it so that that skill points beco
 
     function addingMagMod () {
         var mod = $(this).parent().attr("class");
-        var mag = $(this).parent().parent().parent().attr("class");
+        var magic = $(this).parent().parent().parent().attr("class");
         
         if ($(this).hasClass("active")) {
             $(this).removeClass("active");
-            inventory[mag]["avail"] -= inventory[mag]["maglockMods"][mod]["avail"];
-            inventory[mag]["cost"] -= inventory[mag]["maglockMods"][mod]["cost"];
-            nuyen+=inventory[mag]["maglockMods"][mod]["cost"];
-            delete inventory[mag]["maglockMods"][mod];
+            inventory[magic]["avail"] -= inventory[magic]["maglockMods"][mod]["avail"];
+            inventory[magic]["cost"] -= inventory[magic]["maglockMods"][mod]["cost"];
+            nuyen+=inventory[magic]["maglockMods"][mod]["cost"];
+            delete inventory[magic]["maglockMods"][mod];
         } else {
-            if (inventory[mag]["avail"] + maglockMod[mod]["avail"] > maxAvail) {
+            if (inventory[magic]["avail"] + maglockMod[mod]["avail"] > maxAvail) {
                 return;
             }
             $(this).addClass("active");
-            inventory[mag]["maglockMods"][mod] = {};
+            inventory[magic]["maglockMods"][mod] = {};
             for (var key in maglockMod[mod]) {
-                inventory[mag]["maglockMods"][mod][key] = maglockMod[mod][key];
+                inventory[magic]["maglockMods"][mod][key] = maglockMod[mod][key];
             }
-            inventory[mag]["avail"] += maglockMod[mod]["avail"];
-            inventory[mag]["cost"] += maglockMod[mod]["cost"];
+            inventory[magic]["avail"] += maglockMod[mod]["avail"];
+            inventory[magic]["cost"] += maglockMod[mod]["cost"];
             nuyen-=maglockMod[mod]["cost"];
         }
-        $("."+mag+" .avail").empty().append(inventory[mag]["avail"]);
-        $("."+mag+" .devicecost").empty().append(inventory[mag]["cost"]+"&yen;");
+        $("."+magic+" .avail").empty().append(inventory[magic]["avail"]);
+        $("."+magic+" .devicecost").empty().append(inventory[magic]["cost"]+"&yen;");
         nuyenUpdater();
     }
 
@@ -5101,6 +5115,12 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         var devicename=$(this).parent().attr("class");
         $("."+devicename).remove();
         nuyen+=inventory[devicename]["cost"];
+        if (typeof inventory[devicename]["karmaCost"] !== "undefined") {
+            focinumber--;
+            fociRating-=inventory[devicename]["rating"];
+            karma+=inventory[devicename]["rating"]*inventory[devicename]["karmaCost"];
+            pointUpdater("#karmapnt",karma);
+        }
         delete inventory[devicename];
         nuyenUpdater();
     }
