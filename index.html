@@ -1395,16 +1395,19 @@ h2#skillgroupHeader {
             phyLimitMod:0,
             socLimitMod:0,
             menLimitMod:0
+        },
+        initiative: {
+            iniphy:2,//physical initiative
+            iniphyDice:1,//physical ini dice
+            iniast:2,//astral initiative
+            iniastDice:2,//astral dice
+            inimat:1,//matrix initiative
+            inimatcold:3,//coldsim dice
+            inimathot:4//hotsim dice
         }
     }
     
-    var iniphy=attributes.current.int+attributes.current.rea;//physical initiative
-    var iniphyDice=1;//physical ini dice
-    var iniast=attributes.current.int*2;//astral initiative
-    var iniastDice = 2;//astral dice
-    var inimat = dataP + attributes.current.int;//matrix initiative
-    var inimatcold = 3;//coldsim dice
-    var inimathot = 4;//hotsim dice
+    //var iniphy=attributes.current.int+attributes.current.rea;
     
     var dataP=0;//data processing, for TM's
     
@@ -2670,10 +2673,10 @@ h2#skillgroupHeader {
         attributes.limits.phyLimit = renderLimit (attributes.limitMod.phyLimitMod,"phyLimit", attributes.current.str+attributes.augment.augstr, attributes.current.bod+attributes.augment.augbod, attributes.current.rea+attributes.augment.augrea);
         attributes.limits.socLimit = renderLimit (attributes.limitMod.socLimitMod, "socLimit", attributes.current.cha, attributes.current.wil, ess);
         attributes.limits.menLimit = renderLimit (attributes.limitMod.menLimitMod, "menLimit", attributes.current.log, attributes.current.int, attributes.current.wil);
-        iniphy = initiativeRenderMonkey (attributes.current.rea,"meatini", iniphyDice,attributes.augment.augrea);
-        iniast = initiativeRenderMonkey (attributes.current.int,"magicini", iniastDice, attributes.augment.augint);
-        inimat = initiativeRenderMonkey (dataP,"coldmatini", inimatcold, 0);
-        inimat = initiativeRenderMonkey (dataP,"hotmatini", inimathot, 0);
+        attributes.initiative.iniphy = initiativeRenderMonkey (attributes.current.rea,"meatini", attributes.initiative.iniphyDice,attributes.augment.augrea);
+        attributes.initiative.iniast = initiativeRenderMonkey (attributes.current.int,"magicini", attributes.initiative.iniastDice, attributes.augment.augint);
+        attributes.initiative.inimat = initiativeRenderMonkey (dataP,"coldmatini", attributes.initiative.inimatcold, 0);
+        attributes.initiative.inimat = initiativeRenderMonkey (dataP,"hotmatini", attributes.initiative.inimathot, 0);
         renderSkills ();//this updates everything that uses a for loop
         $("#skillpnt").empty().append($("<strong>"+skills+"/"+skillgroups+"</strong>"));
         pointUpdater("#knowpnt",knowledgepoints);
@@ -2898,7 +2901,7 @@ h2#skillgroupHeader {
                     if (className=="incAtt "+prop) {
                         power["level"]++;
                         powerPoints=powerPoints-power["cost"];
-                        iniphyDice++;
+                        attributes.initiative.iniphyDice++;
                         attributes.augment.augrea++;
                     }
                 }
@@ -2906,7 +2909,7 @@ h2#skillgroupHeader {
                     if (className=="decAtt "+[prop]) {
                         power["level"]--;
                         powerPoints=powerPoints+power["cost"];
-                        iniphyDice--;
+                        attributes.initiative.iniphyDice--;
                         attributes.augment.augrea--;
                     }
                 }
@@ -3681,7 +3684,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             }
             if ($(this).attr("id")=="improvedreflexes") {//god damn improvereflexes has to be a special snowflake and follow different rules
                 power["cost"]=1.5;
-                iniphyDice=1;
+                attributes.initiative.iniphyDice=1;
                 switch (power["level"]) {
                     case 1:
                         powerPoints+=1.5;
@@ -3723,7 +3726,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                     
                     if ($(this).attr("id")=="improvedreflexes") {
                         attributes.augment.augrea++;
-                        iniphyDice++;
+                        attributes.initiative.iniphyDice++;
                     }
                 }
                 addLimitMod (power["limitmod"]);//this will increase limits
