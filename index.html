@@ -45,173 +45,173 @@
     <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="jquery-2.1.1.min.js"></script>
-<style>
-body {background: #333; /* Old browsers */
-    background: -webkit-linear-gradient(top, #222 0%,#2a0022 100%); /* Chrome10+,Safari5.1+ */
-    background: linear-gradient(to bottom, #222 0%,#2a0022 100%); /* W3C */
-    font-family: Share Tech Mono, "Verdana", sans-serif;
-    color: green;
-    text-align: center;
-}
+    <style>
+        body {background: #333; /* Old browsers */
+            background: -webkit-linear-gradient(top, #222 0%,#2a0022 100%); /* Chrome10+,Safari5.1+ */
+            background: linear-gradient(to bottom, #222 0%,#2a0022 100%); /* W3C */
+            font-family: Share Tech Mono, "Verdana", sans-serif;
+            color: green;
+            text-align: center;
+        }
 
-div, table, tr, td {
-    border: solid 1px green;
-    border-radius: 15px 0;
-}
+        div, table, tr, td {
+            border: solid 1px green;
+            border-radius: 15px 0;
+        }
 
-input {
-    background: none;
-    color: white;
-    font-size: 17px;
-    font-family: Share Tech Mono, "Verdana", sans-serif;
-    border: solid green;
-    padding: 5px;
-    text-align: center;
-}
+        input {
+            background: none;
+            color: white;
+            font-size: 17px;
+            font-family: Share Tech Mono, "Verdana", sans-serif;
+            border: solid green;
+            padding: 5px;
+            text-align: center;
+        }
 
-h1 {
-    border: double 15px green;
-    padding: 15px;
-    margin: 10px;
-}
+        h1 {
+            border: double 15px green;
+            padding: 15px;
+            margin: 10px;
+        }
 
-h2, h3 {
-    margin-left: 20px;
-}
+        h2, h3 {
+            margin-left: 20px;
+        }
 
-strong {
-    color: yellow;
-}
+        strong {
+            color: yellow;
+        }
 
-em {
-    color: red;
-}
+        em {
+            color: red;
+        }
 
-p, td {
-    padding: 10px;
-}
+        p, td {
+            padding: 10px;
+        }
 
-#priority, #metatypechoice, #magreschoice, .incAtt, .decAtt, .knowButton, .button {
-    cursor: pointer;
-}
+        #priority, #metatypechoice, #magreschoice, .incAtt, .decAtt, .knowButton, .button {
+            cursor: pointer;
+        }
 
-#priority-label td {
-    cursor: default;
-}
+        #priority-label td {
+            cursor: default;
+        }
 
-#container {
-    width: 1200px;
-    margin: auto;
-}
+        #container {
+            width: 1200px;
+            margin: auto;
+        }
 
-#racial {
-    min-height: 67px;
-}
+        #racial {
+            min-height: 67px;
+        }
 
-.magres, h1, h2, h3, #racial {
-    text-align: left;
-}
+        .magres, h1, h2, h3, #racial {
+            text-align: left;
+        }
 
-.selected {
-    border-color: #0f0;
-}
+        .selected {
+            border-color: #0f0;
+        }
 
-.deact, .label {
-    background: #040;
-    color: #020;
-    border-color: #020;
-    cursor: default;
-}
+        .deact, .label {
+            background: #040;
+            color: #020;
+            border-color: #020;
+            cursor: default;
+        }
 
-.label {
-    color: lightgreen;
-}
+        .label {
+            color: lightgreen;
+        }
 
-.container {
-    float: left;
-    margin: 15px 5px;
-}
+        .container {
+            float: left;
+            margin: 15px 5px;
+        }
 
-#characterPoints {
-    margin: 0;
-    padding-right: 11px;
-    position: absolute;
-    background: #222;
-    width: 1198px;;
-}
+        #characterPoints {
+            margin: 0;
+            padding-right: 11px;
+            position: absolute;
+            background: #222;
+            width: 1198px;;
+        }
 
-#characterPoints.fixed {
-    position: fixed;
-    top: 0;
-}
+        #characterPoints.fixed {
+            position: fixed;
+            top: 0;
+        }
 
-h2#skillgroupHeader {
-    margin-top: 150px;
-}
+        h2#skillgroupHeader {
+            margin-top: 150px;
+        }
 
-.points {
-    padding: 10px;
-    margin: 10px;
-}
+        .points {
+            padding: 10px;
+            margin: 10px;
+        }
 
-.skillsin {
-    width: 450px;
-}
+        .skillsin {
+            width: 450px;
+        }
 
-.skillName {
-    width: 250px;
-}
+        .skillName {
+            width: 250px;
+        }
 
-#metatypeContain, #magresContain {
-    margin-left: 0;
-}
+        #metatypeContain, #magresContain {
+            margin-left: 0;
+        }
 
-#specialContain, #skillcontainer {
-    clear: both;
-}
+        #specialContain, #skillcontainer {
+            clear: both;
+        }
 
-.hide {
-    display: none;
-}
+        .hide {
+            display: none;
+        }
 
-.active {
-    border-color: #0f0;
-}
+        .active {
+            border-color: #0f0;
+        }
 
-.spellname {
-    width: 200px;
-}
+        .spellname {
+            width: 200px;
+        }
 
-.combat .spellname {
-    width: 140px;
-}
+        .combat .spellname {
+            width: 140px;
+        }
 
-.inventory {
-    padding:0;
-}
+        .inventory {
+            padding:0;
+        }
 
-.ammoname {
-    width: 200px;
-}
+        .ammoname {
+            width: 200px;
+        }
 
-.dammod, .grenadesdammod {
-    width: 170px;
-}
+        .dammod, .grenadesdammod {
+            width: 170px;
+        }
 
-#clothing input {
-    width: 110px;
-}
+        #clothing input {
+            width: 110px;
+        }
 
-.alert {
-    color:black;
-    background-color: red;
-    -webkit-transition: background-color 1s;
-    -moz-transition: background-color 1s;
-    -o-transition: background-color 1s;
-    transition: background-color 1s;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="style.css">
+        .alert {
+            color:black;
+            background-color: red;
+            -webkit-transition: background-color 1s;
+            -moz-transition: background-color 1s;
+            -o-transition: background-color 1s;
+            transition: background-color 1s;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <div id="container">
@@ -1276,9 +1276,9 @@ h2#skillgroupHeader {
                 </table>
             </div>
             <div id="magicequipment" class="Mag hide">
-                  <h2>Magic Equipment</h2>
-                  <h3>Enchanting Foci</h3>
-                 <table id="enchantingfoci">
+                <h2>Magic Equipment</h2>
+                <h3>Enchanting Foci</h3>
+                <table id="enchantingfoci">
                      <tr class="label"><td>Buy</td><td>raise</td><td>Force</td><td>lower</td><td>Focus</td><td>Avail</td><td>Cost</td></tr>
                 </table>
                   <h3>Metamagic Foci</h3>
@@ -1309,6 +1309,13 @@ h2#skillgroupHeader {
                   <h2>Reagents</h2>
                  <table id="reagents">
                     <tr class="label"><td>Buy</td><td>Dram</td><td>Sell</td><td>Type</td><td>Avail</td><td>Cost</td></tr>
+                </table>
+            </div>
+            <div id="augmentations">
+                <h2>Augmentations</h2>
+                <h3>Cyber Limbs</h3>
+                <table id="cyberlimbs">
+                    <tr class="label"><td>Buy</td><td>Limb</td><td>Type</td><td>Grade</td><td>+</td><td>Str</td><td>-</td><td>+</td><td>Agi</td><td>-</td><td>Capacity</td><td>Avail</td><td>Ess</td><td>Cost</td></tr>
                 </table>
             </div>
         </div>
@@ -2239,14 +2246,44 @@ h2#skillgroupHeader {
         spatialrecognizer: {name:"Spatial Recognizer", rating:1, cap:2, avail:4, restricted: "", cost:1000},
     }
 
+    characteraugmentation = {
+        limbs: {
+            head: "empty",
+            torso: "empty",
+            left: {
+                arm: "empty",
+                leg: "empty"
+            },
+            right: {
+                arm: "empty",
+                leg: "empty"
+            }
+        }
+    }
+
     var augmentations = {
+        grade: {
+            standard:1,
+            alpha:1.5,
+        },
         obvious: {
-            fullarm: {name:"Obvious Full Arm", grade:"standard", str:3, agi:3, essence:1, capacity:15, avail:4, cost:15000},
-            fullleg: {name:"Obvious Full Leg", grade:"standard", str:3, agi:3, essence:1, capacity:20, avail:4, cost:15000},
-            handfoot: {name:"Obvious Hand/Foot", grade:"standard", str:3, agi:3, essence:0.25, capacity:4, avail:2, cost:5000}
+            fullarm: {name:"Obvious Full Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:1, capacity:15, avail:4, cost:15000},
+            fullleg: {name:"Obvious Full Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:1, capacity:20, avail:4, cost:15000},
+            hand: {name:"Obvious Hand", grade:"standard", slot:"arm", str:3, agi:3, essence:0.25, capacity:4, avail:2, cost:5000},
+            foot: {name:"Obvious Foot", grade:"standard", slot:"leg", str:3, agi:3, essence:0.25, capacity:4, avail:2, cost:5000},
+            lowerarm: {name:"Obvious Lower Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:0.45, capacity:10, avail:4, cost:10000},
+            lowerleg: {name:"Obvious Lower Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:0.45, capacity:12, avail:4, cost:10000},
+            torso: {name:"Obvious Torso", grade:"standard", slot:"torso", str:3, agi:3, essence:1.5, capacity:10, avail:12, cost:20000},
+            skull: {name:"Obvious Skull", grade:"standard", slot:"head", str:3, agi:3, essence:0.75, capacity:4, avail:16, cost:10000}
         },
         synthetic: {
-
+            fullarm: {name:"Synthetic Full Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:1, capacity:8, avail:4, cost:20000},
+            fullleg: {name:"Synthetic Full Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:1, capacity:10, avail:4, cost:20000},
+            hand: {name:"Synthetic Hand", grade:"standard", slot:"arm", str:3, agi:3, essence:0.25, capacity:2, avail:2, cost:6000},
+            foot: {name:"Synthetic Lower Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:0.45, capacity:5, avail:4, cost:12000},
+            lowerleg: {name:"Synthetic Lower Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:0.45, capacity:6, avail:4, cost:12000},
+            torso: {name:"Synthetic Torso", grade:"standard", slot:"torso", str:3, agi:3, essence:1.5, capacity:5, avail:12, cost:25000},
+            skull: {name:"Synthetic Skull", grade:"standard", slot:"head", str:3, agi:3, essence:0.75, capacity:2, avail:16, cost:15000}
         }
     }
     
@@ -3458,6 +3495,15 @@ h2#skillgroupHeader {
             }
         }
         $(".projectiles.crossbow,#shuriken").find(".weaprating").remove();//this removes the rating information for the crossbows, because crossbows don't have ratings
+
+        for (var aug in augmentations) {//render augmentations
+            switch (aug) {
+                case "obvious":
+                    for (var limb in augmentations[aug])
+                    $("#cyberlimbs").append("<tr class="+augmentations[aug][limb]+"><td class='buyAug button'><strong>+</strong></td><td class='limb'>"+augmentations[aug][limb]["name"]+"</td><td class='type'>Obvious</td><td class='grade'>Standard</td><td class='strUp button'>+</td><td class='str'>3</td><td class='strDown button'>-</td><td class='agiUp button'>+</td><td class='agi'>3</td><td class='agiDown button'>-</td><td class='cap'>"+augmentations[aug][limb]["capacity"]+"</td><td class='avail'>"+augmentations[aug][limb]["avail"]+"</td><td class='ess'>"+augmentations[aug][limb]["essence"]+"</td><td class='price'>"+augmentations[aug][limb]["cost"]+"</td></tr>");
+                    break;
+            }
+        }
     }
     
     function funSkillSum (w, x, y, z) {//used to calculate the dice pool of a skill
