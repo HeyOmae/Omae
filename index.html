@@ -1315,7 +1315,7 @@
                 <h2>Augmentations</h2>
                 <h3>Cyber Limbs</h3>
                 <table id="cyberlimbs">
-                    <tr class="label"><td>Buy</td><td>Limb</td><td>Type</td><td>Grade</td><td>+</td><td>Str</td><td>-</td><td>+</td><td>Agi</td><td>-</td><td>Capacity</td><td>Avail</td><td>Ess</td><td>Cost</td></tr>
+                    <tr class="label"><td>Buy</td><td>Limb</td><td>Type</td><td>Grade</td><td>Location</td><td>+</td><td>Str</td><td>-</td><td>+</td><td>Agi</td><td>-</td><td>Capacity</td><td>Avail</td><td>Ess</td><td>Cost</td></tr>
                 </table>
             </div>
         </div>
@@ -2249,7 +2249,7 @@
     characteraugmentation = {
         limbs: {
             head: "empty",
-            torso: "empty",
+            chest: "empty",
             left: {
                 arm: "empty",
                 leg: "empty"
@@ -2263,8 +2263,11 @@
 
     var augmentations = {
         grade: {
-            standard:1,
-            alpha:1.5,
+            used:{cost:0.75, ess:1.25, avail:-4},
+            standard:{cost:1, ess:1, avail:0},
+            alpha:{cost:1.2, ess:0.8, avail:2},
+            beta:{cost:1.5, ess:0.7, avail:4},
+            delta:{cost:2.5, ess:0.5, avail:8}
         },
         obvious: {
             fullarm: {name:"Obvious Full Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:1, capacity:15, avail:4, cost:15000},
@@ -2273,7 +2276,7 @@
             foot: {name:"Obvious Foot", grade:"standard", slot:"leg", str:3, agi:3, essence:0.25, capacity:4, avail:2, cost:5000},
             lowerarm: {name:"Obvious Lower Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:0.45, capacity:10, avail:4, cost:10000},
             lowerleg: {name:"Obvious Lower Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:0.45, capacity:12, avail:4, cost:10000},
-            torso: {name:"Obvious Torso", grade:"standard", slot:"torso", str:3, agi:3, essence:1.5, capacity:10, avail:12, cost:20000},
+            torso: {name:"Obvious Torso", grade:"standard", slot:"chest", str:3, agi:3, essence:1.5, capacity:10, avail:12, cost:20000},
             skull: {name:"Obvious Skull", grade:"standard", slot:"head", str:3, agi:3, essence:0.75, capacity:4, avail:16, cost:10000}
         },
         synthetic: {
@@ -2282,7 +2285,7 @@
             hand: {name:"Synthetic Hand", grade:"standard", slot:"arm", str:3, agi:3, essence:0.25, capacity:2, avail:2, cost:6000},
             foot: {name:"Synthetic Lower Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:0.45, capacity:5, avail:4, cost:12000},
             lowerleg: {name:"Synthetic Lower Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:0.45, capacity:6, avail:4, cost:12000},
-            torso: {name:"Synthetic Torso", grade:"standard", slot:"torso", str:3, agi:3, essence:1.5, capacity:5, avail:12, cost:25000},
+            torso: {name:"Synthetic Torso", grade:"standard", slot:"chest", str:3, agi:3, essence:1.5, capacity:5, avail:12, cost:25000},
             skull: {name:"Synthetic Skull", grade:"standard", slot:"head", str:3, agi:3, essence:0.75, capacity:2, avail:16, cost:15000}
         }
     }
@@ -3499,11 +3502,27 @@
         for (var aug in augmentations) {//render augmentations
             switch (aug) {
                 case "obvious":
-                    for (var limb in augmentations[aug])
-                    $("#cyberlimbs").append("<tr class="+augmentations[aug][limb]+"><td class='buyAug button'><strong>+</strong></td><td class='limb'>"+augmentations[aug][limb]["name"]+"</td><td class='type'>Obvious</td><td class='grade'>Standard</td><td class='strUp button'>+</td><td class='str'>3</td><td class='strDown button'>-</td><td class='agiUp button'>+</td><td class='agi'>3</td><td class='agiDown button'>-</td><td class='cap'>"+augmentations[aug][limb]["capacity"]+"</td><td class='avail'>"+augmentations[aug][limb]["avail"]+"</td><td class='ess'>"+augmentations[aug][limb]["essence"]+"</td><td class='price'>"+augmentations[aug][limb]["cost"]+"</td></tr>");
+                    for (var limb in augmentations[aug]) {
+                        $("#cyberlimbs").append("<tr class="+limb+"><td class='buyAug button'><strong>+</strong></td><td class='limb'>"+augmentations[aug][limb]["name"]+"</td><td class='type'>Obvious</td><td class='grade'>Standard</td><td class='location'>Left</td><td class='strUp button'>+</td><td class='str'>3</td><td class='strDown button'>-</td><td class='agiUp button'>+</td><td class='agi'>3</td><td class='agiDown button'>-</td><td class='cap'>"+augmentations[aug][limb]["capacity"]+"</td><td class='avail'>"+augmentations[aug][limb]["avail"]+"</td><td class='ess'>"+augmentations[aug][limb]["essence"]+"</td><td class='price'>"+augmentations[aug][limb]["cost"]+"&yen;</td></tr>");
+                        switch (augmentations[aug][limb]["slot"]) {
+                            case "chest":
+                                $("."+limb+" .location").empty().append("Chest");
+                                break;
+                            case "head":
+                                $("."+limb+" .location").empty().append("Head");
+                                break;
+                            case "arm":
+                            case "leg":
+                                $("."+limb+" .location").empty().append("<select><option value='left'>Left</option><option value='right'>Right</option></select> "+augmentations[aug][limb]["slot"]);
+                                break;
+
+                        }
+                    }
                     break;
             }
         }
+        $("#cyberlimbs .type").empty().append("<select><option value='obvious'>Obvious</option><option value='synthetic'>Synthetic</option></select>");
+        $("#cyberlimbs .grade").empty().append("<select><option value='used'>Used</option><option value='standard' selected>Standard</option><option value='alpha'>Alpha</option><option value='beta'>Beta</option><option value='delta'>Delta</option></select>");
     }
     
     function funSkillSum (w, x, y, z) {//used to calculate the dice pool of a skill
@@ -5380,7 +5399,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         $("."+device+" .price").empty().append(ed["cost"]+"&yen;");
     }
     
-    $("#e-accessories").on("change", ".modslot select", modChange);
+    $("#e-accessories").on("change", ".modslot select", modChange)
 
     function modChange() {
         var device = $(this).parents("tr").attr("class");
@@ -5470,6 +5489,79 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         $("."+qifoci+" .commrating").empty().append(electronics.qifocus.rating);
         $("."+qifoci+" .avail").empty().append(electronics.qifocus.avail+" "+electronics.qifocus.restrict);
         $("."+qifoci+" .price").empty().append(electronics.qifocus.cost+"&yen;");
+    }
+
+    $("#cyberlimbs").on("change", "select", typeOfLimb)
+
+    function typeOfLimb() {
+        var limb = $(this).parents("tr").attr("class");
+        var limbType = $("."+limb+" .type select").val();
+        var selectLimb = $(this).val();
+        switch (selectLimb) {
+            case "used":
+            case "standard":
+            case "alpha":
+            case "beta":
+            case "delta":
+                augmentations[limbType][limb]["cost"] /= augmentations["grade"][augmentations[limbType][limb]["grade"]]["cost"];
+                augmentations[limbType][limb]["cost"] *= augmentations["grade"][selectLimb]["cost"];
+                augmentations[limbType][limb]["essence"] /= augmentations["grade"][augmentations[limbType][limb]["grade"]]["ess"];
+                augmentations[limbType][limb]["essence"] *= augmentations["grade"][selectLimb]["ess"];
+                augmentations[limbType][limb]["avail"] -= augmentations["grade"][augmentations[limbType][limb]["grade"]]["avail"];
+                augmentations[limbType][limb]["avail"] += augmentations["grade"][selectLimb]["avail"];
+                augmentations[limbType][limb]["grade"] = selectLimb;
+            case "obvious":
+            case "synthetic":
+                $("."+limb+" .limb").empty().append(augmentations[limbType][limb]["name"]);
+                $("."+limb+" .grade select").val(augmentations[limbType][limb]["grade"]);
+                $("."+limb+" .str").empty().append(augmentations[limbType][limb]["str"]);
+                $("."+limb+" .agi").empty().append(augmentations[limbType][limb]["agi"]);
+                $("."+limb+" .cap").empty().append(augmentations[limbType][limb]["capacity"]);
+                $("."+limb+" .avail").empty().append(augmentations[limbType][limb]["avail"]);
+                $("."+limb+" .ess").empty().append(augmentations[limbType][limb]["essence"].toFixed(2));
+                $("."+limb+" .price").empty().append(augmentations[limbType][limb]["cost"]+"&yen;");
+                break;
+        }
+    }
+
+    $("#cyberlimbs").on("click", ".button", customLimb)//this allows for a limb to have custom str or agi. It also allows people to buy limbs, since that's also a button
+
+    function customLimb() {
+        var limb = $(this).parents("tr").attr("class");
+        var limbType = $("."+limb+" .type select").val();
+        var limbGrade = $("."+limb+" .grade select").val();
+        switch ($(this).attr("class")) {
+            case "strUp button":
+                if (augmentations[limbType][limb]["str"]>=attributes.maximum.strmax) {return;}
+                augmentations[limbType][limb]["str"]++;
+                augmentations[limbType][limb]["avail"]++;
+                augmentations[limbType][limb]["cost"]+=(5000*augmentations.grade[limbGrade]["cost"]);
+                break;
+            case "strDown button":
+                if (augmentations[limbType][limb]["str"]<=3) {return;}
+                augmentations[limbType][limb]["str"]--;
+                augmentations[limbType][limb]["avail"]--;
+                augmentations[limbType][limb]["cost"]-=(5000*augmentations.grade[limbGrade]["cost"]);
+                break;
+            case "agiUp button":
+                if (augmentations[limbType][limb]["agi"]>=attributes.maximum.strmax) {return;}
+                augmentations[limbType][limb]["agi"]++;
+                augmentations[limbType][limb]["avail"]++;
+                augmentations[limbType][limb]["cost"]+=(5000*augmentations.grade[limbGrade]["cost"]);
+                break;
+            case "agiDown button":
+                if (augmentations[limbType][limb]["agi"]<=3) {return;}
+                augmentations[limbType][limb]["agi"]--;
+                augmentations[limbType][limb]["avail"]--;
+                augmentations[limbType][limb]["cost"]-=(5000*augmentations.grade[limbGrade]["cost"]);
+                break;
+            case "buyAug button":
+
+        }
+        $("."+limb+" .str").empty().append(augmentations[limbType][limb]["str"]);
+        $("."+limb+" .agi").empty().append(augmentations[limbType][limb]["agi"]);
+        $("."+limb+" .avail").empty().append(augmentations[limbType][limb]["avail"]);
+        $("."+limb+" .price").empty().append(augmentations[limbType][limb]["cost"]+"&yen;");
     }
 
 
