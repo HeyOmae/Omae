@@ -2283,6 +2283,20 @@
             lowerleg: {name:"Synthetic Lower Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:0.45, capacity:6, avail:4, cost:12000},
             torso: {name:"Synthetic Torso", grade:"standard", slot:"chest", str:3, agi:3, essence:1.5, capacity:5, avail:12, cost:25000},
             skull: {name:"Synthetic Skull", grade:"standard", slot:"head", str:3, agi:3, essence:0.75, capacity:2, avail:16, cost:15000}
+        },
+        mods: {
+            //limb enhancement
+            enhancementagility: {name:"Enhacement Agility", stat:"agi", allow:["arm","leg","chest","head"], rating:0, ratingmax:3, capacity:0, avail:0, availx:3, restrict:"Restricted", cost:0, costx:6500, ref:{book:"SR5", page:"456,457"}},
+            enhancementarmor: {name:"Enhacement Armor", stat:"armor", allow:["arm","leg","chest","head"], rating:0, ratingmax:3, capacity:0, avail:0, availx:5, restrict:"", cost:0, costx:3000, ref:{book:"SR5", page:"456,457"}},
+            enhancementstrength: {name:"Enhacement Strength", stat:"str", allow:["arm","leg","chest","head"], rating:0, ratingmax:3, capacity:0, avail:0, availx:3, restrict:"Restricted", cost:0, costx:6500, ref:{book:"SR5", page:"456,457"}},
+
+            //limb accessories
+            cyberarmgyromount: {name:"Cyberarm Gyromount", stat:"rc", allow:["arm"], rc:3, capacity:8, avail:12, restrict:"Forbidden", cost:6000, ref:{book:"SR5", page:"456,457"}},
+            cyberarmslide: {name:"Cyberarm Slide", allow:["arm"], capacity:3, avail:12, restrict:"Restricted", cost:3000, ref:{book:"SR5", page:"456,457"}},
+            cyberholster: {name:"Cyber Holster", allow:["arm","leg","chest","head"], capacity:5, avail:8, restrict:"Restricted", cost:2000, ref:{book:"SR5", page:"457"}},
+            hydraulicjacks: {name:"Hydraulic Jacks", allow:["leg"], rating:0, ratingmax:6, capacity:0, avail:9, availx:0, restrict:"", cost:0, costx:8000, ref:{book:"SR5", page:"456,457"}},
+            largesmugglingcompartment: {name:"Large Smuggling Compartment", allow:["arm","leg","chest","head"], capacity:5, avail:6, restrict:"", cost:8000, ref:{book:"SR5", page:"457"}},
+
         }
     }
     
@@ -2697,11 +2711,23 @@
          reachmod=0;
     }
     //there are 10 types of people in this world. Those who understand binary, and those who don't
-    disUpdater();//runs the attrabute display funcation on start up
     
-    function nuyenUpdater() {
-        $("#nuyen").empty().append($("<strong>"+nuyen+"&#65509</strong>"));
+    var updaters = {//experimenting on removing functions from the global name space
+        nuyenUpdater: function () {
+            $("#nuyen").empty().append($("<strong>"+nuyen+"&#65509</strong>"));
+        },
+        essUpdater: function () {
+            $("#essencepnt").empty().append($("<strong>"+Math.round(ess*1000)/1000+"</strong>"));
+        },
+        magUpdater: function () {
+            $(".mag" + " .stats").empty().append($("<span>"+Math.floor(attributes.current.mag)+"/"+Math.floor(attributes.maximum.magmax)+"</span>"));
+        },
+        resUpdater: function () {
+            $(".res" + " .stats").empty().append($("<span>"+Math.floor(attributes.current.res)+"/"+Math.floor(attributes.maximum.resmax)+"</span>"));
+        }
     }
+
+    disUpdater();//runs the attrabute display funcation on start up
     
     function disUpdater () {//adds the attrabutes to the attribute table
         renderAttStat (attributes.augment.augbod, "bod", attributes.current.bod, attributes.maximum.bodmax);
@@ -2713,8 +2739,8 @@
         renderAttStat (attributes.augment.augint, "int", attributes.current.int, attributes.maximum.intmax);
         renderAttStat (attributes.augment.augcha, "cha", attributes.current.cha, attributes.maximum.chamax);
         renderSpecStat ("edg", attributes.current.edg, attributes.maximum.edgmax);
-        renderSpecStat ("mag", attributes.current.mag, attributes.maximum.magmax);
-        renderSpecStat ("res", attributes.current.res, attributes.maximum.resmax);
+        updaters.magUpdater();
+        updaters.resUpdater();
         pointUpdater (".pnt", attribute);
         pointUpdater (".spePnt",specAttribute);
         attributes.limits.phyLimit = renderLimit (attributes.limitMod.phyLimitMod,"phyLimit", attributes.current.str+attributes.augment.augstr, attributes.current.bod+attributes.augment.augbod, attributes.current.rea+attributes.augment.augrea);
@@ -2729,10 +2755,10 @@
         pointUpdater("#knowpnt",knowledgepoints);
         pointUpdater("#powerpnt",powerPoints);
         pointUpdater("#spellpnt",spells);
-        var formUpdater = pointUpdater("#formpnt",forms);
-        var karmaUpdater = pointUpdater("#karmapnt",karma);
-        var essUpdater = pointUpdater("#essencepnt",ess);
-        nuyenUpdater();
+        pointUpdater("#formpnt",forms);
+        pointUpdater("#karmapnt",karma);
+        updaters.essUpdater();
+        updaters.nuyenUpdater();
     }
     
     function pointUpdater(x,y) {
@@ -4150,7 +4176,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         };
         $(this).parent().remove();
         delete inventory[item];
-        nuyenUpdater();
+        updaters.nuyenUpdater();
     }
     
     $( "#firearms" ).on( "change", "select", settingWeapon );
@@ -4507,7 +4533,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         } else if (inventory[gunclass+ammo]["ammo"]>0&&$(this).hasClass("sellgrenades")) {
             subAmmo($(this),gunclass+ammo,1,invammo);
         }
-        nuyenUpdater();
+        updaters.nuyenUpdater();
     }
     
     function addAmmo(w,x,y) {//w=this, x=name of ammo in inventory, y=ammount of ammo bought at a time
@@ -4593,7 +4619,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             delete inventory[bomb];
         }
         
-        nuyenUpdater();
+        updaters.nuyenUpdater();
     }
     
     $("#explosive").on("click", ".kgup, .kgdown", fatboy);
@@ -4617,7 +4643,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 nuyen+=inventory[bomb]["rating"]*100;
             }
         }
-        nuyenUpdater();
+        updaters.nuyenUpdater();
         
         function bombupdate(x) {
             $("."+x+" .kg").empty().append(inventory[x]["kg"]);
@@ -4649,7 +4675,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             nuyen+=inventory["detonator"]["cost"];
         }
         $(".caps").empty().append(inventory["detonator"]["ammount"]);
-        nuyenUpdater();
+        updaters.nuyenUpdater();
         
     }
     
@@ -4693,7 +4719,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
         nuyen-=armor[armtype]["cost"];
         invNum++;
-        nuyenUpdater();
+        updaters.nuyenUpdater();
         
         function modnorating(x,y) {
             $("."+x+" .armormods").append("<tr class='"+y+"'><td class='label'>"+inventory[armtype+invNum]["mods"][y]["name"]+"</td><td class='buyarmmod button' colspan=3><strong>+</strong></td><td class='label'>Capacity</td><td>"+inventory[armtype+invNum]["mods"][y]["capacity"]+"</td></tr>");
@@ -4706,7 +4732,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         nuyen+=inventory[armtype]["cost"];
         $("."+armtype).remove();
         delete inventory[armtype];
-        nuyenUpdater();
+        updaters.nuyenUpdater();
     }
     
     $("#clotharmor").on("click", ".armmodup, .armmoddown, .buyarmmod", armormodding);
@@ -4746,7 +4772,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             buysign ($(this));
             costUpdater (item);
         }
-        nuyenUpdater();
+        updaters.nuyenUpdater();
         
         function modUpdater(x,y,z) {
             $("."+x+" ."+y+" .armmodrating, ."+x+" ."+y+" .armorcap").empty().append(z["rating"]);
@@ -4789,7 +4815,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 costUpdater (item);
             }
         }
-        nuyenUpdater();
+        updaters.nuyenUpdater();
     }
     
     function turnonhelm (item,x) {
@@ -4876,7 +4902,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 }
                 nuyen-=inventory["clothing"+invNum]["cost"]
                 invNum++;
-                nuyenUpdater();
+                updaters.nuyenUpdater();
                 break;
         }
         fashionprice();
@@ -5018,7 +5044,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             nuyen+=inventory[rfid]["cost"];
         }
         tenUp(rfid);
-        nuyenUpdater();
+        updaters.nuyenUpdater();
         
         function tenUp(x) {
             $("."+x+" .numrfid").empty().append(inventory[x]["tagNo"]);
@@ -5138,7 +5164,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
         nuyen-=inventory[devicename+invNum]["cost"];
         invNum++;
-        nuyenUpdater();
+        updaters.nuyenUpdater();
         
         function toInventory(x) {//this adds the device in to the inventory
             inventory[x+invNum]={};
@@ -5192,7 +5218,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
         $("."+magic+" .avail").empty().append(inventory[magic]["avail"]);
         $("."+magic+" .devicecost").empty().append(inventory[magic]["cost"]+"&yen;");
-        nuyenUpdater();
+        updaters.nuyenUpdater();
     }
 
     //This function is for giving devices access to its mods
@@ -5239,7 +5265,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             pointUpdater("#karmapnt",karma);
         }
         delete inventory[devicename];
-        nuyenUpdater();
+        updaters.nuyenUpdater();
     }
     
     $("#devices").on("click", ".programs .button", buyProgram);//this is for buying cyber programs for decks and RCCs
@@ -5299,7 +5325,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             inventory[device]["cost"]+=cost;
         }
         $("."+device+" .devicecost").empty().append(inventory[device]["cost"]+"&yen;");
-        nuyenUpdater();
+        updaters.nuyenUpdater();
         
         function programcost(x) {
             cost=0;
@@ -5358,7 +5384,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             }
         }
         $("."+device+" .devicecost").empty().append(inventory[device]["cost"]+"&yen;");
-        nuyenUpdater();
+        updaters.nuyenUpdater();
     }
     
     $("#gearResource").on("click", ".ratingUp, .ratingDown", commRating);//this is for raising and slowing communcation devices ratings
@@ -5440,7 +5466,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         $("."+device+" .deviceavail").empty().append(inventory[device]["avail"] + inventory[device]["restrict"]);
         $("."+device+" .devicecost").empty().append(inventory[device]["cost"]+"&yen;");
 
-        nuyenUpdater();
+        updaters.nuyenUpdater();
         
             
         function multipleCapacity(x, y) {//x= mod, y=disable or false
@@ -5559,12 +5585,32 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                     var side = "";
                 }
                 if ($.isEmptyObject(characteraugmentation.limbs[side+augmentations[limbType][limb]["slot"]])) {
-                    var cyber = characteraugmentation.limbs[side+augmentations[limbType][limb]["slot"]] = $.extend({}, augmentations[limbType][limb]);
-                    $("."+limb).after("<tr class='"+side+augmentations[limbType][limb]["slot"]+"'><td class='sellAug button'><em>-</em></td><td>"+side+" "+limbType+" "+augmentations[limbType][limb]["slot"]+"</td><td class='cybermods' colspan=12></td><td class='price'>"+cyber.cost+"&yen;</td></tr>");
+                    var limbloc=side+augmentations[limbType][limb]["slot"];
+                    var cyber = characteraugmentation.limbs[limbloc] = $.extend({}, augmentations[limbType][limb]);
+                    $("."+limb).after("<tr class='"+limbloc+"'><td class='sellAug button'><em>-</em></td><td>"+side+" "+limbType+" "+augmentations[limbType][limb]["slot"]+"</td><td class='cybermods' colspan=12><table><tbody></tbody></table></td><td class='price'>"+cyber.cost+"&yen;</td></tr>");
+
+                    for (var mod in augmentations.mods) {
+                        for (var x in augmentations.mods[mod]["allow"]) {
+                            if (augmentations.mods[mod]["allow"][x]==augmentations[limbType][limb]["slot"]) {
+                                var targetMod = augmentations.mods[mod];
+                                if (typeof targetMod.rating !== "undefined") {
+                                    $("."+limbloc+" .cybermods table tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='modUp button'>+</td><td class='modRating'>0</td><td class='moddown button'>-</td></tr>")
+                                } else {
+                                    $("."+limbloc+" .cybermods table tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='buyMod' colspan=3>+</td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td></tr>")
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+
                     ess-=cyber.essence;
+                    attributes.current.mag-=cyber.essence;
+                    attributes.maximum.magmax-=cyber.essence;
+                    attributes.current.res-=cyber.essence;
+                    attributes.maximum.resmax-=cyber.essence;
                     nuyen-=cyber.cost;
-                    disUpdater().essUpdater;
-                    nuyenUpdater();
+                    disUpdater();
 
                 } else {
                     alert("You already have a wiz new "+side+" "+augmentations[limbType][limb]["slot"]);
@@ -5574,12 +5620,15 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "sellAug button":
                 var cyber = characteraugmentation.limbs[limb];
                 ess+=cyber.essence;
+                attributes.current.mag+=cyber.essence;
+                attributes.maximum.magmax+=cyber.essence;
+                attributes.current.res+=cyber.essence;
+                attributes.maximum.resmax+=cyber.essence;
                 nuyen+=cyber.cost;
 
                 characteraugmentation.limbs[limb] = {};
                 $(this).parent().remove();
-                disUpdater().essUpdater;
-                nuyenUpdater();
+                disUpdater();
                 return;
                 break;
 
