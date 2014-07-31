@@ -2248,16 +2248,12 @@
 
     characteraugmentation = {
         limbs: {
-            head: "empty",
-            chest: "empty",
-            left: {
-                arm: "empty",
-                leg: "empty"
-            },
-            right: {
-                arm: "empty",
-                leg: "empty"
-            }
+            head: {},
+            chest: {},
+            leftarm: {},
+            leftleg: {},
+            rightarm: {},
+            rightleg: {}
         }
     }
 
@@ -2515,7 +2511,7 @@
         function deactivateMT(x) {
             $(x).addClass("deact");
         }
-        attDisplay();
+        disUpdater();
     }
     
     function fnselect (x) {//fucntion for highlighting what has been selected
@@ -2540,7 +2536,7 @@
                 attributes.current.edg=2;
                 attributes.maximum.edgmax=7;
                 attributes.minimum.edgmin=2;
-                attDisplay();
+                disUpdater();
                 $("#racial").empty().append($("<p>None<br>Boring</p>"));
                 switch ("metatype") {
                     case priorityA:
@@ -2569,7 +2565,7 @@
                 attributes.minimum.agimin=2;
                 attributes.maximum.chamax=8;
                 attributes.minimum.chamin=3;
-                attDisplay();
+                disUpdater();
                 $("#racial").empty().append($("<p>Low-Light Vision</p>"));
                 switch ("metatype") {
                     case priorityA:
@@ -2599,7 +2595,7 @@
                 attributes.minimum.bodmin=3;
                 attributes.minimum.strmin=3;
                 attributes.minimum.wilmin=2;
-                attDisplay();
+                disUpdater();
                 $("#racial").empty().append($("<p>Thermographic Vision<br>+2 Pathogen/Toxic Resist<br>20% Lifestyle increase</p>"));
                 switch ("metatype") {
                     case priorityA:
@@ -2625,7 +2621,7 @@
                 attributes.maximum.chamax=5;
                 attributes.minimum.bodmin=4;
                 attributes.minimum.strmin=3;
-                attDisplay();
+                disUpdater();
                 $("#racial").empty().append($("<p>Low-Light Vision</p>"));
                 switch ("metatype") {
                     case priorityA:
@@ -2654,7 +2650,7 @@
                 attributes.minimum.bodmin=5;
                 attributes.minimum.strmin=5;
                 reachmod=1;
-                attDisplay();
+                disUpdater();
                 $("#racial").empty().append($("<p>Thermographic Vision<br>+1 Reach<br>+1 Dermal Armor<br>100% Lifestyle increase</p>"));
                 switch ("metatype") {
                     case priorityA:
@@ -2666,7 +2662,7 @@
                 }
             }
             
-            attDisplay();
+            disUpdater();
         }
     }
     
@@ -2701,13 +2697,13 @@
          reachmod=0;
     }
     //there are 10 types of people in this world. Those who understand binary, and those who don't
-    attDisplay();//runs the attrabute display funcation on start up
+    disUpdater();//runs the attrabute display funcation on start up
     
     function nuyenUpdater() {
         $("#nuyen").empty().append($("<strong>"+nuyen+"&#65509</strong>"));
     }
     
-    function attDisplay () {//adds the attrabutes to the attribute table
+    function disUpdater () {//adds the attrabutes to the attribute table
         renderAttStat (attributes.augment.augbod, "bod", attributes.current.bod, attributes.maximum.bodmax);
         renderAttStat (attributes.augment.augagi, "agi", attributes.current.agi, attributes.maximum.agimax);
         renderAttStat (attributes.augment.augrea, "rea", attributes.current.rea, attributes.maximum.reamax);
@@ -2733,8 +2729,9 @@
         pointUpdater("#knowpnt",knowledgepoints);
         pointUpdater("#powerpnt",powerPoints);
         pointUpdater("#spellpnt",spells);
-        pointUpdater("#formpnt",forms);
-        pointUpdater("#karmapnt",karma);
+        var formUpdater = pointUpdater("#formpnt",forms);
+        var karmaUpdater = pointUpdater("#karmapnt",karma);
+        var essUpdater = pointUpdater("#essencepnt",ess);
         nuyenUpdater();
     }
     
@@ -3161,7 +3158,7 @@
                 specAttribute++;}
             return x;
         }
-        attDisplay ();//this was ment to orignally update the attrabutes, but is now used for EVERYTHING
+        disUpdater ();//this was ment to orignally update the attrabutes, but is now used for EVERYTHING
     }
     
     function addAugmentAtt(x) {
@@ -3298,7 +3295,7 @@
             fociMaxRating=attributes.current.mag*2;
             
         }
-        attDisplay ();
+        disUpdater ();
     }
     function magemysticsetting () {//since mystics and mages have the same stuff, they get a funcation
         switch ("magres"){
@@ -3810,7 +3807,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             }
         }
         
-        attDisplay();
+        disUpdater();
     }
     
     function addLimitMod(x) {
@@ -3931,7 +3928,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 }
                 break;
         };
-        attDisplay();//update the renderer, which will update the spell points to the new total
+        disUpdater();//update the renderer, which will update the spell points to the new total
         
         function customDetectSpell(x,y,z) {//this function is for custom detection spells, in case the name wasn't a dead give away
             if (x==""||typeof spellforms["detect"+x+y]!='undefined') {//Did the user forget to input data or already enter this data? Then do NOTHING!
@@ -3973,7 +3970,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 forms--;//reduce form points
             }
         }
-        attDisplay();
+        disUpdater();
     }
     function activate(x) {//this will highlight and add a + to show that the thing is active
         x.addClass("active").empty().append("<strong>+</strong>");
@@ -4135,7 +4132,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             nuyen-=itemhold["cost"];
         }
         invNum++;
-        attDisplay();
+        disUpdater();
     }
     
     $("#gearResource").on("click",".sell", sellWeapon);
@@ -4268,7 +4265,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             return y;
         }
         
-        attDisplay();
+        disUpdater();
     }
     
     $("#firearms").on("click",".smartgun.button",thinkingsmart)
@@ -4323,7 +4320,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 }
             }
         }
-        attDisplay();
+        disUpdater();
     }
     
     $("#firearms").on("click",".shockpad.button",shockpadding)
@@ -4350,7 +4347,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             nuyen-=50;
             itemhold["cost"]+=50;
         }
-        attDisplay();
+        disUpdater();
     }
     
     $("#firearms").on("click",".airburstlink.button",airJordan)
@@ -4375,7 +4372,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             nuyen-=600;
             itemhold["cost"]+=600;
         }
-        attDisplay();
+        disUpdater();
     }
     
     $("#firearms").on("click",".concealableholster.button, .hiddenarmslide.button, .quickdrawholster.button",holSTAR)
@@ -4420,7 +4417,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 itemhold["cost"]+=175;
             }
         }
-        attDisplay();
+        disUpdater();
     }
     
     //adding ammo details below
@@ -5518,7 +5515,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+limb+" .agi").empty().append(augmentations[limbType][limb]["agi"]);
                 $("."+limb+" .cap").empty().append(augmentations[limbType][limb]["capacity"]);
                 $("."+limb+" .avail").empty().append(augmentations[limbType][limb]["avail"]);
-                $("."+limb+" .ess").empty().append(augmentations[limbType][limb]["essence"].toFixed(2));
+                $("."+limb+" .ess").empty().append(Math.round(augmentations[limbType][limb]["essence"]*1000)/1000);
                 $("."+limb+" .price").empty().append(augmentations[limbType][limb]["cost"]+"&yen;");
                 break;
         }
@@ -5544,7 +5541,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 augmentations[limbType][limb]["cost"]-=(5000*augmentations.grade[limbGrade]["cost"]);
                 break;
             case "agiUp button":
-                if (augmentations[limbType][limb]["agi"]>=attributes.maximum.strmax) {return;}
+                if (augmentations[limbType][limb]["agi"]>=attributes.maximum.agimax) {return;}
                 augmentations[limbType][limb]["agi"]++;
                 augmentations[limbType][limb]["avail"]++;
                 augmentations[limbType][limb]["cost"]+=(5000*augmentations.grade[limbGrade]["cost"]);
@@ -5556,6 +5553,35 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 augmentations[limbType][limb]["cost"]-=(5000*augmentations.grade[limbGrade]["cost"]);
                 break;
             case "buyAug button":
+                if (augmentations[limbType][limb]["slot"]=="arm"||augmentations[limbType][limb]["slot"]=="leg"){
+                    var side = $("."+limb+" .location select").val();
+                } else {
+                    var side = "";
+                }
+                if ($.isEmptyObject(characteraugmentation.limbs[side+augmentations[limbType][limb]["slot"]])) {
+                    var cyber = characteraugmentation.limbs[side+augmentations[limbType][limb]["slot"]] = $.extend({}, augmentations[limbType][limb]);
+                    $("."+limb).after("<tr class='"+side+augmentations[limbType][limb]["slot"]+"'><td class='sellAug button'><em>-</em></td><td>"+side+" "+limbType+" "+augmentations[limbType][limb]["slot"]+"</td><td class='cybermods' colspan=12></td><td class='price'>"+cyber.cost+"&yen;</td></tr>");
+                    ess-=cyber.essence;
+                    nuyen-=cyber.cost;
+                    disUpdater().essUpdater;
+                    nuyenUpdater();
+
+                } else {
+                    alert("You already have a wiz new "+side+" "+augmentations[limbType][limb]["slot"]);
+                }
+                
+                break;
+            case "sellAug button":
+                var cyber = characteraugmentation.limbs[limb];
+                ess+=cyber.essence;
+                nuyen+=cyber.cost;
+
+                characteraugmentation.limbs[limb] = {};
+                $(this).parent().remove();
+                disUpdater().essUpdater;
+                nuyenUpdater();
+                return;
+                break;
 
         }
         $("."+limb+" .str").empty().append(augmentations[limbType][limb]["str"]);
