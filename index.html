@@ -2266,36 +2266,36 @@
             delta:{cost:2.5, ess:0.5, avail:8}
         },
         obvious: {
-            fullarm: {name:"Obvious Full Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:1, capacity:15, avail:4, cost:15000},
-            fullleg: {name:"Obvious Full Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:1, capacity:20, avail:4, cost:15000},
-            hand: {name:"Obvious Hand", grade:"standard", slot:"arm", str:3, agi:3, essence:0.25, capacity:4, avail:2, cost:5000},
-            foot: {name:"Obvious Foot", grade:"standard", slot:"leg", str:3, agi:3, essence:0.25, capacity:4, avail:2, cost:5000},
-            lowerarm: {name:"Obvious Lower Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:0.45, capacity:10, avail:4, cost:10000},
-            lowerleg: {name:"Obvious Lower Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:0.45, capacity:12, avail:4, cost:10000},
-            torso: {name:"Obvious Torso", grade:"standard", slot:"chest", str:3, agi:3, essence:1.5, capacity:10, avail:12, cost:20000},
-            skull: {name:"Obvious Skull", grade:"standard", slot:"head", str:3, agi:3, essence:0.75, capacity:4, avail:16, cost:10000}
+            fullarm: {name:"Obvious Full Arm", grade:"standard", slot:"arm", str:3, augstr:0, agi:3, augagi:0, armor:0, armor:0, rc:0, essence:1, cap:0, capmax:15, avail:4, cost:15000},
+            fullleg: {name:"Obvious Full Leg", grade:"standard", slot:"leg", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:1, cap:0, capmax:20, avail:4, cost:15000},
+            hand: {name:"Obvious Hand", grade:"standard", slot:"arm", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:0.25, cap:0, capmax:4, avail:2, cost:5000},
+            foot: {name:"Obvious Foot", grade:"standard", slot:"leg", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:0.25, cap:0, capmax:4, avail:2, cost:5000},
+            lowerarm: {name:"Obvious Lower Arm", grade:"standard", slot:"arm", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:0.45, cap:0, capmax:10, avail:4, cost:10000},
+            lowerleg: {name:"Obvious Lower Leg", grade:"standard", slot:"leg", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:0.45, cap:0, capmax:12, avail:4, cost:10000},
+            torso: {name:"Obvious Torso", grade:"standard", slot:"chest", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:1.5, cap:0, capmax:10, avail:12, cost:20000},
+            skull: {name:"Obvious Skull", grade:"standard", slot:"head", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:0.75, cap:0, capmax:4, avail:16, cost:10000}
         },
         synthetic: {
-            fullarm: {name:"Synthetic Full Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:1, capacity:8, avail:4, cost:20000},
-            fullleg: {name:"Synthetic Full Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:1, capacity:10, avail:4, cost:20000},
-            hand: {name:"Synthetic Hand", grade:"standard", slot:"arm", str:3, agi:3, essence:0.25, capacity:2, avail:2, cost:6000},
-            foot: {name:"Synthetic Lower Arm", grade:"standard", slot:"arm", str:3, agi:3, essence:0.45, capacity:5, avail:4, cost:12000},
-            lowerleg: {name:"Synthetic Lower Leg", grade:"standard", slot:"leg", str:3, agi:3, essence:0.45, capacity:6, avail:4, cost:12000},
-            torso: {name:"Synthetic Torso", grade:"standard", slot:"chest", str:3, agi:3, essence:1.5, capacity:5, avail:12, cost:25000},
-            skull: {name:"Synthetic Skull", grade:"standard", slot:"head", str:3, agi:3, essence:0.75, capacity:2, avail:16, cost:15000}
+            fullarm: {name:"Synthetic Full Arm", grade:"standard", slot:"arm", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:1, cap:0, capmax:8, avail:4, cost:20000},
+            fullleg: {name:"Synthetic Full Leg", grade:"standard", slot:"leg", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:1, cap:0, capmax:10, avail:4, cost:20000},
+            hand: {name:"Synthetic Hand", grade:"standard", slot:"arm", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:0.25, cap:0, capmax:2, avail:2, cost:6000},
+            foot: {name:"Synthetic Lower Arm", grade:"standard", slot:"arm", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:0.45, cap:0, capmax:5, avail:4, cost:12000},
+            lowerleg: {name:"Synthetic Lower Leg", grade:"standard", slot:"leg", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:0.45, cap:0, capmax:6, avail:4, cost:12000},
+            torso: {name:"Synthetic Torso", grade:"standard", slot:"chest", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:1.5, cap:0, capmax:5, avail:12, cost:25000},
+            skull: {name:"Synthetic Skull", grade:"standard", slot:"head", str:3, augstr:0, agi:3, augagi:0, armor:0, rc:0, essence:0.75, cap:0, capmax:2, avail:16, cost:15000}
         },
         mods: {
             //limb enhancement
-            enhancementagility: {name:"Enhacement Agility", stat:"agi", allow:["arm","leg","chest","head"], rating:0, ratingmax:3, capacity:0, avail:0, availx:3, restrict:"Restricted", cost:0, costx:6500, ref:{book:"SR5", page:"456,457"}},
-            enhancementarmor: {name:"Enhacement Armor", stat:"armor", allow:["arm","leg","chest","head"], rating:0, ratingmax:3, capacity:0, avail:0, availx:5, restrict:"", cost:0, costx:3000, ref:{book:"SR5", page:"456,457"}},
-            enhancementstrength: {name:"Enhacement Strength", stat:"str", allow:["arm","leg","chest","head"], rating:0, ratingmax:3, capacity:0, avail:0, availx:3, restrict:"Restricted", cost:0, costx:6500, ref:{book:"SR5", page:"456,457"}},
+            enhancementagility: {name:"Enhancement Agility", type:"limb enhancement", stat:"agi", allow:["arm","leg","chest","head"], rating:0, ratingmax:3, capacity:0, avail:0, availx:3, restrict:"R", cost:0, costx:6500, ref:{book:"SR5", page:"456,457"}},
+            enhancementarmor: {name:"Enhancement Armor", type:"limb enhancement", stat:"armor", allow:["arm","leg","chest","head"], rating:0, ratingmax:3, capacity:0, avail:0, availx:5, restrict:"", cost:0, costx:3000, ref:{book:"SR5", page:"456,457"}},
+            enhancementstrength: {name:"Enhancement Strength", type:"limb enhancement", stat:"str", allow:["arm","leg","chest","head"], rating:0, ratingmax:3, capacity:0, avail:0, availx:3, restrict:"R", cost:0, costx:6500, ref:{book:"SR5", page:"456,457"}},
 
             //limb accessories
-            cyberarmgyromount: {name:"Cyberarm Gyromount", stat:"rc", allow:["arm"], rc:3, capacity:8, avail:12, restrict:"Forbidden", cost:6000, ref:{book:"SR5", page:"456,457"}},
-            cyberarmslide: {name:"Cyberarm Slide", allow:["arm"], capacity:3, avail:12, restrict:"Restricted", cost:3000, ref:{book:"SR5", page:"456,457"}},
-            cyberholster: {name:"Cyber Holster", allow:["arm","leg","chest","head"], capacity:5, avail:8, restrict:"Restricted", cost:2000, ref:{book:"SR5", page:"457"}},
-            hydraulicjacks: {name:"Hydraulic Jacks", allow:["leg"], rating:0, ratingmax:6, capacity:0, avail:9, availx:0, restrict:"", cost:0, costx:8000, ref:{book:"SR5", page:"456,457"}},
-            largesmugglingcompartment: {name:"Large Smuggling Compartment", allow:["arm","leg","chest","head"], capacity:5, avail:6, restrict:"", cost:8000, ref:{book:"SR5", page:"457"}},
+            cyberarmgyromount: {name:"Cyberarm Gyromount", type:"accessory", stat:"rc", allow:["arm"], rc:3, capacity:8, avail:12, restrict:"F", cost:6000, ref:{book:"SR5", page:"456,457"}},
+            cyberarmslide: {name:"Cyberarm Slide", type:"accessory", allow:["arm"], capacity:3, avail:12, restrict:"R", cost:3000, ref:{book:"SR5", page:"456,457"}},
+            cyberholster: {name:"Cyber Holster", type:"accessory", allow:["arm","leg","chest","head"], capacity:5, avail:8, restrict:"R", cost:2000, ref:{book:"SR5", page:"457"}},
+            hydraulicjacks: {name:"Hydraulic Jacks", type:"accessory", allow:["leg"], rating:0, ratingmax:6, capacity:0, avail:9, availx:0, restrict:"", cost:0, costx:8000, ref:{book:"SR5", page:"456,457"}},
+            largesmugglingcompartment: {name:"Large Smuggling Compartment", type:"accessory", allow:["arm","leg","chest","head"], capacity:5, avail:6, restrict:"", cost:8000, ref:{book:"SR5", page:"457"}},
 
         }
     }
@@ -3526,7 +3526,7 @@
             switch (aug) {
                 case "obvious":
                     for (var limb in augmentations[aug]) {
-                        $("#cyberlimbs").append("<tr class="+limb+"><td class='buyAug button'><strong>+</strong></td><td class='limb'>"+augmentations[aug][limb]["name"]+"</td><td class='type'>Obvious</td><td class='grade'>Standard</td><td class='location'>Left</td><td class='strUp button'>+</td><td class='str'>3</td><td class='strDown button'>-</td><td class='agiUp button'>+</td><td class='agi'>3</td><td class='agiDown button'>-</td><td class='cap'>"+augmentations[aug][limb]["capacity"]+"</td><td class='avail'>"+augmentations[aug][limb]["avail"]+"</td><td class='ess'>"+augmentations[aug][limb]["essence"]+"</td><td class='price'>"+augmentations[aug][limb]["cost"]+"&yen;</td></tr>");
+                        $("#cyberlimbs").append("<tr class="+limb+"><td class='buyAug button'><strong>+</strong></td><td class='limb'>"+augmentations[aug][limb]["name"]+"</td><td class='type'>Obvious</td><td class='grade'>Standard</td><td class='location'>Left</td><td class='strUp button'>+</td><td class='str'>3</td><td class='strDown button'>-</td><td class='agiUp button'>+</td><td class='agi'>3</td><td class='agiDown button'>-</td><td class='cap'>"+augmentations[aug][limb]["capmax"]+"</td><td class='avail'>"+augmentations[aug][limb]["avail"]+"</td><td class='ess'>"+augmentations[aug][limb]["essence"]+"</td><td class='price'>"+augmentations[aug][limb]["cost"]+"&yen;</td></tr>");
                         switch (augmentations[aug][limb]["slot"]) {
                             case "chest":
                                 $("."+limb+" .location").empty().append("Chest");
@@ -3544,8 +3544,173 @@
                     break;
             }
         }
+
         $("#cyberlimbs .type").empty().append("<select><option value='obvious'>Obvious</option><option value='synthetic'>Synthetic</option></select>");
         $("#cyberlimbs .grade").empty().append("<select><option value='used'>Used</option><option value='standard' selected>Standard</option><option value='alpha'>Alpha</option><option value='beta'>Beta</option><option value='delta'>Delta</option></select>");
+
+        //adding ammo details below
+        
+        $(".ammo.label").appendTo(".ammunition");//adds ammo label
+        
+        for (var ammo in ammunition) {
+            var ammotype=ammunition[ammo];
+            
+            switch (ammotype["class"]) {
+                case "taserammo":
+                    abnormalAmmo(ammotype, ammo);
+                    break;
+                case "specialammo":
+                    abnormalAmmo(ammotype, ammo);
+                    break;
+                case "cannonammo":
+                    abnormalAmmo(ammotype, ammo);
+                    break;
+                case "grenades":
+                    explosivesammo("grenadeammo",ammo,ammotype);
+                    break;
+                case "rockets":
+                    explosivesammo("rocketammo",ammo,ammotype);
+                    break;
+                case "none":
+                    $(".standard.ammunition").append("<tr class='"+ammo+"'><td class='buyammo button'>+</td><td class='ammountofammo'>0</td><td class='sellammo button'>-</td><td class='ammoname'>"+ammotype["name"]+"</td><td class='dammod'>"+ammotype["dammod"]+" "+ammotype["typemod"]+" "+ammotype["elemod"]+"</td><td class='apmod'>"+ammotype["apmod"]+"</td><td class='avail'>"+ammotype["avail"]+" "+ammotype["restrict"]+"</td><td class='cost'>"+ammotype["cost"]+"&#65509</td></tr>");
+                    break;
+            }
+            
+            if (ammotype["avail"]>maxAvail) {
+                $("."+ammo+" .button").addClass("deact");
+            }
+            
+        }
+        
+        $(".gas .grenadesname").empty().append("<select class='toxicgas'></select>");
+        
+        for (var dose in toxin) {
+            if (toxin[dose]["avail"]<=maxAvail) {
+                $(".toxicgas").append("<option value='"+dose+"'>"+toxin[dose]["name"]+"</option>")
+            }
+        }
+        
+        $(".holdoutammo .tracer, .lightammo .tracer, .heavyammo .tracer, .sniperammo .tracer, .shotgunammo .tracer").remove();
+        
+        $("#explosive .label").appendTo($(".explosives"));
+        
+        for (var bomb in explosives) {
+            $("."+bomb+".explosives").append("<tr class='"+bomb+"'><td class='buybomb button'><strong>+</strong></td><td class='bombup button'>+</td><td class='explosiverating'>"+explosives[bomb]["rating"]+"</td><td class='bombdown button'>-</td><td>"+explosives[bomb]["avail"]+" "+explosives[bomb]["restrict"]+"</td><td class='bombbond'>"+explosives[bomb]["cost"]+"&#65509;</td></tr>");
+        }
+        
+        $(".commercial .bombup,.commercial .bombdown, .plastic .buybomb").addClass("deact");
+        $(".plastic .buybomb").empty().append("-");
+
+
+        $(".commlinks").appendTo("#links");//sets the commlink labels
+        $(".cyberdecks").appendTo("#decks");//sets the cyberdeck labels
+        $(".rccs").appendTo("#consoles");//sets the RCC labels
+        
+        for (var devicename in electronics) {//this populates the electronic devices
+            var device = electronics[devicename];
+            switch (device.type) {
+                case "commlink":
+                    $("#links").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "deck":
+                    $("#decks").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["array"]+"</td><td>"+device["programs"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "rcc":
+                    $("#consoles").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["dataprocess"]+"</td><td>"+device["firewall"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "accessory":
+                    $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "rfid":
+                    $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "credsticks":
+                    $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "identification":
+                    $('#identification').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+" <input type='text' class='fakename' placeholder='For?'>"+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "tools":
+                    $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+"<input type='text' class='toolname' placeholder='Skill name'> "+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "restraints":
+                    $('#restraints').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0<td class='sellDown'>-</td></td><td>"+device["name"]+"</td><td>"+device.armor+"</td><td>"+device.structure+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "chemicals":
+                    $('#chemicals').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "grapplegungear":
+                    $('#grapplegungear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    break;
+                case "grapplerope":
+                case "docwagon":
+                case "reagents":
+                    bulkBuyGear(device,devicename);
+                    break;
+                case "communications":
+                case "optics": 
+                case "audio": 
+                case "securitydevice":
+                case "bnegear":
+                case "survivalgear":
+                case "biotech":
+                case "slappatches":
+                case "enchantingfoci":
+                case "metamagicfoci":
+                case "powerfoci":
+                case "magicallodgematerials":
+                    ratingGear(device,devicename);
+                    break;
+                case "qifoci":
+                    ratingGear(device,devicename);
+                    $("#"+device.type+" ."+devicename+" .name").after("<td class='adeptPowers'><select></select></td>");
+                    for (var power in adeptPowers) {
+                        $("#"+device.type+" ."+devicename+" .adeptPowers select").append("<option value='"+power+"'>"+adeptPowers[power]["name"]+"</option>");
+                    };
+                    break;
+                case "spellfoci":
+                    ratingGear(device,devicename);
+                    $("#"+device.type+" ."+devicename+" .name").after("<td class='magicType'><select></select></td>");
+                    if(devicename!="ritualspellcastingfocus") {
+                        for (var spellCat in spellType) {
+                            $("#"+device.type+" ."+devicename+" .magicType select").append("<option value='"+spellType[spellCat]+"'>"+spellType[spellCat]+"</option>");
+                        };
+                    } else {
+                        for (var spellCat in ritualKeywords) {
+                            $("#"+device.type+" ."+devicename+" .magicType select").append("<option value='"+ritualKeywords[spellCat]+"'>"+ritualKeywords[spellCat]+"</option>");
+                        };
+                    }
+                    
+                    break;
+                case "spiritfoci":
+                    ratingGear(device,devicename);
+                    $("#"+device.type+" ."+devicename+" .name").after("<td class='magicType'><select></select></td>");
+                    for (var spirit in spiritType) {
+                        $("#"+device.type+" ."+devicename+" .magicType select").append("<option value='"+spiritType[spirit]+"'>"+spiritType[spirit]+"</option>");
+                    };
+                    break;
+            }
+            
+            if (device["avail"]>maxAvail) {
+                $("."+devicename+" .buydevice").addClass("deact").empty().append("-");
+            }
+            if (typeof device.rating === "undefined") {
+                $("."+devicename+" .commrating").empty().append("n/a");
+            }
+            if (typeof device.availx === "undefined") {
+                $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
+            }
+        }
+
+        for (var type in armor) {
+            $("#clotharmor #bodyarmor tbody").append("<tr class='"+type+"'><td class='buyarmor button'><strong>+</strong></td><td>"+armor[type]["name"]+"</td><td>"+armor[type]["armor"]+"</td><td>"+armor[type]["avail"]+" "+armor[type]["restrict"]+"</td><td>"+armor[type]["cost"]+"&#65509;</td></tr>");
+            if (armor[type]["avail"]>maxAvail) {
+                $("."+type+" .buyarmor").addClass("deact").empty().append("-");
+            }
+        }
+
+        //putmorestuffhere
+
     }
     
     function funSkillSum (w, x, y, z) {//used to calculate the dice pool of a skill
@@ -4446,49 +4611,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         disUpdater();
     }
     
-    //adding ammo details below
-    
-    $(".ammo.label").appendTo(".ammunition");//adds ammo label
-    
-    for (var ammo in ammunition) {
-        var ammotype=ammunition[ammo];
-        
-        switch (ammotype["class"]) {
-            case "taserammo":
-                abnormalAmmo(ammotype, ammo);
-                break;
-            case "specialammo":
-                abnormalAmmo(ammotype, ammo);
-                break;
-            case "cannonammo":
-                abnormalAmmo(ammotype, ammo);
-                break;
-            case "grenades":
-                explosivesammo("grenadeammo",ammo,ammotype);
-                break;
-            case "rockets":
-                explosivesammo("rocketammo",ammo,ammotype);
-                break;
-            case "none":
-                $(".standard.ammunition").append("<tr class='"+ammo+"'><td class='buyammo button'>+</td><td class='ammountofammo'>0</td><td class='sellammo button'>-</td><td class='ammoname'>"+ammotype["name"]+"</td><td class='dammod'>"+ammotype["dammod"]+" "+ammotype["typemod"]+" "+ammotype["elemod"]+"</td><td class='apmod'>"+ammotype["apmod"]+"</td><td class='avail'>"+ammotype["avail"]+" "+ammotype["restrict"]+"</td><td class='cost'>"+ammotype["cost"]+"&#65509</td></tr>");
-                break;
-        }
-        
-        if (ammotype["avail"]>maxAvail) {
-            $("."+ammo+" .button").addClass("deact");
-        }
-        
-    }
-    
-    $(".gas .grenadesname").empty().append("<select class='toxicgas'></select>");
-    
-    for (var dose in toxin) {
-        if (toxin[dose]["avail"]<=maxAvail) {
-            $(".toxicgas").append("<option value='"+dose+"'>"+toxin[dose]["name"]+"</option>")
-        }
-    }
-    
-    $(".holdoutammo .tracer, .lightammo .tracer, .heavyammo .tracer, .sniperammo .tracer, .shotgunammo .tracer").remove();
     
     function explosivesammo(x,y,z) {
         $("."+x).append("<tr class='"+y+"'><td class='buygrenades button'>+</td><td class='ammountofammo'>0</td><td class='sellgrenades button'>-</td><td class='grenadesname'>"+z["name"]+"</td><td class='grenadesdammod'>"+z["dammod"]+" "+z["typemod"]+" "+z["elemod"]+"</td><td class='apmod'>"+z["apmod"]+"</td><td class='blast'>"+z["blast"]+"</td><td class='avail'>"+z["avail"]+" "+z["restrict"]+"</td><td class='cost'>"+z["cost"]+"&#65509</td></tr>");
@@ -4565,15 +4687,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         $(".gas .avail").empty().append((toxin[x]["avail"]+2)+" "+toxin[x]["restrict"]);
         $(".gas .cost").empty().append((toxin[x]["cost"]+40)+"&#65509;");
     }
-    
-    $("#explosive .label").appendTo($(".explosives"));
-    
-    for (var bomb in explosives) {
-        $("."+bomb+".explosives").append("<tr class='"+bomb+"'><td class='buybomb button'><strong>+</strong></td><td class='bombup button'>+</td><td class='explosiverating'>"+explosives[bomb]["rating"]+"</td><td class='bombdown button'>-</td><td>"+explosives[bomb]["avail"]+" "+explosives[bomb]["restrict"]+"</td><td class='bombbond'>"+explosives[bomb]["cost"]+"&#65509;</td></tr>");
-    }
-    
-    $(".commercial .bombup,.commercial .bombdown, .plastic .buybomb").addClass("deact");
-    $(".plastic .buybomb").empty().append("-");
     
     $("#explosive").on("click", ".bombup, .bombdown", kaboom);//increases an explosive's rating
     
@@ -4677,15 +4790,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         $(".caps").empty().append(inventory["detonator"]["ammount"]);
         updaters.nuyenUpdater();
         
-    }
-    
- 
- 
-    for (var type in armor) {
-        $("#clotharmor #bodyarmor tbody").append("<tr class='"+type+"'><td class='buyarmor button'><strong>+</strong></td><td>"+armor[type]["name"]+"</td><td>"+armor[type]["armor"]+"</td><td>"+armor[type]["avail"]+" "+armor[type]["restrict"]+"</td><td>"+armor[type]["cost"]+"&#65509;</td></tr>");
-        if (armor[type]["avail"]>maxAvail) {
-            $("."+type+" .buyarmor").addClass("deact").empty().append("-");
-        }
     }
     
     $("#clotharmor").on("click", ".buyarmor", sponge);
@@ -4921,105 +5025,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         }
     }
     
-    $(".commlinks").appendTo("#links");//sets the commlink labels
-    $(".cyberdecks").appendTo("#decks");//sets the cyberdeck labels
-    $(".rccs").appendTo("#consoles");//sets the RCC labels
-    
-    for (var devicename in electronics) {//this populates the electronic devices
-        var device = electronics[devicename];
-        switch (device.type) {
-            case "commlink":
-                $("#links").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "deck":
-                $("#decks").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["array"]+"</td><td>"+device["programs"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "rcc":
-                $("#consoles").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["model"]+"</td><td>"+device["device"]+"</td><td>"+device["dataprocess"]+"</td><td>"+device["firewall"]+"</td><td>"+device["avail"]+" "+device["restrict"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "accessory":
-                $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "rfid":
-                $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "credsticks":
-                $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "identification":
-                $('#identification').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>1</td><td class='ratingDown button'>-</td><td>"+device["name"]+" <input type='text' class='fakename' placeholder='For?'>"+"</td><td class='avail'>"+device["avail"]+" "+device.restrict+"</td><td class='price'>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "tools":
-                $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+"<input type='text' class='toolname' placeholder='Skill name'> "+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "restraints":
-                $('#restraints').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0<td class='sellDown'>-</td></td><td>"+device["name"]+"</td><td>"+device.armor+"</td><td>"+device.structure+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "chemicals":
-                $('#chemicals').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "grapplegungear":
-                $('#grapplegungear').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
-                break;
-            case "grapplerope":
-            case "docwagon":
-            case "reagents":
-                bulkBuyGear(device,devicename);
-                break;
-            case "communications":
-            case "optics": 
-            case "audio": 
-            case "securitydevice":
-            case "bnegear":
-            case "survivalgear":
-            case "biotech":
-            case "slappatches":
-            case "enchantingfoci":
-            case "metamagicfoci":
-            case "powerfoci":
-            case "magicallodgematerials":
-                ratingGear(device,devicename);
-                break;
-            case "qifoci":
-                ratingGear(device,devicename);
-                $("#"+device.type+" ."+devicename+" .name").after("<td class='adeptPowers'><select></select></td>");
-                for (var power in adeptPowers) {
-                    $("#"+device.type+" ."+devicename+" .adeptPowers select").append("<option value='"+power+"'>"+adeptPowers[power]["name"]+"</option>");
-                };
-                break;
-            case "spellfoci":
-                ratingGear(device,devicename);
-                $("#"+device.type+" ."+devicename+" .name").after("<td class='magicType'><select></select></td>");
-                if(devicename!="ritualspellcastingfocus") {
-                    for (var spellCat in spellType) {
-                        $("#"+device.type+" ."+devicename+" .magicType select").append("<option value='"+spellType[spellCat]+"'>"+spellType[spellCat]+"</option>");
-                    };
-                } else {
-                    for (var spellCat in ritualKeywords) {
-                        $("#"+device.type+" ."+devicename+" .magicType select").append("<option value='"+ritualKeywords[spellCat]+"'>"+ritualKeywords[spellCat]+"</option>");
-                    };
-                }
-                
-                break;
-            case "spiritfoci":
-                ratingGear(device,devicename);
-                $("#"+device.type+" ."+devicename+" .name").after("<td class='magicType'><select></select></td>");
-                for (var spirit in spiritType) {
-                    $("#"+device.type+" ."+devicename+" .magicType select").append("<option value='"+spiritType[spirit]+"'>"+spiritType[spirit]+"</option>");
-                };
-                break;
-        }
-        
-        if (device["avail"]>maxAvail) {
-            $("."+devicename+" .buydevice").addClass("deact").empty().append("-");
-        }
-        if (typeof device.rating === "undefined") {
-            $("."+devicename+" .commrating").empty().append("n/a");
-        }
-        if (typeof device.availx === "undefined") {
-            $("."+devicename+" .ratingUp,."+devicename+" .ratingDown").addClass("deact");
-        }
-    }
 
     function ratingGear(x,y){//x=device, y=devicename
         $('#'+x.type).append("<tr class='"+y+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+x.rating+"</td><td class='ratingDown button'>-</td><td class='name'>"+x.name+"</td><td class='avail'>"+x.avail+" "+x.restrict+"</td><td class='price'>"+x.cost+"&yen;</td></tr>");
@@ -5539,7 +5544,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+limb+" .grade select").val(augmentations[limbType][limb]["grade"]);
                 $("."+limb+" .str").empty().append(augmentations[limbType][limb]["str"]);
                 $("."+limb+" .agi").empty().append(augmentations[limbType][limb]["agi"]);
-                $("."+limb+" .cap").empty().append(augmentations[limbType][limb]["capacity"]);
+                $("."+limb+" .cap").empty().append(augmentations[limbType][limb]["maxcap"]);
                 $("."+limb+" .avail").empty().append(augmentations[limbType][limb]["avail"]);
                 $("."+limb+" .ess").empty().append(Math.round(augmentations[limbType][limb]["essence"]*1000)/1000);
                 $("."+limb+" .price").empty().append(augmentations[limbType][limb]["cost"]+"&yen;");
@@ -5587,22 +5592,22 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 if ($.isEmptyObject(characteraugmentation.limbs[side+augmentations[limbType][limb]["slot"]])) {
                     var limbloc=side+augmentations[limbType][limb]["slot"];
                     var cyber = characteraugmentation.limbs[limbloc] = $.extend({}, augmentations[limbType][limb]);
-                    $("."+limb).after("<tr class='"+limbloc+"'><td class='sellAug button'><em>-</em></td><td>"+side+" "+limbType+" "+augmentations[limbType][limb]["slot"]+"</td><td class='cybermods' colspan=12><table><tbody></tbody></table></td><td class='price'>"+cyber.cost+"&yen;</td></tr>");
+                    $("."+limb).after("<tr class='"+limbloc+"'><td class='sellAug button'><em>-</em></td><td>"+side+" "+limbType+" "+augmentations[limbType][limb]["slot"]+"</td><td class='cybermods' colspan=12><table class='cyberenhance'><tbody></tbody></table></td><td class='price'>"+cyber.cost+"&yen;</td></tr>");
 
                     for (var mod in augmentations.mods) {
                         for (var x in augmentations.mods[mod]["allow"]) {
                             if (augmentations.mods[mod]["allow"][x]==augmentations[limbType][limb]["slot"]) {
                                 var targetMod = augmentations.mods[mod];
                                 if (typeof targetMod.rating !== "undefined") {
-                                    $("."+limbloc+" .cybermods table tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='modUp button'>+</td><td class='modRating'>0</td><td class='moddown button'>-</td></tr>")
+                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='modUp button'>+</td><td class='modRating'>0</td><td class='moddown button'>-</td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
                                 } else {
-                                    $("."+limbloc+" .cybermods table tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='buyMod' colspan=3>+</td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td></tr>")
+                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='buyMod button' colspan=3>+</td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
                                 }
-                                
                             }
                         }
-                        
                     }
+
+                    $("."+limbloc+" .cybermods").append("<table class='cyberstats'><tbody><tr class='label'><td>Capacity</td><td>Str</td><td>Agi</td><td>Armor</td><td>RC</td><td>Avail</td><td>Ess</td></tr><tr class='stats'><td class='cap'>"+cyber.cap+"/"+cyber.capmax+"</td><td class='str'>("+(cyber.str+cyber.augstr)+")</td><td class='agi'>("+(cyber.agi+cyber.augagi)+")</td><td class='armor'>"+cyber.armor+"</td><td class='rc'>"+(cyber.rc+(Math.ceil(cyber.str/3))+1)+"</td></tr></tbody></table>")
 
                     ess-=cyber.essence;
                     attributes.current.mag-=cyber.essence;
