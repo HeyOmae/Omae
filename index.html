@@ -5599,15 +5599,15 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                             if (augmentations.mods[mod]["allow"][x]==augmentations[limbType][limb]["slot"]) {
                                 var targetMod = augmentations.mods[mod];
                                 if (typeof targetMod.rating !== "undefined") {
-                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='modUp button'>+</td><td class='modRating'>0</td><td class='moddown button'>-</td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
+                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='modUp button'><strong>+</strong></td><td class='modRating'>0</td><td class='moddown button'><strong>-</strong></td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
                                 } else {
-                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='buyMod button' colspan=3>+</td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
+                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='buyMod button' colspan=3><strong>-</strong></td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
                                 }
                             }
                         }
                     }
 
-                    $("."+limbloc+" .cybermods").append("<table class='cyberstats'><tbody><tr class='label'><td>Capacity</td><td>Str</td><td>Agi</td><td>Armor</td><td>RC</td><td>Avail</td><td>Ess</td></tr><tr class='stats'><td class='cap'>"+cyber.cap+"/"+cyber.capmax+"</td><td class='str'>("+(cyber.str+cyber.augstr)+")</td><td class='agi'>("+(cyber.agi+cyber.augagi)+")</td><td class='armor'>"+cyber.armor+"</td><td class='rc'>"+(cyber.rc+(Math.ceil(cyber.str/3))+1)+"</td></tr></tbody></table>")
+                    $("."+limbloc+" .cybermods").append("<table class='cyberstats'><tbody><tr class='label'><td>Capacity</td><td>Str</td><td>Agi</td><td>Armor</td><td>RC</td><td>Avail</td><td>Ess</td></tr><tr class='stats'><td class='cap'>"+cyber.cap+"/"+cyber.capmax+"</td><td class='str'>("+(cyber.str+cyber.augstr)+")</td><td class='agi'>("+(cyber.agi+cyber.augagi)+")</td><td class='armor'>"+cyber.armor+"</td><td class='rc'>"+(cyber.rc+(Math.ceil(cyber.str/3))+1)+"</td><td>"+cyber.avail+"</td><td>"+cyber.essence+"</td></tr></tbody></table>")
 
                     ess-=cyber.essence;
                     attributes.current.mag-=cyber.essence;
@@ -5621,6 +5621,37 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                     alert("You already have a wiz new "+side+" "+augmentations[limbType][limb]["slot"]);
                 }
                 
+                break;
+            case "buyMod button":
+                var mod = limb;
+                limb = $("."+limb).parents("tr").attr("class");
+
+                activate($(this));
+                if (typeof characteraugmentation.limbs[limb]["mods"] === "undefined") {
+                    characteraugmentation.limbs[limb]["mods"] = {};
+                }
+                var charlimb = characteraugmentation.limbs[limb];
+                var modslot = charlimb["mods"];
+                charlimb["mods"][mod]=$().extend({}, augmentations.mods[mod]);//this copies the limb into its location
+
+                //this stuff changes all the stats to the new bought stuff
+                charlimb.cap+=modslot[mod]["capacity"];
+                nuyen-=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
+
+                cyberlimbUpdater();
+                return;
+            case "buyMod button active":
+                var mod = limb;
+                limb = $("."+limb).parents("tr").attr("class");
+                var charlimb = characteraugmentation.limbs[limb];
+                deactivate($(this));
+
+                charlimb.cap-=charlimb.mods[mod]["capacity"];
+                nuyen+=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
+
+                cyberlimbUpdater();
+                delete characteraugmentation.limbs[limb]["mods"][mod];
+                return;
                 break;
             case "sellAug button":
                 var cyber = characteraugmentation.limbs[limb];
@@ -5638,6 +5669,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
 
         }
+        function cyberlimbUpdater () {
+            $("."+limb+" .cyberstats .cap").empty().append(characteraugmentation.limbs[limb]["cap"]+"/"+characteraugmentation.limbs[limb]["capmax"]);
+            updaters.nuyenUpdater();
+        }
+
         $("."+limb+" .str").empty().append(augmentations[limbType][limb]["str"]);
         $("."+limb+" .agi").empty().append(augmentations[limbType][limb]["agi"]);
         $("."+limb+" .avail").empty().append(augmentations[limbType][limb]["avail"]);
