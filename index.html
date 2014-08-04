@@ -5544,7 +5544,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 $("."+limb+" .grade select").val(augmentations[limbType][limb]["grade"]);
                 $("."+limb+" .str").empty().append(augmentations[limbType][limb]["str"]);
                 $("."+limb+" .agi").empty().append(augmentations[limbType][limb]["agi"]);
-                $("."+limb+" .cap").empty().append(augmentations[limbType][limb]["maxcap"]);
+                $("."+limb+" .cap").empty().append(augmentations[limbType][limb]["capmax"]);
                 $("."+limb+" .avail").empty().append(augmentations[limbType][limb]["avail"]);
                 $("."+limb+" .ess").empty().append(Math.round(augmentations[limbType][limb]["essence"]*1000)/1000);
                 $("."+limb+" .price").empty().append(augmentations[limbType][limb]["cost"]+"&yen;");
@@ -5558,30 +5558,35 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         var limb = $(this).parents("tr").attr("class");
         var limbType = $("."+limb+" .type select").val();
         var limbGrade = $("."+limb+" .grade select").val();
+
         switch ($(this).attr("class")) {
             case "strUp button":
                 if (augmentations[limbType][limb]["str"]>=attributes.maximum.strmax) {return;}
                 augmentations[limbType][limb]["str"]++;
                 augmentations[limbType][limb]["avail"]++;
                 augmentations[limbType][limb]["cost"]+=(5000*augmentations.grade[limbGrade]["cost"]);
+                customlimbUpdater();
                 break;
             case "strDown button":
                 if (augmentations[limbType][limb]["str"]<=3) {return;}
                 augmentations[limbType][limb]["str"]--;
                 augmentations[limbType][limb]["avail"]--;
                 augmentations[limbType][limb]["cost"]-=(5000*augmentations.grade[limbGrade]["cost"]);
+                customlimbUpdater();
                 break;
             case "agiUp button":
                 if (augmentations[limbType][limb]["agi"]>=attributes.maximum.agimax) {return;}
                 augmentations[limbType][limb]["agi"]++;
                 augmentations[limbType][limb]["avail"]++;
                 augmentations[limbType][limb]["cost"]+=(5000*augmentations.grade[limbGrade]["cost"]);
+                customlimbUpdater();
                 break;
             case "agiDown button":
                 if (augmentations[limbType][limb]["agi"]<=3) {return;}
                 augmentations[limbType][limb]["agi"]--;
                 augmentations[limbType][limb]["avail"]--;
                 augmentations[limbType][limb]["cost"]-=(5000*augmentations.grade[limbGrade]["cost"]);
+                customlimbUpdater();
                 break;
             case "buyAug button":
                 if (augmentations[limbType][limb]["slot"]=="arm"||augmentations[limbType][limb]["slot"]=="leg"){
@@ -5624,7 +5629,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
             case "buyMod button":
                 var mod = limb;
-                limb = $("."+limb).parents("tr").attr("class");
+                limb = $(this).parents("tr").parents("tr").attr("class");
 
                 activate($(this));
                 if (typeof characteraugmentation.limbs[limb]["mods"] === "undefined") {
@@ -5637,21 +5642,49 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 //this stuff changes all the stats to the new bought stuff
                 charlimb.cap+=modslot[mod]["capacity"];
                 nuyen-=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
+                charlimb.cost+=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
 
                 cyberlimbUpdater();
-                return;
+                break;
             case "buyMod button active":
                 var mod = limb;
-                limb = $("."+limb).parents("tr").attr("class");
+                limb = $(this).parents("tr").parents("tr").attr("class");
+                console.log(limb);
                 var charlimb = characteraugmentation.limbs[limb];
                 deactivate($(this));
 
                 charlimb.cap-=charlimb.mods[mod]["capacity"];
                 nuyen+=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
+                charlimb.cost-=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
 
                 cyberlimbUpdater();
                 delete characteraugmentation.limbs[limb]["mods"][mod];
-                return;
+                break;
+            case "modUp button":
+                var mod = limb;
+                limb = $(this).parents("tr").parents("tr").attr("class");
+                var charlimb = characteraugmentation.limbs[limb];
+
+                if (typeof charlimb["mods"] === "undefined") {
+                    charlimb["mods"] = {};
+                }
+
+                if (typeof charlimb.mods[mod] === "undefined") {
+                    charlimb.mods[mod]=$().extend({}, augmentations.mods[mod]);
+                }
+                if(charlimb.mods[mod]["rating"]>charlimb.mods[mod]["ratingmax"]){return;}
+
+                charlimb.mods[mod]["rating"]++;
+                charlimb.mods[mod]["capacity"]++;
+                charlimb.mods[mod]["cost"]+=charlimb.mods[mod]["costx"]*augmentations.grade[charlimb.grade]["cost"];
+                charlimb.mods[mod]["avail"]+=charlimb.mods[mod]["availx"];
+                $("."+limb+" ."+mod+" .price").empty().append(charlimb.mods[mod]["cost"]+"&yen;");
+                $("."+limb+" ."+mod+" .avail").empty().append(charlimb.mods[mod]["avail"]);
+                $("."+limb+" ."+mod+" .cap").empty().append("["+charlimb.mods[mod]["capacity"]+"]");
+                $("."+limb+" ."+mod+" .modRating").empty().append(charlimb.mods[mod]["rating"]);
+
+                cyberlimbUpdater();
+
                 break;
             case "sellAug button":
                 var cyber = characteraugmentation.limbs[limb];
@@ -5665,19 +5698,22 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 characteraugmentation.limbs[limb] = {};
                 $(this).parent().remove();
                 disUpdater();
-                return;
                 break;
 
         }
         function cyberlimbUpdater () {
+                console.log(limb);
             $("."+limb+" .cyberstats .cap").empty().append(characteraugmentation.limbs[limb]["cap"]+"/"+characteraugmentation.limbs[limb]["capmax"]);
+            $("."+limb+">.price").empty().append(charlimb.cost+"&yen;")
             updaters.nuyenUpdater();
         }
 
-        $("."+limb+" .str").empty().append(augmentations[limbType][limb]["str"]);
-        $("."+limb+" .agi").empty().append(augmentations[limbType][limb]["agi"]);
-        $("."+limb+" .avail").empty().append(augmentations[limbType][limb]["avail"]);
-        $("."+limb+" .price").empty().append(augmentations[limbType][limb]["cost"]+"&yen;");
+        function customlimbUpdater () {
+            $("."+limb+" .str").empty().append(augmentations[limbType][limb]["str"]);
+            $("."+limb+" .agi").empty().append(augmentations[limbType][limb]["agi"]);
+            $("."+limb+" .avail").empty().append(augmentations[limbType][limb]["avail"]);
+            $("."+limb+" .price").empty().append(augmentations[limbType][limb]["cost"]+"&yen;");
+        }
     }
 
 
