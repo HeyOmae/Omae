@@ -1321,27 +1321,27 @@
         </div>
     </div>
 <script>
-    var priorityA;
-    var priorityB;
-    var priorityC;
-    var priorityD;
-    var priorityE;
+    var priorityA,
+        priorityB,
+        priorityC,
+        priorityD,
+        priorityE,
     
-    var metatype;
-    var attribute=0;
-    var specAttribute=0;
-    var magres;//what kind of emergence or awakening a character is
-    var skills=0;//skill points
-    var knowledgepoints=0;//knowledge skill points
-    var skillgroups=0;//skill group points
-    var skillgroupmax=6;//this is the max rating for a skill group
-    var spells=0;//number of spells one can learn
-    var powerPoints=0.0;//adept power points
-    var forms=0;//number of complex forms
-    var nuyen=0;//money
-    var ess=6.0;
-    var reachmod=0;//reachmod for trolls
-    var karma=25;
+        metatype,
+        attribute=0,
+        specAttribute=0,
+        magres,//what kind of emergence or awakening a character is
+        skills=0,//skill points
+        knowledgepoints=0,//knowledge skill points
+        skillgroups=0,//skill group points
+        skillgroupmax=6,//this is the max rating for a skill group
+        spells=0,//number of spells one can learn
+        powerPoints=0.0,//adept power points
+        forms=0,//number of complex forms
+        nuyen=0,//money
+        ess=6.0,
+        reachmod=0,//reachmod for trolls
+        karma=25;
     
     attributes = {
         current: {
@@ -1384,14 +1384,14 @@
             resmax:6
         },
         augment: {
-            augbod:0,//augmented attrabute
-            augagi:0,
-            augrea:0,
-            augstr:0,
-            augwil:0,
-            auglog:0,
-            augint:0,
-            augcha:0
+            bod:0,//augmented attrabute
+            agi:0,
+            rea:0,
+            str:0,
+            wil:0,
+            log:0,
+            int:0,
+            cha:0
         },
         limits: {
             phyLimit:0,
@@ -1427,81 +1427,81 @@
     var maxAvail = 12; //the max availibility at chargen
     
     var activeSkills = {//the list of all the skills in the entire game forever. Catalysis needs to never release any more skills ever after this
-        archery:{name:"Archery", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        automatics:{name:"Automatics", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        blades:{name:"Blades", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        clubs:{name:"Clubs", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        exoticrangedweapon:{name:"Exotic Ranged Weapon", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:false},
-        heavyweapons:{name:"Heavy Weapons", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        longarms:{name:"Long Arms", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        pistols:{name:"Pistols", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        throwingweapons:{name:"Throwing Weapons", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        unarmedcombat:{name:"Unarmed Combat", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        gunnery:{name:"Gunnery", catalog:"agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        gymnastics:{name:"Gymnastics", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        escapeartist:{name:"Escape Artist", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        exoticmeleeweapon:{name:"Exotic Melee Weapon", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:false},
-        locksmith:{name:"Locksmith", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        palming:{name:"Palming", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        sneaking:{name:"Sneaking", catalog: "agility", stat:attributes.current.agi, rating:0, mod:0, max:6, defaultable:true},
-        diving:{name:"Diving", catalog: "body", stat:attributes.current.bod, rating:0, mod:0, max:6, defaultable:true},
-        freefall:{name:"Free-Fall", catalog: "body", stat:attributes.current.bod, rating:0, mod:0, max:6, defaultable:true},
-        pilotaerospace:{name:"Pilot Aerospace", catalog: "reaction", stat:attributes.current.rea, rating:0, mod:0, max:6, defaultable:false},
-        pilotaircraft:{name:"Pilot Aircraft", catalog: "reaction", stat:attributes.current.rea, rating:0, mod:0, max:6, defaultable:false},
-        pilotwalker:{name:"Pilot Walker", catalog: "reaction", stat:attributes.current.rea, rating:0, mod:0, max:6, defaultable:false},
-        pilotexoticvehicle:{name:"Pilot Exotic Vehicle", catalog: "reaction", stat:attributes.current.rea, rating:0, mod:0, max:6, defaultable:false},
-        pilotgroundcraft:{name:"Pilot Ground Craft", catalog: "reaction", stat:attributes.current.rea, rating:0, mod:0, max:6, defaultable:true},
-        pilotwatercraft:{name:"Pilot Water Craft", catalog: "reaction", stat:attributes.current.rea, rating:0, mod:0, max:6, defaultable:true},
-        running:{name:"Running", catalog: "strength", stat:attributes.current.str, rating:0, mod:0, max:6, defaultable:true},
-        swimming:{name:"Swimming", catalog: "strength", stat:attributes.current.str, rating:0, mod:0, max:6, defaultable:true},
-        con:{name:"Con", catalog: "charisma", stat:attributes.current.cha, rating:0, mod:0, max:6, defaultable:true},
-        etiquette:{name:"Etiquette", catalog: "charisma", stat:attributes.current.cha, rating:0, mod:0, max:6, defaultable:true},
-        instruction:{name:"Instruction", catalog: "charisma", stat:attributes.current.cha, rating:0, mod:0, max:6, defaultable:true},
-        intimidation:{name:"Intimidation", catalog: "charisma", stat:attributes.current.cha, rating:0, mod:0, max:6, defaultable:true},
-        leadership:{name:"Leadership", catalog: "charisma", stat:attributes.current.cha, rating:0, mod:0, max:6, defaultable:true},
-        negotiation:{name:"Negotiation", catalog: "charisma", stat:attributes.current.cha, rating:0, mod:0, max:6, defaultable:true},
-        performance:{name:"Performance", catalog: "charisma", stat:attributes.current.cha, rating:0, mod:0, max:6, defaultable:true},
-        impersonation:{name:"Impersonation", catalog: "charisma", stat:attributes.current.cha, rating:0, mod:0, max:6, defaultable:true},
-        animalhandling:{name:"Animal Handling", catalog: "charisma", stat:attributes.current.cha, rating:0, mod:0, max:6, defaultable:true},
-        artisan:{name:"Artisan", catalog: "intuition", stat:attributes.current.int, rating:0, mod:0, max:6, defaultable:true},
-        assensing:{name:"Assensing", catalog: "intuition", stat:attributes.current.int, rating:0, mod:0, max:6, defaultable:false},
-        disguise:{name:"Disguise", catalog: "intuition", stat:attributes.current.int, rating:0, mod:0, max:6, defaultable:true},
-        navigation:{name:"Navigation", catalog: "intuition", stat:attributes.current.int, rating:0, mod:0, max:6, defaultable:true},
-        perception:{name:"Perception", catalog: "intuition", stat:attributes.current.int, rating:0, mod:0, max:6, defaultable:true},
-        tracking:{name:"Tracking", catalog: "intuition", stat:attributes.current.int, rating:0, mod:0, max:6, defaultable:true},
-        aeronauticsmechanics:{name:"Aeronautics Mechanics", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        arcane:{name:"Arcane", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        armorer:{name:"Armorer", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:true},
-        automotivemechanic:{name:"Automotive Mechanic", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        biotechnology:{name:"Biotechnology", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        chemistry:{name:"Chemistry", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        computer:{name:"Computer", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:true},
-        cybertechnology:{name:"Cybertechnology", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        cybercombat:{name:"Cybercombat", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:true},
-        demolitions:{name:"Demolitions", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:true},
-        electronicwarfare:{name:"Electronic Warfare", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        firstaid:{name:"First Aid", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:true},
-        industrialmechanics:{name:"Industrial Mechanics", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        hacking:{name:"Hacking", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:true},
-        hardware:{name:"Hardware", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        medicine:{name:"Medicine", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        nauticalmechanics:{name:"Nautical Mechanics", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        software:{name:"Software", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:false},
-        forgery:{name:"Forgery", catalog: "logic", stat:attributes.current.log, rating:0, mod:0, max:6, defaultable:true},
-        astralcombat:{name:"Astral Combat", catalog: "will", stat:attributes.current.wil, rating:0, mod:0, max:6, defaultable:false},
-        survival:{name:"Survival", catalog: "will", stat:attributes.current.wil, rating:0, mod:0, max:6, defaultable:true},
-        alchemy:{name:"Alchemy", catalog: "magic", stat:attributes.current.mag, rating:0, mod:0, max:6, defaultable:true},
-        artificing:{name:"Artificing", catalog: "magic", stat:attributes.current.mag, rating:0, mod:0, max:6, defaultable:false},
-        banishing:{name:"Banishing", catalog: "magic", stat:attributes.current.mag, rating:0, mod:0, max:6, defaultable:false},
-        binding:{name:"Binding", catalog: "magic", stat:attributes.current.mag, rating:0, mod:0, max:6, defaultable:false},
-        counterspelling:{name:"Counterspelling", catalog: "magic", stat:attributes.current.mag, rating:0, mod:0, max:6, defaultable:false},
-        ritualspellcasting:{name:"Ritual Spellcasting", catalog: "magic", stat:attributes.current.mag, rating:0, mod:0, max:6, defaultable:false},
-        spellcasting:{name:"Spellcasting", catalog: "magic", stat:attributes.current.mag, rating:0, mod:0, max:6, defaultable:false},
-        summoning:{name:"Summoning", catalog: "magic", stat:attributes.current.mag, rating:0, mod:0, max:6, defaultable:false},
-        disenchanting:{name:"Disenchanting", catalog: "magic", stat:attributes.current.mag, rating:0, mod:0, max:6, defaultable:false},
-        compiling:{name:"Compiling", catalog: "resonance", stat:attributes.current.res, rating:0, mod:0, max:6, defaultable:false},
-        decompiling:{name:"Decompiling", catalog: "resonance", stat:attributes.current.res, rating:0, mod:0, max:6, defaultable:false},
-        registering:{name:"Registering", catalog: "resonance", stat:attributes.current.res, rating:0, mod:0, max:6, defaultable:false}
+        archery:{name:"Archery", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        automatics:{name:"Automatics", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        blades:{name:"Blades", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        clubs:{name:"Clubs", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        exoticrangedweapon:{name:"Exotic Ranged Weapon", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:false},
+        heavyweapons:{name:"Heavy Weapons", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        longarms:{name:"Long Arms", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        pistols:{name:"Pistols", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        throwingweapons:{name:"Throwing Weapons", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        unarmedcombat:{name:"Unarmed Combat", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        gunnery:{name:"Gunnery", catalog:"agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        gymnastics:{name:"Gymnastics", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        escapeartist:{name:"Escape Artist", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        exoticmeleeweapon:{name:"Exotic Melee Weapon", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:false},
+        locksmith:{name:"Locksmith", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        palming:{name:"Palming", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        sneaking:{name:"Sneaking", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
+        diving:{name:"Diving", catalog: "body", stat:"bod", rating:0, mod:0, max:6, defaultable:true},
+        freefall:{name:"Free-Fall", catalog: "body", stat:"bod", rating:0, mod:0, max:6, defaultable:true},
+        pilotaerospace:{name:"Pilot Aerospace", catalog: "reaction", stat:"rea", rating:0, mod:0, max:6, defaultable:false},
+        pilotaircraft:{name:"Pilot Aircraft", catalog: "reaction", stat:"rea", rating:0, mod:0, max:6, defaultable:false},
+        pilotwalker:{name:"Pilot Walker", catalog: "reaction", stat:"rea", rating:0, mod:0, max:6, defaultable:false},
+        pilotexoticvehicle:{name:"Pilot Exotic Vehicle", catalog: "reaction", stat:"rea", rating:0, mod:0, max:6, defaultable:false},
+        pilotgroundcraft:{name:"Pilot Ground Craft", catalog: "reaction", stat:"rea", rating:0, mod:0, max:6, defaultable:true},
+        pilotwatercraft:{name:"Pilot Water Craft", catalog: "reaction", stat:"rea", rating:0, mod:0, max:6, defaultable:true},
+        running:{name:"Running", catalog: "strength", stat:"str", rating:0, mod:0, max:6, defaultable:true},
+        swimming:{name:"Swimming", catalog: "strength", stat:"str", rating:0, mod:0, max:6, defaultable:true},
+        con:{name:"Con", catalog: "charisma", stat:"cha", rating:0, mod:0, max:6, defaultable:true},
+        etiquette:{name:"Etiquette", catalog: "charisma", stat:"cha", rating:0, mod:0, max:6, defaultable:true},
+        instruction:{name:"Instruction", catalog: "charisma", stat:"cha", rating:0, mod:0, max:6, defaultable:true},
+        intimidation:{name:"Intimidation", catalog: "charisma", stat:"cha", rating:0, mod:0, max:6, defaultable:true},
+        leadership:{name:"Leadership", catalog: "charisma", stat:"cha", rating:0, mod:0, max:6, defaultable:true},
+        negotiation:{name:"Negotiation", catalog: "charisma", stat:"cha", rating:0, mod:0, max:6, defaultable:true},
+        performance:{name:"Performance", catalog: "charisma", stat:"cha", rating:0, mod:0, max:6, defaultable:true},
+        impersonation:{name:"Impersonation", catalog: "charisma", stat:"cha", rating:0, mod:0, max:6, defaultable:true},
+        animalhandling:{name:"Animal Handling", catalog: "charisma", stat:"cha", rating:0, mod:0, max:6, defaultable:true},
+        artisan:{name:"Artisan", catalog: "intuition", stat:"int", rating:0, mod:0, max:6, defaultable:true},
+        assensing:{name:"Assensing", catalog: "intuition", stat:"int", rating:0, mod:0, max:6, defaultable:false},
+        disguise:{name:"Disguise", catalog: "intuition", stat:"int", rating:0, mod:0, max:6, defaultable:true},
+        navigation:{name:"Navigation", catalog: "intuition", stat:"int", rating:0, mod:0, max:6, defaultable:true},
+        perception:{name:"Perception", catalog: "intuition", stat:"int", rating:0, mod:0, max:6, defaultable:true},
+        tracking:{name:"Tracking", catalog: "intuition", stat:"int", rating:0, mod:0, max:6, defaultable:true},
+        aeronauticsmechanics:{name:"Aeronautics Mechanics", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        arcane:{name:"Arcane", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        armorer:{name:"Armorer", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:true},
+        automotivemechanic:{name:"Automotive Mechanic", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        biotechnology:{name:"Biotechnology", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        chemistry:{name:"Chemistry", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        computer:{name:"Computer", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:true},
+        cybertechnology:{name:"Cybertechnology", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        cybercombat:{name:"Cybercombat", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:true},
+        demolitions:{name:"Demolitions", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:true},
+        electronicwarfare:{name:"Electronic Warfare", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        firstaid:{name:"First Aid", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:true},
+        industrialmechanics:{name:"Industrial Mechanics", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        hacking:{name:"Hacking", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:true},
+        hardware:{name:"Hardware", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        medicine:{name:"Medicine", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        nauticalmechanics:{name:"Nautical Mechanics", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        software:{name:"Software", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:false},
+        forgery:{name:"Forgery", catalog: "logic", stat:"log", rating:0, mod:0, max:6, defaultable:true},
+        astralcombat:{name:"Astral Combat", catalog: "will", stat:"wil", rating:0, mod:0, max:6, defaultable:false},
+        survival:{name:"Survival", catalog: "will", stat:"wil", rating:0, mod:0, max:6, defaultable:true},
+        alchemy:{name:"Alchemy", catalog: "magic", stat:"mag", rating:0, mod:0, max:6, defaultable:true},
+        artificing:{name:"Artificing", catalog: "magic", stat:"mag", rating:0, mod:0, max:6, defaultable:false},
+        banishing:{name:"Banishing", catalog: "magic", stat:"mag", rating:0, mod:0, max:6, defaultable:false},
+        binding:{name:"Binding", catalog: "magic", stat:"mag", rating:0, mod:0, max:6, defaultable:false},
+        counterspelling:{name:"Counterspelling", catalog: "magic", stat:"mag", rating:0, mod:0, max:6, defaultable:false},
+        ritualspellcasting:{name:"Ritual Spellcasting", catalog: "magic", stat:"mag", rating:0, mod:0, max:6, defaultable:false},
+        spellcasting:{name:"Spellcasting", catalog: "magic", stat:"mag", rating:0, mod:0, max:6, defaultable:false},
+        summoning:{name:"Summoning", catalog: "magic", stat:"mag", rating:0, mod:0, max:6, defaultable:false},
+        disenchanting:{name:"Disenchanting", catalog: "magic", stat:"mag", rating:0, mod:0, max:6, defaultable:false},
+        compiling:{name:"Compiling", catalog: "resonance", stat:"res", rating:0, mod:0, max:6, defaultable:false},
+        decompiling:{name:"Decompiling", catalog: "resonance", stat:"res", rating:0, mod:0, max:6, defaultable:false},
+        registering:{name:"Registering", catalog: "resonance", stat:"res", rating:0, mod:0, max:6, defaultable:false}
 
     };
     
@@ -2730,24 +2730,24 @@
     disUpdater();//runs the attrabute display funcation on start up
     
     function disUpdater () {//adds the attrabutes to the attribute table
-        renderAttStat (attributes.augment.augbod, "bod", attributes.current.bod, attributes.maximum.bodmax);
-        renderAttStat (attributes.augment.augagi, "agi", attributes.current.agi, attributes.maximum.agimax);
-        renderAttStat (attributes.augment.augrea, "rea", attributes.current.rea, attributes.maximum.reamax);
-        renderAttStat (attributes.augment.augstr, "str", attributes.current.str, attributes.maximum.strmax);
-        renderAttStat (attributes.augment.augwil, "wil", attributes.current.wil, attributes.maximum.wilmax);
-        renderAttStat (attributes.augment.auglog, "log", attributes.current.log, attributes.maximum.logmax);
-        renderAttStat (attributes.augment.augint, "int", attributes.current.int, attributes.maximum.intmax);
-        renderAttStat (attributes.augment.augcha, "cha", attributes.current.cha, attributes.maximum.chamax);
+        renderAttStat (attributes.augment.bod, "bod", attributes.current.bod, attributes.maximum.bodmax);
+        renderAttStat (attributes.augment.agi, "agi", attributes.current.agi, attributes.maximum.agimax);
+        renderAttStat (attributes.augment.rea, "rea", attributes.current.rea, attributes.maximum.reamax);
+        renderAttStat (attributes.augment.str, "str", attributes.current.str, attributes.maximum.strmax);
+        renderAttStat (attributes.augment.wil, "wil", attributes.current.wil, attributes.maximum.wilmax);
+        renderAttStat (attributes.augment.log, "log", attributes.current.log, attributes.maximum.logmax);
+        renderAttStat (attributes.augment.int, "int", attributes.current.int, attributes.maximum.intmax);
+        renderAttStat (attributes.augment.cha, "cha", attributes.current.cha, attributes.maximum.chamax);
         renderSpecStat ("edg", attributes.current.edg, attributes.maximum.edgmax);
         updaters.magUpdater();
         updaters.resUpdater();
         pointUpdater (".pnt", attribute);
         pointUpdater (".spePnt",specAttribute);
-        attributes.limits.phyLimit = renderLimit (attributes.limitMod.phyLimitMod,"phyLimit", attributes.current.str+attributes.augment.augstr, attributes.current.bod+attributes.augment.augbod, attributes.current.rea+attributes.augment.augrea);
+        attributes.limits.phyLimit = renderLimit (attributes.limitMod.phyLimitMod,"phyLimit", attributes.current.str+attributes.augment.str, attributes.current.bod+attributes.augment.bod, attributes.current.rea+attributes.augment.rea);
         attributes.limits.socLimit = renderLimit (attributes.limitMod.socLimitMod, "socLimit", attributes.current.cha, attributes.current.wil, ess);
         attributes.limits.menLimit = renderLimit (attributes.limitMod.menLimitMod, "menLimit", attributes.current.log, attributes.current.int, attributes.current.wil);
-        attributes.initiative.iniphy = initiativeRenderMonkey (attributes.current.rea,"meatini", attributes.initiative.iniphyDice,attributes.augment.augrea);
-        attributes.initiative.iniast = initiativeRenderMonkey (attributes.current.int,"magicini", attributes.initiative.iniastDice, attributes.augment.augint);
+        attributes.initiative.iniphy = initiativeRenderMonkey (attributes.current.rea,"meatini", attributes.initiative.iniphyDice,attributes.augment.rea);
+        attributes.initiative.iniast = initiativeRenderMonkey (attributes.current.int,"magicini", attributes.initiative.iniastDice, attributes.augment.int);
         attributes.initiative.inimat = initiativeRenderMonkey (dataP,"coldmatini", attributes.initiative.inimatcold, 0);
         attributes.initiative.inimat = initiativeRenderMonkey (dataP,"hotmatini", attributes.initiative.inimathot, 0);
         renderSkills ();//this updates everything that uses a for loop
@@ -2778,7 +2778,7 @@
         if (magres=="technomancer") {
             dataP=attributes.current.log;
         }
-        var ini = attributes.current.int+attributes.augment.augint + x + w;
+        var ini = attributes.current.int+attributes.augment.int + x + w;
         $("."+y).empty().append($("<strong>"+ini+"+"+z+"D6</strong>"));
         return ini;
     }
@@ -2893,7 +2893,7 @@
                 break;
             
         }
-        skillAttUpdater();
+        //skillAttUpdater();//delete
         
         function bowUpdater() {
             weapons.bow.damage=weapons.bow.rating+2;
@@ -2976,7 +2976,7 @@
                         power["level"]++;
                         powerPoints=powerPoints-power["cost"];
                         attributes.initiative.iniphyDice++;
-                        attributes.augment.augrea++;
+                        attributes.augment.rea++;
                     }
                 }
                 if (power["level"]>1) {
@@ -2984,7 +2984,7 @@
                         power["level"]--;
                         powerPoints=powerPoints+power["cost"];
                         attributes.initiative.iniphyDice--;
-                        attributes.augment.augrea--;
+                        attributes.augment.rea--;
                     }
                 }
             } else if (prop=="improvedphysicalattributebody"||prop=="improvedphysicalattributeagility"||prop=="improvedphysicalattributereaction"||prop=="improvedphysicalattributestrength") {//if the power is improve attribute then do this stuff
@@ -3001,16 +3001,16 @@
                     for (var key in power["attmod"]) {
                         switch (power["attmod"][key]) {
                             case "body":
-                                attributes.augment.augbod=minusAugmentAtt(attributes.augment.augbod);
+                                attributes.augment.bod=minusAugmentAtt(attributes.augment.bod);
                                 break;
                             case "reaction":
-                                attributes.augment.augrea=minusAugmentAtt(attributes.augment.augrea);
+                                attributes.augment.rea=minusAugmentAtt(attributes.augment.rea);
                                 break;
                             case "agility":
-                                attributes.augment.augagi=minusAugmentAtt(attributes.augment.augagi);
+                                attributes.augment.agi=minusAugmentAtt(attributes.augment.agi);
                                 break;
                             case "strength":
-                                attributes.augment.augstr=minusAugmentAtt(attributes.augment.augstr);
+                                attributes.augment.str=minusAugmentAtt(attributes.augment.str);
                                 break;
                         }
                     }
@@ -3397,9 +3397,9 @@
         
         function upNAtEm (x) {//function to set up the active and knowledge skills, "Up and at 'em, Atom Ant!"
             for (var skill in x) {
-                skillsum = funSkillSum (x[skill]["defaultable"], x[skill]["rating"], x[skill]["mod"], x[skill]["stat"]);
+                skillsum = funSkillSum (x[skill]["defaultable"], x[skill]["rating"], x[skill]["mod"], attributes.current[x[skill]["stat"]]);
                 
-                $("<tr class='"+[skill]+"'><td class='incAtt "+[skill]+"'>+</td><td class='rating'>"+x[skill]["rating"]+"</td><td class='decAtt "+[skill]+"'>-</td><td class='skillName'>"+x[skill]["name"]+"</td><td class='stat'>"+x[skill]["stat"]+"</td><td class= 'mod'>"+x[skill]["mod"]+"</td><td class='skillsum'>"+skillsum+"</td><tr>")
+                $("<tr class='"+[skill]+"'><td class='incAtt "+[skill]+"'>+</td><td class='rating'>"+x[skill]["rating"]+"</td><td class='decAtt "+[skill]+"'>-</td><td class='skillName'>"+x[skill]["name"]+"</td><td class='stat'>"+attributes.current[x[skill]["stat"]]+"</td><td class= 'mod'>"+x[skill]["mod"]+"</td><td class='skillsum'>"+skillsum+"</td><tr>")
                   .appendTo("."+x[skill]["catalog"]);
             }
         }
@@ -3724,32 +3724,32 @@
         return sum;
     }
     
-    function skillAttUpdater() {
+    /*function skillAttUpdater() {//delete
         for (var prop in activeSkills) {
             switch (activeSkills[prop]["catalog"]) {//this updates the skills attrabute with the current attrabute rating
                 case "agility":
-                    activeSkills[prop]["stat"]=attributes.current.agi+attributes.augment.augagi;
+                    activeSkills[prop]["stat"]=attributes.current.agi+attributes.augment.agi;
                     break;
                 case "body":
-                    activeSkills[prop]["stat"]=attributes.current.bod+attributes.augment.augbod;
+                    activeSkills[prop]["stat"]=attributes.current.bod+attributes.augment.bod;
                     break;
                 case "reaction":
-                    activeSkills[prop]["stat"]=attributes.current.rea+attributes.augment.augrea;
+                    activeSkills[prop]["stat"]=attributes.current.rea+attributes.augment.rea;
                     break;
                 case "strength":
-                    activeSkills[prop]["stat"]=attributes.current.str+attributes.augment.augstr;
+                    activeSkills[prop]["stat"]=attributes.current.str+attributes.augment.str;
                     break;
                 case "charisma":
-                    activeSkills[prop]["stat"]=attributes.current.cha+attributes.augment.augcha;
+                    activeSkills[prop]["stat"]=attributes.current.cha+attributes.augment.cha;
                     break;
                 case "intuition":
-                    activeSkills[prop]["stat"]=attributes.current.int+attributes.augment.augint;
+                    activeSkills[prop]["stat"]=attributes.current.int+attributes.augment.int;
                     break;
                 case "logic":
-                    activeSkills[prop]["stat"]=attributes.current.log+attributes.augment.auglog;
+                    activeSkills[prop]["stat"]=attributes.current.log+attributes.augment.log;
                     break;
                 case "will":
-                    activeSkills[prop]["stat"]=attributes.current.wil+attributes.augment.augwil;
+                    activeSkills[prop]["stat"]=attributes.current.wil+attributes.augment.wil;
                     break;
                 case "attributes.current.mag":
                     activeSkills[prop]["stat"]=attributes.current.mag;
@@ -3759,14 +3759,14 @@
                     break;
             }
         }
-    }
+    }*/
     
     function renderSkills () {//this has become for rendering/updating anything that can be accessed with a for loop; it seems.
         for (var prop in activeSkills) {
-            statUpdater ("stat", [prop],activeSkills);
-            statUpdater ("rating", [prop],activeSkills);
-            statUpdater ("mod", [prop],activeSkills);
-            activeSkills[prop]["skillsum"] = funSkillSum (activeSkills[prop]["defaultable"], activeSkills[prop]["rating"], activeSkills[prop]["mod"], activeSkills[prop]["stat"]);
+            attUpdater ("stat", prop, activeSkills);
+            statUpdater ("rating", prop,activeSkills);
+            statUpdater ("mod", prop,activeSkills);
+            activeSkills[prop]["skillsum"] = funSkillSum (activeSkills[prop]["defaultable"], activeSkills[prop]["rating"], activeSkills[prop]["mod"], attributes.current[activeSkills[prop]["stat"]]+attributes.augment[activeSkills[prop]["stat"]]);
             dicePoolUpdater (activeSkills[prop]["skillsum"], [prop]);
         }
         for (var prop in knowledgeSkills) {
@@ -3788,10 +3788,10 @@
                     break;
             }
             
-            statUpdater ("stat", [prop],knowledgeSkills);
+            attUpdater ("stat", [prop],knowledgeSkills);
             statUpdater ("rating", [prop],knowledgeSkills);
             statUpdater ("mod", [prop],knowledgeSkills);
-            skillsum = funSkillSum (knowledgeSkills[prop]["defaultable"], knowledgeSkills[prop]["rating"], knowledgeSkills[prop]["mod"], knowledgeSkills[prop]["stat"]);
+            skillsum = funSkillSum (knowledgeSkills[prop]["defaultable"], knowledgeSkills[prop]["rating"], knowledgeSkills[prop]["mod"], knowledgeSkills[prop]["stat"]["value"]);
             dicePoolUpdater (skillsum, [prop]);
         }
         
@@ -3802,7 +3802,11 @@
             }
         }
         
-        function statUpdater (x, y, z) {
+        function attUpdater (x, y, z) {//attibute updater
+            $("."+y+" ."+x).empty().append(attributes.current[z[y][x]]+attributes.augment[z[y][x]]);
+        }
+        
+        function statUpdater (x, y, z) {//all other stats
             $("."+y+" ."+x).empty().append("<span>"+z[y][x]+"</span>");
         }
         
@@ -3816,7 +3820,7 @@
         
         for (var item in weapons) {
             if (weapons[item]["stat"]>0) {
-                weapons[item]["stat"]=attributes.current.str+attributes.augment.augstr;
+                weapons[item]["stat"]=attributes.current.str+attributes.augment.str;
             }
             if (weapons[item]["skill"]=="unarmedcombat"||weapons[item]["skill"]=="throwingweapons") {
                 weapons[item]["accuracy"]=attributes.limits.phyLimit+attributes.limitMod.phyLimitMod;
@@ -3933,16 +3937,16 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             for (var key in power["attmod"]) {//this rests the augmented attibute...for the most part.
                 switch (power["attmod"][key]) {
                     case "body":
-                        attributes.augment.augbod-=power["level"];
+                        attributes.augment.bod-=power["level"];
                         break;
                     case "reaction":
-                        attributes.augment.augrea-=power["level"];
+                        attributes.augment.rea-=power["level"];
                         break;
                     case "agility":
-                        attributes.augment.augagi-=power["level"];
+                        attributes.augment.agi-=power["level"];
                         break;
                     case "strength":
-                        attributes.augment.augstr-=power["level"];
+                        attributes.augment.str-=power["level"];
                         break;
                 }
             }
@@ -3952,15 +3956,15 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 switch (power["level"]) {
                     case 1:
                         powerPoints+=1.5;
-                        attributes.augment.augrea-=1;
+                        attributes.augment.rea-=1;
                         break;
                     case 2:
                         powerPoints+=2.5;
-                        attributes.augment.augrea-=2;
+                        attributes.augment.rea-=2;
                         break;
                     case 3:
                         powerPoints+=3.5;
-                        attributes.augment.augrea-=3;
+                        attributes.augment.rea-=3;
                         break;
                 }
             }else if (power["level"] != "n/a") {//this is for every power that is not improve reflexes
@@ -3989,7 +3993,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                     addAttMod (power["attmod"]);
                     
                     if ($(this).attr("id")=="improvedreflexes") {
-                        attributes.augment.augrea++;
+                        attributes.augment.rea++;
                         attributes.initiative.iniphyDice++;
                     }
                 }
@@ -4038,16 +4042,16 @@ $(document).ready(function () {//this is makes it so that that skill points beco
         for (var key in x) {
             switch (x[key]) {
                 case "body":
-                    attributes.augment.augbod=addAugmentAtt(attributes.augment.augbod);
+                    attributes.augment.bod=addAugmentAtt(attributes.augment.bod);
                     break;
                 case "reaction":
-                    attributes.augment.augrea=addAugmentAtt(attributes.augment.augrea);
+                    attributes.augment.rea=addAugmentAtt(attributes.augment.rea);
                     break;
                 case "agility":
-                    attributes.augment.augagi=addAugmentAtt(attributes.augment.augagi);
+                    attributes.augment.agi=addAugmentAtt(attributes.augment.agi);
                     break;
                 case "strength":
-                    attributes.augment.augstr=addAugmentAtt(attributes.augment.augstr);
+                    attributes.augment.str=addAugmentAtt(attributes.augment.str);
                     break;
             }
         };
@@ -5672,16 +5676,20 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 if (typeof charlimb.mods[mod] === "undefined") {
                     charlimb.mods[mod]=$().extend({}, augmentations.mods[mod]);
                 }
-                if(charlimb.mods[mod]["rating"]>charlimb.mods[mod]["ratingmax"]){return;}
+                if(charlimb.mods[mod]["rating"]>=charlimb.mods[mod]["ratingmax"]){return;}
 
                 charlimb.mods[mod]["rating"]++;
                 charlimb.mods[mod]["capacity"]++;
                 charlimb.mods[mod]["cost"]+=charlimb.mods[mod]["costx"]*augmentations.grade[charlimb.grade]["cost"];
                 charlimb.mods[mod]["avail"]+=charlimb.mods[mod]["availx"];
+                charlimb[charlimb.mods[mod]["stat"]]++;
+                charlimb.cost += charlimb.mods[mod]["cost"];
+                charlimb.cap++;//might need to come back and change this if there are mods that capacity increase in higher increments
                 $("."+limb+" ."+mod+" .price").empty().append(charlimb.mods[mod]["cost"]+"&yen;");
                 $("."+limb+" ."+mod+" .avail").empty().append(charlimb.mods[mod]["avail"]);
                 $("."+limb+" ."+mod+" .cap").empty().append("["+charlimb.mods[mod]["capacity"]+"]");
                 $("."+limb+" ."+mod+" .modRating").empty().append(charlimb.mods[mod]["rating"]);
+                $("."+limb+" .cyberstats ."+charlimb.mods[mod]["stat"]).empty().append("("+charlimb[charlimb.mods[mod]["stat"]]+")");
 
                 cyberlimbUpdater();
 
@@ -5702,7 +5710,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
 
         }
         function cyberlimbUpdater () {
-                console.log(limb);
             $("."+limb+" .cyberstats .cap").empty().append(characteraugmentation.limbs[limb]["cap"]+"/"+characteraugmentation.limbs[limb]["capmax"]);
             $("."+limb+">.price").empty().append(charlimb.cost+"&yen;")
             updaters.nuyenUpdater();
