@@ -1391,7 +1391,10 @@
             wil:0,
             log:0,
             int:0,
-            cha:0
+            cha:0,
+            edg:1,
+            mag:0,
+            res:0
         },
         limits: {
             phyLimit:0,
@@ -2893,7 +2896,6 @@
                 break;
             
         }
-        //skillAttUpdater();//delete
         
         function bowUpdater() {
             weapons.bow.damage=weapons.bow.rating+2;
@@ -3382,9 +3384,9 @@
 
         for (var x in weapons) {//addes exotic melee weapons to the skill list
             if (weapons[x]["category"] == "exoticmeleeweapon") {
-                makeExoticSkill(attributes.current.agi,weapons[x],"Exotic Melee (","agility");
+                makeExoticSkill("agi",weapons[x],"Exotic Melee (","agility");
             } else if (weapons[x]["category"] == "exoticrangedweapon") {
-                makeExoticSkill(attributes.current.agi,weapons[x],"Exotic Range (","agility");
+                makeExoticSkill("agi",weapons[x],"Exotic Range (","agility");
             }
         }
 
@@ -3714,6 +3716,7 @@
     }
     
     function funSkillSum (w, x, y, z) {//used to calculate the dice pool of a skill
+        var sum;
         if (w==true && x==0) {
             sum = y+z+x-1;
         } else if (w==false && x==0) {
@@ -3723,43 +3726,6 @@
         }
         return sum;
     }
-    
-    /*function skillAttUpdater() {//delete
-        for (var prop in activeSkills) {
-            switch (activeSkills[prop]["catalog"]) {//this updates the skills attrabute with the current attrabute rating
-                case "agility":
-                    activeSkills[prop]["stat"]=attributes.current.agi+attributes.augment.agi;
-                    break;
-                case "body":
-                    activeSkills[prop]["stat"]=attributes.current.bod+attributes.augment.bod;
-                    break;
-                case "reaction":
-                    activeSkills[prop]["stat"]=attributes.current.rea+attributes.augment.rea;
-                    break;
-                case "strength":
-                    activeSkills[prop]["stat"]=attributes.current.str+attributes.augment.str;
-                    break;
-                case "charisma":
-                    activeSkills[prop]["stat"]=attributes.current.cha+attributes.augment.cha;
-                    break;
-                case "intuition":
-                    activeSkills[prop]["stat"]=attributes.current.int+attributes.augment.int;
-                    break;
-                case "logic":
-                    activeSkills[prop]["stat"]=attributes.current.log+attributes.augment.log;
-                    break;
-                case "will":
-                    activeSkills[prop]["stat"]=attributes.current.wil+attributes.augment.wil;
-                    break;
-                case "attributes.current.mag":
-                    activeSkills[prop]["stat"]=attributes.current.mag;
-                    break;
-                case "resonance":
-                    activeSkills[prop]["stat"]=attributes.current.res;
-                    break;
-            }
-        }
-    }*/
     
     function renderSkills () {//this has become for rendering/updating anything that can be accessed with a for loop; it seems.
         for (var prop in activeSkills) {
@@ -3772,26 +3738,20 @@
         for (var prop in knowledgeSkills) {
             switch (knowledgeSkills[prop]["catalog"]) {//knowledge skill shit is here
                 case "academic":
-                    knowledgeSkills[prop]["stat"]=attributes.current.log;
+                case "professional":
+                    knowledgeSkills[prop]["stat"]="log";
                     break;
                 case "interests":
-                    knowledgeSkills[prop]["stat"]=attributes.current.int;
-                    break;
-                case "professional":
-                    knowledgeSkills[prop]["stat"]=attributes.current.log;
-                    break;
                 case "street":
-                    knowledgeSkills[prop]["stat"]=attributes.current.int;
-                    break;
                 case "language":
-                    knowledgeSkills[prop]["stat"]=attributes.current.int;
+                    knowledgeSkills[prop]["stat"]="int";
                     break;
             }
             
             attUpdater ("stat", [prop],knowledgeSkills);
             statUpdater ("rating", [prop],knowledgeSkills);
             statUpdater ("mod", [prop],knowledgeSkills);
-            skillsum = funSkillSum (knowledgeSkills[prop]["defaultable"], knowledgeSkills[prop]["rating"], knowledgeSkills[prop]["mod"], knowledgeSkills[prop]["stat"]["value"]);
+            skillsum = funSkillSum (knowledgeSkills[prop]["defaultable"], knowledgeSkills[prop]["rating"], knowledgeSkills[prop]["mod"], attributes.current[knowledgeSkills[prop]["stat"]]+attributes.augment[knowledgeSkills[prop]["stat"]]);
             dicePoolUpdater (skillsum, [prop]);
         }
         
