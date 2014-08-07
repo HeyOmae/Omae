@@ -1341,95 +1341,95 @@
         nuyen=0,//money
         ess=6.0,
         reachmod=0,//reachmod for trolls
-        karma=25;
+        karma=25,
     
-    attributes = {
-        current: {
-            bod:1,//current attrabute
-            agi:1,
-            rea:1,
-            str:1,
-            wil:1,
-            log:1,
-            int:1,
-            cha:1,
-            edg:1,
-            mag:0,
-            res:0
+        attributes = {
+            current: {
+                bod:1,//current attrabute
+                agi:1,
+                rea:1,
+                str:1,
+                wil:1,
+                log:1,
+                int:1,
+                cha:1,
+                edg:1,
+                mag:0,
+                res:0
+            },
+            minimum: {
+                bodmin:1,//minimum attrabute
+                agimin:1,
+                reamin:1,
+                strmin:1,
+                wilmin:1,
+                logmin:1,
+                intmin:1,
+                chamin:1,
+                edgmin:1,
+                magmin:0,
+                resmin:0
+            },
+            maximum: {
+                bodmax:6,//natural maximum attrabute
+                agimax:6,
+                reamax:6,
+                strmax:6,
+                wilmax:6,
+                logmax:6,
+                intmax:6,
+                chamax:6,
+                edgmax:6,
+                magmax:6,
+                resmax:6
+            },
+            augment: {
+                bod:0,//augmented attrabute
+                agi:0,
+                rea:0,
+                str:0,
+                wil:0,
+                log:0,
+                int:0,
+                cha:0,
+                edg:0,
+                mag:0,
+                res:0
+            },
+            limits: {
+                phyLimit:0,
+                socLimit:0,
+                menLimit:0
+            },
+            limitMod: {
+                phyLimitMod:0,
+                socLimitMod:0,
+                menLimitMod:0
+            },
+            initiative: {
+                iniphy:2,//physical initiative
+                iniphyDice:1,//physical ini dice
+                iniast:2,//astral initiative
+                iniastDice:2,//astral dice
+                inimat:1,//matrix initiative
+                inimatcold:3,//coldsim dice
+                inimathot:4//hotsim dice
+            }
         },
-        minimum: {
-            bodmin:1,//minimum attrabute
-            agimin:1,
-            reamin:1,
-            strmin:1,
-            wilmin:1,
-            logmin:1,
-            intmin:1,
-            chamin:1,
-            edgmin:1,
-            magmin:0,
-            resmin:0
-        },
-        maximum: {
-            bodmax:6,//natural maximum attrabute
-            agimax:6,
-            reamax:6,
-            strmax:6,
-            wilmax:6,
-            logmax:6,
-            intmax:6,
-            chamax:6,
-            edgmax:6,
-            magmax:6,
-            resmax:6
-        },
-        augment: {
-            bod:0,//augmented attrabute
-            agi:0,
-            rea:0,
-            str:0,
-            wil:0,
-            log:0,
-            int:0,
-            cha:0,
-            edg:1,
-            mag:0,
-            res:0
-        },
-        limits: {
-            phyLimit:0,
-            socLimit:0,
-            menLimit:0
-        },
-        limitMod: {
-            phyLimitMod:0,
-            socLimitMod:0,
-            menLimitMod:0
-        },
-        initiative: {
-            iniphy:2,//physical initiative
-            iniphyDice:1,//physical ini dice
-            iniast:2,//astral initiative
-            iniastDice:2,//astral dice
-            inimat:1,//matrix initiative
-            inimatcold:3,//coldsim dice
-            inimathot:4//hotsim dice
-        }
-    }
     
     //var iniphy=attributes.current.int+attributes.current.rea;
     
-    var dataP=0;//data processing, for TM's
+        dataP=0,//data processing, for TM's
     
-    var knowledgeType;//This holds which knowledge type is selected when submitting a new knowledge skill
+        knowledgeType,//This holds which knowledge type is selected when submitting a new knowledge skill
     
-    var focinumber=0;//number of foci that are bonded
-    var fociRating=0;//the total rating of the foci
-    var fociMaxRating=attributes.current.mag*2;//max rating or total foci
+        focinumber=0,//number of foci that are bonded
+        fociRating=0,//the total rating of the foci
+        fociMaxRating=attributes.current.mag*2,//max rating or total foci
 
-    var maxAvail = 12; //the max availibility at chargen
+        maxAvail = 12; //the max availibility at chargen
     
-    var activeSkills = {//the list of all the skills in the entire game forever. Catalysis needs to never release any more skills ever after this
+    activeSkills = {//the list of all the skills in the entire game forever. Catalysis needs to never release any more skills ever after this
         archery:{name:"Archery", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
         automatics:{name:"Automatics", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
         blades:{name:"Blades", catalog: "agility", stat:"agi", rating:0, mod:0, max:6, defaultable:true},
@@ -5568,7 +5568,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                             if (augmentations.mods[mod]["allow"][x]==augmentations[limbType][limb]["slot"]) {
                                 var targetMod = augmentations.mods[mod];
                                 if (typeof targetMod.rating !== "undefined") {
-                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='modUp button'><strong>+</strong></td><td class='modRating'>0</td><td class='moddown button'><strong>-</strong></td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
+                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='modUp button'><strong>+</strong></td><td class='modRating'>0</td><td class='modDown button'><strong>-</strong></td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
                                 } else {
                                     $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='buyMod button' colspan=3><strong>-</strong></td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
                                 }
@@ -5577,6 +5577,8 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                     }
 
                     $("."+limbloc+" .cybermods").append("<table class='cyberstats'><tbody><tr class='label'><td>Capacity</td><td>Str</td><td>Agi</td><td>Armor</td><td>RC</td><td>Avail</td><td>Ess</td></tr><tr class='stats'><td class='cap'>"+cyber.cap+"/"+cyber.capmax+"</td><td class='str'>("+(cyber.str+cyber.augstr)+")</td><td class='agi'>("+(cyber.agi+cyber.augagi)+")</td><td class='armor'>"+cyber.armor+"</td><td class='rc'>"+(cyber.rc+(Math.ceil(cyber.str/3))+1)+"</td><td>"+cyber.avail+"</td><td>"+cyber.essence+"</td></tr></tbody></table>")
+
+                    cyber["mods"] = {};
 
                     ess-=cyber.essence;
                     attributes.current.mag-=cyber.essence;
@@ -5596,9 +5598,7 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 limb = $(this).parents("tr").parents("tr").attr("class");
 
                 activate($(this));
-                if (typeof characteraugmentation.limbs[limb]["mods"] === "undefined") {
-                    characteraugmentation.limbs[limb]["mods"] = {};
-                }
+
                 var charlimb = characteraugmentation.limbs[limb];
                 var modslot = charlimb["mods"];
                 charlimb["mods"][mod]=$().extend({}, augmentations.mods[mod]);//this copies the limb into its location
@@ -5613,7 +5613,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "buyMod button active":
                 var mod = limb;
                 limb = $(this).parents("tr").parents("tr").attr("class");
-                console.log(limb);
                 var charlimb = characteraugmentation.limbs[limb];
                 deactivate($(this));
 
@@ -5629,10 +5628,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 limb = $(this).parents("tr").parents("tr").attr("class");
                 var charlimb = characteraugmentation.limbs[limb];
 
-                if (typeof charlimb["mods"] === "undefined") {
-                    charlimb["mods"] = {};
-                }
-
                 if (typeof charlimb.mods[mod] === "undefined") {
                     charlimb.mods[mod]=$().extend({}, augmentations.mods[mod]);
                 }
@@ -5640,19 +5635,36 @@ $(document).ready(function () {//this is makes it so that that skill points beco
 
                 charlimb.mods[mod]["rating"]++;
                 charlimb.mods[mod]["capacity"]++;
-                charlimb.mods[mod]["cost"]+=charlimb.mods[mod]["costx"]*augmentations.grade[charlimb.grade]["cost"];
+                var costUp = charlimb.mods[mod]["costx"]*augmentations.grade[charlimb.grade]["cost"];
+                charlimb.mods[mod]["cost"]+=costUp;
                 charlimb.mods[mod]["avail"]+=charlimb.mods[mod]["availx"];
                 charlimb[charlimb.mods[mod]["stat"]]++;
-                charlimb.cost += charlimb.mods[mod]["cost"];
+                charlimb.cost += costUp;
+                nuyen-= costUp;
                 charlimb.cap++;//might need to come back and change this if there are mods that capacity increase in higher increments
-                $("."+limb+" ."+mod+" .price").empty().append(charlimb.mods[mod]["cost"]+"&yen;");
-                $("."+limb+" ."+mod+" .avail").empty().append(charlimb.mods[mod]["avail"]);
-                $("."+limb+" ."+mod+" .cap").empty().append("["+charlimb.mods[mod]["capacity"]+"]");
-                $("."+limb+" ."+mod+" .modRating").empty().append(charlimb.mods[mod]["rating"]);
-                $("."+limb+" .cyberstats ."+charlimb.mods[mod]["stat"]).empty().append("("+charlimb[charlimb.mods[mod]["stat"]]+")");
 
+                cyberEnhanceUpdater();
                 cyberlimbUpdater();
 
+                break;
+            case "modDown button":
+                var mod = limb;
+                limb = $(this).parents("tr").parents("tr").attr("class");
+                var charlimb = characteraugmentation.limbs[limb];
+                if (charlimb.mods[mod]["rating"]>0) {
+                    charlimb.mods[mod]["rating"]--;
+                    charlimb.mods[mod]["capacity"]--;
+                    var costDown = charlimb.mods[mod]["costx"]*augmentations.grade[charlimb.grade]["cost"]
+                    charlimb.mods[mod]["cost"]-=costDown;
+                    charlimb.mods[mod]["avail"]-=charlimb.mods[mod]["availx"];
+                    charlimb[charlimb.mods[mod]["stat"]]--;
+                    charlimb.cost -= costDown;
+                    nuyen += costDown;
+                    charlimb.cap--;
+
+                    cyberEnhanceUpdater();
+                    cyberlimbUpdater();
+                }
                 break;
             case "sellAug button":
                 var cyber = characteraugmentation.limbs[limb];
@@ -5669,6 +5681,15 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 break;
 
         }
+
+        function cyberEnhanceUpdater () {
+            $("."+limb+" ."+mod+" .price").empty().append(charlimb.mods[mod]["cost"]+"&yen;");
+            $("."+limb+" ."+mod+" .avail").empty().append(charlimb.mods[mod]["avail"]);
+            $("."+limb+" ."+mod+" .cap").empty().append("["+charlimb.mods[mod]["capacity"]+"]");
+            $("."+limb+" ."+mod+" .modRating").empty().append(charlimb.mods[mod]["rating"]);
+            $("."+limb+" .cyberstats ."+charlimb.mods[mod]["stat"]).empty().append("("+charlimb[charlimb.mods[mod]["stat"]]+")");
+        }
+
         function cyberlimbUpdater () {
             $("."+limb+" .cyberstats .cap").empty().append(characteraugmentation.limbs[limb]["cap"]+"/"+characteraugmentation.limbs[limb]["capmax"]);
             $("."+limb+">.price").empty().append(charlimb.cost+"&yen;")
