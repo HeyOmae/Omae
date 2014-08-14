@@ -123,6 +123,10 @@
             cursor: default;
         }
 
+        .deact strong, .deact em {
+            color: #020;
+        }
+
         .label {
             color: lightgreen;
         }
@@ -2300,6 +2304,11 @@
             hydraulicjacks: {name:"Hydraulic Jacks", type:"accessory", allow:["leg"], rating:0, ratingmax:6, capacity:0, avail:9, availx:0, restrict:"", cost:0, costx:8000, ref:{book:"SR5", page:"456,457"}},
             largesmugglingcompartment: {name:"Large Smuggling Compartment", type:"accessory", allow:["arm","leg","chest","head"], capacity:5, avail:6, restrict:"", cost:8000, ref:{book:"SR5", page:"457"}},
 
+        },
+        weapons: {
+            holdoutpistol: {name:"Hold-Out Pistol", type:"cybergun", clip: false, laser: false, silencer: false, capacity:2, avail:8, restrict:"R", cost:2000, ref:{book:"SR5", page:"458"},
+                stats: {skill: "pistols", accuracy: 4, accmod: 2, damage: 6, stat: 0, dvmod: 0, damtype: "P", element: "", mode: {SA:"SA"}, rc: 0, rcmod: 0, ammo: {mag:2, clip:6}, clip: {mag:"m", clip:"c"}, ap: 0}
+            }
         }
     }
     
@@ -3559,11 +3568,7 @@
             
             switch (ammotype["class"]) {
                 case "taserammo":
-                    abnormalAmmo(ammotype, ammo);
-                    break;
                 case "specialammo":
-                    abnormalAmmo(ammotype, ammo);
-                    break;
                 case "cannonammo":
                     abnormalAmmo(ammotype, ammo);
                     break;
@@ -3574,7 +3579,7 @@
                     explosivesammo("rocketammo",ammo,ammotype);
                     break;
                 case "none":
-                    $(".standard.ammunition").append("<tr class='"+ammo+"'><td class='buyammo button'>+</td><td class='ammountofammo'>0</td><td class='sellammo button'>-</td><td class='ammoname'>"+ammotype["name"]+"</td><td class='dammod'>"+ammotype["dammod"]+" "+ammotype["typemod"]+" "+ammotype["elemod"]+"</td><td class='apmod'>"+ammotype["apmod"]+"</td><td class='avail'>"+ammotype["avail"]+" "+ammotype["restrict"]+"</td><td class='cost'>"+ammotype["cost"]+"&#65509</td></tr>");
+                    $(".standard.ammunition").append("<tr class='"+ammo+"'><td class='buyammo button'><strong>+</strong></td><td class='ammountofammo'>0</td><td class='sellammo button'><em>-</em></td><td class='ammoname'>"+ammotype["name"]+"</td><td class='dammod'>"+ammotype["dammod"]+" "+ammotype["typemod"]+" "+ammotype["elemod"]+"</td><td class='apmod'>"+ammotype["apmod"]+"</td><td class='avail'>"+ammotype["avail"]+" "+ammotype["restrict"]+"</td><td class='cost'>"+ammotype["cost"]+"&#65509</td></tr>");
                     break;
             }
             
@@ -3582,6 +3587,14 @@
                 $("."+ammo+" .button").addClass("deact");
             }
             
+        }
+
+        function explosivesammo(x,y,z) {
+            $("."+x).append("<tr class='"+y+"'><td class='buygrenades button'><strong>+</strong></td><td class='ammountofammo'>0</td><td class='sellgrenades button'><em>-</em></td><td class='grenadesname'>"+z["name"]+"</td><td class='grenadesdammod'>"+z["dammod"]+" "+z["typemod"]+" "+z["elemod"]+"</td><td class='apmod'>"+z["apmod"]+"</td><td class='blast'>"+z["blast"]+"</td><td class='avail'>"+z["avail"]+" "+z["restrict"]+"</td><td class='cost'>"+z["cost"]+"&#65509</td></tr>");
+        }
+        
+        function abnormalAmmo(x,y) {
+            $("."+x["class"]).append("<tr class='"+y+"'><td class='buyammo button'><strong>+</strong></td><td class='ammountofammo'>0</td><td class='sellammo button'><em>-</em></td><td class='ammoname'>"+x["name"]+"</td><td class='dammod'>"+x["dammod"]+x["typemod"]+" "+x["elemod"]+"</td><td class='apmod'>"+x["apmod"]+"</td><td class='avail'>"+x["avail"]+" "+x["restrict"]+"</td><td class='cost'>"+x["cost"]+"&#65509</td></tr>");
         }
         
         $(".gas .grenadesname").empty().append("<select class='toxicgas'></select>");
@@ -3624,7 +3637,7 @@
                     $("#eccessories").append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                     break;
                 case "rfid":
-                    $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    $('#rfid').append("<tr class='"+devicename+"'><td class='buyUp button'><strong>+</strong></td><td class='numrfid'>0</td><td class='sellDown button'><em>-</em></td><td>"+device["name"]+"</td><td>"+device["device"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                     break;
                 case "credsticks":
                     $('#credsticks').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["maxvalue"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
@@ -3636,7 +3649,7 @@
                     $('#tools').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+"<input type='text' class='toolname' placeholder='Skill name'> "+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                     break;
                 case "restraints":
-                    $('#restraints').append("<tr class='"+devicename+"'><td class='buyUp button'>+</td><td class='numrfid'>0<td class='sellDown'>-</td></td><td>"+device["name"]+"</td><td>"+device.armor+"</td><td>"+device.structure+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
+                    $('#restraints').append("<tr class='"+devicename+"'><td class='buyUp button'><strong>+</strong></td><td class='numrfid'>0<td class='sellDown'><em>-</em></td></td><td>"+device["name"]+"</td><td>"+device.armor+"</td><td>"+device.structure+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
                     break;
                 case "chemicals":
                     $('#chemicals').append("<tr class='"+devicename+"'><td class='buydevice button'><strong>+</strong></td><td>"+device["name"]+"</td><td>"+device["avail"]+" "+device.restrict+"</td><td>"+device["cost"]+"&yen;</td></tr>");
@@ -3712,6 +3725,13 @@
         }
 
         //putmorestuffhere
+
+        function ratingGear(x,y){//x=device, y=devicename
+            $('#'+x.type).append("<tr class='"+y+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+x.rating+"</td><td class='ratingDown button'>-</td><td class='name'>"+x.name+"</td><td class='avail'>"+x.avail+" "+x.restrict+"</td><td class='price'>"+x.cost+"&yen;</td></tr>");
+        };
+        function bulkBuyGear (x,y) {//x=device, y=devicename
+            $('#'+x.type).append("<tr class='"+y+"'><td class='buyUp button'><strong>+</strong></td><td class='numrfid'>0</td><td class='sellDown button'><em>-</em></td><td>"+x.name+"</td><td>"+x.avail+" "+x.restrict+"</td><td>"+x.cost+"&yen;</td></tr>");
+        }
 
     }
     
@@ -4543,13 +4563,11 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 itemmod["concealableholster"]=false;
                 nuyen+=150;
                 itemhold["cost"]-=150;
-            }
-            if ($(this).hasClass("hiddenarmslide")) {
+            }else if ($(this).hasClass("hiddenarmslide")) {
                 itemmod["hiddenarmslide"]=false;
                 nuyen+=350;
                 itemhold["cost"]-=350;
-            }
-            if ($(this).hasClass("quickdrawholster")) {
+            } else if ($(this).hasClass("quickdrawholster")) {
                 itemmod["quickdrawholster"]=false;
                 nuyen+=175;
                 itemhold["cost"]-=175;
@@ -4560,28 +4578,17 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 itemmod["concealableholster"]=true;
                 nuyen-=150;
                 itemhold["cost"]+=150;
-            }
-            if ($(this).hasClass("hiddenarmslide")) {
+            } else if ($(this).hasClass("hiddenarmslide")) {
                 itemmod["hiddenarmslide"]=true;
                 nuyen-=350;
                 itemhold["cost"]+=350;
-            }
-            if ($(this).hasClass("quickdrawholster")) {
+            } else if ($(this).hasClass("quickdrawholster")) {
                 itemmod["quickdrawholster"]=true;
                 nuyen-=175;
                 itemhold["cost"]+=175;
             }
         }
         disUpdater();
-    }
-    
-    
-    function explosivesammo(x,y,z) {
-        $("."+x).append("<tr class='"+y+"'><td class='buygrenades button'>+</td><td class='ammountofammo'>0</td><td class='sellgrenades button'>-</td><td class='grenadesname'>"+z["name"]+"</td><td class='grenadesdammod'>"+z["dammod"]+" "+z["typemod"]+" "+z["elemod"]+"</td><td class='apmod'>"+z["apmod"]+"</td><td class='blast'>"+z["blast"]+"</td><td class='avail'>"+z["avail"]+" "+z["restrict"]+"</td><td class='cost'>"+z["cost"]+"&#65509</td></tr>");
-    }
-    
-    function abnormalAmmo(x,y) {
-        $("."+x["class"]).append("<tr class='"+y+"'><td class='buyammo button'>+</td><td class='ammountofammo'>0</td><td class='sellammo button'>-</td><td class='ammoname'>"+x["name"]+"</td><td class='dammod'>"+x["dammod"]+x["typemod"]+" "+x["elemod"]+"</td><td class='apmod'>"+x["apmod"]+"</td><td class='avail'>"+x["avail"]+" "+x["restrict"]+"</td><td class='cost'>"+x["cost"]+"&#65509</td></tr>");
     }
     
     $("#ammunition").on("click", ".buyammo,.sellammo,.buygrenades,.sellgrenades", buyingammo);
@@ -4990,12 +4997,6 @@ $(document).ready(function () {//this is makes it so that that skill points beco
     }
     
 
-    function ratingGear(x,y){//x=device, y=devicename
-        $('#'+x.type).append("<tr class='"+y+"'><td class='buydevice button'><strong>+</strong></td><td class='ratingUp button'>+</td><td class='commrating'>"+x.rating+"</td><td class='ratingDown button'>-</td><td class='name'>"+x.name+"</td><td class='avail'>"+x.avail+" "+x.restrict+"</td><td class='price'>"+x.cost+"&yen;</td></tr>");
-    };
-    function bulkBuyGear (x,y) {//x=device, y=devicename
-        $('#'+x.type).append("<tr class='"+y+"'><td class='buyUp button'>+</td><td class='numrfid'>0</td><td class='sellDown button'>-</td><td>"+x.name+"</td><td>"+x.avail+" "+x.restrict+"</td><td>"+x.cost+"&yen;</td></tr>");
-    }
     
     $("#gearResource").on("click", ".buyUp, .sellDown", buyinbulk);
     
@@ -5561,18 +5562,31 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 if ($.isEmptyObject(characteraugmentation.limbs[side+augmentations[limbType][limb]["slot"]])) {
                     var limbloc=side+augmentations[limbType][limb]["slot"];
                     var cyber = characteraugmentation.limbs[limbloc] = $.extend({}, augmentations[limbType][limb]);
-                    $("."+limb).after("<tr class='"+limbloc+"'><td class='sellAug button'><em>-</em></td><td>"+side+" "+limbType+" "+augmentations[limbType][limb]["slot"]+"</td><td class='cybermods' colspan=12><table class='cyberenhance'><tbody></tbody></table></td><td class='price'>"+cyber.cost+"&yen;</td></tr>");
+                    $("."+limb).after("<tr class='"+limbloc+"'><td class='sellAug button'><em>-</em></td><td>"+side+" "+limbType+" "+augmentations[limbType][limb]["slot"]+"</td><td class='cybermods' colspan=12><table class='mods'><tbody></tbody></table></td><td class='price'>"+cyber.cost+"&yen;</td></tr>");
 
                     for (var mod in augmentations.mods) {
                         for (var x in augmentations.mods[mod]["allow"]) {
                             if (augmentations.mods[mod]["allow"][x]==augmentations[limbType][limb]["slot"]) {
                                 var targetMod = augmentations.mods[mod];
                                 if (typeof targetMod.rating !== "undefined") {
-                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='modUp button'><strong>+</strong></td><td class='modRating'>0</td><td class='modDown button'><strong>-</strong></td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
+                                    $("."+limbloc+" .cybermods table.mods tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='modUp button'><strong>+</strong></td><td class='modRating'>0</td><td class='modDown button'><strong>-</strong></td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>");
                                 } else {
-                                    $("."+limbloc+" .cybermods table.cyberenhance tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='buyMod button' colspan=3><strong>-</strong></td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>")
+                                    $("."+limbloc+" .cybermods table.mods tbody").append("<tr class='"+mod+"'><td>"+targetMod.name+"</td><td class='buyMod button' colspan=3><strong>-</strong></td><td class='label'>Cap</td><td class='cap'>["+targetMod.capacity+"]</td><td class='label'>Avail</td><td class='avail'>"+targetMod.avail+targetMod.restrict+"</td><td class='label'>Price</td><td class='price'>"+targetMod.cost*augmentations.grade[cyber.grade]["cost"]+"&yen;</td></tr>");
                                 }
                             }
+                        }
+                    }
+
+                    $("."+limbloc+" .cybermods").append("<table class='weapons'><tbody><tr class='label'><td>CyberWeapon</td><td>Buy</td><td>Ext. Clip</td><td>Laser Sight</td><td>Silencer</td><td>Cap</td><td>Acc</td><td>Dam</td><td>Fire Mod</td><td>RC</td><td>Ammo</td><td>Avail</td><td>Cost</td></tr></tbody></table>");
+
+                    for (var weapon in augmentations.weapons) {
+                        var weap = augmentations.weapons[weapon];
+                        $("."+limbloc+" .cybermods table.weapons tbody").append("<tr class='"+weapon+"'><td>"+weap.name+"</td><td class='buyMod button'><strong>+</strong></td><td class='clip button'>+</td><td class='laser button'>+</td><td class='silencer button'>+</td><td class='capacity'>["+weap.capacity+"]</td><td class='accuracy'>"+weap.stats.accuracy+"("+(weap.stats.accuracy+weap.stats.accmod)+")"+"</td><td class='damage'>"+weap.stats.damage+weap.stats.damtype+"</td><td class='mode'></td><td class='rc'>"+weap.stats.rc+"</td><td class='ammo'></td><td class='avail'>"+weap.avail+weap.restrict+"</td><td class='cost'>"+weap.cost+"&yen;</td></tr>");
+                        for (fire in weap.stats.mode) {
+                            $("."+limbloc+" .cybermods .weapons ."+weapon+" .mode").append(weap.stats.mode[fire]+", ");
+                        }
+                        for (type in weap.stats.ammo) {
+                            $("."+limbloc+" .cybermods .weapons ."+weapon+" .ammo").append(weap.stats.ammo[type]+"("+weap.stats.clip[type]+")");
                         }
                     }
 
@@ -5596,17 +5610,18 @@ $(document).ready(function () {//this is makes it so that that skill points beco
             case "buyMod button":
                 var mod = limb;
                 limb = $(this).parents("tr").parents("tr").attr("class");
+                var typeOfMod = $(this).parents("table").attr("class");
 
                 activate($(this));
 
                 var charlimb = characteraugmentation.limbs[limb];
                 var modslot = charlimb["mods"];
-                charlimb["mods"][mod]=$().extend({}, augmentations.mods[mod]);//this copies the limb into its location
+                modslot[mod]=$().extend({}, augmentations[typeOfMod][mod]);//this copies the limb into its location
 
                 //this stuff changes all the stats to the new bought stuff
                 charlimb.cap+=modslot[mod]["capacity"];
-                nuyen-=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
-                charlimb.cost+=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
+                nuyen-=augmentations[typeOfMod][mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
+                charlimb.cost+=augmentations[typeOfMod][mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
 
                 cyberlimbUpdater();
                 break;
@@ -5614,11 +5629,12 @@ $(document).ready(function () {//this is makes it so that that skill points beco
                 var mod = limb;
                 limb = $(this).parents("tr").parents("tr").attr("class");
                 var charlimb = characteraugmentation.limbs[limb];
+                var typeOfMod = $(this).parents("table").attr("class");
                 deactivate($(this));
 
                 charlimb.cap-=charlimb.mods[mod]["capacity"];
-                nuyen+=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
-                charlimb.cost-=augmentations.mods[mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
+                nuyen+=augmentations[typeOfMod][mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
+                charlimb.cost-=augmentations[typeOfMod][mod]["cost"]*augmentations.grade[charlimb.grade]["cost"];
 
                 cyberlimbUpdater();
                 delete characteraugmentation.limbs[limb]["mods"][mod];
