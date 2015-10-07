@@ -1,0 +1,193 @@
+body {
+    background: #333;
+    /* Old browsers */
+    background: -webkit-linear-gradient(top, #222 0%, #2a0022 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: linear-gradient(to bottom, #222 0%, #2a0022 100%);
+    /* W3C */
+    font-family: Share Tech Mono, "Verdana", sans-serif;
+    color: green;
+    text-align: center;
+}
+
+div,
+table,
+tr,
+td {
+    border: solid 1px green;
+    border-radius: 15px 0;
+}
+
+input {
+    background: none;
+    color: white;
+    font-size: 17px;
+    font-family: Share Tech Mono, "Verdana", sans-serif;
+    border: solid green;
+    padding: 5px;
+    text-align: center;
+}
+
+h1 {
+    border: double 15px green;
+    padding: 15px;
+    margin: 10px;
+}
+
+h2,
+h3 {
+    margin-left: 20px;
+}
+
+strong {
+    color: yellow;
+}
+
+em {
+    color: red;
+}
+
+p,
+td {
+    padding: 10px;
+}
+
+#priority,
+#metatypechoice,
+#magreschoice,
+.incAtt,
+.decAtt,
+.knowButton,
+.button {
+    cursor: pointer;
+}
+
+#priority-label td {
+    cursor: default;
+}
+
+#container {
+    width: 1200px;
+    margin: auto;
+}
+
+#racial {
+    min-height: 67px;
+}
+
+.magres,
+h1,
+h2,
+h3,
+#racial {
+    text-align: left;
+}
+
+.selected {
+    border-color: #0f0;
+}
+
+.deact,
+.label {
+    background: #040;
+    color: #020;
+    border-color: #020;
+    cursor: default;
+}
+
+.deact strong,
+.deact em {
+    color: #020;
+}
+
+.label {
+    color: lightgreen;
+}
+
+.container {
+    float: left;
+    margin: 15px 5px;
+}
+
+#characterPoints {
+    margin: 0;
+    padding-right: 11px;
+    position: absolute;
+    background: #222;
+    width: 1198px;
+    ;
+}
+
+#characterPoints.fixed {
+    position: fixed;
+    top: 0;
+}
+
+h2#skillgroupHeader {
+    margin-top: 150px;
+}
+
+.points {
+    padding: 10px;
+    margin: 10px;
+}
+
+.skillsin {
+    width: 450px;
+}
+
+.skillName {
+    width: 250px;
+}
+
+#metatypeContain,
+#magresContain {
+    margin-left: 0;
+}
+
+#specialContain,
+#skillcontainer {
+    clear: both;
+}
+
+.hide {
+    display: none;
+}
+
+.active {
+    border-color: #0f0;
+}
+
+.spellname {
+    width: 200px;
+}
+
+.combat .spellname {
+    width: 140px;
+}
+
+.inventory {
+    padding: 0;
+}
+
+.ammoname {
+    width: 200px;
+}
+
+.dammod,
+.grenadesdammod {
+    width: 170px;
+}
+
+#clothing input {
+    width: 110px;
+}
+
+.alert {
+    color: black;
+    background-color: red;
+    -webkit-transition: background-color 1s;
+    -moz-transition: background-color 1s;
+    -o-transition: background-color 1s;
+    transition: background-color 1s;
+}
