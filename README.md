@@ -1,3 +1,6 @@
+This project is abandoned, and is here to serve as a hilarious reminder at how bad I use to be at coding.
+To checkout the newer, better, logical, and following best practices version, see https://github.com/HeyOmae/Omae2.1
+
 Omae
 ====
 
